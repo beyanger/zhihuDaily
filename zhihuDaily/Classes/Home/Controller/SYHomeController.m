@@ -42,6 +42,10 @@ static NSString *reuseid = @"useid";
     [SYParamResult mj_setupObjectClassInArray:^NSDictionary *{
         return @{@"top_stories":@"SYStory", @"stories":@"SYStory"};
     }];
+    [SYStory mj_setupObjectClassInArray:^NSDictionary *{
+        return @{@"images":@"SYImage"};
+    }];
+    
     [YSHttpTool GETWithURL:zhihu_lastest params:nil success:^(id responseObject) {
         SYParamResult *result = [SYParamResult mj_objectWithKeyValues:responseObject];
         for (SYStory *story in result.stories) {

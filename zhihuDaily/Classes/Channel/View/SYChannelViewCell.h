@@ -1,13 +1,13 @@
 //
-//  SYImage.m
+//  SYChannelViewCell.h
 //  zhihuDaily
 //
 //  Created by yang on 16/2/22.
 //  Copyright © 2016年 yang. All rights reserved.
 //
 
-#import "SYImage.h"
+#import <UIKit/UIKit.h>
 
-@implementation SYImage
+@interface SYChannelViewCell : UITableViewCell
 
 @end

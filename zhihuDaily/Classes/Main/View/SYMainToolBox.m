@@ -30,7 +30,7 @@
 
 - (IBAction)didClickedButton:(UIButton *)sender {
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"menuAction" object:nil];
+
     if ([self.toolBoxDelegate respondsToSelector:@selector(toolBox:didClickedTitle:)]) {
         [self.toolBoxDelegate toolBox:self didClickedTitle:sender.currentTitle];
     }

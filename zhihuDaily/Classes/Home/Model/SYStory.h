@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SYImage.h"
+
 @interface SYStory : NSObject
 
 @property (nonatomic, copy) NSString *title;

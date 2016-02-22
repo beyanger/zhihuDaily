@@ -13,7 +13,6 @@
 		2F2CCB971C7B016500C45E3D /* SYTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCB951C7B016500C45E3D /* SYTableViewCell.m */; };
 		2F2CCB981C7B016500C45E3D /* SYTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F2CCB961C7B016500C45E3D /* SYTableViewCell.xib */; };
 		2F2CCB9E1C7B043000C45E3D /* SYLastestGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCB9D1C7B043000C45E3D /* SYLastestGroup.m */; };
-		2F2CCBA11C7B085200C45E3D /* SYImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBA01C7B085200C45E3D /* SYImage.m */; };
 		2F2CCBA41C7B088E00C45E3D /* SYParamResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBA31C7B088E00C45E3D /* SYParamResult.m */; };
 		2F2CCBA71C7B08F600C45E3D /* SYStory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBA61C7B08F600C45E3D /* SYStory.m */; };
 		2F2CCBA91C7B0B2100C45E3D /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 2F2CCBA81C7B0B2100C45E3D /* example.json */; };
@@ -28,6 +27,9 @@
 		2F2CCBC81C7B0C1400C45E3D /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBBD1C7B0C1400C45E3D /* NSObject+MJProperty.m */; };
 		2F2CCBC91C7B0C1400C45E3D /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBBF1C7B0C1400C45E3D /* NSString+MJExtension.m */; };
 		2F2CCBCC1C7B156500C45E3D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBCB1C7B156500C45E3D /* ViewController.m */; };
+		2F2CCBCF1C7B26F100C45E3D /* SYSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBCE1C7B26F100C45E3D /* SYSettingController.m */; };
+		2F37AB5E1C7B34BA00D3CD65 /* SYChannelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB5D1C7B34BA00D3CD65 /* SYChannelController.m */; };
+		2F37AB611C7B353300D3CD65 /* SYChannelViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB601C7B353300D3CD65 /* SYChannelViewCell.m */; };
 		2FC5874B1C79FDEB003C9A7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874A1C79FDEB003C9A7A /* main.m */; };
 		2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */; };
 		2FC587541C79FDEB003C9A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587521C79FDEB003C9A7A /* Main.storyboard */; };
@@ -105,8 +107,6 @@
 		2F2CCB961C7B016500C45E3D /* SYTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYTableViewCell.xib; sourceTree = "<group>"; };
 		2F2CCB9C1C7B043000C45E3D /* SYLastestGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYLastestGroup.h; sourceTree = "<group>"; };
 		2F2CCB9D1C7B043000C45E3D /* SYLastestGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYLastestGroup.m; sourceTree = "<group>"; };
-		2F2CCB9F1C7B085200C45E3D /* SYImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYImage.h; sourceTree = "<group>"; };
-		2F2CCBA01C7B085200C45E3D /* SYImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYImage.m; sourceTree = "<group>"; };
 		2F2CCBA21C7B088E00C45E3D /* SYParamResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYParamResult.h; sourceTree = "<group>"; };
 		2F2CCBA31C7B088E00C45E3D /* SYParamResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYParamResult.m; sourceTree = "<group>"; };
 		2F2CCBA51C7B08F600C45E3D /* SYStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYStory.h; sourceTree = "<group>"; };
@@ -135,6 +135,12 @@
 		2F2CCBBF1C7B0C1400C45E3D /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
 		2F2CCBCA1C7B156500C45E3D /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		2F2CCBCB1C7B156500C45E3D /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2F2CCBCD1C7B26F100C45E3D /* SYSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYSettingController.h; sourceTree = "<group>"; };
+		2F2CCBCE1C7B26F100C45E3D /* SYSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYSettingController.m; sourceTree = "<group>"; };
+		2F37AB5C1C7B34BA00D3CD65 /* SYChannelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYChannelController.h; sourceTree = "<group>"; };
+		2F37AB5D1C7B34BA00D3CD65 /* SYChannelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYChannelController.m; sourceTree = "<group>"; };
+		2F37AB5F1C7B353300D3CD65 /* SYChannelViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYChannelViewCell.h; sourceTree = "<group>"; };
+		2F37AB601C7B353300D3CD65 /* SYChannelViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYChannelViewCell.m; sourceTree = "<group>"; };
 		2FC587461C79FDEB003C9A7A /* zhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5874A1C79FDEB003C9A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -281,6 +287,8 @@
 		2F2CCB821C7AF09800C45E3D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2F2CCBCD1C7B26F100C45E3D /* SYSettingController.h */,
+				2F2CCBCE1C7B26F100C45E3D /* SYSettingController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -326,8 +334,6 @@
 				2F2CCBA61C7B08F600C45E3D /* SYStory.m */,
 				2F2CCB9C1C7B043000C45E3D /* SYLastestGroup.h */,
 				2F2CCB9D1C7B043000C45E3D /* SYLastestGroup.m */,
-				2F2CCB9F1C7B085200C45E3D /* SYImage.h */,
-				2F2CCBA01C7B085200C45E3D /* SYImage.m */,
 				2F2CCBA21C7B088E00C45E3D /* SYParamResult.h */,
 				2F2CCBA31C7B088E00C45E3D /* SYParamResult.m */,
 			);
@@ -357,6 +363,8 @@
 		2F2CCB8E1C7B00CE00C45E3D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2F37AB5C1C7B34BA00D3CD65 /* SYChannelController.h */,
+				2F37AB5D1C7B34BA00D3CD65 /* SYChannelController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -371,6 +379,8 @@
 		2F2CCB901C7B00CE00C45E3D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2F37AB5F1C7B353300D3CD65 /* SYChannelViewCell.h */,
+				2F37AB601C7B353300D3CD65 /* SYChannelViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -792,7 +802,6 @@
 				2FC587FA1C7A0974003C9A7A /* MASCompositeConstraint.m in Sources */,
 				2F2CCBC41C7B0C1400C45E3D /* MJPropertyType.m in Sources */,
 				2F2CCBC91C7B0C1400C45E3D /* NSString+MJExtension.m in Sources */,
-				2F2CCBA11C7B085200C45E3D /* SYImage.m in Sources */,
 				2FC587D51C7A096A003C9A7A /* SDWebImageDownloader.m in Sources */,
 				2FC587A41C7A0956003C9A7A /* AFURLRequestSerialization.m in Sources */,
 				2FC587A51C7A0956003C9A7A /* AFURLResponseSerialization.m in Sources */,
@@ -804,6 +813,7 @@
 				2FC587D11C7A096A003C9A7A /* NSData+ImageContentType.m in Sources */,
 				2FD803B71C7A3B5500C15EB7 /* SYToolButton.m in Sources */,
 				2F2CCBC11C7B0C1400C45E3D /* MJFoundation.m in Sources */,
+				2F2CCBCF1C7B26F100C45E3D /* SYSettingController.m in Sources */,
 				2F2CCBC51C7B0C1400C45E3D /* NSObject+MJClass.m in Sources */,
 				2F2CCBCC1C7B156500C45E3D /* ViewController.m in Sources */,
 				2FC587FB1C7A0974003C9A7A /* MASConstraint.m in Sources */,
@@ -817,6 +827,7 @@
 				2F2CCB971C7B016500C45E3D /* SYTableViewCell.m in Sources */,
 				2F2CCB9E1C7B043000C45E3D /* SYLastestGroup.m in Sources */,
 				2FC588071C7A0B50003C9A7A /* YSHttpTool.m in Sources */,
+				2F37AB611C7B353300D3CD65 /* SYChannelViewCell.m in Sources */,
 				2F2CCBC61C7B0C1400C45E3D /* NSObject+MJCoding.m in Sources */,
 				2FC587D21C7A096A003C9A7A /* SDImageCache.m in Sources */,
 				2FC587D31C7A096A003C9A7A /* SDWebImageCompat.m in Sources */,
@@ -828,6 +839,7 @@
 				2FC587FD1C7A0974003C9A7A /* MASLayoutConstraint.m in Sources */,
 				2FC587D61C7A096A003C9A7A /* SDWebImageDownloaderOperation.m in Sources */,
 				2FC5874B1C79FDEB003C9A7A /* main.m in Sources */,
+				2F37AB5E1C7B34BA00D3CD65 /* SYChannelController.m in Sources */,
 				2FC587DE1C7A096A003C9A7A /* UIImageView+WebCache.m in Sources */,
 				2F2CCB7B1C7AE49000C45E3D /* SYMenuItem.m in Sources */,
 				2FC587DD1C7A096A003C9A7A /* UIImageView+HighlightedWebCache.m in Sources */,

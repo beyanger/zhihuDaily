@@ -17,6 +17,8 @@
 
 
 @property (nonatomic, strong) NSArray<SYMenuItem *> *dataSource;
+@property (nonatomic, strong) NSMutableArray *childVC;
+@property (nonatomic, strong) NSMutableArray *childView;
 
 @end
 
@@ -57,10 +59,25 @@
     [mutableArray writeToFile:fullPath atomically:YES];
 }
 
+- (NSMutableArray *)childVC {
+    if (!_childVC) {
+        _childVC = [@[] mutableCopy];
+    }
+    return _childVC;
+}
+- (NSMutableArray *)childView {
+    if (!_childView) {
+        _childView = [@[] mutableCopy];
+    }
+    return _childView;
+}
+
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //显示主界面
+    [self showHomePage];
     
     // 设置 toolBox 面板
     SYMainToolBox *toolBox = [[[NSBundle mainBundle] loadNibNamed:@"SYMainToolBox" owner:nil options:nil] firstObject];
@@ -71,20 +88,26 @@
     toolBox.toolBoxDelegate = self;
     self.toolBox = toolBox;
     
-    
-    UITableViewController *tvc = [[SYHomeController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:tvc];
-    
-    [self addChildViewController:nav];
-    [self.view addSubview:nav.view];
-    self.currentView = nav.view;
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(progressNoti:) name:@"menuAction" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toolBoxOpen) name:@"menuActionOpen" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toolBoxClose) name:@"menuActionClose" object:nil];
 }
 
-
+- (void)showHomePage {
+    [self.childViewControllers makeObjectsPerformSelector:@selector(removeFromParentViewController)];
+    
+    UITableViewController *tvc = [[SYHomeController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:tvc];
+    
+    if (self.currentView) {
+        nav.view.frame = self.currentView.frame;
+        [self.currentView removeFromSuperview];
+    }
+    self.currentView = nav.view;
+    
+    [self.view addSubview:nav.view];
+    [self addChildViewController:nav];
+}
 
 
 #pragma mark 处理通知事件
@@ -97,6 +120,7 @@
         [self toolBoxClose];
     }
 }
+
 #pragma mark 打开左侧面板
 - (void)toolBoxOpen {
     if (self.currentView.frame.origin.x == 0) {
@@ -139,15 +163,49 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%@", indexPath);
+    if (indexPath.row == 0) {
+        [self showHomePage];
+    } else {
+    
+    
+    }
+    
+    [self menuClose];
 }
 
 
 
 #pragma mark toolBox的按钮的代理方法
 - (void)toolBox:(SYMainToolBox *)toolBox didClickedTitle:(NSString *)title {
-    NSLog(@"%@", title);
+
+    [self.childViewControllers makeObjectsPerformSelector:@selector(removeFromParentViewController)];
+    
+    if ([title isEqualToString:@"设置"]) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UINavigationController *setNav = [sb instantiateViewControllerWithIdentifier:@"setting"];
+ 
+        
+        if (self.currentView) {
+            setNav.view.frame = self.currentView.frame;
+            [self.currentView removeFromSuperview];
+        }
+        self.currentView = setNav.view;
+        
+        [self.view addSubview:setNav.view];
+        [self addChildViewController:setNav];
+    } else if ([title isEqualToString:@"消息"]) {
+    
+    } else if ([title isEqualToString:@"收藏"]) {
+    
+    }
+    [self menuClose];
 }
+
+- (void)menuClose {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"menuActionClose" object:nil];
+}
+
 
 
 - (void)didReceiveMemoryWarning {
