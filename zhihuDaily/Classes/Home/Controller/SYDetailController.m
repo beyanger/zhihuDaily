@@ -37,8 +37,10 @@
 }
 
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     
     NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/news/%lld", self.story.id];
@@ -76,6 +78,9 @@
         NSLog(@"加载出错....");
     }];
 
+    UIView *bottomView = [[[NSBundle mainBundle] loadNibNamed:@"SYBottomView" owner:self options:nil] firstObject];
+    bottomView.frame = CGRectMake(0, kScreenHeight-40, kScreenWidth, 40);
+    [self.view addSubview:bottomView];
 }
 
 
@@ -92,7 +97,8 @@
 
 - (UIWebView *)webView {
     if (!_webView) {
-        UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+        UIWebView *webView = [[UIWebView alloc] init];
+        webView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-40);
         [self.view addSubview:webView];
         _webView = webView;
         _webView.delegate = self;
