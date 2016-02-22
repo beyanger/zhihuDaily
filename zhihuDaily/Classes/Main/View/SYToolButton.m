@@ -10,18 +10,20 @@
 
 @implementation SYToolButton
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+}
+
 
 - (CGRect)imageRectForContentRect:(CGRect)contentRect {
-    CGFloat height = contentRect.size.height * 0.7;
+    CGFloat height = contentRect.size.height * 0.8;
     return CGRectMake(0, 0, contentRect.size.width, height);
 }
 
 - (CGRect)titleRectForContentRect:(CGRect)contentRect {
-    
-    NSLog(@"%@", NSStringFromCGRect(contentRect));
-    
+    CGFloat y = contentRect.size.height * 0.85;
     CGFloat height = contentRect.size.height * 0.4;
-    CGFloat y = contentRect.size.height * 0.7;
     return CGRectMake(0, y, contentRect.size.width, height);
 }
 

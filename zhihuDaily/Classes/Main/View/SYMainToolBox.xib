@@ -17,20 +17,29 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r3x-mY-c08">
                             <rect key="frame" x="0.0" y="60" width="267" height="60"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ALf-SV-HPN" customClass="SYToolButton">
-                                    <rect key="frame" x="178" y="0.0" width="89" height="60"/>
-                                    <animations/>
-                                    <state key="normal" title="Button"/>
-                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPt-9a-eeQ" customClass="SYToolButton">
                                     <rect key="frame" x="89" y="0.0" width="89" height="60"/>
                                     <animations/>
-                                    <state key="normal" title="Button"/>
+                                    <state key="normal" title="消息"/>
+                                    <connections>
+                                        <action selector="didClickedButton:" destination="4El-y3-DJA" eventType="touchUpInside" id="cuN-f7-WWy"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suK-FQ-Afi" customClass="SYToolButton">
                                     <rect key="frame" x="0.0" y="0.0" width="89" height="60"/>
                                     <animations/>
-                                    <state key="normal" title="Button"/>
+                                    <state key="normal" title="收藏"/>
+                                    <connections>
+                                        <action selector="didClickedButton:" destination="4El-y3-DJA" eventType="touchUpInside" id="cwp-O6-iVu"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ALf-SV-HPN" customClass="SYToolButton">
+                                    <rect key="frame" x="178" y="0.0" width="89" height="60"/>
+                                    <animations/>
+                                    <state key="normal" title="设置"/>
+                                    <connections>
+                                        <action selector="didClickedButton:" destination="4El-y3-DJA" eventType="touchUpInside" id="mxP-3n-6ys"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <animations/>
@@ -89,11 +98,17 @@
                             <rect key="frame" x="0.0" y="0.0" width="133.5" height="40"/>
                             <animations/>
                             <state key="normal" title="离线"/>
+                            <connections>
+                                <action selector="didClickedButton:" destination="4El-y3-DJA" eventType="touchUpInside" id="bod-XE-eSI"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDp-w3-G8F">
                             <rect key="frame" x="133" y="0.0" width="133.5" height="40"/>
                             <animations/>
                             <state key="normal" title="夜间"/>
+                            <connections>
+                                <action selector="didClickedButton:" destination="4El-y3-DJA" eventType="touchUpInside" id="1GL-XG-q4Y"/>
+                            </connections>
                         </button>
                     </subviews>
                     <animations/>
@@ -111,7 +126,7 @@
                         <constraint firstAttribute="bottom" secondItem="SDp-w3-G8F" secondAttribute="bottom" id="wrd-Cf-9re"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2qm-48-8yY">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2qm-48-8yY">
                     <rect key="frame" x="0.0" y="140" width="267" height="420"/>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -135,9 +150,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="avatarImage" destination="1FH-cZ-fTN" id="eA5-Ve-7BO"/>
-                <outlet property="collection" destination="suK-FQ-Afi" id="nwk-CP-RXy"/>
-                <outlet property="message" destination="bPt-9a-eeQ" id="u4y-gY-ZeS"/>
-                <outlet property="setting" destination="ALf-SV-HPN" id="A11-KD-4Cp"/>
+                <outlet property="nickName" destination="mkQ-ii-c7W" id="DqP-0P-Gr6"/>
                 <outlet property="tableView" destination="2qm-48-8yY" id="cvu-wl-Un5"/>
             </connections>
             <point key="canvasLocation" x="-92.5" y="384"/>

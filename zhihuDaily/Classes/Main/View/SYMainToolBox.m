@@ -14,9 +14,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImage;
-@property (weak, nonatomic) IBOutlet SYToolButton *collection;
-@property (weak, nonatomic) IBOutlet SYToolButton *message;
-@property (weak, nonatomic) IBOutlet SYToolButton *setting;
+@property (weak, nonatomic) IBOutlet UILabel *nickName;
+
 
 @end
 
@@ -26,12 +25,16 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.avatarImage.layer.cornerRadius = 25.0;
-    self.collection.backgroundColor = [UIColor orangeColor];
-    self.message.backgroundColor = [UIColor blueColor];
-    self.setting.backgroundColor = [UIColor purpleColor];
-    
 }
 
+
+- (IBAction)didClickedButton:(UIButton *)sender {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"menuAction" object:nil];
+    if ([self.toolBoxDelegate respondsToSelector:@selector(toolBox:didClickedTitle:)]) {
+        [self.toolBoxDelegate toolBox:self didClickedTitle:sender.currentTitle];
+    }
+}
 
 
 - (void)setDataSource:(id<UITableViewDataSource>)dataSource {
