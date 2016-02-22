@@ -27,9 +27,9 @@
 		2F2CCBC71C7B0C1400C45E3D /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBBB1C7B0C1400C45E3D /* NSObject+MJKeyValue.m */; };
 		2F2CCBC81C7B0C1400C45E3D /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBBD1C7B0C1400C45E3D /* NSObject+MJProperty.m */; };
 		2F2CCBC91C7B0C1400C45E3D /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBBF1C7B0C1400C45E3D /* NSString+MJExtension.m */; };
+		2F2CCBCC1C7B156500C45E3D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBCB1C7B156500C45E3D /* ViewController.m */; };
 		2FC5874B1C79FDEB003C9A7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874A1C79FDEB003C9A7A /* main.m */; };
 		2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */; };
-		2FC587511C79FDEB003C9A7A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC587501C79FDEB003C9A7A /* ViewController.m */; };
 		2FC587541C79FDEB003C9A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587521C79FDEB003C9A7A /* Main.storyboard */; };
 		2FC587561C79FDEB003C9A7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587551C79FDEB003C9A7A /* Assets.xcassets */; };
 		2FC587591C79FDEB003C9A7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587571C79FDEB003C9A7A /* LaunchScreen.storyboard */; };
@@ -133,12 +133,12 @@
 		2F2CCBBD1C7B0C1400C45E3D /* NSObject+MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJProperty.m"; sourceTree = "<group>"; };
 		2F2CCBBE1C7B0C1400C45E3D /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
 		2F2CCBBF1C7B0C1400C45E3D /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
+		2F2CCBCA1C7B156500C45E3D /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2F2CCBCB1C7B156500C45E3D /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2FC587461C79FDEB003C9A7A /* zhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5874A1C79FDEB003C9A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2FC5874F1C79FDEB003C9A7A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2FC587501C79FDEB003C9A7A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2FC587531C79FDEB003C9A7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2FC587551C79FDEB003C9A7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FC587581C79FDEB003C9A7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -431,8 +431,6 @@
 				2FC5877C1C79FE74003C9A7A /* Classes */,
 				2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */,
 				2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */,
-				2FC5874F1C79FDEB003C9A7A /* ViewController.h */,
-				2FC587501C79FDEB003C9A7A /* ViewController.m */,
 				2FC587521C79FDEB003C9A7A /* Main.storyboard */,
 				2FC587551C79FDEB003C9A7A /* Assets.xcassets */,
 				2FC587571C79FDEB003C9A7A /* LaunchScreen.storyboard */,
@@ -494,6 +492,8 @@
 		2FC5877E1C79FE74003C9A7A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2F2CCBCA1C7B156500C45E3D /* ViewController.h */,
+				2F2CCBCB1C7B156500C45E3D /* ViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -796,7 +796,6 @@
 				2FC587D51C7A096A003C9A7A /* SDWebImageDownloader.m in Sources */,
 				2FC587A41C7A0956003C9A7A /* AFURLRequestSerialization.m in Sources */,
 				2FC587A51C7A0956003C9A7A /* AFURLResponseSerialization.m in Sources */,
-				2FC587511C79FDEB003C9A7A /* ViewController.m in Sources */,
 				2FC587D01C7A096A003C9A7A /* MKAnnotationView+WebCache.m in Sources */,
 				2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */,
 				2FC587FE1C7A0974003C9A7A /* MASViewAttribute.m in Sources */,
@@ -806,6 +805,7 @@
 				2FD803B71C7A3B5500C15EB7 /* SYToolButton.m in Sources */,
 				2F2CCBC11C7B0C1400C45E3D /* MJFoundation.m in Sources */,
 				2F2CCBC51C7B0C1400C45E3D /* NSObject+MJClass.m in Sources */,
+				2F2CCBCC1C7B156500C45E3D /* ViewController.m in Sources */,
 				2FC587FB1C7A0974003C9A7A /* MASConstraint.m in Sources */,
 				2FC587DA1C7A096A003C9A7A /* UIImage+GIF.m in Sources */,
 				2FC587D91C7A096A003C9A7A /* UIButton+WebCache.m in Sources */,

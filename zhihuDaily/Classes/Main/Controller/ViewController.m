@@ -78,7 +78,10 @@
     [self addChildViewController:nav];
     [self.view addSubview:nav.view];
     self.currentView = nav.view;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(progressNoti:) name:@"menuAction" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toolBoxOpen) name:@"menuActionOpen" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toolBoxClose) name:@"menuActionClose" object:nil];
 }
 
 
@@ -88,30 +91,35 @@
 - (void)progressNoti:(NSNotification *)noti {
     // menu 没有被弹出， 需要弹出
     if (self.currentView.frame.origin.x == 0) {
+        [self toolBoxOpen];
+    } else {
+    // menu 已经被弹出，需要被收回
+        [self toolBoxClose];
+    }
+}
+#pragma mark 打开左侧面板
+- (void)toolBoxOpen {
+    if (self.currentView.frame.origin.x == 0) {
         [UIView animateWithDuration:0.25 animations:^{
             self.toolBox.frame = CGRectMake(0, 0, kScreenWidth*0.6, kScreenHeight);
             self.currentView.frame = CGRectMake(CGRectGetMaxX(self.toolBox.frame), 0, kScreenWidth, kScreenHeight);
         }];
-        
-    } else {
-    // menu 已经被弹出，需要被收回
+    }
+}
+#pragma mark 关闭左侧面板
+- (void)toolBoxClose {
+    if (self.currentView.frame.origin.x != 0) {
         [UIView animateWithDuration:0.25 animations:^{
             self.toolBox.frame = CGRectMake(-kScreenWidth*0.6, 0, kScreenWidth*0.6, kScreenHeight);
             self.currentView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
         }];
     }
-
 }
 
 
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
 }
 
 

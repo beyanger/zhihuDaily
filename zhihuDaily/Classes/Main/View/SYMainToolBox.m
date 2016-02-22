@@ -45,4 +45,8 @@
     self.tableView.delegate = delegate;
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"menuActionOpen" object:nil];
+}
+
 @end
