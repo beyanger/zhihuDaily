@@ -8,17 +8,60 @@
 
 #import "AppDelegate.h"
 
-@interface AppDelegate ()
+#import "YSHttpTool.h"
+#import "UIImageView+WebCache.h"
 
+
+
+@interface AppDelegate ()
+@property (nonatomic, weak) UIImageView *imageView;
 @end
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    
+    [self.window makeKeyAndVisible];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [self.window addSubview:imageView];
+    self.imageView = imageView;
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
+    NSString *url = [ud stringForKey:@"launchScreen"];
+    
+    if (url) {
+        [imageView sd_setImageWithURL:[NSURL URLWithString:url]];
+    }
+    
+    [YSHttpTool GETWithURL:@"http://news-at.zhihu.com/api/4/start-image/720*1184" params:nil success:^(id responseObject) {
+        NSString *urlStr = responseObject[@"img"];
+        [ud setObject:urlStr forKey:@"launchScreen"];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:urlStr]];
+        
+    } failure:^(NSError *error) {
+        NSLog(@"请求主页失败");
+    }];
+    
+    
+    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(removeLaunchImage) userInfo:nil repeats:NO];
+    
     return YES;
 }
+
+- (void)removeLaunchImage {
+    
+    [UIView animateWithDuration:0.67 animations:^{
+        self.imageView.alpha = 0.0;
+        self.imageView.transform = CGAffineTransformMakeScale(1.2, 1.2);
+    } completion:^(BOOL finished) {
+        [self.imageView removeFromSuperview];
+    }];
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
