@@ -38,7 +38,6 @@
     
     // 设置 toolBox 面板
     [self setupToolBox];
-    
     [self setupDataSource];
 }
 
@@ -70,7 +69,6 @@
     } failure:^(NSError *error) {
         NSLog(@"获取主题出错： %@", error);
     }];
-
 }
 
 

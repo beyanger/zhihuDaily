@@ -36,6 +36,12 @@
 		2F37AB791C7B675100D3CD65 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB731C7B675100D3CD65 /* MMDrawerController.m */; };
 		2F37AB7A1C7B675100D3CD65 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB751C7B675100D3CD65 /* MMDrawerVisualState.m */; };
 		2F37AB7B1C7B675100D3CD65 /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB771C7B675100D3CD65 /* UIViewController+MMDrawerController.m */; };
+		2F37AB7E1C7B6D5200D3CD65 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB7D1C7B6D5200D3CD65 /* UIView+Extension.m */; };
+		2F37AB811C7B6E0300D3CD65 /* SYTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB801C7B6E0300D3CD65 /* SYTopView.m */; };
+		2F37AB831C7B6E0F00D3CD65 /* SYTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F37AB821C7B6E0F00D3CD65 /* SYTopView.xib */; };
+		2F37AB861C7B7D7C00D3CD65 /* SYWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB851C7B7D7C00D3CD65 /* SYWebViewController.m */; };
+		2F37AB891C7B7F0B00D3CD65 /* SYBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB881C7B7F0B00D3CD65 /* SYBottomView.m */; };
+		2F37AB8B1C7B7F1600D3CD65 /* SYBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F37AB8A1C7B7F1600D3CD65 /* SYBottomView.xib */; };
 		2FC5874B1C79FDEB003C9A7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874A1C79FDEB003C9A7A /* main.m */; };
 		2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */; };
 		2FC587541C79FDEB003C9A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587521C79FDEB003C9A7A /* Main.storyboard */; };
@@ -161,6 +167,16 @@
 		2F37AB751C7B675100D3CD65 /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
 		2F37AB761C7B675100D3CD65 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
 		2F37AB771C7B675100D3CD65 /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
+		2F37AB7C1C7B6D5200D3CD65 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		2F37AB7D1C7B6D5200D3CD65 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		2F37AB7F1C7B6E0300D3CD65 /* SYTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYTopView.h; sourceTree = "<group>"; };
+		2F37AB801C7B6E0300D3CD65 /* SYTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYTopView.m; sourceTree = "<group>"; };
+		2F37AB821C7B6E0F00D3CD65 /* SYTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYTopView.xib; sourceTree = "<group>"; };
+		2F37AB841C7B7D7C00D3CD65 /* SYWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYWebViewController.h; sourceTree = "<group>"; };
+		2F37AB851C7B7D7C00D3CD65 /* SYWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYWebViewController.m; sourceTree = "<group>"; };
+		2F37AB871C7B7F0B00D3CD65 /* SYBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYBottomView.h; sourceTree = "<group>"; };
+		2F37AB881C7B7F0B00D3CD65 /* SYBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYBottomView.m; sourceTree = "<group>"; };
+		2F37AB8A1C7B7F1600D3CD65 /* SYBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYBottomView.xib; sourceTree = "<group>"; };
 		2FC587461C79FDEB003C9A7A /* zhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5874A1C79FDEB003C9A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -346,6 +362,8 @@
 				2F2CCB8A1C7AF1C100C45E3D /* SYHomeController.m */,
 				2F37AB671C7B4EFF00D3CD65 /* SYDetailController.h */,
 				2F37AB681C7B4EFF00D3CD65 /* SYDetailController.m */,
+				2F37AB841C7B7D7C00D3CD65 /* SYWebViewController.h */,
+				2F37AB851C7B7D7C00D3CD65 /* SYWebViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -369,6 +387,12 @@
 				2F2CCB941C7B016500C45E3D /* SYTableViewCell.h */,
 				2F2CCB951C7B016500C45E3D /* SYTableViewCell.m */,
 				2F2CCB961C7B016500C45E3D /* SYTableViewCell.xib */,
+				2F37AB7F1C7B6E0300D3CD65 /* SYTopView.h */,
+				2F37AB801C7B6E0300D3CD65 /* SYTopView.m */,
+				2F37AB821C7B6E0F00D3CD65 /* SYTopView.xib */,
+				2F37AB871C7B7F0B00D3CD65 /* SYBottomView.h */,
+				2F37AB881C7B7F0B00D3CD65 /* SYBottomView.m */,
+				2F37AB8A1C7B7F1600D3CD65 /* SYBottomView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -439,6 +463,8 @@
 		2F37AB6A1C7B63E600D3CD65 /* Catagories */ = {
 			isa = PBXGroup;
 			children = (
+				2F37AB7C1C7B6D5200D3CD65 /* UIView+Extension.h */,
+				2F37AB7D1C7B6D5200D3CD65 /* UIView+Extension.m */,
 				2F37AB6B1C7B63F000D3CD65 /* UINavigationController+FDFullscreenPopGesture.h */,
 				2F37AB6C1C7B63F000D3CD65 /* UINavigationController+FDFullscreenPopGesture.m */,
 			);
@@ -809,6 +835,8 @@
 				2FC587561C79FDEB003C9A7A /* Assets.xcassets in Resources */,
 				2F2CCBA91C7B0B2100C45E3D /* example.json in Resources */,
 				2FC587851C79FED8003C9A7A /* SYMainToolBox.xib in Resources */,
+				2F37AB8B1C7B7F1600D3CD65 /* SYBottomView.xib in Resources */,
+				2F37AB831C7B6E0F00D3CD65 /* SYTopView.xib in Resources */,
 				2FC587541C79FDEB003C9A7A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -856,9 +884,11 @@
 				2F2CCBC41C7B0C1400C45E3D /* MJPropertyType.m in Sources */,
 				2F2CCBC91C7B0C1400C45E3D /* NSString+MJExtension.m in Sources */,
 				2FC587D51C7A096A003C9A7A /* SDWebImageDownloader.m in Sources */,
+				2F37AB7E1C7B6D5200D3CD65 /* UIView+Extension.m in Sources */,
 				2FC587A41C7A0956003C9A7A /* AFURLRequestSerialization.m in Sources */,
 				2F37AB691C7B4EFF00D3CD65 /* SYDetailController.m in Sources */,
 				2FC587A51C7A0956003C9A7A /* AFURLResponseSerialization.m in Sources */,
+				2F37AB891C7B7F0B00D3CD65 /* SYBottomView.m in Sources */,
 				2F37AB7A1C7B675100D3CD65 /* MMDrawerVisualState.m in Sources */,
 				2FC587D01C7A096A003C9A7A /* MKAnnotationView+WebCache.m in Sources */,
 				2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */,
@@ -870,6 +900,7 @@
 				2F37AB791C7B675100D3CD65 /* MMDrawerController.m in Sources */,
 				2F2CCBC11C7B0C1400C45E3D /* MJFoundation.m in Sources */,
 				2F2CCBCF1C7B26F100C45E3D /* SYSettingController.m in Sources */,
+				2F37AB861C7B7D7C00D3CD65 /* SYWebViewController.m in Sources */,
 				2F2CCBC51C7B0C1400C45E3D /* NSObject+MJClass.m in Sources */,
 				2F2CCBCC1C7B156500C45E3D /* ViewController.m in Sources */,
 				2FC587FB1C7A0974003C9A7A /* MASConstraint.m in Sources */,
@@ -894,6 +925,7 @@
 				2FC587831C79FECA003C9A7A /* SYMainToolBox.m in Sources */,
 				2FC587FD1C7A0974003C9A7A /* MASLayoutConstraint.m in Sources */,
 				2FC587D61C7A096A003C9A7A /* SDWebImageDownloaderOperation.m in Sources */,
+				2F37AB811C7B6E0300D3CD65 /* SYTopView.m in Sources */,
 				2FC5874B1C79FDEB003C9A7A /* main.m in Sources */,
 				2F37AB5E1C7B34BA00D3CD65 /* SYChannelController.m in Sources */,
 				2FC587DE1C7A096A003C9A7A /* UIImageView+WebCache.m in Sources */,

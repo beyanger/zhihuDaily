@@ -9,10 +9,19 @@
 #import "SYDetailController.h"
 #import "SYStory.h"
 #import "YSHttpTool.h"
+#import "SYTopView.h"
+#import "UIImageView+WebCache.h"
+#import "UIView+Extension.h"
 
-@interface SYDetailController ()
+
+@interface SYDetailController () <UIWebViewDelegate>
 
 @property (nonatomic, strong) SYStory *story;
+
+@property (nonatomic, weak) SYTopView   *topView;
+@property (nonatomic, weak) UIWebView *webView;
+
+@property (nonatomic, weak) UINavigationController *navController;
 
 @end
 
@@ -33,9 +42,6 @@
     
     
     NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/news/%lld", self.story.id];
-    
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:webView];
     
     [YSHttpTool GETWithURL:url params:nil success:^(id responseObject) {
         NSDictionary *dict = (NSDictionary *)responseObject;
@@ -59,39 +65,81 @@
         
         [htmlStr appendFormat:@"</head><body>%@</body></html>", dict[@"body"]];
         
-        
-        NSString *placeHolderStr = [NSString stringWithFormat:@"<div class=\"img-place-holder\"><img src=\"%@\"></div>", dict[@"image"]];
-        [htmlStr replaceOccurrencesOfString:@"<div class=\"img-place-holder\"></div>" withString:placeHolderStr options:NSCaseInsensitiveSearch range:NSMakeRange(0, htmlStr.length)];
-        
-        
-        NSLog(@"%@", htmlStr);
-        
         dispatch_async(dispatch_get_main_queue(), ^{
-            [webView loadHTMLString:htmlStr baseURL:nil];
+            [self.webView loadHTMLString:htmlStr baseURL:nil];
+            self.topView.title.text = dict[@"title"];
+            [self.topView.image sd_setImageWithURL:[NSURL URLWithString:dict[@"image"]]];
+            self.topView.author.text = dict[@"image_source"];
         });
         
     } failure:^(NSError *error) {
         NSLog(@"加载出错....");
     }];
-    
-    
-    
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (SYTopView *)topView {
+    if (!_topView) {
+        _topView = [[[NSBundle mainBundle] loadNibNamed:@"SYTopView" owner:self options:nil] firstObject];
+        _topView.clipsToBounds = YES;
+        _topView.frame = CGRectMake(0, 0, kScreenWidth, 200);
+        _topView.image.contentMode = UIViewContentModeScaleAspectFill;
+        [self.webView.scrollView addSubview:_topView];
+    }
+    return _topView;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UIWebView *)webView {
+    if (!_webView) {
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+        [self.view addSubview:webView];
+        _webView = webView;
+        _webView.delegate = self;
+        [self.webView.scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+        
+    }
+    return _webView;
 }
-*/
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    
+    if ([request.URL.absoluteString hasPrefix:@"http"]) {
+        UIViewController *vc = [[UIViewController alloc] init];
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.frame];
+        [vc.view addSubview:webView];
+        
+        [webView loadRequest:request];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        
+        vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(dismis)];
+        
+        self.navController = nav;
+        
+        [self presentViewController:nav animated:YES completion:nil];
+        
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)dismis {
+    [self.navController dismissViewControllerAnimated:YES completion:nil];
+
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"contentOffset"]) {
+        CGFloat yoffset = [change[@"new"] CGPointValue].y;
+        if (yoffset < 0) {
+            self.topView.frame = CGRectMake(0, yoffset, kScreenWidth, 200-yoffset);
+        }
+        
+    }
+}
+
+
 
 @end
