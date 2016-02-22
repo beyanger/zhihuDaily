@@ -21,6 +21,9 @@
 
 @implementation SYMainToolBox
 
+- (void)reloadData {
+    [self.tableView reloadData];
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

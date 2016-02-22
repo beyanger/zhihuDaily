@@ -63,6 +63,9 @@
                                             <animations/>
                                         </tableViewCellContentView>
                                         <animations/>
+                                        <connections>
+                                            <segue destination="FxS-fL-6Br" kind="show" id="piA-uW-nWW"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -359,7 +362,41 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rIi-7P-XMZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1147" y="441"/>
+            <point key="canvasLocation" x="-1300" y="451"/>
+        </scene>
+        <!--个人主页-->
+        <scene sceneID="laT-fV-PFP">
+            <objects>
+                <viewController id="FxS-fL-6Br" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bKN-eM-54j"/>
+                        <viewControllerLayoutGuide type="bottom" id="RHf-Wh-sGx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jGZ-H7-04A">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hy5-bC-B9K">
+                                <rect key="frame" x="260" y="96" width="80" height="80"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="5Hh-Wv-XVx"/>
+                                    <constraint firstAttribute="width" constant="80" id="eLj-N5-Xwh"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hy5-bC-B9K" firstAttribute="centerX" secondItem="jGZ-H7-04A" secondAttribute="centerX" id="4Jw-Yi-nIv"/>
+                            <constraint firstItem="hy5-bC-B9K" firstAttribute="top" secondItem="bKN-eM-54j" secondAttribute="bottom" constant="32" id="ayf-A5-x8P"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="个人主页" id="u1i-4b-162"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B32-FE-a90" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-570" y="432"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FKH-Ty-duv">

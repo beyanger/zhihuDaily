@@ -10,67 +10,24 @@
 #import "SYMainToolBox.h"
 #import "SYMenuItem.h"
 #import "SYHomeController.h"
+#import "YSHttpTool.h"
+#import "MJExtension.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource, SYMainToolBoxDelegate>
 @property (nonatomic, weak) SYMainToolBox *toolBox;
 @property (nonatomic, weak) UIView *currentView;
 
+@property (nonatomic, weak) UITapGestureRecognizer *tapGesture;
 
-@property (nonatomic, strong) NSArray<SYMenuItem *> *dataSource;
+
+@property (nonatomic, strong) NSMutableArray<SYMenuItem *> *dataSource;
+
 @property (nonatomic, strong) NSMutableArray *childVC;
 @property (nonatomic, strong) NSMutableArray *childView;
 
 @end
 
 @implementation ViewController
-
-- (NSArray *)dataSource {
-    if (!_dataSource) {
-        NSMutableArray *mutableArray = [@[] mutableCopy];
-        // 先从沙箱中获取数据
-        NSString *pathStr = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-        NSString *fullPath = [pathStr stringByAppendingPathComponent:@"menu.plist"];
-        NSArray *array = [NSArray arrayWithContentsOfFile:fullPath];
-        
-        if (!array) {
-            //若沙箱中没有数据，则从bundle中获取
-            NSString *path = [[NSBundle mainBundle] pathForResource:@"menu.plist" ofType:nil];
-            array = [NSArray arrayWithContentsOfFile:path];
-        }
-        
-        for (NSDictionary *dict in array) {
-            SYMenuItem *item = [SYMenuItem itemWithDictionary:dict];
-            [mutableArray addObject:item];
-        }
-        _dataSource = [mutableArray copy];
-    }
-    return _dataSource;
-}
-// 保存数据到沙箱中
-- (void)saveData {
-    NSString *pathStr = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *fullPath = [pathStr stringByAppendingPathComponent:@"menu.plist"];
-    NSMutableArray *mutableArray = [@[] mutableCopy];
-    for (SYMenuItem *item in self.dataSource) {
-        NSDictionary *dict = @{@"title":item.title, @"collected":@(item.collected)};
-        [mutableArray addObject:dict];
-        
-    }
-    [mutableArray writeToFile:fullPath atomically:YES];
-}
-
-- (NSMutableArray *)childVC {
-    if (!_childVC) {
-        _childVC = [@[] mutableCopy];
-    }
-    return _childVC;
-}
-- (NSMutableArray *)childView {
-    if (!_childView) {
-        _childView = [@[] mutableCopy];
-    }
-    return _childView;
-}
 
 
 
@@ -80,6 +37,13 @@
     [self showHomePage];
     
     // 设置 toolBox 面板
+    [self setupToolBox];
+    
+    [self setupDataSource];
+}
+
+
+- (void)setupToolBox {
     SYMainToolBox *toolBox = [[[NSBundle mainBundle] loadNibNamed:@"SYMainToolBox" owner:nil options:nil] firstObject];
     toolBox.frame = CGRectMake(-kScreenWidth*0.6, 0, kScreenWidth*0.6, kScreenHeight);
     [self.view addSubview:toolBox];
@@ -92,6 +56,23 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toolBoxOpen) name:@"menuActionOpen" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toolBoxClose) name:@"menuActionClose" object:nil];
 }
+
+- (void)setupDataSource {
+    [YSHttpTool GETWithURL:@"http://news-at.zhihu.com/api/4/themes" params:nil success:^(id responseObject) {
+        self.dataSource = [SYMenuItem mj_objectArrayWithKeyValuesArray:responseObject[@"others"]];
+        SYMenuItem *home = [[SYMenuItem alloc] init];
+        home.name = @"首页";
+        home.id = 1;
+        [self.dataSource insertObject:home atIndex:0];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.toolBox reloadData];
+        });
+    } failure:^(NSError *error) {
+        NSLog(@"获取主题出错： %@", error);
+    }];
+
+}
+
 
 - (void)showHomePage {
     [self.childViewControllers makeObjectsPerformSelector:@selector(removeFromParentViewController)];
@@ -115,11 +96,21 @@
     // menu 没有被弹出， 需要弹出
     if (self.currentView.frame.origin.x == 0) {
         [self toolBoxOpen];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        [self.currentView addGestureRecognizer:tap];
+        self.tapGesture = tap;
+        
     } else {
     // menu 已经被弹出，需要被收回
         [self toolBoxClose];
     }
 }
+
+- (void)handleTap:(UITapGestureRecognizer *)tap {
+    [self.currentView removeGestureRecognizer:self.tapGesture];
+    [self menuClose];
+}
+
 
 #pragma mark 打开左侧面板
 - (void)toolBoxOpen {
@@ -130,6 +121,8 @@
         }];
     }
 }
+
+
 #pragma mark 关闭左侧面板
 - (void)toolBoxClose {
     if (self.currentView.frame.origin.x != 0) {
@@ -158,7 +151,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuse_id];
     }
-    cell.textLabel.text = self.dataSource[indexPath.row].title;
+    cell.textLabel.text = self.dataSource[indexPath.row].name;
     return cell;
 }
 
@@ -183,8 +176,6 @@
     if ([title isEqualToString:@"设置"]) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UINavigationController *setNav = [sb instantiateViewControllerWithIdentifier:@"setting"];
- 
-        
         if (self.currentView) {
             setNav.view.frame = self.currentView.frame;
             [self.currentView removeFromSuperview];

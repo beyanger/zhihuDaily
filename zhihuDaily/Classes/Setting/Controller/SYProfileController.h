@@ -1,14 +1,13 @@
 //
-//  SYMenuItem.m
+//  SYProfileController.h
 //  zhihuDaily
 //
 //  Created by yang on 16/2/22.
 //  Copyright © 2016年 yang. All rights reserved.
 //
 
-#import "SYMenuItem.h"
+#import <UIKit/UIKit.h>
 
-@implementation SYMenuItem
-
+@interface SYProfileController : UIViewController
 
 @end

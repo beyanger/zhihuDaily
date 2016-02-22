@@ -13,6 +13,8 @@
 #import "MJExtension.h"
 #import "SYParamResult.h"
 #import "SYTableViewCell.h"
+#import "SYDetailController.h"
+
 @interface SYHomeController ()
 
 @property (nonatomic, strong) NSMutableArray<SYLastestGroup *> *storyGroup;
@@ -38,13 +40,13 @@ static NSString *reuseid = @"useid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.rowHeight = 80;
+    self.tableView.showsVerticalScrollIndicator = NO;
+    self.tableView.contentInset = UIEdgeInsetsMake(200, 0, 0, 0);
     
     [SYParamResult mj_setupObjectClassInArray:^NSDictionary *{
         return @{@"top_stories":@"SYStory", @"stories":@"SYStory"};
     }];
-    [SYStory mj_setupObjectClassInArray:^NSDictionary *{
-        return @{@"images":@"SYImage"};
-    }];
+
     
     [YSHttpTool GETWithURL:zhihu_lastest params:nil success:^(id responseObject) {
         SYParamResult *result = [SYParamResult mj_objectWithKeyValues:responseObject];
@@ -63,14 +65,10 @@ static NSString *reuseid = @"useid";
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
-        
-        
+
     } failure:^(NSError *error) {
         NSLog(@"获取最新文章失败： %@", error);
     }];
-
-    
-
     
     [self.tableView registerNib:[UINib nibWithNibName:@"SYTableViewCell" bundle:nil] forCellReuseIdentifier:@"useid"];
     
@@ -114,10 +112,8 @@ static NSString *reuseid = @"useid";
         cell = [[SYTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseid];
     }
     
-    
     SYLastestGroup *group = self.storyGroup[indexPath.section];
     cell.story = group.stories[indexPath.row];
-    
     
     return cell;
 }
@@ -125,11 +121,18 @@ static NSString *reuseid = @"useid";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"menuActionClose" object:nil];
-
+    SYLastestGroup *group = self.storyGroup[indexPath.section];
+    SYStory *story = group.stories[indexPath.row];
+    
+    SYDetailController *dc = [[SYDetailController alloc] initWithStory:story];
+    [self presentViewController:dc animated:YES completion:nil];
+    
+    
 }
 
-
-
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSLog(@"%@", NSStringFromCGPoint(scrollView.contentOffset));
+}
 
 
 

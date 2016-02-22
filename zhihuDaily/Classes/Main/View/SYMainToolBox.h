@@ -23,5 +23,7 @@
 @property (nonatomic, weak) id<UITableViewDelegate> delegate;
 @property (nonatomic, weak) id<SYMainToolBoxDelegate> toolBoxDelegate;
 
+- (void)reloadData;
+
 
 @end

@@ -25,7 +25,6 @@
     _story = story;
     self.title.text = story.title;
     
-    NSLog(@"%d", story.id);
     [self.image sd_setImageWithURL:[NSURL URLWithString:story.images.firstObject]];
     self.multiImage.hidden = !story.multipic;
 }

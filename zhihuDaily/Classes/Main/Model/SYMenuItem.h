@@ -12,12 +12,16 @@
 /**
  *  title
  */
-@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *name;
 
 /**
- *  是否被收藏
+ *  是否id
  */
-@property (nonatomic, assign) BOOL collected;
+@property (nonatomic, assign) int id;
+
+
+
+
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 + (instancetype)itemWithDictionary:(NSDictionary *)dict;
