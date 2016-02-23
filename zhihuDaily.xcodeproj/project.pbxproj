@@ -49,6 +49,7 @@
 		2F37AB861C7B7D7C00D3CD65 /* SYWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB851C7B7D7C00D3CD65 /* SYWebViewController.m */; };
 		2F37AB891C7B7F0B00D3CD65 /* SYStoryNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB881C7B7F0B00D3CD65 /* SYStoryNavigationView.m */; };
 		2F37AB8B1C7B7F1600D3CD65 /* SYStoryNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F37AB8A1C7B7F1600D3CD65 /* SYStoryNavigationView.xib */; };
+		2F9995D61C7C0F6B0072C8F0 /* SYWebNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F9995D51C7C0F6B0072C8F0 /* SYWebNavigationView.xib */; };
 		2FC5874B1C79FDEB003C9A7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874A1C79FDEB003C9A7A /* main.m */; };
 		2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */; };
 		2FC587541C79FDEB003C9A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587521C79FDEB003C9A7A /* Main.storyboard */; };
@@ -197,6 +198,7 @@
 		2F37AB871C7B7F0B00D3CD65 /* SYStoryNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYStoryNavigationView.h; sourceTree = "<group>"; };
 		2F37AB881C7B7F0B00D3CD65 /* SYStoryNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYStoryNavigationView.m; sourceTree = "<group>"; };
 		2F37AB8A1C7B7F1600D3CD65 /* SYStoryNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYStoryNavigationView.xib; sourceTree = "<group>"; };
+		2F9995D51C7C0F6B0072C8F0 /* SYWebNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYWebNavigationView.xib; sourceTree = "<group>"; };
 		2FC587461C79FDEB003C9A7A /* zhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5874A1C79FDEB003C9A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -441,6 +443,7 @@
 				2F37AB8A1C7B7F1600D3CD65 /* SYStoryNavigationView.xib */,
 				2F0E2CBB1C7BE7F7004FDA0F /* SYImageView.h */,
 				2F0E2CBC1C7BE7F7004FDA0F /* SYImageView.m */,
+				2F9995D51C7C0F6B0072C8F0 /* SYWebNavigationView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -882,6 +885,7 @@
 				2FC587591C79FDEB003C9A7A /* LaunchScreen.storyboard in Resources */,
 				2F2CCB981C7B016500C45E3D /* SYTableViewCell.xib in Resources */,
 				2FC587561C79FDEB003C9A7A /* Assets.xcassets in Resources */,
+				2F9995D61C7C0F6B0072C8F0 /* SYWebNavigationView.xib in Resources */,
 				2F2CCBA91C7B0B2100C45E3D /* example.json in Resources */,
 				2FC587851C79FED8003C9A7A /* SYMainToolBox.xib in Resources */,
 				2F0E2CC51C7BF071004FDA0F /* MBProgressHUD.bundle in Resources */,

@@ -21,7 +21,6 @@
 
 @interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate>
 
-@property (nonatomic, strong) SYStory *story;
 
 @property (nonatomic, weak) SYTopView   *topView;
 @property (nonatomic, weak) UIWebView *webView;
@@ -185,6 +184,8 @@
 - (void)setStory:(SYStory *)story {
     _story = story;
     
+    if (!story) return;
+    
     [SYStoryTool getDetailWithId:self.story.id completed:^(id obj) {
         dispatch_async(dispatch_get_main_queue(), ^{
             SYDetailStory *ds = (SYDetailStory *)obj;
@@ -194,10 +195,14 @@
             self.topView.author.text = ds.image_source;
         });
     }];
-
-    
     
     // 设置 extraStory
+    [SYStoryTool getExtraWithId:self.story.id completed:^(id obj) {
+        SYExtraStory *es = (SYExtraStory *)obj;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.storyNav.extraStory = es;
+        });
+    }];
 }
 
 

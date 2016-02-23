@@ -16,8 +16,10 @@
 #import "SYDetailController.h"
 #import "SYStoryTool.h"
 
-@interface SYHomeController ()
+@interface SYHomeController () <SYDetailControllerDelegate>
 
+@property (nonatomic, weak) SYDetailController *currentDetailController;
+@property (nonatomic, strong) NSIndexPath *currentIndexPath;
 @property (nonatomic, strong) NSMutableArray<SYLastestGroup *> *storyGroup;
 
 @end
@@ -115,13 +117,15 @@ static NSString *reuseid = @"useid";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"menuActionClose" object:nil];
+    self.currentIndexPath = indexPath;
+    
     SYLastestGroup *group = self.storyGroup[indexPath.section];
     SYStory *story = group.stories[indexPath.row];
     
     SYDetailController *dc = [[SYDetailController alloc] initWithStory:story];
+    dc.delegate = self;
+    self.currentDetailController = dc;
     [self presentViewController:dc animated:YES completion:nil];
-    
-    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -129,5 +133,19 @@ static NSString *reuseid = @"useid";
 }
 
 
+- (SYStory *)nextStoryForDetailController:(SYDetailController *)detailController {
+
+    SYLastestGroup *group = self.storyGroup[self.currentIndexPath.section];
+    
+    if (self.currentIndexPath.row >= group.stories.count-1) {
+        return nil;
+    }
+    
+    SYStory *story = group.stories[self.currentIndexPath.row+1];
+    
+    self.currentDetailController.story = story;
+    self.currentIndexPath = [NSIndexPath indexPathForRow:self.currentIndexPath.row+1 inSection:self.currentIndexPath.section];
+    return story;
+}
 
 @end

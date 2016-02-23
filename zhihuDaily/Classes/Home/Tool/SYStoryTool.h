@@ -26,4 +26,5 @@ typedef void(^Completed)(id obj);
 + (void)getLastestStoryWithCompleted:(Completed)completed;
 
 
+
 @end

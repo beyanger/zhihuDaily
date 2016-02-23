@@ -29,7 +29,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor lightGrayColor];
+        self.backgroundColor = SYColor(128, 128, 128, 0.9);
         [self setupSubviews];
     }
     return self;
@@ -54,7 +54,7 @@
     tap.numberOfTapsRequired = 2;
     
     [self.imageView addGestureRecognizer:tap];
-    
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     
     UIButton *downLoadButton = [UIButton buttonWithType:UIButtonTypeContactAdd];

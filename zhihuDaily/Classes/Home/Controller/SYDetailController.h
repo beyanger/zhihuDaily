@@ -25,6 +25,8 @@
 
 - (instancetype)initWithStory:(SYStory *)story;
 
+@property (nonatomic, strong) SYStory *story;
+
 @property (nonatomic, weak) id<SYDetailControllerDelegate> delegate;
 
 @end
