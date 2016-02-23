@@ -51,8 +51,6 @@
 + (void)getLongCommentsWithId:(long long)storyid completed:(Completed)completed {
     NSString *longCommentUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/story/%lld/long-comments", storyid];
     
-    NSLog(@"get .. long : %@", longCommentUrl);
-    
     [YSHttpTool GETWithURL:longCommentUrl params:nil success:^(id responseObject) {
         NSArray *comment = [SYComment mj_objectArrayWithKeyValuesArray:responseObject[@"comments"]];
         completed(comment);

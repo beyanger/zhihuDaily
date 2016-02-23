@@ -27,13 +27,13 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.avatarImage.layer.cornerRadius = 25.0;
+    self.avatarImage.layer.cornerRadius = 20.0;
+    self.avatarImage.clipsToBounds = YES;
+    self.tableView.backgroundColor = [UIColor lightGrayColor];
 }
 
 
 - (IBAction)didClickedButton:(UIButton *)sender {
-    
-
     if ([self.toolBoxDelegate respondsToSelector:@selector(toolBox:didClickedTitle:)]) {
         [self.toolBoxDelegate toolBox:self didClickedTitle:sender.currentTitle];
     }
@@ -49,7 +49,7 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"menuActionOpen" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"menuActionClose" object:nil];
 }
 
 @end

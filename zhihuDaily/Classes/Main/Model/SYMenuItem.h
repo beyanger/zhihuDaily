@@ -15,14 +15,8 @@
 @property (nonatomic, copy) NSString *name;
 
 /**
- *  是否id
+ *  
  */
 @property (nonatomic, assign) int id;
 
-
-
-
-
-- (instancetype)initWithDictionary:(NSDictionary *)dict;
-+ (instancetype)itemWithDictionary:(NSDictionary *)dict;
 @end

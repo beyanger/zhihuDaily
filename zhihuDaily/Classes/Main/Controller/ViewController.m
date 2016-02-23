@@ -76,16 +76,16 @@
     [self.childViewControllers makeObjectsPerformSelector:@selector(removeFromParentViewController)];
     
     UITableViewController *tvc = [[SYHomeController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:tvc];
+
     
     if (self.currentView) {
-        nav.view.frame = self.currentView.frame;
+        tvc.view.frame = self.currentView.frame;
         [self.currentView removeFromSuperview];
     }
-    self.currentView = nav.view;
+    self.currentView = tvc.view;
     
-    [self.view addSubview:nav.view];
-    [self addChildViewController:nav];
+    [self.view addSubview:tvc.view];
+    [self addChildViewController:tvc];
 }
 
 
@@ -148,6 +148,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse_id];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuse_id];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.backgroundColor = SYColor(100, 100, 100, 1.);
     }
     cell.textLabel.text = self.dataSource[indexPath.row].name;
     return cell;

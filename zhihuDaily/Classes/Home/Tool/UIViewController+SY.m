@@ -34,7 +34,6 @@
 
 
 + (void)load {
-    NSString *className = NSStringFromClass([self class]);
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         Class class = [self class];

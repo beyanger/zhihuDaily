@@ -22,6 +22,8 @@
 @property (nonatomic, strong) NSIndexPath *currentIndexPath;
 @property (nonatomic, strong) NSMutableArray<SYLastestGroup *> *storyGroup;
 
+@property (nonatomic, weak) UILabel *titleLabel;
+
 @end
 
 
@@ -42,11 +44,19 @@ static NSString *reuseid = @"useid";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [self setupTableView];
+
+    [self setupHomeIcon];
+    
+  
+}
+
+- (void)setupTableView {
     self.tableView.rowHeight = 80;
     self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.contentInset = UIEdgeInsetsMake(200, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(160, 0, 0, 0);
     
-
     [SYStoryTool getLastestStoryWithCompleted:^(id obj) {
         SYLastestParamResult *result = (SYLastestParamResult *)obj;
         for (SYStory *story in result.stories) {
@@ -67,15 +77,16 @@ static NSString *reuseid = @"useid";
     }];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"SYTableViewCell" bundle:nil] forCellReuseIdentifier:@"useid"];
-    
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    [button addTarget:self action:@selector(didClickedMenuButton:) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    
-  
 }
+
+- (void)setupHomeIcon {
+    UIButton *button = [[UIButton alloc] init];
+    button.bounds = CGRectMake(0, 0, 38, 38);
+    [button setImage:[UIImage imageNamed:@"Home_Icon"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(didClickedMenuButton:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
 
 - (void)didClickedMenuButton:(UIButton *)sender {
     
@@ -129,8 +140,9 @@ static NSString *reuseid = @"useid";
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"%@", NSStringFromCGPoint(scrollView.contentOffset));
+    NSLog(@"----> %@", NSStringFromCGPoint(scrollView.contentOffset));
 }
+
 
 
 - (SYStory *)nextStoryForDetailController:(SYDetailController *)detailController {
@@ -147,5 +159,24 @@ static NSString *reuseid = @"useid";
     self.currentIndexPath = [NSIndexPath indexPathForRow:self.currentIndexPath.row+1 inSection:self.currentIndexPath.section];
     return story;
 }
+
+
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        UILabel *titleLabel = [[UILabel alloc] init];
+        
+        NSDictionary *attr = @{
+            NSFontAttributeName:[UIFont systemFontOfSize:18],
+            NSForegroundColorAttributeName:[UIColor redColor]};
+        
+        titleLabel.attributedText = [[NSAttributedString alloc] initWithString:@"今日要闻" attributes:attr];
+        [titleLabel sizeToFit];
+        titleLabel.center = CGPointMake(kScreenWidth*0.5, 35);
+        _titleLabel = titleLabel;
+        [self.view addSubview:titleLabel];
+    }
+    return _titleLabel;
+}
+
 
 @end

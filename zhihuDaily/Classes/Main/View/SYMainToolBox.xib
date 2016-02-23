@@ -20,7 +20,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPt-9a-eeQ" customClass="SYToolButton">
                                     <rect key="frame" x="89" y="0.0" width="89" height="60"/>
                                     <animations/>
-                                    <state key="normal" title="消息"/>
+                                    <state key="normal" title="消息">
+                                        <color key="titleColor" red="0.99257630109786987" green="0.97260266542434692" blue="0.96811455488204956" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
                                     <connections>
                                         <action selector="didClickedButton:" destination="4El-y3-DJA" eventType="touchUpInside" id="cuN-f7-WWy"/>
                                     </connections>
@@ -28,7 +30,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suK-FQ-Afi" customClass="SYToolButton">
                                     <rect key="frame" x="0.0" y="0.0" width="89" height="60"/>
                                     <animations/>
-                                    <state key="normal" title="收藏"/>
+                                    <state key="normal" title="收藏">
+                                        <color key="titleColor" red="0.99257630109786987" green="0.97260266542434692" blue="0.96811455488204956" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
                                     <connections>
                                         <action selector="didClickedButton:" destination="4El-y3-DJA" eventType="touchUpInside" id="cwp-O6-iVu"/>
                                     </connections>
@@ -36,14 +40,16 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ALf-SV-HPN" customClass="SYToolButton">
                                     <rect key="frame" x="178" y="0.0" width="89" height="60"/>
                                     <animations/>
-                                    <state key="normal" title="设置"/>
+                                    <state key="normal" title="设置">
+                                        <color key="titleColor" red="0.99257630109786987" green="0.97260266542434692" blue="0.96811455488204956" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
                                     <connections>
                                         <action selector="didClickedButton:" destination="4El-y3-DJA" eventType="touchUpInside" id="mxP-3n-6ys"/>
                                     </connections>
                                 </button>
                             </subviews>
                             <animations/>
-                            <color key="backgroundColor" red="0.88233077526092529" green="0.29500600695610046" blue="0.9125247597694397" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                             <constraints>
                                 <constraint firstItem="suK-FQ-Afi" firstAttribute="top" secondItem="r3x-mY-c08" secondAttribute="top" id="6Qt-od-e39"/>
                                 <constraint firstItem="bPt-9a-eeQ" firstAttribute="leading" secondItem="suK-FQ-Afi" secondAttribute="trailing" id="8Ww-Ju-TEr"/>
@@ -61,27 +67,27 @@
                             </constraints>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Comment_Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="1FH-cZ-fTN">
-                            <rect key="frame" x="10" y="0.0" width="50" height="50"/>
+                            <rect key="frame" x="15" y="5" width="40" height="40"/>
                             <animations/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="50" id="Cfe-le-cys"/>
+                                <constraint firstAttribute="width" constant="40" id="Cfe-le-cys"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我发现你爹" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mkQ-ii-c7W">
-                            <rect key="frame" x="70" y="0.0" width="197" height="50"/>
+                            <rect key="frame" x="65" y="0.0" width="202" height="50"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <animations/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="1FH-cZ-fTN" firstAttribute="top" secondItem="vJP-gx-GUh" secondAttribute="top" id="2ne-XK-B9G"/>
+                        <constraint firstItem="1FH-cZ-fTN" firstAttribute="top" secondItem="vJP-gx-GUh" secondAttribute="top" constant="5" id="2ne-XK-B9G"/>
                         <constraint firstAttribute="trailing" secondItem="r3x-mY-c08" secondAttribute="trailing" id="5Pg-Bf-tbe"/>
-                        <constraint firstItem="1FH-cZ-fTN" firstAttribute="leading" secondItem="vJP-gx-GUh" secondAttribute="leading" constant="10" id="SoN-PP-awZ"/>
-                        <constraint firstItem="r3x-mY-c08" firstAttribute="top" secondItem="1FH-cZ-fTN" secondAttribute="bottom" constant="10" id="VDz-Hw-qWV"/>
+                        <constraint firstItem="1FH-cZ-fTN" firstAttribute="leading" secondItem="vJP-gx-GUh" secondAttribute="leading" constant="15" id="SoN-PP-awZ"/>
+                        <constraint firstItem="r3x-mY-c08" firstAttribute="top" secondItem="1FH-cZ-fTN" secondAttribute="bottom" constant="15" id="VDz-Hw-qWV"/>
                         <constraint firstAttribute="trailing" secondItem="mkQ-ii-c7W" secondAttribute="trailing" id="cJI-I1-JFb"/>
                         <constraint firstAttribute="bottom" secondItem="r3x-mY-c08" secondAttribute="bottom" id="eN0-lG-VlR"/>
                         <constraint firstAttribute="height" constant="120" id="jZp-eF-Hqp"/>
@@ -97,7 +103,9 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L8W-i6-N6R">
                             <rect key="frame" x="0.0" y="0.0" width="133.5" height="40"/>
                             <animations/>
-                            <state key="normal" title="离线"/>
+                            <state key="normal" title="离线">
+                                <color key="titleColor" red="0.99257630109786987" green="0.97260266542434692" blue="0.96811455488204956" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
                             <connections>
                                 <action selector="didClickedButton:" destination="4El-y3-DJA" eventType="touchUpInside" id="bod-XE-eSI"/>
                             </connections>
@@ -105,14 +113,16 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDp-w3-G8F">
                             <rect key="frame" x="133" y="0.0" width="133.5" height="40"/>
                             <animations/>
-                            <state key="normal" title="夜间"/>
+                            <state key="normal" title="夜间">
+                                <color key="titleColor" red="0.99257630109786987" green="0.97260266542434692" blue="0.96811455488204956" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
                             <connections>
                                 <action selector="didClickedButton:" destination="4El-y3-DJA" eventType="touchUpInside" id="1GL-XG-q4Y"/>
                             </connections>
                         </button>
                     </subviews>
                     <animations/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="SDp-w3-G8F" firstAttribute="top" secondItem="w66-sd-XHN" secondAttribute="top" id="6EN-LZ-s1w"/>
                         <constraint firstItem="L8W-i6-N6R" firstAttribute="top" secondItem="w66-sd-XHN" secondAttribute="top" id="9AP-oV-PvF"/>
@@ -130,10 +140,11 @@
                     <rect key="frame" x="0.0" y="140" width="267" height="420"/>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexBackgroundColor" red="0.49014008045196533" green="0.49022829532623291" blue="0.49013447761535645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </tableView>
             </subviews>
             <animations/>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="2qm-48-8yY" firstAttribute="leading" secondItem="4El-y3-DJA" secondAttribute="leading" id="1MN-Pf-9Nf"/>
                 <constraint firstItem="w66-sd-XHN" firstAttribute="top" secondItem="2qm-48-8yY" secondAttribute="bottom" id="76F-9L-YtN"/>
@@ -153,7 +164,7 @@
                 <outlet property="nickName" destination="mkQ-ii-c7W" id="DqP-0P-Gr6"/>
                 <outlet property="tableView" destination="2qm-48-8yY" id="cvu-wl-Un5"/>
             </connections>
-            <point key="canvasLocation" x="-92.5" y="384"/>
+            <point key="canvasLocation" x="-164.5" y="372"/>
         </view>
     </objects>
     <resources>

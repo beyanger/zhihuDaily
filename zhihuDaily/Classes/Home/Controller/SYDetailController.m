@@ -163,19 +163,14 @@
     [webView stringByEvaluatingJavaScriptFromString:str];
     
     //js方法遍历图片添加点击事件 返回图片个数
-    static  NSString * const jsGetImages =
-    @"function getImages(){\
-    var objs = document.getElementsByTagName(\"img\");\
-    for(var i=0;i<objs.length;i++){\
-    objs[i].onclick=function(){\
-    document.location=\"detailimage:\"+this.src;\
-    };\
-    };\
-    return objs.length;\
-    };";
+    static  NSString * const jsGetImages = @"function getImages(){"\
+    "var objs = document.getElementsByTagName(\"img\");"\
+    "for(var i=0;i<objs.length;i++){"\
+    "objs[i].onclick=function(){"\
+    "document.location=\"detailimage:\"+this.src;"\
+    "};};return objs.length;};";
     
-    [webView stringByEvaluatingJavaScriptFromString:jsGetImages];//注入js方法
-    [webView stringByEvaluatingJavaScriptFromString:@"getImages()"];
+    [webView stringByEvaluatingJavaScriptFromString:jsGetImages];    [webView stringByEvaluatingJavaScriptFromString:@"getImages()"];
     
     
     NSLog(@"%@", NSStringFromCGSize(self.webView.scrollView.contentSize));

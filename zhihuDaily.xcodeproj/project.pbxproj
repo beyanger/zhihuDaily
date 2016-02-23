@@ -21,7 +21,6 @@
 		2F2CCB9E1C7B043000C45E3D /* SYLastestGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCB9D1C7B043000C45E3D /* SYLastestGroup.m */; };
 		2F2CCBA41C7B088E00C45E3D /* SYLastestParamResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBA31C7B088E00C45E3D /* SYLastestParamResult.m */; };
 		2F2CCBA71C7B08F600C45E3D /* SYStory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBA61C7B08F600C45E3D /* SYStory.m */; };
-		2F2CCBA91C7B0B2100C45E3D /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 2F2CCBA81C7B0B2100C45E3D /* example.json */; };
 		2F2CCBC01C7B0C1400C45E3D /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBAD1C7B0C1400C45E3D /* MJExtensionConst.m */; };
 		2F2CCBC11C7B0C1400C45E3D /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBAF1C7B0C1400C45E3D /* MJFoundation.m */; };
 		2F2CCBC21C7B0C1400C45E3D /* MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBB11C7B0C1400C45E3D /* MJProperty.m */; };
@@ -154,7 +153,6 @@
 		2F2CCBA31C7B088E00C45E3D /* SYLastestParamResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYLastestParamResult.m; sourceTree = "<group>"; };
 		2F2CCBA51C7B08F600C45E3D /* SYStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYStory.h; sourceTree = "<group>"; };
 		2F2CCBA61C7B08F600C45E3D /* SYStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYStory.m; sourceTree = "<group>"; };
-		2F2CCBA81C7B0B2100C45E3D /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
 		2F2CCBAB1C7B0C1400C45E3D /* MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtension.h; sourceTree = "<group>"; };
 		2F2CCBAC1C7B0C1400C45E3D /* MJExtensionConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConst.h; sourceTree = "<group>"; };
 		2F2CCBAD1C7B0C1400C45E3D /* MJExtensionConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJExtensionConst.m; sourceTree = "<group>"; };
@@ -429,7 +427,6 @@
 		2F2CCB851C7AF19F00C45E3D /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				2F2CCBA81C7B0B2100C45E3D /* example.json */,
 				2F0E2CB11C7BDBED004FDA0F /* Tool */,
 				2F2CCB861C7AF19F00C45E3D /* Controller */,
 				2F2CCB871C7AF19F00C45E3D /* Model */,
@@ -948,7 +945,6 @@
 				2FC587591C79FDEB003C9A7A /* LaunchScreen.storyboard in Resources */,
 				2F2CCB981C7B016500C45E3D /* SYTableViewCell.xib in Resources */,
 				2FC587561C79FDEB003C9A7A /* Assets.xcassets in Resources */,
-				2F2CCBA91C7B0B2100C45E3D /* example.json in Resources */,
 				2FC587851C79FED8003C9A7A /* SYMainToolBox.xib in Resources */,
 				2F0E2CC51C7BF071004FDA0F /* MBProgressHUD.bundle in Resources */,
 				2F37AB8B1C7B7F1600D3CD65 /* SYStoryNavigationView.xib in Resources */,
