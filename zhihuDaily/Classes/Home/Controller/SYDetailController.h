@@ -8,6 +8,23 @@
 
 #import <UIKit/UIKit.h>
 #import "SYStory.h"
+
+@class SYDetailController;
+
+@protocol SYDetailControllerDelegate <NSObject>
+
+@optional
+- (SYStory *)nextStoryForDetailController:(SYDetailController *)detailController;
+- (SYStory *)prevStoryForDetailController:(SYDetailController *)detailController;
+
+@end
+
+
 @interface SYDetailController : UIViewController
+
+
 - (instancetype)initWithStory:(SYStory *)story;
+
+@property (nonatomic, weak) id<SYDetailControllerDelegate> delegate;
+
 @end

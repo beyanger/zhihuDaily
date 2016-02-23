@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="pLv-50-ZoV" customClass="SYStoryNavigationView">
+            <rect key="frame" x="0.0" y="0.0" width="441" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYt-Av-9lR">
+                    <rect key="frame" x="0.0" y="0.0" width="88" height="40"/>
+                    <animations/>
+                    <state key="normal" image="News_Navigation_Arrow"/>
+                    <connections>
+                        <action selector="didClicked:" destination="pLv-50-ZoV" eventType="touchUpInside" id="9f5-Db-QFf"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7V-Ps-hua">
+                    <rect key="frame" x="88" y="0.0" width="88.5" height="40"/>
+                    <animations/>
+                    <state key="normal" image="News_Navigation_Next"/>
+                    <connections>
+                        <action selector="didClicked:" destination="pLv-50-ZoV" eventType="touchUpInside" id="g9Y-Ex-fhi"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ilf-Hx-KZY">
+                    <rect key="frame" x="176" y="0.0" width="88" height="40"/>
+                    <animations/>
+                    <state key="normal" image="News_Navigation_Vote"/>
+                    <state key="selected" image="News_Navigation_Voted"/>
+                    <connections>
+                        <action selector="didClicked:" destination="pLv-50-ZoV" eventType="touchUpInside" id="l1a-YP-sWK"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ux-4l-7sQ">
+                    <rect key="frame" x="264" y="0.0" width="88.5" height="40"/>
+                    <animations/>
+                    <state key="normal" image="News_Navigation_Share"/>
+                    <connections>
+                        <action selector="didClicked:" destination="pLv-50-ZoV" eventType="touchUpInside" id="9fw-F1-p79"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgQ-Um-scb">
+                    <rect key="frame" x="353" y="0.0" width="88" height="40"/>
+                    <animations/>
+                    <state key="normal" image="News_Navigation_Comment"/>
+                    <connections>
+                        <action selector="didClicked:" destination="pLv-50-ZoV" eventType="touchUpInside" id="xON-tn-5Vx"/>
+                    </connections>
+                </button>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="hYt-Av-9lR" firstAttribute="leading" secondItem="pLv-50-ZoV" secondAttribute="leading" id="3mL-yY-x8D"/>
+                <constraint firstItem="Ilf-Hx-KZY" firstAttribute="leading" secondItem="u7V-Ps-hua" secondAttribute="trailing" id="5Hu-rk-Q3R"/>
+                <constraint firstAttribute="bottom" secondItem="hYt-Av-9lR" secondAttribute="bottom" id="894-n3-atx"/>
+                <constraint firstItem="hYt-Av-9lR" firstAttribute="top" secondItem="pLv-50-ZoV" secondAttribute="top" id="Egb-2n-QiU"/>
+                <constraint firstItem="9Ux-4l-7sQ" firstAttribute="top" secondItem="pLv-50-ZoV" secondAttribute="top" id="Iuc-dQ-UQH"/>
+                <constraint firstAttribute="bottom" secondItem="bgQ-Um-scb" secondAttribute="bottom" id="LGt-mY-glH"/>
+                <constraint firstItem="9Ux-4l-7sQ" firstAttribute="width" secondItem="hYt-Av-9lR" secondAttribute="width" id="OSQ-Wh-oVi"/>
+                <constraint firstItem="9Ux-4l-7sQ" firstAttribute="leading" secondItem="Ilf-Hx-KZY" secondAttribute="trailing" id="Rfh-gK-424"/>
+                <constraint firstAttribute="trailing" secondItem="bgQ-Um-scb" secondAttribute="trailing" id="TQs-s7-5cy"/>
+                <constraint firstItem="Ilf-Hx-KZY" firstAttribute="width" secondItem="hYt-Av-9lR" secondAttribute="width" id="TvM-bq-ih3"/>
+                <constraint firstItem="bgQ-Um-scb" firstAttribute="leading" secondItem="9Ux-4l-7sQ" secondAttribute="trailing" id="Yxi-Zu-7dl"/>
+                <constraint firstAttribute="bottom" secondItem="Ilf-Hx-KZY" secondAttribute="bottom" id="Z8W-Lv-LCT"/>
+                <constraint firstAttribute="bottom" secondItem="u7V-Ps-hua" secondAttribute="bottom" id="a5g-CH-VzP"/>
+                <constraint firstItem="u7V-Ps-hua" firstAttribute="leading" secondItem="hYt-Av-9lR" secondAttribute="trailing" id="a8u-hY-9eI"/>
+                <constraint firstAttribute="bottom" secondItem="9Ux-4l-7sQ" secondAttribute="bottom" id="aCT-7y-YwR"/>
+                <constraint firstItem="u7V-Ps-hua" firstAttribute="top" secondItem="pLv-50-ZoV" secondAttribute="top" id="agD-zH-wJr"/>
+                <constraint firstItem="Ilf-Hx-KZY" firstAttribute="top" secondItem="pLv-50-ZoV" secondAttribute="top" id="eLg-Ts-7cD"/>
+                <constraint firstItem="bgQ-Um-scb" firstAttribute="top" secondItem="pLv-50-ZoV" secondAttribute="top" id="hWC-Ii-gym"/>
+                <constraint firstItem="u7V-Ps-hua" firstAttribute="width" secondItem="hYt-Av-9lR" secondAttribute="width" id="qso-AC-uBr"/>
+                <constraint firstItem="bgQ-Um-scb" firstAttribute="width" secondItem="hYt-Av-9lR" secondAttribute="width" id="zJu-qU-YnY"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="439.5" y="-38"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="News_Navigation_Arrow" width="64" height="43"/>
+        <image name="News_Navigation_Comment" width="64" height="43"/>
+        <image name="News_Navigation_Next" width="64" height="43"/>
+        <image name="News_Navigation_Share" width="64" height="43"/>
+        <image name="News_Navigation_Vote" width="64" height="43"/>
+        <image name="News_Navigation_Voted" width="64" height="43"/>
+    </resources>
+</document>

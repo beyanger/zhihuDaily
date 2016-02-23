@@ -16,8 +16,9 @@
       "scale" : "3x"
     },
     {
-      "idiom" : "iphone",
       "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "AppIcon40x40@2x.png",
       "scale" : "2x"
     },
     {
@@ -108,6 +109,11 @@
       "scale" : "2x"
     },
     {
+      "idiom" : "ipad",
+      "size" : "83.5x83.5",
+      "scale" : "2x"
+    },
+    {
       "size" : "24x24",
       "idiom" : "watch",
       "scale" : "2x",
@@ -138,7 +144,6 @@
     {
       "size" : "40x40",
       "idiom" : "watch",
-      "filename" : "AppIcon40x40@2x.png",
       "scale" : "2x",
       "role" : "appLauncher",
       "subtype" : "38mm"
@@ -156,30 +161,6 @@
       "scale" : "2x",
       "role" : "quickLook",
       "subtype" : "42mm"
-    },
-    {
-      "size" : "29x29",
-      "idiom" : "ipad",
-      "filename" : "AppIcon29x29~ipad.png",
-      "unassigned" : true,
-      "scale" : "1x"
-    },
-    {
-      "size" : "29x29",
-      "idiom" : "watch",
-      "filename" : "AppIcon29x29@2x~ipad.png",
-      "unassigned" : true,
-      "role" : "companionSettings",
-      "scale" : "2x"
-    },
-    {
-      "role" : "appLauncher",
-      "size" : "40x40",
-      "idiom" : "watch",
-      "filename" : "AppIcon40x40@2x~ipad.png",
-      "subtype" : "38mm",
-      "unassigned" : true,
-      "scale" : "2x"
     }
   ],
   "info" : {
