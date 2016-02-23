@@ -49,7 +49,15 @@
 		2F37AB861C7B7D7C00D3CD65 /* SYWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB851C7B7D7C00D3CD65 /* SYWebViewController.m */; };
 		2F37AB891C7B7F0B00D3CD65 /* SYStoryNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB881C7B7F0B00D3CD65 /* SYStoryNavigationView.m */; };
 		2F37AB8B1C7B7F1600D3CD65 /* SYStoryNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F37AB8A1C7B7F1600D3CD65 /* SYStoryNavigationView.xib */; };
-		2F9995D61C7C0F6B0072C8F0 /* SYWebNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F9995D51C7C0F6B0072C8F0 /* SYWebNavigationView.xib */; };
+		2F9995DC1C7C206D0072C8F0 /* SYShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995DB1C7C206D0072C8F0 /* SYShareView.m */; };
+		2F9995E11C7C39190072C8F0 /* SYCommentsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E01C7C39190072C8F0 /* SYCommentsTableController.m */; };
+		2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E31C7C3D100072C8F0 /* SYComment.m */; };
+		2F9995E71C7C476A0072C8F0 /* SYCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E61C7C476A0072C8F0 /* SYCommentCell.m */; };
+		2F9995E91C7C47760072C8F0 /* SYCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F9995E81C7C47760072C8F0 /* SYCommentCell.xib */; };
+		2F9995F31C7C53CA0072C8F0 /* UITableView+FDIndexPathHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995EC1C7C53CA0072C8F0 /* UITableView+FDIndexPathHeightCache.m */; };
+		2F9995F41C7C53CA0072C8F0 /* UITableView+FDKeyedHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995EE1C7C53CA0072C8F0 /* UITableView+FDKeyedHeightCache.m */; };
+		2F9995F51C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995F01C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.m */; };
+		2F9995F61C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995F21C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.m */; };
 		2FC5874B1C79FDEB003C9A7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874A1C79FDEB003C9A7A /* main.m */; };
 		2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */; };
 		2FC587541C79FDEB003C9A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587521C79FDEB003C9A7A /* Main.storyboard */; };
@@ -198,7 +206,23 @@
 		2F37AB871C7B7F0B00D3CD65 /* SYStoryNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYStoryNavigationView.h; sourceTree = "<group>"; };
 		2F37AB881C7B7F0B00D3CD65 /* SYStoryNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYStoryNavigationView.m; sourceTree = "<group>"; };
 		2F37AB8A1C7B7F1600D3CD65 /* SYStoryNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYStoryNavigationView.xib; sourceTree = "<group>"; };
-		2F9995D51C7C0F6B0072C8F0 /* SYWebNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYWebNavigationView.xib; sourceTree = "<group>"; };
+		2F9995DA1C7C206D0072C8F0 /* SYShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYShareView.h; sourceTree = "<group>"; };
+		2F9995DB1C7C206D0072C8F0 /* SYShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYShareView.m; sourceTree = "<group>"; };
+		2F9995DF1C7C39190072C8F0 /* SYCommentsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCommentsTableController.h; sourceTree = "<group>"; };
+		2F9995E01C7C39190072C8F0 /* SYCommentsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCommentsTableController.m; sourceTree = "<group>"; };
+		2F9995E21C7C3D100072C8F0 /* SYComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYComment.h; sourceTree = "<group>"; };
+		2F9995E31C7C3D100072C8F0 /* SYComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYComment.m; sourceTree = "<group>"; };
+		2F9995E51C7C476A0072C8F0 /* SYCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCommentCell.h; sourceTree = "<group>"; };
+		2F9995E61C7C476A0072C8F0 /* SYCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCommentCell.m; sourceTree = "<group>"; };
+		2F9995E81C7C47760072C8F0 /* SYCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYCommentCell.xib; sourceTree = "<group>"; };
+		2F9995EB1C7C53CA0072C8F0 /* UITableView+FDIndexPathHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDIndexPathHeightCache.h"; sourceTree = "<group>"; };
+		2F9995EC1C7C53CA0072C8F0 /* UITableView+FDIndexPathHeightCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDIndexPathHeightCache.m"; sourceTree = "<group>"; };
+		2F9995ED1C7C53CA0072C8F0 /* UITableView+FDKeyedHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDKeyedHeightCache.h"; sourceTree = "<group>"; };
+		2F9995EE1C7C53CA0072C8F0 /* UITableView+FDKeyedHeightCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDKeyedHeightCache.m"; sourceTree = "<group>"; };
+		2F9995EF1C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
+		2F9995F01C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
+		2F9995F11C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCellDebug.h"; sourceTree = "<group>"; };
+		2F9995F21C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCellDebug.m"; sourceTree = "<group>"; };
 		2FC587461C79FDEB003C9A7A /* zhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5874A1C79FDEB003C9A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -390,8 +414,8 @@
 		2F2CCB851C7AF19F00C45E3D /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				2F0E2CB11C7BDBED004FDA0F /* Tool */,
 				2F2CCBA81C7B0B2100C45E3D /* example.json */,
+				2F0E2CB11C7BDBED004FDA0F /* Tool */,
 				2F2CCB861C7AF19F00C45E3D /* Controller */,
 				2F2CCB871C7AF19F00C45E3D /* Model */,
 				2F2CCB881C7AF19F00C45E3D /* View */,
@@ -408,6 +432,8 @@
 				2F37AB681C7B4EFF00D3CD65 /* SYDetailController.m */,
 				2F37AB841C7B7D7C00D3CD65 /* SYWebViewController.h */,
 				2F37AB851C7B7D7C00D3CD65 /* SYWebViewController.m */,
+				2F9995DF1C7C39190072C8F0 /* SYCommentsTableController.h */,
+				2F9995E01C7C39190072C8F0 /* SYCommentsTableController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -425,6 +451,8 @@
 				2F0E2CB61C7BDD2B004FDA0F /* SYDetailStory.m */,
 				2F0E2CB81C7BE1A0004FDA0F /* SYExtraStory.h */,
 				2F0E2CB91C7BE1A0004FDA0F /* SYExtraStory.m */,
+				2F9995E21C7C3D100072C8F0 /* SYComment.h */,
+				2F9995E31C7C3D100072C8F0 /* SYComment.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -443,7 +471,11 @@
 				2F37AB8A1C7B7F1600D3CD65 /* SYStoryNavigationView.xib */,
 				2F0E2CBB1C7BE7F7004FDA0F /* SYImageView.h */,
 				2F0E2CBC1C7BE7F7004FDA0F /* SYImageView.m */,
-				2F9995D51C7C0F6B0072C8F0 /* SYWebNavigationView.xib */,
+				2F9995DA1C7C206D0072C8F0 /* SYShareView.h */,
+				2F9995DB1C7C206D0072C8F0 /* SYShareView.m */,
+				2F9995E51C7C476A0072C8F0 /* SYCommentCell.h */,
+				2F9995E61C7C476A0072C8F0 /* SYCommentCell.m */,
+				2F9995E81C7C47760072C8F0 /* SYCommentCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -536,6 +568,21 @@
 				2F37AB771C7B675100D3CD65 /* UIViewController+MMDrawerController.m */,
 			);
 			path = MMDrawerController;
+			sourceTree = "<group>";
+		};
+		2F9995EA1C7C53CA0072C8F0 /* FDTemplateLayoutCell */ = {
+			isa = PBXGroup;
+			children = (
+				2F9995EB1C7C53CA0072C8F0 /* UITableView+FDIndexPathHeightCache.h */,
+				2F9995EC1C7C53CA0072C8F0 /* UITableView+FDIndexPathHeightCache.m */,
+				2F9995ED1C7C53CA0072C8F0 /* UITableView+FDKeyedHeightCache.h */,
+				2F9995EE1C7C53CA0072C8F0 /* UITableView+FDKeyedHeightCache.m */,
+				2F9995EF1C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.h */,
+				2F9995F01C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.m */,
+				2F9995F11C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.h */,
+				2F9995F21C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.m */,
+			);
+			path = FDTemplateLayoutCell;
 			sourceTree = "<group>";
 		};
 		2FC5873D1C79FDEB003C9A7A = {
@@ -657,6 +704,7 @@
 		2FC587891C7A0937003C9A7A /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				2F9995EA1C7C53CA0072C8F0 /* FDTemplateLayoutCell */,
 				2F0E2CBE1C7BF071004FDA0F /* MBProgressHUD */,
 				2F37AB6E1C7B675100D3CD65 /* MMDrawerController */,
 				2F37AB6A1C7B63E600D3CD65 /* Catagories */,
@@ -885,13 +933,13 @@
 				2FC587591C79FDEB003C9A7A /* LaunchScreen.storyboard in Resources */,
 				2F2CCB981C7B016500C45E3D /* SYTableViewCell.xib in Resources */,
 				2FC587561C79FDEB003C9A7A /* Assets.xcassets in Resources */,
-				2F9995D61C7C0F6B0072C8F0 /* SYWebNavigationView.xib in Resources */,
 				2F2CCBA91C7B0B2100C45E3D /* example.json in Resources */,
 				2FC587851C79FED8003C9A7A /* SYMainToolBox.xib in Resources */,
 				2F0E2CC51C7BF071004FDA0F /* MBProgressHUD.bundle in Resources */,
 				2F37AB8B1C7B7F1600D3CD65 /* SYStoryNavigationView.xib in Resources */,
 				2F37AB831C7B6E0F00D3CD65 /* SYTopView.xib in Resources */,
 				2FC587541C79FDEB003C9A7A /* Main.storyboard in Resources */,
+				2F9995E91C7C47760072C8F0 /* SYCommentCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,11 +969,13 @@
 				2FC587DC1C7A096A003C9A7A /* UIImage+WebP.m in Sources */,
 				2FC587A31C7A0956003C9A7A /* AFURLConnectionOperation.m in Sources */,
 				2FC587D71C7A096A003C9A7A /* SDWebImageManager.m in Sources */,
+				2F9995E11C7C39190072C8F0 /* SYCommentsTableController.m in Sources */,
 				2FC588001C7A0974003C9A7A /* NSArray+MASAdditions.m in Sources */,
 				2FC5879E1C7A0956003C9A7A /* AFHTTPRequestOperation.m in Sources */,
 				2F2CCBA41C7B088E00C45E3D /* SYLastestParamResult.m in Sources */,
 				2F2CCBC21C7B0C1400C45E3D /* MJProperty.m in Sources */,
 				2FC587A11C7A0956003C9A7A /* AFNetworkReachabilityManager.m in Sources */,
+				2F9995F31C7C53CA0072C8F0 /* UITableView+FDIndexPathHeightCache.m in Sources */,
 				2FC587A61C7A0956003C9A7A /* AFURLSessionManager.m in Sources */,
 				2F2CCBC01C7B0C1400C45E3D /* MJExtensionConst.m in Sources */,
 				2F2CCBC31C7B0C1400C45E3D /* MJPropertyKey.m in Sources */,
@@ -936,10 +986,12 @@
 				2FC587FA1C7A0974003C9A7A /* MASCompositeConstraint.m in Sources */,
 				2F37AB781C7B675100D3CD65 /* MMDrawerBarButtonItem.m in Sources */,
 				2F37AB7B1C7B675100D3CD65 /* UIViewController+MMDrawerController.m in Sources */,
+				2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */,
 				2F2CCBC41C7B0C1400C45E3D /* MJPropertyType.m in Sources */,
 				2F2CCBC91C7B0C1400C45E3D /* NSString+MJExtension.m in Sources */,
 				2F0E2CBD1C7BE7F7004FDA0F /* SYImageView.m in Sources */,
 				2FC587D51C7A096A003C9A7A /* SDWebImageDownloader.m in Sources */,
+				2F9995F61C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				2F37AB7E1C7B6D5200D3CD65 /* UIView+Extension.m in Sources */,
 				2FC587A41C7A0956003C9A7A /* AFURLRequestSerialization.m in Sources */,
 				2F37AB691C7B4EFF00D3CD65 /* SYDetailController.m in Sources */,
@@ -959,6 +1011,7 @@
 				2F2CCBCF1C7B26F100C45E3D /* SYSettingController.m in Sources */,
 				2F37AB861C7B7D7C00D3CD65 /* SYWebViewController.m in Sources */,
 				2F2CCBC51C7B0C1400C45E3D /* NSObject+MJClass.m in Sources */,
+				2F9995E71C7C476A0072C8F0 /* SYCommentCell.m in Sources */,
 				2F2CCBCC1C7B156500C45E3D /* ViewController.m in Sources */,
 				2F0E2CBA1C7BE1A0004FDA0F /* SYExtraStory.m in Sources */,
 				2FC587FB1C7A0974003C9A7A /* MASConstraint.m in Sources */,
@@ -969,11 +1022,14 @@
 				2FC587FC1C7A0974003C9A7A /* MASConstraintMaker.m in Sources */,
 				2FC587D81C7A096A003C9A7A /* SDWebImagePrefetcher.m in Sources */,
 				2FC587D41C7A096A003C9A7A /* SDWebImageDecoder.m in Sources */,
+				2F9995F51C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				2FC588031C7A0974003C9A7A /* ViewController+MASAdditions.m in Sources */,
 				2F2CCB971C7B016500C45E3D /* SYTableViewCell.m in Sources */,
 				2F2CCB9E1C7B043000C45E3D /* SYLastestGroup.m in Sources */,
+				2F9995F41C7C53CA0072C8F0 /* UITableView+FDKeyedHeightCache.m in Sources */,
 				2FC588071C7A0B50003C9A7A /* YSHttpTool.m in Sources */,
 				2F37AB611C7B353300D3CD65 /* SYChannelViewCell.m in Sources */,
+				2F9995DC1C7C206D0072C8F0 /* SYShareView.m in Sources */,
 				2F2CCBC61C7B0C1400C45E3D /* NSObject+MJCoding.m in Sources */,
 				2FC587D21C7A096A003C9A7A /* SDImageCache.m in Sources */,
 				2FC587D31C7A096A003C9A7A /* SDWebImageCompat.m in Sources */,

@@ -8,11 +8,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="pLv-50-ZoV" customClass="SYStoryNavigationView">
-            <rect key="frame" x="0.0" y="0.0" width="441" height="40"/>
+            <rect key="frame" x="0.0" y="0.0" width="521" height="40"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYt-Av-9lR">
-                    <rect key="frame" x="0.0" y="0.0" width="88" height="40"/>
+                    <rect key="frame" x="0.0" y="0.0" width="104" height="40"/>
                     <animations/>
                     <state key="normal" image="News_Navigation_Arrow"/>
                     <connections>
@@ -20,7 +20,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7V-Ps-hua">
-                    <rect key="frame" x="88" y="0.0" width="88.5" height="40"/>
+                    <rect key="frame" x="104" y="0.0" width="104.5" height="40"/>
                     <animations/>
                     <state key="normal" image="News_Navigation_Next"/>
                     <connections>
@@ -28,7 +28,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ilf-Hx-KZY">
-                    <rect key="frame" x="176" y="0.0" width="88" height="40"/>
+                    <rect key="frame" x="208" y="0.0" width="104" height="40"/>
                     <animations/>
                     <state key="normal" image="News_Navigation_Vote"/>
                     <state key="selected" image="News_Navigation_Voted"/>
@@ -37,7 +37,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ux-4l-7sQ">
-                    <rect key="frame" x="264" y="0.0" width="88.5" height="40"/>
+                    <rect key="frame" x="312" y="0.0" width="104.5" height="40"/>
                     <animations/>
                     <state key="normal" image="News_Navigation_Share"/>
                     <connections>
@@ -45,13 +45,27 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgQ-Um-scb">
-                    <rect key="frame" x="353" y="0.0" width="88" height="40"/>
+                    <rect key="frame" x="417" y="0.0" width="104" height="40"/>
                     <animations/>
                     <state key="normal" image="News_Navigation_Comment"/>
                     <connections>
                         <action selector="didClicked:" destination="pLv-50-ZoV" eventType="touchUpInside" id="xON-tn-5Vx"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="129" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZcM-FS-zgm">
+                    <rect key="frame" x="471" y="6" width="16" height="11"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vp4-Yi-VeK">
+                    <rect key="frame" x="266.5" y="5.5" width="19" height="13.5"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" red="0.62738096714019775" green="0.62749135494232178" blue="0.62737399339675903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,7 +73,9 @@
                 <constraint firstItem="hYt-Av-9lR" firstAttribute="leading" secondItem="pLv-50-ZoV" secondAttribute="leading" id="3mL-yY-x8D"/>
                 <constraint firstItem="Ilf-Hx-KZY" firstAttribute="leading" secondItem="u7V-Ps-hua" secondAttribute="trailing" id="5Hu-rk-Q3R"/>
                 <constraint firstAttribute="bottom" secondItem="hYt-Av-9lR" secondAttribute="bottom" id="894-n3-atx"/>
+                <constraint firstItem="ZcM-FS-zgm" firstAttribute="centerY" secondItem="bgQ-Um-scb" secondAttribute="centerY" constant="-8" id="AXA-hi-ddx"/>
                 <constraint firstItem="hYt-Av-9lR" firstAttribute="top" secondItem="pLv-50-ZoV" secondAttribute="top" id="Egb-2n-QiU"/>
+                <constraint firstItem="vp4-Yi-VeK" firstAttribute="centerX" secondItem="Ilf-Hx-KZY" secondAttribute="centerX" constant="16" id="HPt-QD-gB9"/>
                 <constraint firstItem="9Ux-4l-7sQ" firstAttribute="top" secondItem="pLv-50-ZoV" secondAttribute="top" id="Iuc-dQ-UQH"/>
                 <constraint firstAttribute="bottom" secondItem="bgQ-Um-scb" secondAttribute="bottom" id="LGt-mY-glH"/>
                 <constraint firstItem="9Ux-4l-7sQ" firstAttribute="width" secondItem="hYt-Av-9lR" secondAttribute="width" id="OSQ-Wh-oVi"/>
@@ -73,13 +89,20 @@
                 <constraint firstAttribute="bottom" secondItem="9Ux-4l-7sQ" secondAttribute="bottom" id="aCT-7y-YwR"/>
                 <constraint firstItem="u7V-Ps-hua" firstAttribute="top" secondItem="pLv-50-ZoV" secondAttribute="top" id="agD-zH-wJr"/>
                 <constraint firstItem="Ilf-Hx-KZY" firstAttribute="top" secondItem="pLv-50-ZoV" secondAttribute="top" id="eLg-Ts-7cD"/>
+                <constraint firstItem="ZcM-FS-zgm" firstAttribute="centerX" secondItem="bgQ-Um-scb" secondAttribute="centerX" constant="10" id="eSb-eD-zAp"/>
+                <constraint firstItem="vp4-Yi-VeK" firstAttribute="centerY" secondItem="Ilf-Hx-KZY" secondAttribute="centerY" constant="-8" id="gpH-un-CDA"/>
                 <constraint firstItem="bgQ-Um-scb" firstAttribute="top" secondItem="pLv-50-ZoV" secondAttribute="top" id="hWC-Ii-gym"/>
                 <constraint firstItem="u7V-Ps-hua" firstAttribute="width" secondItem="hYt-Av-9lR" secondAttribute="width" id="qso-AC-uBr"/>
                 <constraint firstItem="bgQ-Um-scb" firstAttribute="width" secondItem="hYt-Av-9lR" secondAttribute="width" id="zJu-qU-YnY"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="439.5" y="-38"/>
+            <connections>
+                <outlet property="commentsLabel" destination="ZcM-FS-zgm" id="cXG-ju-cAK"/>
+                <outlet property="popularityButton" destination="Ilf-Hx-KZY" id="6op-8W-Kap"/>
+                <outlet property="popularityLabel" destination="vp4-Yi-VeK" id="VKc-bH-ZAr"/>
+            </connections>
+            <point key="canvasLocation" x="479.5" y="15"/>
         </view>
     </objects>
     <resources>

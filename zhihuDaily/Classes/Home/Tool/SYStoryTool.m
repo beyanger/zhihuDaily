@@ -9,6 +9,8 @@
 #import "SYStoryTool.h"
 
 #import "MJExtension.h"
+
+
 @implementation SYStoryTool
 
 + (void)getDetailWithId:(long long)storyid completed:(Completed)completed {
@@ -46,7 +48,29 @@
     } failure:nil];
 }
 
++ (void)getLongCommentsWithId:(long long)storyid completed:(Completed)completed {
+    NSString *longCommentUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/story/%lld/long-comments", storyid];
+    
+    NSLog(@"get .. long : %@", longCommentUrl);
+    
+    [YSHttpTool GETWithURL:longCommentUrl params:nil success:^(id responseObject) {
+        NSArray *comment = [SYComment mj_objectArrayWithKeyValuesArray:responseObject[@"comments"]];
+        completed(comment);
+    } failure:nil];
+    
+    
+}
 
+
++ (void)getShortCommentsWithId:(long long)storyid completed:(Completed)completed {
+    NSString *shortCommentUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/story/%lld/short-comments", storyid];
+    [YSHttpTool GETWithURL:shortCommentUrl params:nil success:^(id responseObject) {
+        NSArray *comment = [SYComment mj_objectArrayWithKeyValuesArray:responseObject[@"comments"]];
+        completed(comment);
+    } failure:nil];
+    
+    
+}
 
 
 

@@ -17,7 +17,8 @@
 #import "SYDetailStory.h"
 #import "SYImageView.h"
 #import "SYStoryNavigationView.h"
-
+#import "SYShareView.h"
+#import "SYCommentsTableController.h"
 
 @interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate>
 
@@ -55,6 +56,9 @@
     [self.view addSubview:storyNav];
     storyNav.delegate = self;
     
+
+    
+
 }
 - (void)storyNavigationView:(SYStoryNavigationView *)navView didClicked:(NSInteger)index {
     switch (index) {
@@ -71,12 +75,19 @@
         case 2: // like
             
             break;
-        case 3: // share
-            
+        case 3: { // share {
+            SYShareView *shareView = [[SYShareView alloc] init];
+            [shareView show];
+        }
             break;
         
-        case 4: // comment
+        case 4: {// comment
+            SYCommentsTableController *ctc = [[SYCommentsTableController alloc] init];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ctc];
+            ctc.story = self.story;
+            [self presentViewController:nav animated:YES completion:nil];
             
+        }
             break;
             
         default:
@@ -124,11 +135,16 @@
     NSString *absoString = request.URL.absoluteString;
     if ([absoString hasPrefix:@"http"]) {
 
-        SYWebViewController *wvc = [[SYWebViewController alloc] init];
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UINavigationController *nav = [sb instantiateViewControllerWithIdentifier:@"webViewNavi"];
+        
+        SYWebViewController *wvc = nav.childViewControllers.firstObject;
         wvc.request = request;
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:wvc];
+        
+        
         [self presentViewController:nav animated:YES completion:nil];
         return NO;
+        
     } else if ([absoString hasPrefix:@"detailimage:"]) {
         NSString *url = [absoString stringByReplacingOccurrencesOfString:@"detailimage:"
                                        withString:@""];

@@ -12,12 +12,11 @@
 #import "SYDetailStory.h"
 #import "SYExtraStory.h"
 #import "SYLastestParamResult.h"
-
+#import "SYComment.h"
 
 typedef void(^Completed)(id obj);
 
 @interface SYStoryTool : NSObject
-
 
 + (void)getDetailWithId:(long long)storyid completed:(Completed)completed;
 
@@ -25,6 +24,7 @@ typedef void(^Completed)(id obj);
 
 + (void)getLastestStoryWithCompleted:(Completed)completed;
 
++ (void)getLongCommentsWithId:(long long)storyid completed:(Completed)completed;
 
-
++ (void)getShortCommentsWithId:(long long)storyid completed:(Completed)completed;
 @end

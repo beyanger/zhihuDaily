@@ -7,10 +7,17 @@
 //
 
 #import "SYWebViewController.h"
+#import "SYShareView.h"
+
 
 @interface SYWebViewController () <UIWebViewDelegate>
-@property (nonatomic, weak) UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (nonatomic, weak) UIActivityIndicatorView *indicator;
+@property (nonatomic, weak) UIView *cover;
+@property (nonatomic, weak) SYShareView  *shareView;
+@property (weak, nonatomic) IBOutlet UIButton *back;
+@property (weak, nonatomic) IBOutlet UIButton *forward;
+
 @end
 
 @implementation SYWebViewController
@@ -18,27 +25,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-
+    [self updateButton];
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(dismis)];
    
+    self.webView.delegate = self;
     [self.webView loadRequest:self.request];
 }
 
 
-- (void)dismis {
+- (IBAction)dismis {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
-
-- (UIWebView *)webView {
-    if (!_webView) {
-        UIWebView *webView = [[UIWebView alloc] init];
-        _webView = webView;
-        webView.frame = self.view.bounds;
-        webView.delegate = self;
-        [self.view addSubview:webView];
-    }
-    return _webView;
+- (IBAction)reload {
+    [self.webView reload];
 }
+- (IBAction)goBack:(id)sender {
+    [self.webView goBack];
+}
+- (IBAction)goForward:(id)sender {
+    [self.webView goForward];
+}
+- (IBAction)share:(id)sender {
+    SYShareView *shareView = [[SYShareView alloc] init];
+    [shareView show];
+}
+
+
+
 
 - (UIActivityIndicatorView *)indicator {
     if (!_indicator) {
@@ -49,7 +63,6 @@
     return _indicator;
 }
 
-
 - (void)setRequest:(NSURLRequest *)request {
     _request = request;
     
@@ -59,15 +72,17 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     [self.indicator startAnimating];
+    [self updateButton];
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self.indicator stopAnimating];
+    [self updateButton];
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)updateButton {
+    self.back.enabled = self.webView.canGoBack;
+    self.forward.enabled = self.webView.canGoForward;
 }
 
 /*
