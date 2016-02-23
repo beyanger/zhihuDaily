@@ -77,6 +77,11 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self.indicator stopAnimating];
     [self updateButton];
+    
+    
+    NSString *theTitle=[webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    self.title = theTitle;
+    
 }
 
 

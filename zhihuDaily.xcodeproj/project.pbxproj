@@ -58,6 +58,9 @@
 		2F9995F41C7C53CA0072C8F0 /* UITableView+FDKeyedHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995EE1C7C53CA0072C8F0 /* UITableView+FDKeyedHeightCache.m */; };
 		2F9995F51C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995F01C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.m */; };
 		2F9995F61C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995F21C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.m */; };
+		2F9995F91C7C70E50072C8F0 /* UIViewController+SY.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995F81C7C70E40072C8F0 /* UIViewController+SY.m */; };
+		2F9995FF1C7C75C70072C8F0 /* SYPresentAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995FE1C7C75C70072C8F0 /* SYPresentAnimation.m */; };
+		2F9996021C7C799D0072C8F0 /* SYDismisAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9996011C7C799D0072C8F0 /* SYDismisAnimation.m */; };
 		2FC5874B1C79FDEB003C9A7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874A1C79FDEB003C9A7A /* main.m */; };
 		2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */; };
 		2FC587541C79FDEB003C9A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587521C79FDEB003C9A7A /* Main.storyboard */; };
@@ -223,6 +226,12 @@
 		2F9995F01C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
 		2F9995F11C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCellDebug.h"; sourceTree = "<group>"; };
 		2F9995F21C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCellDebug.m"; sourceTree = "<group>"; };
+		2F9995F71C7C70E40072C8F0 /* UIViewController+SY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SY.h"; sourceTree = "<group>"; };
+		2F9995F81C7C70E40072C8F0 /* UIViewController+SY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SY.m"; sourceTree = "<group>"; };
+		2F9995FD1C7C75C70072C8F0 /* SYPresentAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYPresentAnimation.h; sourceTree = "<group>"; };
+		2F9995FE1C7C75C70072C8F0 /* SYPresentAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYPresentAnimation.m; sourceTree = "<group>"; };
+		2F9996001C7C799D0072C8F0 /* SYDismisAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYDismisAnimation.h; sourceTree = "<group>"; };
+		2F9996011C7C799D0072C8F0 /* SYDismisAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYDismisAnimation.m; sourceTree = "<group>"; };
 		2FC587461C79FDEB003C9A7A /* zhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5874A1C79FDEB003C9A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -353,6 +362,12 @@
 			children = (
 				2F0E2CB21C7BDC03004FDA0F /* SYStoryTool.h */,
 				2F0E2CB31C7BDC03004FDA0F /* SYStoryTool.m */,
+				2F9995F71C7C70E40072C8F0 /* UIViewController+SY.h */,
+				2F9995F81C7C70E40072C8F0 /* UIViewController+SY.m */,
+				2F9995FD1C7C75C70072C8F0 /* SYPresentAnimation.h */,
+				2F9995FE1C7C75C70072C8F0 /* SYPresentAnimation.m */,
+				2F9996001C7C799D0072C8F0 /* SYDismisAnimation.h */,
+				2F9996011C7C799D0072C8F0 /* SYDismisAnimation.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -970,6 +985,7 @@
 				2FC587A31C7A0956003C9A7A /* AFURLConnectionOperation.m in Sources */,
 				2FC587D71C7A096A003C9A7A /* SDWebImageManager.m in Sources */,
 				2F9995E11C7C39190072C8F0 /* SYCommentsTableController.m in Sources */,
+				2F9995FF1C7C75C70072C8F0 /* SYPresentAnimation.m in Sources */,
 				2FC588001C7A0974003C9A7A /* NSArray+MASAdditions.m in Sources */,
 				2FC5879E1C7A0956003C9A7A /* AFHTTPRequestOperation.m in Sources */,
 				2F2CCBA41C7B088E00C45E3D /* SYLastestParamResult.m in Sources */,
@@ -982,6 +998,7 @@
 				2F37AB6D1C7B63F000D3CD65 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				2F37AB651C7B4A0F00D3CD65 /* SYProfileController.m in Sources */,
 				2FC588021C7A0974003C9A7A /* View+MASAdditions.m in Sources */,
+				2F9996021C7C799D0072C8F0 /* SYDismisAnimation.m in Sources */,
 				2F2CCBC81C7B0C1400C45E3D /* NSObject+MJProperty.m in Sources */,
 				2FC587FA1C7A0974003C9A7A /* MASCompositeConstraint.m in Sources */,
 				2F37AB781C7B675100D3CD65 /* MMDrawerBarButtonItem.m in Sources */,
@@ -1012,6 +1029,7 @@
 				2F37AB861C7B7D7C00D3CD65 /* SYWebViewController.m in Sources */,
 				2F2CCBC51C7B0C1400C45E3D /* NSObject+MJClass.m in Sources */,
 				2F9995E71C7C476A0072C8F0 /* SYCommentCell.m in Sources */,
+				2F9995F91C7C70E50072C8F0 /* UIViewController+SY.m in Sources */,
 				2F2CCBCC1C7B156500C45E3D /* ViewController.m in Sources */,
 				2F0E2CBA1C7BE1A0004FDA0F /* SYExtraStory.m in Sources */,
 				2FC587FB1C7A0974003C9A7A /* MASConstraint.m in Sources */,

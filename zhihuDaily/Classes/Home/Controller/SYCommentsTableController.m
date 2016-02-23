@@ -31,6 +31,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"评论";
     
     UITableView *tableView = [[UITableView alloc] init];
     tableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-40);
