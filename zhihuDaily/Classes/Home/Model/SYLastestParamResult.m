@@ -6,8 +6,8 @@
 //  Copyright © 2016年 yang. All rights reserved.
 //
 
-#import "SYParamResult.h"
+#import "SYLastestParamResult.h"
 
-@implementation SYParamResult
+@implementation SYLastestParamResult
 
 @end

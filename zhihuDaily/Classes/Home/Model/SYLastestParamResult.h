@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SYParamResult : NSObject
+@interface SYLastestParamResult : NSObject
 
 @property (nonatomic, copy) NSString *date;
 @property (nonatomic, strong) NSArray *stories;

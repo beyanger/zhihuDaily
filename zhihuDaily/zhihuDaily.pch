@@ -9,16 +9,14 @@
 #ifndef zhihuDaily_pch
 #define zhihuDaily_pch
 
-#define weakSelf(ws)    __weak __typeof(&*self) ws = self;
+#define WEAKSELF(ws)    __weak __typeof(&*self) ws = self;
 #define SYColor(r, g, b, a) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:a]
 
 #define randomColor       SYColor(arc4random()%255, arc4random()%255, arc4random()%255, 1.)
 
 #define kScreenWidth         [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight        [UIScreen mainScreen].bounds.size.height
-
-#define zhihu_lastest       @"http://news-at.zhihu.com/api/4/news/latest"
-
+#define kScreenBounds         [UIScreen mainScreen].bounds
 
 
 #endif /* zhihuDaily_pch */

@@ -11,9 +11,10 @@
 #import "SYLastestGroup.h"
 #import "YSHttpTool.h"
 #import "MJExtension.h"
-#import "SYParamResult.h"
+#import "SYLastestParamResult.h"
 #import "SYTableViewCell.h"
 #import "SYDetailController.h"
+#import "SYStoryTool.h"
 
 @interface SYHomeController ()
 
@@ -43,13 +44,9 @@ static NSString *reuseid = @"useid";
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.contentInset = UIEdgeInsetsMake(200, 0, 0, 0);
     
-    [SYParamResult mj_setupObjectClassInArray:^NSDictionary *{
-        return @{@"top_stories":@"SYStory", @"stories":@"SYStory"};
-    }];
 
-    
-    [YSHttpTool GETWithURL:zhihu_lastest params:nil success:^(id responseObject) {
-        SYParamResult *result = [SYParamResult mj_objectWithKeyValues:responseObject];
+    [SYStoryTool getLastestStoryWithCompleted:^(id obj) {
+        SYLastestParamResult *result = (SYLastestParamResult *)obj;
         for (SYStory *story in result.stories) {
             for (SYStory *top_story in result.top_stories) {
                 if (story.id == top_story.id) {
@@ -65,9 +62,6 @@ static NSString *reuseid = @"useid";
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
-
-    } failure:^(NSError *error) {
-        NSLog(@"获取最新文章失败： %@", error);
     }];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"SYTableViewCell" bundle:nil] forCellReuseIdentifier:@"useid"];

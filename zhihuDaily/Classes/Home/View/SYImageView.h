@@ -1,5 +1,5 @@
 //
-//  SYWebViewController.h
+//  SYImageView.h
 //  zhihuDaily
 //
 //  Created by yang on 16/2/23.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SYWebViewController : UIViewController
-@property (nonatomic, strong) NSURLRequest *request;
+@interface SYImageView : UIView
+
++ (instancetype)imageWithURLString:(NSString *)url;
+
 @end
