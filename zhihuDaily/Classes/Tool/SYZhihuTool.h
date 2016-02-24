@@ -28,5 +28,9 @@ typedef void(^Completed)(id obj);
 + (void)getLongCommentsWithId:(long long)storyid completed:(Completed)completed;
 
 + (void)getShortCommentsWithId:(long long)storyid completed:(Completed)completed;
+
 + (void)getThemesWithCompleted:(Completed)completed;
+
++ (void)getLauchImageWithCompleted:(Completed)completed;
+
 @end

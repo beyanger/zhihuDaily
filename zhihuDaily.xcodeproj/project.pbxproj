@@ -30,7 +30,7 @@
 		2F2CCBC71C7B0C1400C45E3D /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBBB1C7B0C1400C45E3D /* NSObject+MJKeyValue.m */; };
 		2F2CCBC81C7B0C1400C45E3D /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBBD1C7B0C1400C45E3D /* NSObject+MJProperty.m */; };
 		2F2CCBC91C7B0C1400C45E3D /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBBF1C7B0C1400C45E3D /* NSString+MJExtension.m */; };
-		2F2CCBCC1C7B156500C45E3D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBCB1C7B156500C45E3D /* ViewController.m */; };
+		2F2CCBCC1C7B156500C45E3D /* SYMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBCB1C7B156500C45E3D /* SYMainViewController.m */; };
 		2F2CCBCF1C7B26F100C45E3D /* SYSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBCE1C7B26F100C45E3D /* SYSettingController.m */; };
 		2F37AB651C7B4A0F00D3CD65 /* SYProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB631C7B4A0F00D3CD65 /* SYProfileController.m */; };
 		2F37AB691C7B4EFF00D3CD65 /* SYDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB681C7B4EFF00D3CD65 /* SYDetailController.m */; };
@@ -64,8 +64,6 @@
 		2FC587591C79FDEB003C9A7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587571C79FDEB003C9A7A /* LaunchScreen.storyboard */; };
 		2FC587641C79FDEB003C9A7A /* zhihuDailyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC587631C79FDEB003C9A7A /* zhihuDailyTests.m */; };
 		2FC5876F1C79FDEB003C9A7A /* zhihuDailyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5876E1C79FDEB003C9A7A /* zhihuDailyUITests.m */; };
-		2FC587831C79FECA003C9A7A /* SYMainToolBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC587821C79FECA003C9A7A /* SYMainToolBox.m */; };
-		2FC587851C79FED8003C9A7A /* SYMainToolBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587841C79FED8003C9A7A /* SYMainToolBox.xib */; };
 		2FC5879E1C7A0956003C9A7A /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5878C1C7A0956003C9A7A /* AFHTTPRequestOperation.m */; };
 		2FC5879F1C7A0956003C9A7A /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5878E1C7A0956003C9A7A /* AFHTTPRequestOperationManager.m */; };
 		2FC587A01C7A0956003C9A7A /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC587901C7A0956003C9A7A /* AFHTTPSessionManager.m */; };
@@ -107,8 +105,13 @@
 		2FE707851C7D9724005CB13B /* SYPicturesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE707841C7D9724005CB13B /* SYPicturesView.m */; };
 		2FE707911C7DBF4E005CB13B /* SYThemeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE7078C1C7DBF4E005CB13B /* SYThemeController.m */; };
 		2FE707921C7DBF4E005CB13B /* SYThemeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE707901C7DBF4E005CB13B /* SYThemeViewCell.m */; };
-		2FE707951C7DC041005CB13B /* SYMainViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE707941C7DC041005CB13B /* SYMainViewCell.m */; };
 		2FE7079B1C7DC2A3005CB13B /* SYZhihuTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE7079A1C7DC2A3005CB13B /* SYZhihuTool.m */; };
+		2FE707A21C7DD358005CB13B /* SYLeftDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE707A11C7DD358005CB13B /* SYLeftDrawerController.m */; };
+		2FE707A61C7DD6B6005CB13B /* SYMainToolBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE707A41C7DD6B6005CB13B /* SYMainToolBox.m */; };
+		2FE707A71C7DD6B6005CB13B /* SYMainToolBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FE707A51C7DD6B6005CB13B /* SYMainToolBox.xib */; };
+		2FE707AC1C7DDC69005CB13B /* SYLeftDrawerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FE707AB1C7DDC69005CB13B /* SYLeftDrawerController.xib */; };
+		2FE707AF1C7DE3F4005CB13B /* SYLeftDrawerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE707AE1C7DE3F4005CB13B /* SYLeftDrawerCell.m */; };
+		2FE707B21C7DECDD005CB13B /* SYDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE707B11C7DECDD005CB13B /* SYDemoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,8 +178,8 @@
 		2F2CCBBD1C7B0C1400C45E3D /* NSObject+MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJProperty.m"; sourceTree = "<group>"; };
 		2F2CCBBE1C7B0C1400C45E3D /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
 		2F2CCBBF1C7B0C1400C45E3D /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
-		2F2CCBCA1C7B156500C45E3D /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2F2CCBCB1C7B156500C45E3D /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2F2CCBCA1C7B156500C45E3D /* SYMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYMainViewController.h; sourceTree = "<group>"; };
+		2F2CCBCB1C7B156500C45E3D /* SYMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYMainViewController.m; sourceTree = "<group>"; };
 		2F2CCBCD1C7B26F100C45E3D /* SYSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYSettingController.h; sourceTree = "<group>"; };
 		2F2CCBCE1C7B26F100C45E3D /* SYSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYSettingController.m; sourceTree = "<group>"; };
 		2F37AB621C7B4A0F00D3CD65 /* SYProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYProfileController.h; sourceTree = "<group>"; };
@@ -241,9 +244,6 @@
 		2FC5876A1C79FDEB003C9A7A /* zhihuDailyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = zhihuDailyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5876E1C79FDEB003C9A7A /* zhihuDailyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zhihuDailyUITests.m; sourceTree = "<group>"; };
 		2FC587701C79FDEB003C9A7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2FC587811C79FECA003C9A7A /* SYMainToolBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYMainToolBox.h; sourceTree = "<group>"; };
-		2FC587821C79FECA003C9A7A /* SYMainToolBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYMainToolBox.m; sourceTree = "<group>"; };
-		2FC587841C79FED8003C9A7A /* SYMainToolBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYMainToolBox.xib; sourceTree = "<group>"; };
 		2FC5878B1C7A0956003C9A7A /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		2FC5878C1C7A0956003C9A7A /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		2FC5878D1C7A0956003C9A7A /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -333,10 +333,18 @@
 		2FE7078C1C7DBF4E005CB13B /* SYThemeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYThemeController.m; sourceTree = "<group>"; };
 		2FE7078F1C7DBF4E005CB13B /* SYThemeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYThemeViewCell.h; sourceTree = "<group>"; };
 		2FE707901C7DBF4E005CB13B /* SYThemeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYThemeViewCell.m; sourceTree = "<group>"; };
-		2FE707931C7DC041005CB13B /* SYMainViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYMainViewCell.h; sourceTree = "<group>"; };
-		2FE707941C7DC041005CB13B /* SYMainViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYMainViewCell.m; sourceTree = "<group>"; };
 		2FE707991C7DC2A3005CB13B /* SYZhihuTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYZhihuTool.h; sourceTree = "<group>"; };
 		2FE7079A1C7DC2A3005CB13B /* SYZhihuTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYZhihuTool.m; sourceTree = "<group>"; };
+		2FE707A01C7DD358005CB13B /* SYLeftDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYLeftDrawerController.h; sourceTree = "<group>"; };
+		2FE707A11C7DD358005CB13B /* SYLeftDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYLeftDrawerController.m; sourceTree = "<group>"; };
+		2FE707A31C7DD6B6005CB13B /* SYMainToolBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYMainToolBox.h; sourceTree = "<group>"; };
+		2FE707A41C7DD6B6005CB13B /* SYMainToolBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYMainToolBox.m; sourceTree = "<group>"; };
+		2FE707A51C7DD6B6005CB13B /* SYMainToolBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYMainToolBox.xib; sourceTree = "<group>"; };
+		2FE707AB1C7DDC69005CB13B /* SYLeftDrawerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYLeftDrawerController.xib; sourceTree = "<group>"; };
+		2FE707AD1C7DE3F4005CB13B /* SYLeftDrawerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYLeftDrawerCell.h; sourceTree = "<group>"; };
+		2FE707AE1C7DE3F4005CB13B /* SYLeftDrawerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYLeftDrawerCell.m; sourceTree = "<group>"; };
+		2FE707B01C7DECDD005CB13B /* SYDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYDemoViewController.h; sourceTree = "<group>"; };
+		2FE707B11C7DECDD005CB13B /* SYDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYDemoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -633,6 +641,7 @@
 		2FC5877C1C79FE74003C9A7A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2FE7079C1C7DD339005CB13B /* LeftDrawer */,
 				2FE707891C7DBF4E005CB13B /* Theme */,
 				2F2CCB851C7AF19F00C45E3D /* Home */,
 				2F2CCB811C7AF09800C45E3D /* Setting */,
@@ -655,8 +664,10 @@
 		2FC5877E1C79FE74003C9A7A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				2F2CCBCA1C7B156500C45E3D /* ViewController.h */,
-				2F2CCBCB1C7B156500C45E3D /* ViewController.m */,
+				2F2CCBCA1C7B156500C45E3D /* SYMainViewController.h */,
+				2F2CCBCB1C7B156500C45E3D /* SYMainViewController.m */,
+				2FE707B01C7DECDD005CB13B /* SYDemoViewController.h */,
+				2FE707B11C7DECDD005CB13B /* SYDemoViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -673,13 +684,8 @@
 		2FC587801C79FE74003C9A7A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2FC587811C79FECA003C9A7A /* SYMainToolBox.h */,
-				2FC587821C79FECA003C9A7A /* SYMainToolBox.m */,
-				2FC587841C79FED8003C9A7A /* SYMainToolBox.xib */,
 				2FD803B51C7A3B5500C15EB7 /* SYToolButton.h */,
 				2FD803B61C7A3B5500C15EB7 /* SYToolButton.m */,
-				2FE707931C7DC041005CB13B /* SYMainViewCell.h */,
-				2FE707941C7DC041005CB13B /* SYMainViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -850,6 +856,45 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		2FE7079C1C7DD339005CB13B /* LeftDrawer */ = {
+			isa = PBXGroup;
+			children = (
+				2FE7079D1C7DD339005CB13B /* Controller */,
+				2FE7079E1C7DD339005CB13B /* Model */,
+				2FE7079F1C7DD339005CB13B /* View */,
+			);
+			path = LeftDrawer;
+			sourceTree = "<group>";
+		};
+		2FE7079D1C7DD339005CB13B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2FE707A01C7DD358005CB13B /* SYLeftDrawerController.h */,
+				2FE707A11C7DD358005CB13B /* SYLeftDrawerController.m */,
+				2FE707AB1C7DDC69005CB13B /* SYLeftDrawerController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2FE7079E1C7DD339005CB13B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2FE7079F1C7DD339005CB13B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2FE707AD1C7DE3F4005CB13B /* SYLeftDrawerCell.h */,
+				2FE707AE1C7DE3F4005CB13B /* SYLeftDrawerCell.m */,
+				2FE707A31C7DD6B6005CB13B /* SYMainToolBox.h */,
+				2FE707A41C7DD6B6005CB13B /* SYMainToolBox.m */,
+				2FE707A51C7DD6B6005CB13B /* SYMainToolBox.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -960,12 +1005,13 @@
 				2FC587591C79FDEB003C9A7A /* LaunchScreen.storyboard in Resources */,
 				2F2CCB981C7B016500C45E3D /* SYTableViewCell.xib in Resources */,
 				2FC587561C79FDEB003C9A7A /* Assets.xcassets in Resources */,
-				2FC587851C79FED8003C9A7A /* SYMainToolBox.xib in Resources */,
 				2F0E2CC51C7BF071004FDA0F /* MBProgressHUD.bundle in Resources */,
 				2F37AB8B1C7B7F1600D3CD65 /* SYStoryNavigationView.xib in Resources */,
 				2F37AB831C7B6E0F00D3CD65 /* SYTopView.xib in Resources */,
 				2FC587541C79FDEB003C9A7A /* Main.storyboard in Resources */,
 				2F9995E91C7C47760072C8F0 /* SYCommentCell.xib in Resources */,
+				2FE707AC1C7DDC69005CB13B /* SYLeftDrawerController.xib in Resources */,
+				2FE707A71C7DD6B6005CB13B /* SYMainToolBox.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1003,20 +1049,24 @@
 				2F2CCBA41C7B088E00C45E3D /* SYLastestParamResult.m in Sources */,
 				2F2CCBC21C7B0C1400C45E3D /* MJProperty.m in Sources */,
 				2FC587A11C7A0956003C9A7A /* AFNetworkReachabilityManager.m in Sources */,
+				2FE707B21C7DECDD005CB13B /* SYDemoViewController.m in Sources */,
 				2F9995F31C7C53CA0072C8F0 /* UITableView+FDIndexPathHeightCache.m in Sources */,
 				2FC587A61C7A0956003C9A7A /* AFURLSessionManager.m in Sources */,
 				2F2CCBC01C7B0C1400C45E3D /* MJExtensionConst.m in Sources */,
+				2FE707AF1C7DE3F4005CB13B /* SYLeftDrawerCell.m in Sources */,
 				2F2CCBC31C7B0C1400C45E3D /* MJPropertyKey.m in Sources */,
 				2F37AB6D1C7B63F000D3CD65 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				2F37AB651C7B4A0F00D3CD65 /* SYProfileController.m in Sources */,
 				2FC588021C7A0974003C9A7A /* View+MASAdditions.m in Sources */,
 				2F9996021C7C799D0072C8F0 /* SYDismisAnimation.m in Sources */,
 				2F2CCBC81C7B0C1400C45E3D /* NSObject+MJProperty.m in Sources */,
+				2FE707A61C7DD6B6005CB13B /* SYMainToolBox.m in Sources */,
 				2FC587FA1C7A0974003C9A7A /* MASCompositeConstraint.m in Sources */,
 				2F37AB781C7B675100D3CD65 /* MMDrawerBarButtonItem.m in Sources */,
 				2F37AB7B1C7B675100D3CD65 /* UIViewController+MMDrawerController.m in Sources */,
 				2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */,
 				2F2CCBC41C7B0C1400C45E3D /* MJPropertyType.m in Sources */,
+				2FE707A21C7DD358005CB13B /* SYLeftDrawerController.m in Sources */,
 				2F2CCBC91C7B0C1400C45E3D /* NSString+MJExtension.m in Sources */,
 				2F0E2CBD1C7BE7F7004FDA0F /* SYImageView.m in Sources */,
 				2FC587D51C7A096A003C9A7A /* SDWebImageDownloader.m in Sources */,
@@ -1042,7 +1092,7 @@
 				2F2CCBC51C7B0C1400C45E3D /* NSObject+MJClass.m in Sources */,
 				2F9995E71C7C476A0072C8F0 /* SYCommentCell.m in Sources */,
 				2F9995F91C7C70E50072C8F0 /* UIViewController+SY.m in Sources */,
-				2F2CCBCC1C7B156500C45E3D /* ViewController.m in Sources */,
+				2F2CCBCC1C7B156500C45E3D /* SYMainViewController.m in Sources */,
 				2F0E2CBA1C7BE1A0004FDA0F /* SYExtraStory.m in Sources */,
 				2FC587FB1C7A0974003C9A7A /* MASConstraint.m in Sources */,
 				2FC587DA1C7A096A003C9A7A /* UIImage+GIF.m in Sources */,
@@ -1069,7 +1119,6 @@
 				2FC587DF1C7A096A003C9A7A /* UIView+WebCacheOperation.m in Sources */,
 				2FC587FF1C7A0974003C9A7A /* MASViewConstraint.m in Sources */,
 				2FC587A21C7A0956003C9A7A /* AFSecurityPolicy.m in Sources */,
-				2FC587831C79FECA003C9A7A /* SYMainToolBox.m in Sources */,
 				2FC587FD1C7A0974003C9A7A /* MASLayoutConstraint.m in Sources */,
 				2FE707911C7DBF4E005CB13B /* SYThemeController.m in Sources */,
 				2FC587D61C7A096A003C9A7A /* SDWebImageDownloaderOperation.m in Sources */,
@@ -1077,7 +1126,6 @@
 				2FC5874B1C79FDEB003C9A7A /* main.m in Sources */,
 				2FC587DE1C7A096A003C9A7A /* UIImageView+WebCache.m in Sources */,
 				2F2CCB7B1C7AE49000C45E3D /* SYTheme.m in Sources */,
-				2FE707951C7DC041005CB13B /* SYMainViewCell.m in Sources */,
 				2FC587DD1C7A096A003C9A7A /* UIImageView+HighlightedWebCache.m in Sources */,
 				2FC587A01C7A0956003C9A7A /* AFHTTPSessionManager.m in Sources */,
 				2F2CCB8B1C7AF1C100C45E3D /* SYHomeController.m in Sources */,

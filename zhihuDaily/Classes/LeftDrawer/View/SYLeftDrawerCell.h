@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "SYTheme.h"
 
-@interface SYMainViewCell : UITableViewCell
+@interface SYLeftDrawerCell : UITableViewCell
 @property (nonatomic, strong) SYTheme *theme;
 @end

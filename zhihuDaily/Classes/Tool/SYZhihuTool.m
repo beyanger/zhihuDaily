@@ -80,5 +80,16 @@
 }
 
 
++ (void)getLauchImageWithCompleted:(Completed)completed {
+    NSString *launchImgUrl = @"http://news-at.zhihu.com/api/4/start-image/720*1184";
+    
+    [YSHttpTool GETWithURL:launchImgUrl params:nil success:^(id responseObject) {
+        NSString *urlStr = responseObject[@"img"];
+        completed(urlStr);
+    } failure:nil];
+
+}
+
+
 
 @end

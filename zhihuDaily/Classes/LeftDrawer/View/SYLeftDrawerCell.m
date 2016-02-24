@@ -6,9 +6,9 @@
 //  Copyright © 2016年 yang. All rights reserved.
 //
 
-#import "SYMainViewCell.h"
+#import "SYLeftDrawerCell.h"
 
-@implementation SYMainViewCell
+@implementation SYLeftDrawerCell
 
 - (void)setTheme:(SYTheme *)theme {
     _theme = theme;

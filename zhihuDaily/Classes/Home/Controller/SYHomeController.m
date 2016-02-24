@@ -82,7 +82,7 @@ static NSString *reuseid = @"useid";
 }
 
 - (void)updatePictureView {
-    WEAKSELF(ws);
+    
     CGRect frame = self.picturesView.frame;
     self.picturesView.contentSize = CGSizeMake(kScreenWidth*self.topStory.count, frame.size.height);
     for (NSUInteger i = 0 ; i < self.topStory.count; i++) {
@@ -99,7 +99,7 @@ static NSString *reuseid = @"useid";
 }
 
 - (void)didClickedMenuButton:(UIButton *)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"menuAction" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ToggleDrawer object:nil];
 }
 
 

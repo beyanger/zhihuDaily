@@ -281,6 +281,8 @@
         header.textColor = [UIColor whiteColor];
         header.textAlignment = NSTextAlignmentCenter;
         header.text = @"载入上一篇";
+        
+        header.center = CGPointMake(kScreenWidth*0.5, -40);
         _header = header;
         
         UIImage *image = [UIImage imageNamed:@"downArrow"];

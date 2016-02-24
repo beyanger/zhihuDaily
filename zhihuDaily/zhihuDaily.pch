@@ -19,4 +19,10 @@
 #define kScreenBounds         [UIScreen mainScreen].bounds
 
 
+#define OpenDrawer          @"leftdrawer_open"
+#define CloseDrawer         @"leftdrawer_close"
+#define ToggleDrawer        @"leftdrawer_toggle"
+
+
+
 #endif /* zhihuDaily_pch */

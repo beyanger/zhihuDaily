@@ -9,8 +9,13 @@
 #import "AppDelegate.h"
 
 #import "YSHttpTool.h"
+#import "SYZhihuTool.h"
 #import "UIImageView+WebCache.h"
-
+#import "SYLeftDrawerController.h"
+#import "MMDrawerController.h"
+#import "SYMainViewController.h"
+#import "SYDemoViewController.h"
+#import "SYHomeController.h"
 
 
 @interface AppDelegate ()
@@ -21,6 +26,21 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    self.window = [[UIWindow alloc] initWithFrame:kScreenBounds];
+    [self.window makeKeyAndVisible];
+    
+    SYHomeController *uvc = [[SYHomeController alloc] init];
+    SYLeftDrawerController *ldc = [[SYLeftDrawerController alloc] init];
+    
+    SYMainViewController *mmdc = [[SYMainViewController alloc] initWithCenterViewController:uvc leftDrawerViewController:ldc];
+    self.window.rootViewController = mmdc;
+    
+
+
+    
+    
+    return YES;
     
     
     [self.window makeKeyAndVisible];
@@ -36,31 +56,23 @@
     if (url) {
         [imageView sd_setImageWithURL:[NSURL URLWithString:url]];
     }
-    
-    [YSHttpTool GETWithURL:@"http://news-at.zhihu.com/api/4/start-image/720*1184" params:nil success:^(id responseObject) {
-        NSString *urlStr = responseObject[@"img"];
-        [ud setObject:urlStr forKey:@"launchScreen"];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:urlStr]];
-        
-    } failure:^(NSError *error) {
-        NSLog(@"请求主页失败");
+    [SYZhihuTool getLauchImageWithCompleted:^(NSString *obj) {
+        [ud setObject:obj forKey:@"launchScreen"];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:obj]];
     }];
     
-    
-    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(removeLaunchImage) userInfo:nil repeats:NO];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:0.67 animations:^{
+            self.imageView.alpha = 0.0;
+            self.imageView.transform = CGAffineTransformMakeScale(1.2, 1.2);
+        } completion:^(BOOL finished) {
+            [self.imageView removeFromSuperview];
+        }];
+    });
     
     return YES;
 }
 
-- (void)removeLaunchImage {
-    
-    [UIView animateWithDuration:0.67 animations:^{
-        self.imageView.alpha = 0.0;
-        self.imageView.transform = CGAffineTransformMakeScale(1.2, 1.2);
-    } completion:^(BOOL finished) {
-        [self.imageView removeFromSuperview];
-    }];
-}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
