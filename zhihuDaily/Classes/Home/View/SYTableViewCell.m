@@ -18,9 +18,6 @@
 
 @implementation SYTableViewCell
 
-
-
-
 - (void)setStory:(SYStory *)story {
     _story = story;
     self.title.text = story.title;
@@ -28,9 +25,6 @@
     [self.image sd_setImageWithURL:[NSURL URLWithString:story.images.firstObject]];
     self.multiImage.hidden = !story.multipic;
 }
-
-
-
 
 - (void)awakeFromNib {
     self.multiImage.backgroundColor = [UIColor greenColor];

@@ -15,25 +15,30 @@
 #import "SYTableViewCell.h"
 #import "SYDetailController.h"
 #import "SYStoryTool.h"
+#import "UIImageView+WebCache.h"
+#import "Masonry.h"
 
-@interface SYHomeController () <SYDetailControllerDelegate>
+@interface SYHomeController () <SYDetailControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 //@property (nonatomic, weak) SYDetailController *currentDetailController;
 @property (nonatomic, strong) NSIndexPath *currentIndexPath;
 @property (nonatomic, strong) NSMutableArray<SYLastestGroup *> *storyGroup;
+@property (nonatomic, strong) NSMutableArray<SYStory *> *topStory;
 
+@property (nonatomic, weak) UITableView *tableView;
+
+@property (nonatomic, weak) UIView *headerView;
 @property (nonatomic, weak) UILabel *titleLabel;
+
+@property (nonatomic, weak) UIButton *leftButton;
+
+@property (nonatomic, weak) UIScrollView *picturesView;
 
 @end
 
 
 static NSString *reuseid = @"useid";
 @implementation SYHomeController
-
-
-- (instancetype)initWithStyle:(UITableViewStyle)style {
-    return [super initWithStyle:UITableViewStyleGrouped];
-}
 
 - (NSMutableArray *)allAritcle {
     if (!_storyGroup) {
@@ -44,52 +49,56 @@ static NSString *reuseid = @"useid";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self setupTableView];
-
-    [self setupHomeIcon];
-    
+    [self picturesView];
+    [self headerView];
+    [self leftButton];
+    [self titleLabel];
   
 }
 
 - (void)setupTableView {
-    self.tableView.rowHeight = 80;
-    self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.contentInset = UIEdgeInsetsMake(160, 0, 0, 0);
+    [self.tableView registerNib:[UINib nibWithNibName:@"SYTableViewCell" bundle:nil] forCellReuseIdentifier:@"useid"];
+    
+    [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     
     [SYStoryTool getLastestStoryWithCompleted:^(id obj) {
         SYLastestParamResult *result = (SYLastestParamResult *)obj;
-        for (SYStory *story in result.stories) {
-            for (SYStory *top_story in result.top_stories) {
-                if (story.id == top_story.id) {
-                    story.top = 1;
-                }
-            }
-        }
+
         SYLastestGroup *group = [[SYLastestGroup alloc] init];
         group.stories = result.stories;
         
         self.storyGroup = [@[group] mutableCopy];
+        self.topStory = [result.top_stories mutableCopy];
+        
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self updatePictureView];
             [self.tableView reloadData];
         });
     }];
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"SYTableViewCell" bundle:nil] forCellReuseIdentifier:@"useid"];
 }
 
-- (void)setupHomeIcon {
-    UIButton *button = [[UIButton alloc] init];
-    button.bounds = CGRectMake(0, 0, 38, 38);
-    [button setImage:[UIImage imageNamed:@"Home_Icon"] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(didClickedMenuButton:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-}
+- (void)updatePictureView {
+    WEAKSELF(ws);
+    CGRect frame = self.picturesView.frame;
+    self.picturesView.contentSize = CGSizeMake(kScreenWidth*self.topStory.count, frame.size.height);
+    for (NSUInteger i = 0 ; i < self.topStory.count; i++) {
+        SYStory *story = self.topStory[i];
+        
+        UIImageView *imageView = [[UIImageView alloc] init];
+        imageView.frame = CGRectMake(i*kScreenWidth, 0, kScreenWidth, frame.size.height);
+        [self.picturesView addSubview:imageView];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:story.image]];
+        
+        
+    }
 
+}
 
 - (void)didClickedMenuButton:(UIButton *)sender {
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"menuAction" object:nil];
 }
 
@@ -166,10 +175,6 @@ static NSString *reuseid = @"useid";
         return nil;
     }
     SYStory *story = group.stories[self.currentIndexPath.row-1];
-
-    
-    NSLog(@"indexpath: %d, %d", self.currentIndexPath.row, self.currentIndexPath.section);
-    
     
     self.currentIndexPath = [NSIndexPath indexPathForRow:self.currentIndexPath.row-1 inSection:self.currentIndexPath.section];
     
@@ -177,6 +182,35 @@ static NSString *reuseid = @"useid";
     return story;
 }
 
+
+- (UITableView *)tableView {
+    if (!_tableView) {
+        UITableView *tableView = [[UITableView alloc] initWithFrame:kScreenBounds style:UITableViewStyleGrouped];
+        tableView.delegate = self;
+        tableView.dataSource = self;
+        tableView.rowHeight = 80;
+        tableView.showsVerticalScrollIndicator = NO;
+        
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 200)];
+        tableView.tableHeaderView = view;
+        [self.view addSubview:tableView];
+        _tableView = tableView;
+    }
+    return _tableView;
+}
+
+
+- (UIView *)headerView {
+    if (!_headerView) {
+        UIView *headerView = [[UIView alloc] init];
+        headerView.frame = CGRectMake(0, 0, kScreenWidth, 56);
+        headerView.backgroundColor = SYColor(23, 144, 211, 1.);
+        
+        headerView.alpha = 0.0;
+        _headerView = headerView;
+    }
+    return _headerView;
+}
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
@@ -193,6 +227,40 @@ static NSString *reuseid = @"useid";
         [self.view addSubview:titleLabel];
     }
     return _titleLabel;
+}
+
+- (UIButton *)leftButton {
+    if (!_leftButton) {
+        UIButton *leftButton = [[UIButton alloc] init];
+        leftButton.frame = CGRectMake(10, 30, 30, 30);
+        [leftButton addTarget:self action:@selector(didClickedMenuButton:) forControlEvents:UIControlEventTouchUpInside];
+        [leftButton setImage:[UIImage imageNamed:@"Home_Icon"] forState:UIControlStateNormal];
+        [self.view addSubview:leftButton];
+        _leftButton = leftButton;
+    }
+    return _leftButton;
+}
+
+- (UIScrollView *)picturesView {
+    if (!_picturesView) {
+        UIScrollView *picturesView = [[UIScrollView alloc] init];
+        picturesView.frame = CGRectMake(0, -45, kScreenWidth, 245);
+        [self.view addSubview:picturesView];
+        _picturesView = picturesView;
+    }
+    return _picturesView;
+}
+
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+
+    if ([keyPath isEqualToString:@"contentOffset"]) {
+        if (self.tableView.contentOffset.y < 0) {
+            self.picturesView.frame = CGRectMake(0, -45, kScreenWidth, 245-self.tableView.contentOffset.y);
+        }
+    }
+    
 }
 
 

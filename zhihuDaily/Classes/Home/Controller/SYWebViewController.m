@@ -27,7 +27,9 @@
 
     [self updateButton];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(dismis)];
+    
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back_White"] style:UIBarButtonItemStylePlain target:self action:@selector(dismis)];
    
     self.webView.delegate = self;
     [self.webView loadRequest:self.request];

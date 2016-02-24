@@ -66,8 +66,6 @@
         NSArray *comment = [SYComment mj_objectArrayWithKeyValuesArray:responseObject[@"comments"]];
         completed(comment);
     } failure:nil];
-    
-    
 }
 
 

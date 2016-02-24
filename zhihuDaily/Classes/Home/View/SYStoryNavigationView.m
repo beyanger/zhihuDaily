@@ -33,7 +33,6 @@
     if ([keyPath isEqualToString:@"selected"]) {
             self.popularityLabel.textColor = self.popularityButton.selected ? SYColor(22, 164, 220, 1.) : [UIColor lightGrayColor];
         if (self.popularityButton.selected) {
-            self.popularityLabel.text = [NSString stringWithFormat:@"%d", self.popularityLabel.text.intValue+1];
 #warning  添加动画
             [self changeValue:self.popularityButton];
         } else {
@@ -44,18 +43,16 @@
 
 - (void)changeValue:(UIButton *)button {
     UILabel *view = [[UILabel alloc] init];
-    view.backgroundColor = [UIColor blueColor];
+    view.backgroundColor = SYColor(22, 164, 220, 1.);
     view.textAlignment = NSTextAlignmentCenter;
     view.textColor = [UIColor whiteColor];
     view.layer.cornerRadius = 4;
     view.clipsToBounds = YES;
-    view.text = [NSString stringWithFormat:@"%d", self.popularityLabel.text.intValue-1];
+    view.text = self.popularityLabel.text;
     
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     [window addSubview:view];
-    
     CGSize buttonSize = button.frame.size;
-    
     CGRect originFrame = CGRectMake(buttonSize.width*0.5, buttonSize.height*0.5, 0, 0);
     view.frame = [self.popularityButton convertRect:originFrame toView:window];
     
@@ -63,7 +60,12 @@
         CGRect frame = CGRectMake(0, -15, buttonSize.width, 15);
         view.frame = [button convertRect:frame toView:window];
     } completion:^(BOOL finished) {
-        view.text = self.popularityLabel.text;
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            view.text = [NSString stringWithFormat:@"%d", self.popularityLabel.text.intValue+1];
+            self.popularityLabel.text = view.text;
+        });
+        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [view removeFromSuperview];
         });

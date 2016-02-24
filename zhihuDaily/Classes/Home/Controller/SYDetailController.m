@@ -19,6 +19,8 @@
 #import "SYStoryNavigationView.h"
 #import "SYShareView.h"
 #import "SYCommentsTableController.h"
+#import "UIView+Extension.h"
+#import "Masonry.h"
 
 @interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate, UIScrollViewDelegate>
 
@@ -28,6 +30,9 @@
 
 @property (nonatomic, weak) UILabel *footer;
 @property (nonatomic, weak) UILabel *header;
+
+@property (nonatomic, weak) UIImageView *upArrow;
+@property (nonatomic, weak) UIImageView *downArrow;
 
 @property (nonatomic, weak) SYStoryNavigationView *storyNav;
 
@@ -39,6 +44,8 @@
 {
     self = [super init];
     if (self) {
+
+        self.view.backgroundColor = [UIColor whiteColor];
         self.story = story;
     }
     return self;
@@ -56,7 +63,7 @@
     [self.view addSubview:storyNav];
     storyNav.delegate = self;
     
-
+    self.position = _position;
     
 
 }
@@ -190,9 +197,7 @@
     
 
     self.footer.center = CGPointMake(kScreenWidth*0.5, self.webView.scrollView.contentSize.height+20);
-    self.header.center = CGPointMake(kScreenWidth*0.5, -20);
-    
-    
+    self.header.center = CGPointMake(kScreenWidth*0.5, -40);
 }
 
 
@@ -202,17 +207,41 @@
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    
     if (scrollView.contentOffset.y < -80) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if ([self.delegate respondsToSelector:@selector(prevStoryForDetailController:)]) {
-                self.story = [self.delegate prevStoryForDetailController:self];
+                SYStory *story  = [self.delegate prevStoryForDetailController:self];
+                if (story) {
+                    // 切换动画
+                    [UIView animateWithDuration:0.2 animations:^{
+                        self.webView.y = self.webView.height;
+                    } completion:^(BOOL finished) {
+                        self.story = story;
+                        self.webView.y = -self.webView.height;
+                        [UIView animateWithDuration:0.2 animations:^{
+                            self.webView.y = 0;
+                        }];
+                    }];
+                }
             }
         });
     } else if (scrollView.contentSize.height - scrollView.contentOffset.y-kScreenHeight < -120) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if ([self.delegate respondsToSelector:@selector(nextStoryForDetailController:)]) {
-                self.story = [self.delegate nextStoryForDetailController:self];
+                SYStory *story  = [self.delegate nextStoryForDetailController:self];
+                if (story) {
+                    // 切换动画
+                    [UIView animateWithDuration:0.2 animations:^{
+                        self.webView.y = -self.webView.height;
+                    } completion:^(BOOL finished) {
+                        self.webView.y = self.webView.height;
+                        self.story = story;
+                        [UIView animateWithDuration:0.2 animations:^{
+                            self.webView.y = 0;
+                        }];
+
+                    }];
+                }
             }
         });
     }
@@ -226,8 +255,19 @@
         [self.webView.scrollView addSubview:footer];
         footer.textColor = [UIColor grayColor];
         footer.textAlignment = NSTextAlignmentCenter;
-        footer.bounds = CGRectMake(0, 0, kScreenWidth, 40);
+        footer.text = @"载入下一篇";
+        [footer sizeToFit];
         _footer = footer;
+    
+        UIImage *image = [UIImage imageNamed:@"upArrow"];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        [footer addSubview:imageView];
+        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(15, 20));
+            make.centerY.mas_equalTo(footer);
+            make.right.mas_equalTo(footer.mas_left).offset(-10);
+        }];
+        _upArrow = imageView;
     }
     return _footer;
 }
@@ -238,8 +278,18 @@
         [self.webView.scrollView insertSubview:header aboveSubview:self.topView];
         header.textColor = [UIColor whiteColor];
         header.textAlignment = NSTextAlignmentCenter;
-        header.bounds = CGRectMake(0, 0, kScreenWidth, 40);
         _header = header;
+        
+        UIImage *image = [UIImage imageNamed:@"downArrow"];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        [header addSubview:imageView];
+        
+        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(15, 20));
+            make.centerY.mas_equalTo(header);
+            make.right.mas_equalTo(header.mas_left).offset(-10);
+        }];
+        _downArrow = imageView;
     }
     return _header;
 }
@@ -275,14 +325,12 @@
     _position = position;
     if (position == 0) {
         self.header.text = @"已经是第一篇";
-        self.footer.text = @"载入下一篇";
-    } else if (position == -1) {
-        self.header.text = @"载入上一篇";
-        self.footer.text = @"已经是最后一篇";
+        self.downArrow.alpha = 0.0;
     } else {
         self.header.text = @"载入上一篇";
-        self.footer.text = @"载入下一篇";
+        self.downArrow.alpha = 1.0;
     }
+    [self.header sizeToFit];
 }
 
 
@@ -291,8 +339,24 @@
         CGFloat yoffset = [change[@"new"] CGPointValue].y;
         if (yoffset < 0) {
             self.topView.frame = CGRectMake(0, yoffset, kScreenWidth, 200-yoffset);
-            //NSLog(@"---> %f", yoffset);
         }
+
+        CGAffineTransform transform = CGAffineTransformIdentity;
+        if (yoffset < -80) {
+            transform = CGAffineTransformMakeRotation(M_PI);
+        }
+        [UIView animateWithDuration:0.25 animations:^{
+            self.downArrow.transform = transform;
+        }];
+        
+        transform = CGAffineTransformIdentity;
+        if (self.webView.scrollView.contentSize.height - self.webView.scrollView.contentOffset.y-kScreenHeight < -120) {
+            transform = CGAffineTransformMakeRotation(M_PI);
+        }
+        [UIView animateWithDuration:0.25 animations:^{
+            self.upArrow.transform = transform;
+        }];
+        
     }
 }
 
