@@ -20,14 +20,14 @@
 #import "SYShareView.h"
 #import "SYCommentsTableController.h"
 
-@interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate>
+@interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate, UIScrollViewDelegate>
 
 
 @property (nonatomic, weak) SYTopView   *topView;
 @property (nonatomic, weak) UIWebView *webView;
 
-@property (nonatomic, weak) UIView *footer;
-
+@property (nonatomic, weak) UILabel *footer;
+@property (nonatomic, weak) UILabel *header;
 
 @property (nonatomic, weak) SYStoryNavigationView *storyNav;
 
@@ -120,6 +120,7 @@
         [self.view addSubview:webView];
         _webView = webView;
         _webView.delegate = self;
+        _webView.scrollView.delegate = self;
         _webView.backgroundColor = [UIColor whiteColor];
         [self.webView.scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
         
@@ -163,31 +164,84 @@
     [webView stringByEvaluatingJavaScriptFromString:str];
     
     //js方法遍历图片添加点击事件 返回图片个数
-    static  NSString * const jsGetImages = @"function getImages(){"\
-    "var objs = document.getElementsByTagName(\"img\");"\
-    "for(var i=0;i<objs.length;i++){"\
-    "objs[i].onclick=function(){"\
+    static  NSString * const jsGetImages = @"function setImages(){"\
+    "var images = document.getElementsByTagName(\"img\");"\
+    "for(var i=0;i<images.length;i++){"\
+    "images[i].onclick=function(){"\
     "document.location=\"detailimage:\"+this.src;"\
-    "};};return objs.length;};";
+    "};};return images.length;};";
     
-    [webView stringByEvaluatingJavaScriptFromString:jsGetImages];    [webView stringByEvaluatingJavaScriptFromString:@"getImages()"];
+    [webView stringByEvaluatingJavaScriptFromString:jsGetImages];
+    [webView stringByEvaluatingJavaScriptFromString:@"setImages()"];
+    
+    // 获取网页上的所有图片
+    NSString *jsImage = @"var images= document.getElementsByTagName('img');"
+                        "var imageUrls = \"\";"
+                        "for(var i = 0; i < images.length; i++)"
+                            "{var image = images[i];"
+                            "imageUrls += image.src+\"...beyanger....\";"
+                        "}"
+                        "imageUrls.toString();";
+    
+    NSString *imageUrls = [webView stringByEvaluatingJavaScriptFromString:jsImage];
+    
+    NSArray *imageArray = [imageUrls componentsSeparatedByString:@"...beyanger...."];
+#pragma todo 设置图片浏览界面的上一张和下一张功能
+    
+
+    self.footer.center = CGPointMake(kScreenWidth*0.5, self.webView.scrollView.contentSize.height+20);
+    self.header.center = CGPointMake(kScreenWidth*0.5, -20);
     
     
-    NSLog(@"%@", NSStringFromCGSize(self.webView.scrollView.contentSize));
-    
-    self.footer.frame = CGRectMake(kScreenWidth*0.5-40, self.webView.scrollView.contentSize.height, 80, 30);
 }
 
 
 
-- (UIView *)footer {
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+    if (scrollView.contentOffset.y < -80) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if ([self.delegate respondsToSelector:@selector(prevStoryForDetailController:)]) {
+                self.story = [self.delegate prevStoryForDetailController:self];
+            }
+        });
+    } else if (scrollView.contentSize.height - scrollView.contentOffset.y-kScreenHeight < -120) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if ([self.delegate respondsToSelector:@selector(nextStoryForDetailController:)]) {
+                self.story = [self.delegate nextStoryForDetailController:self];
+            }
+        });
+    }
+}
+
+
+
+- (UILabel *)footer {
     if (!_footer) {
-        UIView *footer = [[UIView alloc] init];
-        footer.backgroundColor = [UIColor redColor];
+        UILabel *footer = [[UILabel alloc] init];
         [self.webView.scrollView addSubview:footer];
+        footer.textColor = [UIColor grayColor];
+        footer.textAlignment = NSTextAlignmentCenter;
+        footer.bounds = CGRectMake(0, 0, kScreenWidth, 40);
         _footer = footer;
     }
     return _footer;
+}
+
+- (UILabel *)header {
+    if (!_header) {
+        UILabel *header = [[UILabel alloc] init];
+        [self.webView.scrollView insertSubview:header aboveSubview:self.topView];
+        header.textColor = [UIColor whiteColor];
+        header.textAlignment = NSTextAlignmentCenter;
+        header.bounds = CGRectMake(0, 0, kScreenWidth, 40);
+        _header = header;
+    }
+    return _header;
 }
 
 
@@ -217,6 +271,19 @@
 }
 
 
+- (void)setPosition:(long)position {
+    _position = position;
+    if (position == 0) {
+        self.header.text = @"已经是第一篇";
+        self.footer.text = @"载入下一篇";
+    } else if (position == -1) {
+        self.header.text = @"载入上一篇";
+        self.footer.text = @"已经是最后一篇";
+    } else {
+        self.header.text = @"载入上一篇";
+        self.footer.text = @"载入下一篇";
+    }
+}
 
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
@@ -224,10 +291,11 @@
         CGFloat yoffset = [change[@"new"] CGPointValue].y;
         if (yoffset < 0) {
             self.topView.frame = CGRectMake(0, yoffset, kScreenWidth, 200-yoffset);
-            
+            //NSLog(@"---> %f", yoffset);
         }
     }
 }
+
 
 
 

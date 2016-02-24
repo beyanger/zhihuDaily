@@ -18,7 +18,7 @@
 
 @interface SYHomeController () <SYDetailControllerDelegate>
 
-@property (nonatomic, weak) SYDetailController *currentDetailController;
+//@property (nonatomic, weak) SYDetailController *currentDetailController;
 @property (nonatomic, strong) NSIndexPath *currentIndexPath;
 @property (nonatomic, strong) NSMutableArray<SYLastestGroup *> *storyGroup;
 
@@ -133,30 +133,47 @@ static NSString *reuseid = @"useid";
     SYLastestGroup *group = self.storyGroup[indexPath.section];
     SYStory *story = group.stories[indexPath.row];
     
+    
     SYDetailController *dc = [[SYDetailController alloc] initWithStory:story];
     dc.delegate = self;
-    self.currentDetailController = dc;
+    dc.position = indexPath.row==(group.stories.count-1) ? -1 : indexPath.row;
+    
+    //self.currentDetailController = dc;
     [self presentViewController:dc animated:YES completion:nil];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"----> %@", NSStringFromCGPoint(scrollView.contentOffset));
 }
 
 
 
 - (SYStory *)nextStoryForDetailController:(SYDetailController *)detailController {
-
     SYLastestGroup *group = self.storyGroup[self.currentIndexPath.section];
-    
     if (self.currentIndexPath.row >= group.stories.count-1) {
         return nil;
     }
     
     SYStory *story = group.stories[self.currentIndexPath.row+1];
-    
-    self.currentDetailController.story = story;
+    detailController.story = story;
     self.currentIndexPath = [NSIndexPath indexPathForRow:self.currentIndexPath.row+1 inSection:self.currentIndexPath.section];
+    
+    
+    detailController.position = self.currentIndexPath.row==(group.stories.count-1) ? -1 : self.currentIndexPath.row;
+    
+    return story;
+}
+
+- (SYStory *)prevStoryForDetailController:(SYDetailController *)detailController {
+    SYLastestGroup *group = self.storyGroup[self.currentIndexPath.section];
+    if (self.currentIndexPath.row <= 0) {
+        return nil;
+    }
+    SYStory *story = group.stories[self.currentIndexPath.row-1];
+
+    
+    NSLog(@"indexpath: %d, %d", self.currentIndexPath.row, self.currentIndexPath.section);
+    
+    
+    self.currentIndexPath = [NSIndexPath indexPathForRow:self.currentIndexPath.row-1 inSection:self.currentIndexPath.section];
+    
+    detailController.position = self.currentIndexPath.row==(group.stories.count-1) ? -1 : self.currentIndexPath.row;
     return story;
 }
 

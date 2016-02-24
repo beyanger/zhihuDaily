@@ -24,6 +24,11 @@
 
 @property (nonatomic, strong) SYStory *story;
 
+// 0  : first
+// -1 : last
+@property (nonatomic, assign) long position;
+
+
 - (instancetype)initWithStory:(SYStory *)story;
 
 @property (nonatomic, weak) id<SYDetailControllerDelegate> delegate;

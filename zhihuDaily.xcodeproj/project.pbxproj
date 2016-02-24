@@ -382,13 +382,6 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
-		2F2CCB7C1C7AE5AC00C45E3D /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
 		2F2CCB811C7AF09800C45E3D /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -620,7 +613,7 @@
 		2FC587481C79FDEB003C9A7A /* zhihuDaily */ = {
 			isa = PBXGroup;
 			children = (
-				2F2CCB7C1C7AE5AC00C45E3D /* Sources */,
+				2FE707751C7CA281005CB13B /* Resources */,
 				2FC587891C7A0937003C9A7A /* Libs */,
 				2FC5877C1C79FE74003C9A7A /* Classes */,
 				2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */,
@@ -833,6 +826,13 @@
 				2FC588061C7A0B50003C9A7A /* YSHttpTool.m */,
 			);
 			path = Tool;
+			sourceTree = "<group>";
+		};
+		2FE707751C7CA281005CB13B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -19,8 +19,10 @@
     viewControllerToPresent.modalPresentationStyle = UIModalPresentationCustom;
     viewControllerToPresent.transitioningDelegate = self;
     
-    
-    [self new_presentViewController:viewControllerToPresent animated:YES completion:completion];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [self new_presentViewController:viewControllerToPresent animated:YES completion:completion];
+    });
 }
 
 
@@ -28,7 +30,12 @@
     
     self.modalPresentationStyle = UIModalPresentationCustom;
     self.transitioningDelegate = self;
-    [self new_dismissViewControllerAnimated:flag completion:completion];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [self new_dismissViewControllerAnimated:flag completion:completion];
+    });
+    
 }
 
 
