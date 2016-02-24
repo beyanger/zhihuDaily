@@ -27,15 +27,6 @@
                         <action selector="didClicked:" destination="pLv-50-ZoV" eventType="touchUpInside" id="g9Y-Ex-fhi"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ilf-Hx-KZY">
-                    <rect key="frame" x="208" y="0.0" width="104" height="40"/>
-                    <animations/>
-                    <state key="normal" image="News_Navigation_Vote"/>
-                    <state key="selected" image="News_Navigation_Voted"/>
-                    <connections>
-                        <action selector="didClicked:" destination="pLv-50-ZoV" eventType="touchUpInside" id="l1a-YP-sWK"/>
-                    </connections>
-                </button>
                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ux-4l-7sQ">
                     <rect key="frame" x="312" y="0.0" width="104.5" height="40"/>
                     <animations/>
@@ -66,6 +57,15 @@
                     <color key="textColor" red="0.62738096714019775" green="0.62749135494232178" blue="0.62737399339675903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ilf-Hx-KZY">
+                    <rect key="frame" x="208" y="0.0" width="104" height="40"/>
+                    <animations/>
+                    <state key="normal" image="News_Navigation_Vote"/>
+                    <state key="selected" image="News_Navigation_Voted"/>
+                    <connections>
+                        <action selector="didClicked:" destination="pLv-50-ZoV" eventType="touchUpInside" id="l1a-YP-sWK"/>
+                    </connections>
+                </button>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
