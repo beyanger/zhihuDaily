@@ -26,9 +26,7 @@
     self.multiImage.hidden = !story.multipic;
 }
 
-- (void)awakeFromNib {
-    self.multiImage.backgroundColor = [UIColor greenColor];
-}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

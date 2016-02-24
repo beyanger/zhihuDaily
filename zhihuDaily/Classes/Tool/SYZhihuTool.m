@@ -6,12 +6,12 @@
 //  Copyright © 2016年 yang. All rights reserved.
 //
 
-#import "SYStoryTool.h"
+#import "SYZhihuTool.h"
 
 #import "MJExtension.h"
 
 
-@implementation SYStoryTool
+@implementation SYZhihuTool
 
 + (void)getDetailWithId:(long long)storyid completed:(Completed)completed {
     NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/news/%lld", storyid];
@@ -66,6 +66,17 @@
         NSArray *comment = [SYComment mj_objectArrayWithKeyValuesArray:responseObject[@"comments"]];
         completed(comment);
     } failure:nil];
+}
+
+
++ (void)getThemesWithCompleted:(Completed)completed {
+    NSString *themeUrl = @"http://news-at.zhihu.com/api/4/themes";
+    
+    [YSHttpTool GETWithURL:themeUrl params:nil success:^(id responseObject) {
+        NSArray *themeArray = [SYTheme mj_objectArrayWithKeyValuesArray:responseObject[@"others"]];
+        completed(themeArray);
+    } failure:nil];
+
 }
 
 

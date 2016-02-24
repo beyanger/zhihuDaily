@@ -13,7 +13,7 @@
 #import "UIImageView+WebCache.h"
 #import "UIView+Extension.h"
 #import "SYWebViewController.h"
-#import "SYStoryTool.h"
+#import "SYZhihuTool.h"
 #import "SYDetailStory.h"
 #import "SYImageView.h"
 #import "SYStoryNavigationView.h"
@@ -55,7 +55,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;
 
     SYStoryNavigationView *storyNav = [[[NSBundle mainBundle] loadNibNamed:@"SYStoryNavigationView" owner:self options:nil] firstObject];
     self.storyNav = storyNav;
@@ -198,6 +198,7 @@
 
     self.footer.center = CGPointMake(kScreenWidth*0.5, self.webView.scrollView.contentSize.height+20);
     self.header.center = CGPointMake(kScreenWidth*0.5, -40);
+    
 }
 
 
@@ -258,7 +259,6 @@
         footer.text = @"载入下一篇";
         [footer sizeToFit];
         _footer = footer;
-    
         UIImage *image = [UIImage imageNamed:@"upArrow"];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
         [footer addSubview:imageView];
@@ -276,8 +276,11 @@
     if (!_header) {
         UILabel *header = [[UILabel alloc] init];
         [self.webView.scrollView insertSubview:header aboveSubview:self.topView];
+        //[self.webView.scrollView addSubview:header];
+        
         header.textColor = [UIColor whiteColor];
         header.textAlignment = NSTextAlignmentCenter;
+        header.text = @"载入上一篇";
         _header = header;
         
         UIImage *image = [UIImage imageNamed:@"downArrow"];
@@ -291,6 +294,8 @@
         }];
         _downArrow = imageView;
     }
+    
+
     return _header;
 }
 
@@ -301,7 +306,7 @@
     
     if (!story) return;
     
-    [SYStoryTool getDetailWithId:self.story.id completed:^(id obj) {
+    [SYZhihuTool getDetailWithId:self.story.id completed:^(id obj) {
         dispatch_async(dispatch_get_main_queue(), ^{
             SYDetailStory *ds = (SYDetailStory *)obj;
             [self.webView loadHTMLString:ds.htmlStr baseURL:nil];
@@ -312,7 +317,7 @@
     }];
     
     // 设置 extraStory
-    [SYStoryTool getExtraWithId:self.story.id completed:^(id obj) {
+    [SYZhihuTool getExtraWithId:self.story.id completed:^(id obj) {
         SYExtraStory *es = (SYExtraStory *)obj;
         dispatch_async(dispatch_get_main_queue(), ^{
             self.storyNav.extraStory = es;

@@ -1,5 +1,5 @@
 //
-//  SYChannelController.h
+//  SYChannelViewCell.h
 //  zhihuDaily
 //
 //  Created by yang on 16/2/22.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SYChannelController : UITableViewController
+@interface  SYThemeViewCell: UITableViewCell
 
 @end

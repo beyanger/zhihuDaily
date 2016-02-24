@@ -14,7 +14,7 @@
 #import "SYLastestParamResult.h"
 #import "SYTableViewCell.h"
 #import "SYDetailController.h"
-#import "SYStoryTool.h"
+#import "SYZhihuTool.h"
 #import "UIImageView+WebCache.h"
 #import "Masonry.h"
 
@@ -63,7 +63,7 @@ static NSString *reuseid = @"useid";
     
     [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     
-    [SYStoryTool getLastestStoryWithCompleted:^(id obj) {
+    [SYZhihuTool getLastestStoryWithCompleted:^(id obj) {
         SYLastestParamResult *result = (SYLastestParamResult *)obj;
 
         SYLastestGroup *group = [[SYLastestGroup alloc] init];

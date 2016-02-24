@@ -8,7 +8,7 @@
 
 #import "SYCommentsTableController.h"
 #import "SYCommentCell.h"
-#import "SYStoryTool.h"
+#import "SYZhihuTool.h"
 #import "UITableView+FDTemplateLayoutCell.h"
 static NSString *comment_reuseid = @"comment_reuseid";
 
@@ -43,9 +43,6 @@ static NSString *comment_reuseid = @"comment_reuseid";
     [self.tableView registerNib:[UINib nibWithNibName:@"SYCommentCell" bundle:nil] forCellReuseIdentifier:comment_reuseid];
    
     
-    NSLog(@"frame: %@, offset: %@,", NSStringFromCGRect(self.tableView.frame), NSStringFromCGPoint(self.tableView.contentOffset) );
-
-    
     [self setupDataSource];
     
     
@@ -66,14 +63,14 @@ static NSString *comment_reuseid = @"comment_reuseid";
 }
 
 - (void)setupDataSource {
-    [SYStoryTool getLongCommentsWithId:self.story.id completed:^(id obj) {
+    [SYZhihuTool getLongCommentsWithId:self.story.id completed:^(id obj) {
         self.allComments[@(0)] = obj;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
     }];
 
-    [SYStoryTool getShortCommentsWithId:self.story.id completed:^(id obj) {
+    [SYZhihuTool getShortCommentsWithId:self.story.id completed:^(id obj) {
         self.allComments[@(1)] = obj;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];

@@ -28,12 +28,12 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4oG-To-um1">
-                        <rect key="frame" x="282" y="52" width="34" height="12"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Home_Morepic" translatesAutoresizingMaskIntoConstraints="NO" id="4oG-To-um1">
+                        <rect key="frame" x="282" y="50" width="34" height="14"/>
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="34" id="A64-Ir-r7R"/>
-                            <constraint firstAttribute="height" constant="12" id="Tv5-Hi-kjI"/>
+                            <constraint firstAttribute="height" constant="14" id="Tv5-Hi-kjI"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -59,4 +59,7 @@
             <point key="canvasLocation" x="355" y="272.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Home_Morepic" width="32" height="14"/>
+    </resources>
 </document>

@@ -13,10 +13,11 @@
 #import "SYExtraStory.h"
 #import "SYLastestParamResult.h"
 #import "SYComment.h"
+#import "SYTheme.h"
 
 typedef void(^Completed)(id obj);
 
-@interface SYStoryTool : NSObject
+@interface SYZhihuTool : NSObject
 
 + (void)getDetailWithId:(long long)storyid completed:(Completed)completed;
 
@@ -27,4 +28,5 @@ typedef void(^Completed)(id obj);
 + (void)getLongCommentsWithId:(long long)storyid completed:(Completed)completed;
 
 + (void)getShortCommentsWithId:(long long)storyid completed:(Completed)completed;
++ (void)getThemesWithCompleted:(Completed)completed;
 @end

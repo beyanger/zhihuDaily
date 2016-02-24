@@ -6,15 +6,15 @@
 //  Copyright © 2016年 yang. All rights reserved.
 //
 
-#import "SYChannelController.h"
+#import "SYThemeController.h"
 
-@interface SYChannelController ()
+@interface SYThemeController ()
 
 @end
 
-static NSString *channel_reuseid = @"reuse_id";
+static NSString *theme_reuseid = @"theme_reuseid";
 
-@implementation SYChannelController
+@implementation SYThemeController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,7 +46,7 @@ static NSString *channel_reuseid = @"reuse_id";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:channel_reuseid forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:theme_reuseid forIndexPath:indexPath];
     
     // Configure the cell...
     

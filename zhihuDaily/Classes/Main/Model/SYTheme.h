@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SYMenuItem : NSObject
+@interface SYTheme : NSObject
 /**
  *  title
  */

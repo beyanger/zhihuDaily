@@ -8,10 +8,13 @@
 
 #import "ViewController.h"
 #import "SYMainToolBox.h"
-#import "SYMenuItem.h"
+#import "SYTheme.h"
 #import "SYHomeController.h"
-#import "YSHttpTool.h"
+#import "SYZhihuTool.h"
 #import "MJExtension.h"
+#import "SYMainViewCell.h"
+#import "SYThemeController.h"
+
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource, SYMainToolBoxDelegate>
 @property (nonatomic, weak) SYMainToolBox *toolBox;
@@ -20,7 +23,7 @@
 @property (nonatomic, weak) UITapGestureRecognizer *tapGesture;
 
 
-@property (nonatomic, strong) NSMutableArray<SYMenuItem *> *dataSource;
+@property (nonatomic, strong) NSMutableArray<SYTheme *> *dataSource;
 
 @property (nonatomic, strong) NSMutableArray *childVC;
 @property (nonatomic, strong) NSMutableArray *childView;
@@ -57,17 +60,14 @@
 }
 
 - (void)setupDataSource {
-    [YSHttpTool GETWithURL:@"http://news-at.zhihu.com/api/4/themes" params:nil success:^(id responseObject) {
-        self.dataSource = [SYMenuItem mj_objectArrayWithKeyValuesArray:responseObject[@"others"]];
-        SYMenuItem *home = [[SYMenuItem alloc] init];
+    [SYZhihuTool getThemesWithCompleted:^(id obj) {
+        SYTheme *home = [[SYTheme alloc] init];
         home.name = @"首页";
-        home.id = 1;
+        self.dataSource = [obj mutableCopy];
         [self.dataSource insertObject:home atIndex:0];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.toolBox reloadData];
         });
-    } failure:^(NSError *error) {
-        NSLog(@"获取主题出错： %@", error);
     }];
 }
 
@@ -75,11 +75,12 @@
 - (void)showHomePage {
     [self.childViewControllers makeObjectsPerformSelector:@selector(removeFromParentViewController)];
     
-    UITableViewController *tvc = [[SYHomeController alloc] init];
+    SYHomeController *tvc = [[SYHomeController alloc] init];
 
     
     if (self.currentView) {
         tvc.view.frame = self.currentView.frame;
+        NSLog(@"%@", self.currentView);
         [self.currentView removeFromSuperview];
     }
     self.currentView = tvc.view;
@@ -143,15 +144,17 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataSource.count;
 }
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *reuse_id = @"reuse_id";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse_id];
+- (SYMainViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *reuse_id = @"main_reuseid";
+    SYMainViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse_id];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuse_id];
+        cell = [[SYMainViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuse_id];
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.backgroundColor = SYColor(100, 100, 100, 1.);
     }
-    cell.textLabel.text = self.dataSource[indexPath.row].name;
+    cell.theme = self.dataSource[indexPath.row];
+    
+    
     return cell;
 }
 
@@ -159,8 +162,9 @@
     if (indexPath.row == 0) {
         [self showHomePage];
     } else {
-    
-    
+        SYThemeController *tc = [[SYThemeController alloc] init];
+        tc.id = self.dataSource[indexPath.row].id;
+        [self presentViewController:tc animated:YES completion:nil];
     }
     
     [self menuClose];

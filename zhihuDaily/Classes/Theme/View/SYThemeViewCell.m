@@ -6,9 +6,9 @@
 //  Copyright © 2016年 yang. All rights reserved.
 //
 
-#import "SYChannelViewCell.h"
+#import "SYThemeViewCell.h"
 
-@implementation SYChannelViewCell
+@implementation SYThemeViewCell
 
 - (void)awakeFromNib {
     // Initialization code

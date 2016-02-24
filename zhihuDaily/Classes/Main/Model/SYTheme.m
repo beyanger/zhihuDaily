@@ -6,9 +6,9 @@
 //  Copyright © 2016年 yang. All rights reserved.
 //
 
-#import "SYMenuItem.h"
+#import "SYTheme.h"
 
-@implementation SYMenuItem
+@implementation SYTheme
 
 
 @end
