@@ -10,6 +10,8 @@
 #import "UIImageView+WebCache.h"
 #import "Masonry.h"
 #import "UIView+Extension.h"
+#import "SYTopImageView.h"
+
 
 @interface SYPicturesView () <UIScrollViewDelegate>
 
@@ -40,10 +42,12 @@
         [pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(60, 16));
             make.centerX.mas_equalTo(ws);
-            make.bottom.mas_equalTo(ws).offset(-20);
+            make.bottom.mas_equalTo(ws).offset(-14);
         }];
-        [self addTimer];
         
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClicked)];
+        [self addGestureRecognizer:tap];
+        [self addTimer];
     }
     return self;
 }
@@ -55,6 +59,12 @@
 
 - (void)removeTimer {
     [self.timer invalidate];
+}
+
+- (void)didClicked {
+    if ([self.delegate respondsToSelector:@selector(pictureView:clickedIndex:)]) {
+        [self.delegate pictureView:self clickedIndex:self.pageControl.currentPage];
+    }
 }
 
 
@@ -75,8 +85,6 @@
 }
 
 
-
-
 - (void)nextImage {
     NSInteger page = self.pageControl.currentPage;
     if (page == self.pageControl.numberOfPages-1) {
@@ -89,20 +97,21 @@
     [self.scrollerView setContentOffset:CGPointMake(x, 0) animated:YES];
 }
 
-
-
-
 - (void)setTopStroies:(NSArray<SYStory *> *)topStroies {
     _topStroies = topStroies;
-    for (UIImageView *imageView in self.allImages) {
-        [imageView removeFromSuperview];
+    for (SYTopImageView *topImage in self.allImages) {
+        [topImage removeFromSuperview];
     }
     [self.allImages removeAllObjects];
+    
+    
     self.pageControl.numberOfPages = topStroies.count;
+    
+    
     for (NSUInteger i = 0; i < topStroies.count; i++) {
         SYStory *story = topStroies[i];
-        UIImageView *imageView = [[UIImageView alloc] init];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:story.image]];
+        SYTopImageView *imageView = [[NSBundle mainBundle] loadNibNamed:@"SYTopImageView" owner:nil options:nil].firstObject;
+        imageView.story = story;
         [self.allImages addObject:imageView];
         [self.scrollerView addSubview:imageView];
     }

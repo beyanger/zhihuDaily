@@ -57,6 +57,8 @@
 		2F9996021C7C799D0072C8F0 /* SYDismisAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9996011C7C799D0072C8F0 /* SYDismisAnimation.m */; };
 		2FB923011C7E2BF8000A0A2D /* SYRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB923001C7E2BF8000A0A2D /* SYRefreshView.m */; };
 		2FB923041C7EACA1000A0A2D /* SYBeforeStoryResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB923031C7EACA1000A0A2D /* SYBeforeStoryResult.m */; };
+		2FB923061C7EE232000A0A2D /* SYTopImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FB923051C7EE232000A0A2D /* SYTopImageView.xib */; };
+		2FB923091C7EE353000A0A2D /* SYTopImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB923081C7EE353000A0A2D /* SYTopImageView.m */; };
 		2FC5874B1C79FDEB003C9A7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874A1C79FDEB003C9A7A /* main.m */; };
 		2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */; };
 		2FC587541C79FDEB003C9A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587521C79FDEB003C9A7A /* Main.storyboard */; };
@@ -229,6 +231,9 @@
 		2FB923001C7E2BF8000A0A2D /* SYRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYRefreshView.m; sourceTree = "<group>"; };
 		2FB923021C7EACA1000A0A2D /* SYBeforeStoryResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYBeforeStoryResult.h; sourceTree = "<group>"; };
 		2FB923031C7EACA1000A0A2D /* SYBeforeStoryResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYBeforeStoryResult.m; sourceTree = "<group>"; };
+		2FB923051C7EE232000A0A2D /* SYTopImageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYTopImageView.xib; sourceTree = "<group>"; };
+		2FB923071C7EE353000A0A2D /* SYTopImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYTopImageView.h; sourceTree = "<group>"; };
+		2FB923081C7EE353000A0A2D /* SYTopImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYTopImageView.m; sourceTree = "<group>"; };
 		2FC587461C79FDEB003C9A7A /* zhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5874A1C79FDEB003C9A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -502,6 +507,9 @@
 				2FE707811C7D86C4005CB13B /* SYHomeHeaderView.m */,
 				2FE707831C7D9724005CB13B /* SYPicturesView.h */,
 				2FE707841C7D9724005CB13B /* SYPicturesView.m */,
+				2FB923071C7EE353000A0A2D /* SYTopImageView.h */,
+				2FB923081C7EE353000A0A2D /* SYTopImageView.m */,
+				2FB923051C7EE232000A0A2D /* SYTopImageView.xib */,
 				2FB922FF1C7E2BF8000A0A2D /* SYRefreshView.h */,
 				2FB923001C7E2BF8000A0A2D /* SYRefreshView.m */,
 			);
@@ -993,6 +1001,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F1319DA1C7E18A200FA146F /* SYWebViewController.xib in Resources */,
+				2FB923061C7EE232000A0A2D /* SYTopImageView.xib in Resources */,
 				2FC587591C79FDEB003C9A7A /* LaunchScreen.storyboard in Resources */,
 				2F2CCB981C7B016500C45E3D /* SYTableViewCell.xib in Resources */,
 				2FC587561C79FDEB003C9A7A /* Assets.xcassets in Resources */,
@@ -1053,6 +1062,7 @@
 				2FE707A61C7DD6B6005CB13B /* SYMainToolBox.m in Sources */,
 				2FC587FA1C7A0974003C9A7A /* MASCompositeConstraint.m in Sources */,
 				2F37AB781C7B675100D3CD65 /* MMDrawerBarButtonItem.m in Sources */,
+				2FB923091C7EE353000A0A2D /* SYTopImageView.m in Sources */,
 				2F1319D81C7E113700FA146F /* SYNavigationController.m in Sources */,
 				2F37AB7B1C7B675100D3CD65 /* UIViewController+MMDrawerController.m in Sources */,
 				2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */,

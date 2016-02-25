@@ -8,9 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "SYStory.h"
+@class SYPicturesView;
+
+@protocol SYPicturesViewDelegate <NSObject>
+
+@optional
+- (void)pictureView:(SYPicturesView *)picturesView clickedIndex:(NSInteger)index;
+
+@end
+
+
 @interface SYPicturesView : UIView
 
 @property (nonatomic, strong) NSArray<SYStory *> *topStroies;
 
+@property (nonatomic, weak) id<SYPicturesViewDelegate> delegate;
 
 @end

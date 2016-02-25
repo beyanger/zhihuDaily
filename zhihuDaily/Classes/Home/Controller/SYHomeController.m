@@ -23,7 +23,7 @@
 #import "UIView+Extension.h"
 #import "SYBeforeStoryResult.h"
 #import "SYHomeHeaderView.h"
-@interface SYHomeController () <SYDetailControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface SYHomeController () <SYDetailControllerDelegate, UITableViewDataSource, UITableViewDelegate, SYPicturesViewDelegate>
 
 @property (nonatomic, strong) NSIndexPath *currentIndexPath;
 @property (nonatomic, strong) NSMutableArray<SYBeforeStoryResult *> *storyGroup;
@@ -151,13 +151,7 @@ static NSString *reuseid = @"useid";
     
     SYBeforeStoryResult *result = self.storyGroup[indexPath.section];
     SYStory *story = result.stories[indexPath.row];
-    
-    
-    SYDetailController *dc = [[SYDetailController alloc] initWithStory:story];
-    dc.delegate = self;
-    dc.position = indexPath.row==(result.stories.count-1) ? -1 : indexPath.row;
-    
-    [self.navigationController pushViewController:dc animated:YES];
+    [self gotoDetailControllerWithStory:story];
 }
 
 
@@ -192,6 +186,37 @@ static NSString *reuseid = @"useid";
         self.titleLabel.alpha = 0;
     }
 }
+
+// top story 轮播器的代理方法
+- (void)pictureView:(SYPicturesView *)picturesView clickedIndex:(NSInteger)index {
+
+    if (index < 0 || index >= self.topStory.count) return;
+
+    SYStory *story = self.topStory[index];
+    SYBeforeStoryResult *result = self.storyGroup[0];
+    for (NSUInteger i = 0; result.stories.count; i++) {
+        if ([story.title isEqualToString:[result.stories[i] title]]) {
+            self.currentIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            break;
+        }
+    }
+    [self gotoDetailControllerWithStory:story];
+}
+
+- (void)gotoDetailControllerWithStory:(SYStory *)story {
+    
+    SYDetailController *dc = [[SYDetailController alloc] initWithStory:story];
+    
+    dc.delegate =self;
+    if (self.currentIndexPath.row == 0 && self.currentIndexPath.section == 0) {
+        dc.position = 0;
+    } else {
+        dc.position = 1;
+    }
+    [self.navigationController pushViewController:dc animated:YES];
+}
+
+
 
 // 下一篇永远都会有
 - (SYStory *)nextStoryForDetailController:(SYDetailController *)detailController {
@@ -316,6 +341,7 @@ static NSString *reuseid = @"useid";
     if (!_picturesView) {
         _picturesView = [[SYPicturesView alloc] init];
         _picturesView.frame = CGRectMake(0, -45, kScreenWidth, 265);
+        _picturesView.delegate = self;
     }
     return _picturesView;
 }
