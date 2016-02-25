@@ -7,8 +7,15 @@
 //
 
 #import "SYHomeHeaderView.h"
-
+#import "UIView+Extension.h"
 static NSString *header_reuseid = @"header_reuseid";
+
+@interface SYHomeHeaderView ()
+
+@property (nonatomic, weak) UILabel *dateLabel;
+
+@end
+
 
 @implementation SYHomeHeaderView
 
@@ -16,7 +23,13 @@ static NSString *header_reuseid = @"header_reuseid";
     SYHomeHeaderView  *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:header_reuseid];
     if (!header) {
         header = [[SYHomeHeaderView alloc] init];
-        header.contentView.backgroundColor = SYColor(23, 144, 211, 1);
+        UILabel *label = [[UILabel alloc] init];
+        [header.contentView addSubview:label];
+        label.textColor = [UIColor whiteColor];
+        [header.contentView addSubview:label];
+        label.font = [UIFont boldSystemFontOfSize:18.];
+        header.dateLabel = label;
+        header.contentView.backgroundColor = SYColor(23, 144, 211, 1.);
     }
     return header;
 }
@@ -30,19 +43,22 @@ static NSString *header_reuseid = @"header_reuseid";
     dateFormatter.dateFormat = @"MM月dd日 EEEE";
     _date = [dateFormatter stringFromDate:da];
     
-    NSDictionary *attr = @{
-            NSFontAttributeName: [UIFont systemFontOfSize:18] ,
-            NSForegroundColorAttributeName: [UIColor whiteColor]};
-    
-    self.textLabel.attributedText = [[NSAttributedString alloc] initWithString:_date attributes:attr];
-}
+    self.dateLabel.text = _date;
+    [self.dateLabel sizeToFit];
+//    NSDictionary *attr = @{
+//            NSFontAttributeName: [UIFont systemFontOfSize:38.] ,
+//            NSForegroundColorAttributeName: [UIColor whiteColor]};
+//    
+//    self.textLabel.attributedText = [[NSAttributedString alloc] initWithString:_date attributes:attr];
 
+
+    
+}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    CGPoint center = self.textLabel.center;
-    center.x = self.center.x;
-    self.textLabel.center = center;
+ 
+    self.dateLabel.center = self.contentView.center;
 }
 
 @end

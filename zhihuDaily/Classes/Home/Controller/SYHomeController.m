@@ -22,11 +22,11 @@
 #import "SYPicturesView.h"
 #import "UIView+Extension.h"
 #import "SYBeforeStoryResult.h"
-
+#import "SYHomeHeaderView.h"
 @interface SYHomeController () <SYDetailControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSIndexPath *currentIndexPath;
-@property (nonatomic, strong) NSMutableArray<SYLastestGroup *> *storyGroup;
+@property (nonatomic, strong) NSMutableArray<SYBeforeStoryResult *> *storyGroup;
 @property (nonatomic, strong) NSMutableArray<SYStory *> *topStory;
 
 @property (nonatomic, weak) UITableView *tableView;
@@ -46,7 +46,7 @@
 static NSString *reuseid = @"useid";
 @implementation SYHomeController
 
-- (NSMutableArray *)allAritcle {
+- (NSMutableArray<SYBeforeStoryResult *> *)storyGroup {
     if (!_storyGroup) {
         _storyGroup = [@[] mutableCopy];
     }
@@ -63,14 +63,7 @@ static NSString *reuseid = @"useid";
     [self.view addSubview:self.headerView];
     [self leftButton];
     [self titleLabel];
-    
-    
-    
-    [SYZhihuTool getBeforeStroyWithDate:[NSDate date] completed:^(id obj) {
-        SYBeforeStoryResult *result = obj;
-        NSLog(@"----> %lu", result.stories.count);
-    }];
-  
+
 }
 
 - (void)setupTableView {
@@ -79,27 +72,39 @@ static NSString *reuseid = @"useid";
     [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     
     [self reload];
+    
 }
 
 - (void)reload {
     [SYZhihuTool getLastestStoryWithCompleted:^(id obj) {
-        SYLastestParamResult *result = (SYLastestParamResult *)obj;
-        
-        SYLastestGroup *group = [[SYLastestGroup alloc] init];
-        group.stories = result.stories;
-        
-        self.storyGroup = [@[group] mutableCopy];
+        SYLastestParamResult *result = obj;
+        if (self.storyGroup.count > 0) {
+            [self.storyGroup removeObjectAtIndex:0];
+        }
+        [self.storyGroup insertObject:result atIndex:0];
         self.topStory = [result.top_stories mutableCopy];
-        
         
         dispatch_async(dispatch_get_main_queue(), ^{
             self.picturesView.topStroies = result.top_stories;
             [self.tableView reloadData];
             [self.refreshView endRefresh];
+            [self loadMoreBefore];
         });
     }];
 }
 
+
+
+- (void)loadMoreBefore {
+    SYBeforeStoryResult *result = self.storyGroup.lastObject;
+    [SYZhihuTool getBeforeStroyWithDateString:result.date completed:^(id obj) {
+        SYBeforeStoryResult *result = obj;
+        [self.storyGroup addObject:result];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
+}
 
 
 
@@ -122,8 +127,8 @@ static NSString *reuseid = @"useid";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    SYLastestGroup *group = self.storyGroup[section];
-    return group.stories.count;
+    SYBeforeStoryResult *result = self.storyGroup[section];
+    return result.stories.count;
     
 }
 
@@ -133,8 +138,8 @@ static NSString *reuseid = @"useid";
         cell = [[SYTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseid];
     }
     
-    SYLastestGroup *group = self.storyGroup[indexPath.section];
-    cell.story = group.stories[indexPath.row];
+    SYBeforeStoryResult *result = self.storyGroup[indexPath.section];
+    cell.story = result.stories[indexPath.row];
     
     return cell;
 }
@@ -144,45 +149,69 @@ static NSString *reuseid = @"useid";
 
     self.currentIndexPath = indexPath;
     
-    SYLastestGroup *group = self.storyGroup[indexPath.section];
-    SYStory *story = group.stories[indexPath.row];
+    SYBeforeStoryResult *result = self.storyGroup[indexPath.section];
+    SYStory *story = result.stories[indexPath.row];
     
     
     SYDetailController *dc = [[SYDetailController alloc] initWithStory:story];
     dc.delegate = self;
-    dc.position = indexPath.row==(group.stories.count-1) ? -1 : indexPath.row;
+    dc.position = indexPath.row==(result.stories.count-1) ? -1 : indexPath.row;
     
     //[self presentViewController:dc animated:YES completion:nil];
     
     [self.navigationController pushViewController:dc animated:YES];
-    
 }
 
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    SYHomeHeaderView *headerView = [SYHomeHeaderView headerViewWithTableView:tableView];
+    SYBeforeStoryResult *result = self.storyGroup[section];
+    headerView.date = result.date;
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    //    写成0  display  不会在0的section 执行
+    return 42;
+}
+
+
+
+
 - (SYStory *)nextStoryForDetailController:(SYDetailController *)detailController {
-    SYLastestGroup *group = self.storyGroup[self.currentIndexPath.section];
-    if (self.currentIndexPath.row >= group.stories.count-1) {
-        return nil;
+    SYBeforeStoryResult *result = self.storyGroup[self.currentIndexPath.section];
+    if (self.currentIndexPath.row == result.stories.count-1) {
+        result = self.storyGroup[self.currentIndexPath.section+1];
+        self.currentIndexPath = [NSIndexPath indexPathForRow:0 inSection:self.currentIndexPath.section+1];
+    } else {
+        self.currentIndexPath = [NSIndexPath indexPathForRow:self.currentIndexPath.row+1 inSection:self.currentIndexPath.section];
     }
-    
-    SYStory *story = group.stories[self.currentIndexPath.row+1];
+    SYStory *story = result.stories[self.currentIndexPath.row];
     detailController.story = story;
-    self.currentIndexPath = [NSIndexPath indexPathForRow:self.currentIndexPath.row+1 inSection:self.currentIndexPath.section];
-    detailController.position = self.currentIndexPath.row==(group.stories.count-1) ? -1 : self.currentIndexPath.row;
-    
+    detailController.position = 1;
     return story;
 }
 
 - (SYStory *)prevStoryForDetailController:(SYDetailController *)detailController {
-    SYLastestGroup *group = self.storyGroup[self.currentIndexPath.section];
-    if (self.currentIndexPath.row <= 0) {
+    if (self.currentIndexPath.row == 0 && self.currentIndexPath.section ==0) {
         return nil;
     }
-    SYStory *story = group.stories[self.currentIndexPath.row-1];
+
+    SYBeforeStoryResult *result = nil;
+    if (self.currentIndexPath.row == 0) {
+        result = self.storyGroup[self.currentIndexPath.section-1];
+        self.currentIndexPath = [NSIndexPath indexPathForRow:result.stories.count-1 inSection:self.currentIndexPath.section-1];
+    } else {
+        self.currentIndexPath = [NSIndexPath indexPathForRow:self.currentIndexPath.row-1 inSection:self.currentIndexPath.section];
+    }
+    result = self.storyGroup[self.currentIndexPath.section];
     
-    self.currentIndexPath = [NSIndexPath indexPathForRow:self.currentIndexPath.row-1 inSection:self.currentIndexPath.section];
-    
-    detailController.position = self.currentIndexPath.row==(group.stories.count-1) ? -1 : self.currentIndexPath.row;
-    return story;
+    if (self.currentIndexPath.row == 0 && self.currentIndexPath.section ==0) {
+        detailController.position = 0;
+    } else {
+        detailController.position = 1;
+    }
+    return result.stories[self.currentIndexPath.row];
 }
 
 
@@ -197,7 +226,7 @@ static NSString *reuseid = @"useid";
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, kScreenWidth, kScreenHeight-20) style:UITableViewStyleGrouped];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, kScreenWidth, kScreenHeight-20) style:UITableViewStylePlain];
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.rowHeight = 80;

@@ -335,9 +335,6 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if ([keyPath isEqualToString:@"contentOffset"]) {
         CGFloat yoffset = [change[@"new"] CGPointValue].y;
-
-        NSLog(@"%f", yoffset);
-        
         if (yoffset > 0) {
             self.topView.y = -yoffset-40;
         } else {

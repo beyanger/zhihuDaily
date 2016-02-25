@@ -37,4 +37,6 @@ typedef void(^Completed)(id obj);
 
 + (void)getBeforeStroyWithDate:(NSDate *)date completed:(Completed)completed;
 
++ (void)getBeforeStroyWithDateString:(NSString *)dateString completed:(Completed)completed;
+
 @end

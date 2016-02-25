@@ -94,10 +94,13 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyyMMdd"];
     NSString *dateString = [dateFormatter stringFromDate:date];
-    
+    [self getBeforeStroyWithDateString:dateString completed:completed];
+}
+
+
++ (void)getBeforeStroyWithDateString:(NSString *)dateString completed:(Completed)completed {
     NSString *beforeUrl = [NSString stringWithFormat:@"http://news.at.zhihu.com/api/4/news/before/%@", dateString];
-    
-    
+
     [SYBeforeStoryResult mj_setupObjectClassInArray:^NSDictionary *{
         return @{@"stories":@"SYStory"};
     }];
