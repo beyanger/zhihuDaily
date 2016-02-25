@@ -90,6 +90,23 @@
 
 }
 
++ (void)getBeforeStroyWithDate:(NSDate *)date completed:(Completed)completed {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyyMMdd"];
+    NSString *dateString = [dateFormatter stringFromDate:date];
+    
+    NSString *beforeUrl = [NSString stringWithFormat:@"http://news.at.zhihu.com/api/4/news/before/%@", dateString];
+    
+    
+    [SYBeforeStoryResult mj_setupObjectClassInArray:^NSDictionary *{
+        return @{@"stories":@"SYStory"};
+    }];
+    [YSHttpTool GETWithURL:beforeUrl params:nil success:^(id responseObject) {
+        SYBeforeStoryResult *result = [SYBeforeStoryResult mj_objectWithKeyValues:responseObject];
+        completed(result);
+    } failure:nil];
+}
+
 
 
 @end

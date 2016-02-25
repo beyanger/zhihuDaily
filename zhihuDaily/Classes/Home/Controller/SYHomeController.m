@@ -19,7 +19,9 @@
 #import "Masonry.h"
 #import "AppDelegate.h"
 #import "SYRefreshView.h"
-
+#import "SYPicturesView.h"
+#import "UIView+Extension.h"
+#import "SYBeforeStoryResult.h"
 
 @interface SYHomeController () <SYDetailControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -29,12 +31,12 @@
 
 @property (nonatomic, weak) UITableView *tableView;
 
-@property (nonatomic, weak) UIView *headerView;
+@property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, weak) UILabel *titleLabel;
 
 @property (nonatomic, weak) UIButton *leftButton;
 
-@property (nonatomic, weak) UIScrollView *picturesView;
+@property (nonatomic, strong) SYPicturesView *picturesView;
 
 @property (nonatomic, weak) SYRefreshView *refreshView;
 
@@ -54,12 +56,20 @@ static NSString *reuseid = @"useid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view.backgroundColor = [UIColor whiteColor];
     
     [self setupTableView];
-    [self picturesView];
-    [self headerView];
+    [self.view addSubview:self.picturesView];
+    [self.view addSubview:self.headerView];
     [self leftButton];
     [self titleLabel];
+    
+    
+    
+    [SYZhihuTool getBeforeStroyWithDate:[NSDate date] completed:^(id obj) {
+        SYBeforeStoryResult *result = obj;
+        NSLog(@"----> %lu", result.stories.count);
+    }];
   
 }
 
@@ -83,7 +93,7 @@ static NSString *reuseid = @"useid";
         
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self updatePictureView];
+            self.picturesView.topStroies = result.top_stories;
             [self.tableView reloadData];
             [self.refreshView endRefresh];
         });
@@ -91,22 +101,7 @@ static NSString *reuseid = @"useid";
 }
 
 
-- (void)updatePictureView {
-    
-    CGRect frame = self.picturesView.frame;
-    self.picturesView.contentSize = CGSizeMake(kScreenWidth*self.topStory.count, frame.size.height);
-    for (NSUInteger i = 0 ; i < self.topStory.count; i++) {
-        SYStory *story = self.topStory[i];
-        
-        UIImageView *imageView = [[UIImageView alloc] init];
-        imageView.frame = CGRectMake(i*kScreenWidth, 0, kScreenWidth, frame.size.height);
-        [self.picturesView addSubview:imageView];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:story.image]];
-        
-        
-    }
 
-}
 
 - (void)didClickedMenuButton:(UIButton *)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:ToggleDrawer object:nil];
@@ -172,8 +167,6 @@ static NSString *reuseid = @"useid";
     SYStory *story = group.stories[self.currentIndexPath.row+1];
     detailController.story = story;
     self.currentIndexPath = [NSIndexPath indexPathForRow:self.currentIndexPath.row+1 inSection:self.currentIndexPath.section];
-    
-    
     detailController.position = self.currentIndexPath.row==(group.stories.count-1) ? -1 : self.currentIndexPath.row;
     
     return story;
@@ -204,7 +197,7 @@ static NSString *reuseid = @"useid";
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        UITableView *tableView = [[UITableView alloc] initWithFrame:kScreenBounds style:UITableViewStyleGrouped];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, kScreenWidth, kScreenHeight-20) style:UITableViewStyleGrouped];
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.rowHeight = 80;
@@ -221,11 +214,10 @@ static NSString *reuseid = @"useid";
 
 - (UIView *)headerView {
     if (!_headerView) {
+        
         UIView *headerView = [[UIView alloc] init];
         headerView.frame = CGRectMake(0, 0, kScreenWidth, 56);
-        headerView.backgroundColor = SYColor(23, 144, 211, 1.);
-        
-        headerView.alpha = 0.0;
+        headerView.backgroundColor = SYColor(23, 144, 211, 0.);
         _headerView = headerView;
     }
     return _headerView;
@@ -237,7 +229,7 @@ static NSString *reuseid = @"useid";
         
         NSDictionary *attr = @{
             NSFontAttributeName:[UIFont systemFontOfSize:18],
-            NSForegroundColorAttributeName:[UIColor redColor]};
+            NSForegroundColorAttributeName:[UIColor whiteColor]};
         
         titleLabel.attributedText = [[NSAttributedString alloc] initWithString:@"今日要闻" attributes:attr];
         [titleLabel sizeToFit];
@@ -258,7 +250,7 @@ static NSString *reuseid = @"useid";
 - (UIButton *)leftButton {
     if (!_leftButton) {
         UIButton *leftButton = [[UIButton alloc] init];
-        leftButton.frame = CGRectMake(10, 30, 30, 30);
+        leftButton.frame = CGRectMake(10, 20, 30, 30);
         [leftButton addTarget:self action:@selector(didClickedMenuButton:) forControlEvents:UIControlEventTouchUpInside];
         [leftButton setImage:[UIImage imageNamed:@"Home_Icon"] forState:UIControlStateNormal];
         [self.view addSubview:leftButton];
@@ -267,12 +259,10 @@ static NSString *reuseid = @"useid";
     return _leftButton;
 }
 
-- (UIScrollView *)picturesView {
+- (SYPicturesView *)picturesView {
     if (!_picturesView) {
-        UIScrollView *picturesView = [[UIScrollView alloc] init];
-        picturesView.frame = CGRectMake(0, -45, kScreenWidth, 245);
-        [self.view addSubview:picturesView];
-        _picturesView = picturesView;
+        _picturesView = [[SYPicturesView alloc] init];
+        _picturesView.frame = CGRectMake(0, -45, kScreenWidth, 265);
     }
     return _picturesView;
 }
@@ -282,11 +272,28 @@ static NSString *reuseid = @"useid";
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
 
     if ([keyPath isEqualToString:@"contentOffset"]) {
-        if (self.tableView.contentOffset.y < 0) {
-            self.picturesView.frame = CGRectMake(0, -45, kScreenWidth, 245-self.tableView.contentOffset.y);
+        CGFloat yoffset = self.tableView.contentOffset.y;
+        if (yoffset <= 0) {
+            self.picturesView.height = 265-yoffset;
+            self.picturesView.y = -45;
+        } else {
+            self.picturesView.height = 265;
+            self.picturesView.y = -45- yoffset;
         }
+        
+        CGFloat alpha = 0;
+        if (yoffset <= 75.) {
+            alpha = 0;
+        } else if (yoffset < 165.) {
+            alpha = (yoffset-75.) / (165.-75);
+        } else {
+            alpha = 1.;
+        }
+        self.headerView.backgroundColor = SYColor(23, 144, 211, alpha);
+        
+        
     }
-    
+
 }
 
 

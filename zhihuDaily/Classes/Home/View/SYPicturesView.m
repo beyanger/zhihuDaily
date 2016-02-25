@@ -9,7 +9,7 @@
 #import "SYPicturesView.h"
 #import "UIImageView+WebCache.h"
 #import "Masonry.h"
-
+#import "UIView+Extension.h"
 
 @interface SYPicturesView ()
 
@@ -26,18 +26,25 @@
         [imageView removeFromSuperview];
     }
     [self.allImages removeAllObjects];
+    
     for (NSUInteger i = 0; i < topStroies.count; i++) {
         SYStory *story = topStroies[i];
         UIImageView *imageView = [[UIImageView alloc] init];
         [imageView sd_setImageWithURL:[NSURL URLWithString:story.image]];
-        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        }];
+        [self.allImages addObject:imageView];
+        [self addSubview:imageView];
     }
 }
 
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    self.contentSize = CGSizeMake(kScreenWidth*self.allImages.count, self.height);
+    for (NSUInteger i = 0; i < self.allImages.count; i++) {
+        UIImageView *imageVew = self.allImages[i];
+        imageVew.frame = CGRectMake(i*kScreenWidth, 0, kScreenWidth, self.height);
+    }
+    
 }
 
 

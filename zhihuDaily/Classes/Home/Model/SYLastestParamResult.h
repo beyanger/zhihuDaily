@@ -7,11 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SYBeforeStoryResult.h"
+@interface SYLastestParamResult : SYBeforeStoryResult
 
-@interface SYLastestParamResult : NSObject
-
-@property (nonatomic, copy) NSString *date;
-@property (nonatomic, strong) NSArray *stories;
 @property (nonatomic, strong) NSArray *top_stories;
 
 @end

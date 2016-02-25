@@ -56,6 +56,7 @@
 		2F9995FF1C7C75C70072C8F0 /* SYPresentAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995FE1C7C75C70072C8F0 /* SYPresentAnimation.m */; };
 		2F9996021C7C799D0072C8F0 /* SYDismisAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9996011C7C799D0072C8F0 /* SYDismisAnimation.m */; };
 		2FB923011C7E2BF8000A0A2D /* SYRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB923001C7E2BF8000A0A2D /* SYRefreshView.m */; };
+		2FB923041C7EACA1000A0A2D /* SYBeforeStoryResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB923031C7EACA1000A0A2D /* SYBeforeStoryResult.m */; };
 		2FC5874B1C79FDEB003C9A7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874A1C79FDEB003C9A7A /* main.m */; };
 		2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */; };
 		2FC587541C79FDEB003C9A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587521C79FDEB003C9A7A /* Main.storyboard */; };
@@ -226,6 +227,8 @@
 		2F9996011C7C799D0072C8F0 /* SYDismisAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYDismisAnimation.m; sourceTree = "<group>"; };
 		2FB922FF1C7E2BF8000A0A2D /* SYRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYRefreshView.h; sourceTree = "<group>"; };
 		2FB923001C7E2BF8000A0A2D /* SYRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYRefreshView.m; sourceTree = "<group>"; };
+		2FB923021C7EACA1000A0A2D /* SYBeforeStoryResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYBeforeStoryResult.h; sourceTree = "<group>"; };
+		2FB923031C7EACA1000A0A2D /* SYBeforeStoryResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYBeforeStoryResult.m; sourceTree = "<group>"; };
 		2FC587461C79FDEB003C9A7A /* zhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5874A1C79FDEB003C9A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -462,6 +465,8 @@
 				2F2CCBA61C7B08F600C45E3D /* SYStory.m */,
 				2F2CCB9C1C7B043000C45E3D /* SYLastestGroup.h */,
 				2F2CCB9D1C7B043000C45E3D /* SYLastestGroup.m */,
+				2FB923021C7EACA1000A0A2D /* SYBeforeStoryResult.h */,
+				2FB923031C7EACA1000A0A2D /* SYBeforeStoryResult.m */,
 				2F2CCBA21C7B088E00C45E3D /* SYLastestParamResult.h */,
 				2F2CCBA31C7B088E00C45E3D /* SYLastestParamResult.m */,
 				2F0E2CB51C7BDD2B004FDA0F /* SYDetailStory.h */,
@@ -1053,6 +1058,7 @@
 				2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */,
 				2F2CCBC41C7B0C1400C45E3D /* MJPropertyType.m in Sources */,
 				2FE707A21C7DD358005CB13B /* SYLeftDrawerController.m in Sources */,
+				2FB923041C7EACA1000A0A2D /* SYBeforeStoryResult.m in Sources */,
 				2F2CCBC91C7B0C1400C45E3D /* NSString+MJExtension.m in Sources */,
 				2F0E2CBD1C7BE7F7004FDA0F /* SYImageView.m in Sources */,
 				2FC587D51C7A096A003C9A7A /* SDWebImageDownloader.m in Sources */,

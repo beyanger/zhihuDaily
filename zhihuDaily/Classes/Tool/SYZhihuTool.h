@@ -14,6 +14,8 @@
 #import "SYLastestParamResult.h"
 #import "SYComment.h"
 #import "SYTheme.h"
+#import "SYBeforeStoryResult.h"
+
 
 typedef void(^Completed)(id obj);
 
@@ -32,5 +34,7 @@ typedef void(^Completed)(id obj);
 + (void)getThemesWithCompleted:(Completed)completed;
 
 + (void)getLauchImageWithCompleted:(Completed)completed;
+
++ (void)getBeforeStroyWithDate:(NSDate *)date completed:(Completed)completed;
 
 @end

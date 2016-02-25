@@ -15,6 +15,8 @@
 #import "SYHomeController.h"
 #import "SYNavigationController.h"
 
+
+
 @interface SYLeftDrawerController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray<SYTheme *> *dataSource;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarView;
@@ -32,6 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     self.avatarView.layer.cornerRadius = 20;
     self.avatarView.clipsToBounds = YES;
     self.tableView.delegate = self;
