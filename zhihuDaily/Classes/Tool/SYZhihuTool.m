@@ -8,7 +8,6 @@
 
 #import "SYZhihuTool.h"
 
-#import "MJExtension.h"
 
 
 @implementation SYZhihuTool
@@ -110,6 +109,25 @@
     } failure:nil];
 }
 
+
++ (void)getThemeWithThemeId:(int)themeId Completed:(Completed)completed {
+    NSString *themeUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/theme/%d", themeId];
+    
+    [SYThemeItem mj_setupObjectClassInArray:^NSDictionary *{
+        return @{@"stories": @"SYStory", @"editors":@"SYEditor"};
+    }];
+    
+    [SYThemeItem mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
+        return @{@"desc":@"description"};
+    }];
+    
+    [YSHttpTool GETWithURL:themeUrl params:nil success:^(id responseObject) {
+        SYThemeItem *item = [SYThemeItem mj_objectWithKeyValues:responseObject];
+        completed(item);
+        
+    } failure:nil];
+    
+}
 
 
 @end

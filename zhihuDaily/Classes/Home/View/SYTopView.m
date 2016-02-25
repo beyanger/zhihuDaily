@@ -24,6 +24,7 @@
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:story.image]];
     self.titleLabel.text = story.title;
     self.sourceLabel.text = story.image_source;
+    [self setNeedsLayout];
 }
 
 

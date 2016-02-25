@@ -35,6 +35,9 @@
 
 @property (nonatomic, strong) SYStoryNavigationView *storyNav;
 
+@property (nonatomic, assign) BOOL isChanging;
+
+
 @end
 
 @implementation SYDetailController
@@ -88,7 +91,12 @@
         case 4: {// comment
             SYCommentsTableController *ctc = [[SYCommentsTableController alloc] init];
             ctc.story = self.story;
-            [self.navigationController pushViewController:ctc animated:ctc];
+            
+            UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:ctc];
+            
+            //[self.navigationController pushViewController:ctc animated:ctc];
+            
+            [self presentViewController:navi animated:YES completion:nil];
             
         }
             break;
@@ -106,6 +114,7 @@
 - (SYTopView *)topView {
     if (!_topView) {
         _topView = [[[NSBundle mainBundle] loadNibNamed:@"SYTopView" owner:self options:nil] firstObject];
+        _topView.layer.anchorPoint = CGPointMake(0.5, 0);
         _topView.clipsToBounds = YES;
         _topView.frame = CGRectMake(0, -40, kScreenWidth, 220+40);
     }
@@ -193,51 +202,40 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (scrollView.contentOffset.y < -80) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if ([self.delegate respondsToSelector:@selector(prevStoryForDetailController:)]) {
-                SYStory *story  = [self.delegate prevStoryForDetailController:self];
-                if (story) {
-                    // 切换动画
-                    [UIView animateWithDuration:0.2 animations:^{
-                        self.topView.y = kScreenHeight;
-                        self.webView.y = kScreenHeight;
-                    } completion:^(BOOL finished) {
-                        self.story = story;
-                        self.topView.y = -kScreenHeight-40;
-                        self.webView.y = -kScreenHeight;
-                        [UIView animateWithDuration:0.2 animations:^{
-                            self.webView.y = 20;
-                            self.topView.y = -40;
-                        }];
-                    }];
-                }
+  
+        if ([self.delegate respondsToSelector:@selector(prevStoryForDetailController:)]) {
+            SYStory *story  = [self.delegate prevStoryForDetailController:self];
+            // 加载上一篇
+            if (story) {
+                self.isChanging = YES;
+                [UIView animateWithDuration:4.3 animations:^{
+                    self.topView.transform = CGAffineTransformMakeTranslation( 0, kScreenHeight);
+                    self.webView.transform = CGAffineTransformMakeTranslation(0, kScreenHeight);
+                } completion:^(BOOL finished) {
+                    self.story = story;
+                    self.isChanging = NO;
+                }];
             }
-        });
+        }
+    
     } else if (scrollView.contentSize.height - scrollView.contentOffset.y-kScreenHeight < -120) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
             if ([self.delegate respondsToSelector:@selector(nextStoryForDetailController:)]) {
                 SYStory *story  = [self.delegate nextStoryForDetailController:self];
+                
                 if (story) {
-                    // 切换动画
-                    [UIView animateWithDuration:0.2 animations:^{
-                        self.topView.y = -kScreenHeight;
-                        self.webView.y = -kScreenHeight;
+                    self.isChanging = YES;
+                    [UIView animateWithDuration:4.3 animations:^{
+                        self.webView.transform = CGAffineTransformMakeTranslation(0, -kScreenHeight);
                     } completion:^(BOOL finished) {
-                        self.topView.y = kScreenHeight;
-                        self.webView.y = kScreenHeight;
                         self.story = story;
-                        [UIView animateWithDuration:0.2 animations:^{
-                            self.topView.y = -40;
-                            self.webView.y = 20;
-                        }];
+                        self.isChanging = NO;
                     }];
                 }
+
             }
-        });
     }
 }
-
-
 
 - (UILabel *)footer {
     if (!_footer) {
@@ -296,10 +294,11 @@
 
 
 - (void)setStory:(SYStory *)story {
+    if (!story) return;
     _story = story;
     
-    if (!story) return;
-    
+    self.topView.transform = CGAffineTransformIdentity;
+    self.webView.transform = CGAffineTransformIdentity;
     
     [SYZhihuTool getDetailWithId:self.story.id completed:^(id obj) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -335,14 +334,17 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if ([keyPath isEqualToString:@"contentOffset"]) {
         CGFloat yoffset = [change[@"new"] CGPointValue].y;
-        if (yoffset > 0) {
-            self.topView.y = -yoffset-40;
-        } else {
-            self.topView.height = 260-yoffset;
+        
+        if (!self.isChanging) {
+            if (yoffset < 0) {
+                self.topView.transform = CGAffineTransformMakeScale(1, -yoffset/self.topView.height+1);
+            } else {
+                self.topView.transform = CGAffineTransformMakeTranslation(0, -yoffset);
+            }
         }
         
+        self.header.transform = CGAffineTransformMakeTranslation(0, -yoffset);
         
-        self.header.y = -40-yoffset;
         CGAffineTransform transform = CGAffineTransformIdentity;
         if (yoffset < -80) {
             transform = CGAffineTransformMakeRotation(M_PI);

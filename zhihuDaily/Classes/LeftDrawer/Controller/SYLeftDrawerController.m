@@ -46,10 +46,14 @@
 
 - (IBAction)didClickedMenuButton:(UIButton *)sender {
     if ([sender.currentTitle isEqualToString:@"设置"]) {
-        UIViewController *vc = [[UIViewController alloc] init];
-        vc.view.backgroundColor = randomColor;
         
-        [self.mainController setCenterViewController:vc withCloseAnimation:YES completion:nil];
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        SYSettingController *sc = [sb instantiateViewControllerWithIdentifier:@"setting"];
+        
+        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:sc];
+        
+        
+        [self.mainController setCenterViewController:navi withCloseAnimation:YES completion:nil];
         
     }
 }

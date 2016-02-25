@@ -334,7 +334,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="设置" id="wlX-ez-P6e">
-                        <barButtonItem key="leftBarButtonItem" title="&lt;" id="c3T-fi-BpI">
+                        <barButtonItem key="leftBarButtonItem" image="Back" id="c3T-fi-BpI">
                             <connections>
                                 <action selector="back:" destination="9K0-05-c2J" id="bbi-2C-7h0"/>
                             </connections>
@@ -358,7 +358,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hy5-bC-B9K">
-                                <rect key="frame" x="260" y="96" width="80" height="80"/>
+                                <rect key="frame" x="260" y="52" width="80" height="80"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="5Hh-Wv-XVx"/>
@@ -380,4 +380,7 @@
             <point key="canvasLocation" x="-714" y="356"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Back" width="44" height="44"/>
+    </resources>
 </document>

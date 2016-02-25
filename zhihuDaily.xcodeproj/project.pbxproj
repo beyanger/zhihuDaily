@@ -59,6 +59,9 @@
 		2FB923041C7EACA1000A0A2D /* SYBeforeStoryResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB923031C7EACA1000A0A2D /* SYBeforeStoryResult.m */; };
 		2FB923061C7EE232000A0A2D /* SYTopImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FB923051C7EE232000A0A2D /* SYTopImageView.xib */; };
 		2FB923091C7EE353000A0A2D /* SYTopImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB923081C7EE353000A0A2D /* SYTopImageView.m */; };
+		2FB9230C1C7EEBC6000A0A2D /* SYThemeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB9230B1C7EEBC6000A0A2D /* SYThemeItem.m */; };
+		2FB9230F1C7EEBE8000A0A2D /* SYEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB9230E1C7EEBE8000A0A2D /* SYEditor.m */; };
+		2FB923121C7F104A000A0A2D /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB923111C7F104A000A0A2D /* UINavigationBar+Awesome.m */; };
 		2FC5874B1C79FDEB003C9A7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874A1C79FDEB003C9A7A /* main.m */; };
 		2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */; };
 		2FC587541C79FDEB003C9A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587521C79FDEB003C9A7A /* Main.storyboard */; };
@@ -234,6 +237,12 @@
 		2FB923051C7EE232000A0A2D /* SYTopImageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYTopImageView.xib; sourceTree = "<group>"; };
 		2FB923071C7EE353000A0A2D /* SYTopImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYTopImageView.h; sourceTree = "<group>"; };
 		2FB923081C7EE353000A0A2D /* SYTopImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYTopImageView.m; sourceTree = "<group>"; };
+		2FB9230A1C7EEBC6000A0A2D /* SYThemeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYThemeItem.h; sourceTree = "<group>"; };
+		2FB9230B1C7EEBC6000A0A2D /* SYThemeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYThemeItem.m; sourceTree = "<group>"; };
+		2FB9230D1C7EEBE8000A0A2D /* SYEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEditor.h; sourceTree = "<group>"; };
+		2FB9230E1C7EEBE8000A0A2D /* SYEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEditor.m; sourceTree = "<group>"; };
+		2FB923101C7F104A000A0A2D /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
+		2FB923111C7F104A000A0A2D /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		2FC587461C79FDEB003C9A7A /* zhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5874A1C79FDEB003C9A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -547,6 +556,8 @@
 		2F37AB6A1C7B63E600D3CD65 /* Catagories */ = {
 			isa = PBXGroup;
 			children = (
+				2FB923101C7F104A000A0A2D /* UINavigationBar+Awesome.h */,
+				2FB923111C7F104A000A0A2D /* UINavigationBar+Awesome.m */,
 				2F37AB7C1C7B6D5200D3CD65 /* UIView+Extension.h */,
 				2F37AB7D1C7B6D5200D3CD65 /* UIView+Extension.m */,
 				2F37AB6B1C7B63F000D3CD65 /* UINavigationController+FDFullscreenPopGesture.h */,
@@ -841,6 +852,10 @@
 		2FE7078D1C7DBF4E005CB13B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2FB9230A1C7EEBC6000A0A2D /* SYThemeItem.h */,
+				2FB9230B1C7EEBC6000A0A2D /* SYThemeItem.m */,
+				2FB9230D1C7EEBE8000A0A2D /* SYEditor.h */,
+				2FB9230E1C7EEBE8000A0A2D /* SYEditor.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1055,6 +1070,7 @@
 				2FE707AF1C7DE3F4005CB13B /* SYLeftDrawerCell.m in Sources */,
 				2F2CCBC31C7B0C1400C45E3D /* MJPropertyKey.m in Sources */,
 				2F37AB6D1C7B63F000D3CD65 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
+				2FB923121C7F104A000A0A2D /* UINavigationBar+Awesome.m in Sources */,
 				2F37AB651C7B4A0F00D3CD65 /* SYProfileController.m in Sources */,
 				2FC588021C7A0974003C9A7A /* View+MASAdditions.m in Sources */,
 				2F9996021C7C799D0072C8F0 /* SYDismisAnimation.m in Sources */,
@@ -1070,6 +1086,7 @@
 				2FE707A21C7DD358005CB13B /* SYLeftDrawerController.m in Sources */,
 				2FB923041C7EACA1000A0A2D /* SYBeforeStoryResult.m in Sources */,
 				2F2CCBC91C7B0C1400C45E3D /* NSString+MJExtension.m in Sources */,
+				2FB9230C1C7EEBC6000A0A2D /* SYThemeItem.m in Sources */,
 				2F0E2CBD1C7BE7F7004FDA0F /* SYImageView.m in Sources */,
 				2FC587D51C7A096A003C9A7A /* SDWebImageDownloader.m in Sources */,
 				2F37AB7E1C7B6D5200D3CD65 /* UIView+Extension.m in Sources */,
@@ -1126,6 +1143,7 @@
 				2FC5874B1C79FDEB003C9A7A /* main.m in Sources */,
 				2FC587DE1C7A096A003C9A7A /* UIImageView+WebCache.m in Sources */,
 				2F2CCB7B1C7AE49000C45E3D /* SYTheme.m in Sources */,
+				2FB9230F1C7EEBE8000A0A2D /* SYEditor.m in Sources */,
 				2FC587DD1C7A096A003C9A7A /* UIImageView+HighlightedWebCache.m in Sources */,
 				2FC587A01C7A0956003C9A7A /* AFHTTPSessionManager.m in Sources */,
 				2F2CCB8B1C7AF1C100C45E3D /* SYHomeController.m in Sources */,

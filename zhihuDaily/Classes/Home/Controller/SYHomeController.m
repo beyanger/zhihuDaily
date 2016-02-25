@@ -64,6 +64,13 @@ static NSString *reuseid = @"useid";
     [self leftButton];
     [self titleLabel];
 
+    [SYZhihuTool getThemeWithThemeId:11 Completed:^(id obj) {
+        SYThemeItem *item = obj;
+        for (SYEditor *editor in item.editors) {
+            NSLog(@"%@", editor.name);
+        }
+    }];
+    
 }
 
 - (void)setupTableView {
@@ -159,7 +166,7 @@ static NSString *reuseid = @"useid";
     SYHomeHeaderView *headerView = [SYHomeHeaderView headerViewWithTableView:tableView];
     SYBeforeStoryResult *result = self.storyGroup[section];
     headerView.date = result.date;
-    return headerView;
+    return section ? headerView : nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

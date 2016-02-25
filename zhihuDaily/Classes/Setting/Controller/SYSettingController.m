@@ -27,7 +27,7 @@
 }
 
 - (IBAction)back:(UIBarButtonItem *)sender {
-       [[NSNotificationCenter defaultCenter] postNotificationName:@"menuAction" object:nil];
+       [[NSNotificationCenter defaultCenter] postNotificationName:ToggleDrawer object:nil];
 }
 
 

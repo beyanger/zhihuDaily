@@ -9,6 +9,7 @@
 #import "SYCommentsTableController.h"
 #import "SYCommentCell.h"
 #import "SYZhihuTool.h"
+#import "UINavigationBar+Awesome.h"
 static NSString *comment_reuseid = @"comment_reuseid";
 
 @interface SYCommentsTableController () <UITableViewDataSource, UITableViewDelegate>
@@ -29,9 +30,21 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
+    [self.navigationController.navigationBar lt_setBackgroundColor:SYColor(23, 144, 211, 1.)];
+    NSDictionary *attr = @{
+            NSForegroundColorAttributeName:[UIColor whiteColor]};
+    self.navigationController.navigationBar.titleTextAttributes = attr;
     self.title = @"评论";
+
+    [self setupTableView];
     
+    [self setupDataSource];
+    
+    [self setupBackBtn];
+}
+
+- (void)setupTableView {
     UITableView *tableView = [[UITableView alloc] init];
     tableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-40);
     [self.view addSubview:tableView];
@@ -39,22 +52,22 @@ static NSString *comment_reuseid = @"comment_reuseid";
     tableView.delegate = self;
     tableView.dataSource = self;
     [self.tableView registerNib:[UINib nibWithNibName:@"SYCommentCell" bundle:nil] forCellReuseIdentifier:comment_reuseid];
-    [self setupDataSource];
-    
-    
+}
+
+- (void)setupBackBtn {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    button.backgroundColor = [UIColor greenColor];
+    button.backgroundColor = [UIColor lightGrayColor];
     button.frame = CGRectMake(0, kScreenHeight-40, kScreenWidth, 40);
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setTitle:@"返回" forState:UIControlStateNormal];
     [self.view addSubview:button];
     [button addTarget:self action:@selector(backGo) forControlEvents:UIControlEventTouchUpInside];
-    
-    
     self.backButton = button;
 }
 
+
 - (void)backGo {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)setupDataSource {
