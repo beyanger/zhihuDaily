@@ -34,6 +34,9 @@
                                     <inset key="titleEdgeInsets" minX="-18" minY="20" maxX="0.0" maxY="0.0"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="-15" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="设置" image="Menu_Icon_Setting"/>
+                                    <connections>
+                                        <action selector="didClickedMenuButton:" destination="-1" eventType="touchUpInside" id="oM2-Ir-nLk"/>
+                                    </connections>
                                 </button>
                                 <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmM-KK-dCi">
                                     <rect key="frame" x="66.5" y="0.0" width="67" height="60"/>
@@ -43,6 +46,9 @@
                                     <inset key="titleEdgeInsets" minX="-18" minY="20" maxX="0.0" maxY="0.0"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="-15" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="消息" image="Menu_Icon_Message"/>
+                                    <connections>
+                                        <action selector="didClickedMenuButton:" destination="-1" eventType="touchUpInside" id="rH1-X2-Tge"/>
+                                    </connections>
                                 </button>
                                 <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBN-6P-rXm">
                                     <rect key="frame" x="0.0" y="0.0" width="66.5" height="60"/>
@@ -52,6 +58,9 @@
                                     <inset key="titleEdgeInsets" minX="-18" minY="20" maxX="0.0" maxY="0.0"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="-15" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="收藏" image="Menu_Icon_Collect"/>
+                                    <connections>
+                                        <action selector="didClickedMenuButton:" destination="-1" eventType="touchUpInside" id="0O6-gN-t2q"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <animations/>

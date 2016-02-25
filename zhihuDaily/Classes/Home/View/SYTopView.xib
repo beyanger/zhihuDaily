@@ -46,9 +46,9 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="author" destination="wNt-1M-XNL" id="C5F-kB-DLI"/>
-                <outlet property="image" destination="A7I-6E-dzc" id="A2M-ve-QSf"/>
-                <outlet property="title" destination="JpL-7z-dyR" id="HbS-Gn-T3t"/>
+                <outlet property="imageView" destination="A7I-6E-dzc" id="q0z-kb-udi"/>
+                <outlet property="sourceLabel" destination="wNt-1M-XNL" id="yF0-BV-8k9"/>
+                <outlet property="titleLabel" destination="JpL-7z-dyR" id="8mn-6o-Nbu"/>
             </connections>
             <point key="canvasLocation" x="410" y="242.5"/>
         </view>

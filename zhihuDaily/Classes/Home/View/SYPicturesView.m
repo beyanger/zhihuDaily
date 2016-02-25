@@ -32,7 +32,6 @@
         [imageView sd_setImageWithURL:[NSURL URLWithString:story.image]];
         [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         }];
-        
     }
 }
 
@@ -42,6 +41,15 @@
 }
 
 
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+
+    
+
+}
+
+
+
 
 - (NSMutableArray *)allImages {
     if (!_allImages) {
@@ -49,6 +57,7 @@
     }
     return _allImages;
 }
+
 
 
 @end

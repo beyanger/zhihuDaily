@@ -13,30 +13,41 @@
 #import "SYZhihuTool.h"
 #import "MJExtension.h"
 #import "SYThemeController.h"
-
-
+#import "SYLeftDrawerController.h"
+#import "SYThemeController.h"
 @interface SYMainViewController ()
 
 @end
 
 @implementation SYMainViewController
 
-- (instancetype)initWithCenterViewController:(UIViewController *)centerViewController leftDrawerViewController:(UIViewController *)leftDrawerViewController {
-    self = [super initWithCenterViewController:centerViewController leftDrawerViewController:leftDrawerViewController];
-    if (self) {
-        self.maximumLeftDrawerWidth = 200;
-        self.shouldStretchDrawer = NO;
-        self.showsShadow = NO;
-        self.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
-        self.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
-        
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openDrawer) name:OpenDrawer object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeDrawer) name:CloseDrawer object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleDrawer) name:ToggleDrawer object:nil];
-    }
-    return self;
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.maximumLeftDrawerWidth = 200;
+    self.shouldStretchDrawer = NO;
+    self.showsShadow = NO;
+    self.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
+    self.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openDrawer) name:OpenDrawer object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeDrawer) name:CloseDrawer object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleDrawer) name:ToggleDrawer object:nil];
+    
+
+    
+    SYLeftDrawerController *drawerController = [[SYLeftDrawerController alloc] init];
+    
+    UINavigationController *homeController = [drawerController naviHome];
+    
+    drawerController.mainController = self;
+    
+    self.centerViewController = homeController;
+    self.leftDrawerViewController = drawerController;
+
 }
+
+
 
 - (void)openDrawer {
     [self openDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
@@ -55,10 +66,6 @@
     }
 }
 
-
-
-
-
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -66,11 +73,5 @@
 
 
 
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

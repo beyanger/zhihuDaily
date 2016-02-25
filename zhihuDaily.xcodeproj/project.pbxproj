@@ -13,6 +13,8 @@
 		2F0E2CC41C7BF071004FDA0F /* MBProgressHUD+YS.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0E2CC01C7BF071004FDA0F /* MBProgressHUD+YS.m */; };
 		2F0E2CC51C7BF071004FDA0F /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F0E2CC11C7BF071004FDA0F /* MBProgressHUD.bundle */; };
 		2F0E2CC61C7BF071004FDA0F /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0E2CC31C7BF071004FDA0F /* MBProgressHUD.m */; };
+		2F1319D81C7E113700FA146F /* SYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1319D71C7E113700FA146F /* SYNavigationController.m */; };
+		2F1319DA1C7E18A200FA146F /* SYWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F1319D91C7E18A200FA146F /* SYWebViewController.xib */; };
 		2F2CCB7B1C7AE49000C45E3D /* SYTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCB7A1C7AE49000C45E3D /* SYTheme.m */; };
 		2F2CCB8B1C7AF1C100C45E3D /* SYHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCB8A1C7AF1C100C45E3D /* SYHomeController.m */; };
 		2F2CCB971C7B016500C45E3D /* SYTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCB951C7B016500C45E3D /* SYTableViewCell.m */; };
@@ -50,13 +52,10 @@
 		2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E31C7C3D100072C8F0 /* SYComment.m */; };
 		2F9995E71C7C476A0072C8F0 /* SYCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E61C7C476A0072C8F0 /* SYCommentCell.m */; };
 		2F9995E91C7C47760072C8F0 /* SYCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F9995E81C7C47760072C8F0 /* SYCommentCell.xib */; };
-		2F9995F31C7C53CA0072C8F0 /* UITableView+FDIndexPathHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995EC1C7C53CA0072C8F0 /* UITableView+FDIndexPathHeightCache.m */; };
-		2F9995F41C7C53CA0072C8F0 /* UITableView+FDKeyedHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995EE1C7C53CA0072C8F0 /* UITableView+FDKeyedHeightCache.m */; };
-		2F9995F51C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995F01C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.m */; };
-		2F9995F61C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995F21C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.m */; };
 		2F9995F91C7C70E50072C8F0 /* UIViewController+SY.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995F81C7C70E40072C8F0 /* UIViewController+SY.m */; };
 		2F9995FF1C7C75C70072C8F0 /* SYPresentAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995FE1C7C75C70072C8F0 /* SYPresentAnimation.m */; };
 		2F9996021C7C799D0072C8F0 /* SYDismisAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9996011C7C799D0072C8F0 /* SYDismisAnimation.m */; };
+		2FB923011C7E2BF8000A0A2D /* SYRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB923001C7E2BF8000A0A2D /* SYRefreshView.m */; };
 		2FC5874B1C79FDEB003C9A7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874A1C79FDEB003C9A7A /* main.m */; };
 		2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */; };
 		2FC587541C79FDEB003C9A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587521C79FDEB003C9A7A /* Main.storyboard */; };
@@ -143,6 +142,9 @@
 		2F0E2CC11C7BF071004FDA0F /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		2F0E2CC21C7BF071004FDA0F /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		2F0E2CC31C7BF071004FDA0F /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		2F1319D61C7E113700FA146F /* SYNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNavigationController.h; sourceTree = "<group>"; };
+		2F1319D71C7E113700FA146F /* SYNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNavigationController.m; sourceTree = "<group>"; };
+		2F1319D91C7E18A200FA146F /* SYWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYWebViewController.xib; sourceTree = "<group>"; };
 		2F2CCB791C7AE49000C45E3D /* SYTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYTheme.h; sourceTree = "<group>"; };
 		2F2CCB7A1C7AE49000C45E3D /* SYTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYTheme.m; sourceTree = "<group>"; };
 		2F2CCB891C7AF1C100C45E3D /* SYHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYHomeController.h; sourceTree = "<group>"; };
@@ -216,20 +218,14 @@
 		2F9995E51C7C476A0072C8F0 /* SYCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCommentCell.h; sourceTree = "<group>"; };
 		2F9995E61C7C476A0072C8F0 /* SYCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCommentCell.m; sourceTree = "<group>"; };
 		2F9995E81C7C47760072C8F0 /* SYCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYCommentCell.xib; sourceTree = "<group>"; };
-		2F9995EB1C7C53CA0072C8F0 /* UITableView+FDIndexPathHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDIndexPathHeightCache.h"; sourceTree = "<group>"; };
-		2F9995EC1C7C53CA0072C8F0 /* UITableView+FDIndexPathHeightCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDIndexPathHeightCache.m"; sourceTree = "<group>"; };
-		2F9995ED1C7C53CA0072C8F0 /* UITableView+FDKeyedHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDKeyedHeightCache.h"; sourceTree = "<group>"; };
-		2F9995EE1C7C53CA0072C8F0 /* UITableView+FDKeyedHeightCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDKeyedHeightCache.m"; sourceTree = "<group>"; };
-		2F9995EF1C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
-		2F9995F01C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
-		2F9995F11C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCellDebug.h"; sourceTree = "<group>"; };
-		2F9995F21C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCellDebug.m"; sourceTree = "<group>"; };
 		2F9995F71C7C70E40072C8F0 /* UIViewController+SY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SY.h"; sourceTree = "<group>"; };
 		2F9995F81C7C70E40072C8F0 /* UIViewController+SY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SY.m"; sourceTree = "<group>"; };
 		2F9995FD1C7C75C70072C8F0 /* SYPresentAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYPresentAnimation.h; sourceTree = "<group>"; };
 		2F9995FE1C7C75C70072C8F0 /* SYPresentAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYPresentAnimation.m; sourceTree = "<group>"; };
 		2F9996001C7C799D0072C8F0 /* SYDismisAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYDismisAnimation.h; sourceTree = "<group>"; };
 		2F9996011C7C799D0072C8F0 /* SYDismisAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYDismisAnimation.m; sourceTree = "<group>"; };
+		2FB922FF1C7E2BF8000A0A2D /* SYRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYRefreshView.h; sourceTree = "<group>"; };
+		2FB923001C7E2BF8000A0A2D /* SYRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYRefreshView.m; sourceTree = "<group>"; };
 		2FC587461C79FDEB003C9A7A /* zhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5874A1C79FDEB003C9A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -452,6 +448,7 @@
 				2F37AB681C7B4EFF00D3CD65 /* SYDetailController.m */,
 				2F37AB841C7B7D7C00D3CD65 /* SYWebViewController.h */,
 				2F37AB851C7B7D7C00D3CD65 /* SYWebViewController.m */,
+				2F1319D91C7E18A200FA146F /* SYWebViewController.xib */,
 				2F9995DF1C7C39190072C8F0 /* SYCommentsTableController.h */,
 				2F9995E01C7C39190072C8F0 /* SYCommentsTableController.m */,
 			);
@@ -500,6 +497,8 @@
 				2FE707811C7D86C4005CB13B /* SYHomeHeaderView.m */,
 				2FE707831C7D9724005CB13B /* SYPicturesView.h */,
 				2FE707841C7D9724005CB13B /* SYPicturesView.m */,
+				2FB922FF1C7E2BF8000A0A2D /* SYRefreshView.h */,
+				2FB923001C7E2BF8000A0A2D /* SYRefreshView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -557,21 +556,6 @@
 				2F37AB771C7B675100D3CD65 /* UIViewController+MMDrawerController.m */,
 			);
 			path = MMDrawerController;
-			sourceTree = "<group>";
-		};
-		2F9995EA1C7C53CA0072C8F0 /* FDTemplateLayoutCell */ = {
-			isa = PBXGroup;
-			children = (
-				2F9995EB1C7C53CA0072C8F0 /* UITableView+FDIndexPathHeightCache.h */,
-				2F9995EC1C7C53CA0072C8F0 /* UITableView+FDIndexPathHeightCache.m */,
-				2F9995ED1C7C53CA0072C8F0 /* UITableView+FDKeyedHeightCache.h */,
-				2F9995EE1C7C53CA0072C8F0 /* UITableView+FDKeyedHeightCache.m */,
-				2F9995EF1C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.h */,
-				2F9995F01C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.m */,
-				2F9995F11C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.h */,
-				2F9995F21C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.m */,
-			);
-			path = FDTemplateLayoutCell;
 			sourceTree = "<group>";
 		};
 		2FC5873D1C79FDEB003C9A7A = {
@@ -668,6 +652,8 @@
 				2F2CCBCB1C7B156500C45E3D /* SYMainViewController.m */,
 				2FE707B01C7DECDD005CB13B /* SYDemoViewController.h */,
 				2FE707B11C7DECDD005CB13B /* SYDemoViewController.m */,
+				2F1319D61C7E113700FA146F /* SYNavigationController.h */,
+				2F1319D71C7E113700FA146F /* SYNavigationController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -693,7 +679,6 @@
 		2FC587891C7A0937003C9A7A /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				2F9995EA1C7C53CA0072C8F0 /* FDTemplateLayoutCell */,
 				2F0E2CBE1C7BF071004FDA0F /* MBProgressHUD */,
 				2F37AB6E1C7B675100D3CD65 /* MMDrawerController */,
 				2F37AB6A1C7B63E600D3CD65 /* Catagories */,
@@ -1002,6 +987,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F1319DA1C7E18A200FA146F /* SYWebViewController.xib in Resources */,
 				2FC587591C79FDEB003C9A7A /* LaunchScreen.storyboard in Resources */,
 				2F2CCB981C7B016500C45E3D /* SYTableViewCell.xib in Resources */,
 				2FC587561C79FDEB003C9A7A /* Assets.xcassets in Resources */,
@@ -1050,7 +1036,6 @@
 				2F2CCBC21C7B0C1400C45E3D /* MJProperty.m in Sources */,
 				2FC587A11C7A0956003C9A7A /* AFNetworkReachabilityManager.m in Sources */,
 				2FE707B21C7DECDD005CB13B /* SYDemoViewController.m in Sources */,
-				2F9995F31C7C53CA0072C8F0 /* UITableView+FDIndexPathHeightCache.m in Sources */,
 				2FC587A61C7A0956003C9A7A /* AFURLSessionManager.m in Sources */,
 				2F2CCBC01C7B0C1400C45E3D /* MJExtensionConst.m in Sources */,
 				2FE707AF1C7DE3F4005CB13B /* SYLeftDrawerCell.m in Sources */,
@@ -1063,6 +1048,7 @@
 				2FE707A61C7DD6B6005CB13B /* SYMainToolBox.m in Sources */,
 				2FC587FA1C7A0974003C9A7A /* MASCompositeConstraint.m in Sources */,
 				2F37AB781C7B675100D3CD65 /* MMDrawerBarButtonItem.m in Sources */,
+				2F1319D81C7E113700FA146F /* SYNavigationController.m in Sources */,
 				2F37AB7B1C7B675100D3CD65 /* UIViewController+MMDrawerController.m in Sources */,
 				2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */,
 				2F2CCBC41C7B0C1400C45E3D /* MJPropertyType.m in Sources */,
@@ -1070,10 +1056,10 @@
 				2F2CCBC91C7B0C1400C45E3D /* NSString+MJExtension.m in Sources */,
 				2F0E2CBD1C7BE7F7004FDA0F /* SYImageView.m in Sources */,
 				2FC587D51C7A096A003C9A7A /* SDWebImageDownloader.m in Sources */,
-				2F9995F61C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				2F37AB7E1C7B6D5200D3CD65 /* UIView+Extension.m in Sources */,
 				2FC587A41C7A0956003C9A7A /* AFURLRequestSerialization.m in Sources */,
 				2F37AB691C7B4EFF00D3CD65 /* SYDetailController.m in Sources */,
+				2FB923011C7E2BF8000A0A2D /* SYRefreshView.m in Sources */,
 				2FC587A51C7A0956003C9A7A /* AFURLResponseSerialization.m in Sources */,
 				2F37AB891C7B7F0B00D3CD65 /* SYStoryNavigationView.m in Sources */,
 				2F37AB7A1C7B675100D3CD65 /* MMDrawerVisualState.m in Sources */,
@@ -1103,12 +1089,10 @@
 				2FC587D81C7A096A003C9A7A /* SDWebImagePrefetcher.m in Sources */,
 				2FC587D41C7A096A003C9A7A /* SDWebImageDecoder.m in Sources */,
 				2FE707921C7DBF4E005CB13B /* SYThemeViewCell.m in Sources */,
-				2F9995F51C7C53CA0072C8F0 /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				2FC588031C7A0974003C9A7A /* ViewController+MASAdditions.m in Sources */,
 				2F2CCB971C7B016500C45E3D /* SYTableViewCell.m in Sources */,
 				2FE707821C7D86C4005CB13B /* SYHomeHeaderView.m in Sources */,
 				2F2CCB9E1C7B043000C45E3D /* SYLastestGroup.m in Sources */,
-				2F9995F41C7C53CA0072C8F0 /* UITableView+FDKeyedHeightCache.m in Sources */,
 				2FC588071C7A0B50003C9A7A /* YSHttpTool.m in Sources */,
 				2F9995DC1C7C206D0072C8F0 /* SYShareView.m in Sources */,
 				2F2CCBC61C7B0C1400C45E3D /* NSObject+MJCoding.m in Sources */,

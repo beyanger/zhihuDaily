@@ -9,7 +9,6 @@
 #import "SYCommentsTableController.h"
 #import "SYCommentCell.h"
 #import "SYZhihuTool.h"
-#import "UITableView+FDTemplateLayoutCell.h"
 static NSString *comment_reuseid = @"comment_reuseid";
 
 @interface SYCommentsTableController () <UITableViewDataSource, UITableViewDelegate>
@@ -35,14 +34,11 @@ static NSString *comment_reuseid = @"comment_reuseid";
     
     UITableView *tableView = [[UITableView alloc] init];
     tableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-40);
-    //tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
     [self.view addSubview:tableView];
     self.tableView = tableView;
     tableView.delegate = self;
     tableView.dataSource = self;
     [self.tableView registerNib:[UINib nibWithNibName:@"SYCommentCell" bundle:nil] forCellReuseIdentifier:comment_reuseid];
-   
-    
     [self setupDataSource];
     
     
@@ -51,15 +47,14 @@ static NSString *comment_reuseid = @"comment_reuseid";
     button.frame = CGRectMake(0, kScreenHeight-40, kScreenWidth, 40);
     [button setTitle:@"返回" forState:UIControlStateNormal];
     [self.view addSubview:button];
-    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(backGo) forControlEvents:UIControlEventTouchUpInside];
     
     
     self.backButton = button;
 }
 
-- (void)back {
-    [self.backButton removeFromSuperview];
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (void)backGo {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)setupDataSource {
@@ -90,14 +85,6 @@ static NSString *comment_reuseid = @"comment_reuseid";
     return comments.count;
 }
 
-
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    
-//    if (section == 0) {
-//        return  [NSString stringWithFormat:@"%ld段长评论", [self tableView:tableView numberOfRowsInSection:0]];
-//    }
-//    return [NSString stringWithFormat:@"%ld段短评论", [self tableView:tableView numberOfRowsInSection:1]];
-//}
 
 - (SYCommentCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 

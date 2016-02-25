@@ -1,0 +1,104 @@
+//
+//  SYRefreshView.m
+//  zhihuDaily
+//
+//  Created by yang on 16/2/25.
+//  Copyright © 2016年 yang. All rights reserved.
+//
+
+#import "SYRefreshView.h"
+
+@interface SYRefreshView ()
+
+@property (nonatomic, weak) UIScrollView *scrollView;
+
+@property (nonatomic, weak) CAShapeLayer *progressLayer;
+
+@property (nonatomic, weak) UIActivityIndicatorView *indicatorView;
+
+@property (nonatomic, assign) CGFloat offsetY;
+
+@end
+
+@implementation SYRefreshView
+
+
++ (instancetype)refreshViewWithScrollView:(UIScrollView *)scrollView {
+    SYRefreshView *refreshView = [[self alloc] init];
+    refreshView.scrollView = scrollView;
+
+    CAShapeLayer *progressLayer = [CAShapeLayer layer];
+    [refreshView.layer addSublayer:progressLayer];
+    progressLayer.strokeColor = [UIColor whiteColor].CGColor;
+    progressLayer.fillColor = [UIColor clearColor].CGColor;
+    progressLayer.backgroundColor = [UIColor clearColor].CGColor;
+    progressLayer.strokeEnd = 0.0;
+    progressLayer.transform = CATransform3DMakeRotation(-M_PI_2, 0, 0, 1);
+    progressLayer.lineWidth = 2.0;
+    refreshView.progressLayer = progressLayer;
+    
+    
+    UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] init];
+    [refreshView addSubview:indicatorView];
+    refreshView.indicatorView = indicatorView;
+    
+    
+    [refreshView.scrollView addObserver:refreshView forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+    return refreshView;
+}
+
+
+- (void)layoutSublayersOfLayer:(CALayer *)layer {
+    [super layoutSublayersOfLayer:layer];
+    self.progressLayer.frame = self.bounds;
+    self.progressLayer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectInset(self.bounds, 2, 2)].CGPath;
+}
+
+- (void)layoutSubviews {
+    self.indicatorView.frame = self.bounds;
+}
+
+- (void)dealloc {
+    [self removeObserver:self.scrollView forKeyPath:@"contentOffset"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    CGFloat height = [change[@"new"] CGPointValue].y;
+    if (height > 0) {
+        height = 0.;
+    } else if (height <= -80) {
+        height = 1.0;
+    } else {
+        height = height / -80.0;
+    }
+    
+    if (self.scrollView.isDragging) {
+        self.hidden = NO;
+        self.offsetY = height;
+        self.progressLayer.hidden = NO;
+        self.progressLayer.strokeEnd = height;
+        [self.indicatorView stopAnimating];
+    } else {
+        if (self.offsetY == 1.) {
+            [self.indicatorView startAnimating];
+            self.progressLayer.hidden = YES;
+            self.progressLayer.strokeEnd = 0;
+        } else {
+            [self.indicatorView stopAnimating];
+            self.progressLayer.hidden = NO;
+            self.progressLayer.strokeEnd = height;
+        }
+    }
+    
+}
+
+
+- (void)endRefresh {
+    self.hidden = YES;
+    self.progressLayer.strokeEnd = 0;
+    self.progressLayer.hidden = NO;
+    [self.indicatorView stopAnimating];
+}
+
+
+@end

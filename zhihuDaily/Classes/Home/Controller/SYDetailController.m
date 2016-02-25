@@ -8,7 +8,6 @@
 
 #import "SYDetailController.h"
 #import "SYStory.h"
-#import "YSHttpTool.h"
 #import "SYTopView.h"
 #import "UIImageView+WebCache.h"
 #import "UIView+Extension.h"
@@ -25,16 +24,16 @@
 @interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate, UIScrollViewDelegate>
 
 
-@property (nonatomic, weak) SYTopView   *topView;
-@property (nonatomic, weak) UIWebView *webView;
+@property (nonatomic, strong) SYTopView   *topView;
+@property (nonatomic, strong) UIWebView *webView;
 
-@property (nonatomic, weak) UILabel *footer;
-@property (nonatomic, weak) UILabel *header;
+@property (nonatomic, strong) UILabel *footer;
+@property (nonatomic, strong) UILabel *header;
 
 @property (nonatomic, weak) UIImageView *upArrow;
 @property (nonatomic, weak) UIImageView *downArrow;
 
-@property (nonatomic, weak) SYStoryNavigationView *storyNav;
+@property (nonatomic, strong) SYStoryNavigationView *storyNav;
 
 @end
 
@@ -44,7 +43,6 @@
 {
     self = [super init];
     if (self) {
-
         self.view.backgroundColor = [UIColor whiteColor];
         self.story = story;
     }
@@ -57,11 +55,11 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
 
-    SYStoryNavigationView *storyNav = [[[NSBundle mainBundle] loadNibNamed:@"SYStoryNavigationView" owner:self options:nil] firstObject];
-    self.storyNav = storyNav;
-    storyNav.frame = CGRectMake(0, kScreenHeight-40, kScreenWidth, 40);
-    [self.view addSubview:storyNav];
-    storyNav.delegate = self;
+    [self.view addSubview:self.webView];
+    [self.view addSubview:self.topView];
+    [self.view addSubview:self.header];
+    
+    [self.webView.scrollView addSubview:self.footer];
     
     self.position = _position;
     
@@ -70,12 +68,11 @@
 - (void)storyNavigationView:(SYStoryNavigationView *)navView didClicked:(NSInteger)index {
     switch (index) {
         case 0: // dismis
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self.navigationController popViewControllerAnimated:YES];
             break;
         case 1: // next
             if ([self.delegate respondsToSelector:@selector(nextStoryForDetailController:)]) {
                 self.story = [self.delegate nextStoryForDetailController:self];
-                
             }
             
             break;
@@ -90,9 +87,8 @@
         
         case 4: {// comment
             SYCommentsTableController *ctc = [[SYCommentsTableController alloc] init];
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ctc];
             ctc.story = self.story;
-            [self presentViewController:nav animated:YES completion:nil];
+            [self.navigationController pushViewController:ctc animated:ctc];
             
         }
             break;
@@ -111,11 +107,7 @@
     if (!_topView) {
         _topView = [[[NSBundle mainBundle] loadNibNamed:@"SYTopView" owner:self options:nil] firstObject];
         _topView.clipsToBounds = YES;
-        _topView.frame = CGRectMake(0, -40, kScreenWidth, 200+40);
-        
-        
-        _topView.image.contentMode = UIViewContentModeCenter;
-        [self.webView.scrollView addSubview:_topView];
+        _topView.frame = CGRectMake(0, -40, kScreenWidth, 220+40);
     }
     return _topView;
 }
@@ -123,8 +115,7 @@
 - (UIWebView *)webView {
     if (!_webView) {
         UIWebView *webView = [[UIWebView alloc] init];
-        webView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-40);
-        [self.view addSubview:webView];
+        webView.frame = CGRectMake(0, 20, kScreenWidth, kScreenHeight-40-20);
         _webView = webView;
         _webView.delegate = self;
         _webView.scrollView.delegate = self;
@@ -143,14 +134,9 @@
     NSString *absoString = request.URL.absoluteString;
     if ([absoString hasPrefix:@"http"]) {
 
-        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UINavigationController *nav = [sb instantiateViewControllerWithIdentifier:@"webViewNavi"];
-        
-        SYWebViewController *wvc = nav.childViewControllers.firstObject;
-        wvc.request = request;
-        
-        
-        [self presentViewController:nav animated:YES completion:nil];
+        SYWebViewController *nav = [[SYWebViewController alloc] init];
+        nav.request = request;
+        [self.navigationController pushViewController:nav animated:YES];
         return NO;
         
     } else if ([absoString hasPrefix:@"detailimage:"]) {
@@ -158,8 +144,6 @@
                                        withString:@""];
         [SYImageView imageWithURLString:url];
         return NO;
-        
-        
     }
     return YES;
 }
@@ -196,7 +180,7 @@
 #pragma todo 设置图片浏览界面的上一张和下一张功能
     
 
-    self.footer.center = CGPointMake(kScreenWidth*0.5, self.webView.scrollView.contentSize.height+20);
+    self.footer.center = CGPointMake(kScreenWidth*0.5, self.webView.scrollView.contentSize.height+25);
     self.header.center = CGPointMake(kScreenWidth*0.5, -40);
     
 }
@@ -215,12 +199,15 @@
                 if (story) {
                     // 切换动画
                     [UIView animateWithDuration:0.2 animations:^{
-                        self.webView.y = self.webView.height;
+                        self.topView.y = kScreenHeight;
+                        self.webView.y = kScreenHeight;
                     } completion:^(BOOL finished) {
                         self.story = story;
-                        self.webView.y = -self.webView.height;
+                        self.topView.y = -kScreenHeight-40;
+                        self.webView.y = -kScreenHeight;
                         [UIView animateWithDuration:0.2 animations:^{
-                            self.webView.y = 0;
+                            self.webView.y = 20;
+                            self.topView.y = -40;
                         }];
                     }];
                 }
@@ -233,14 +220,16 @@
                 if (story) {
                     // 切换动画
                     [UIView animateWithDuration:0.2 animations:^{
-                        self.webView.y = -self.webView.height;
+                        self.topView.y = -kScreenHeight;
+                        self.webView.y = -kScreenHeight;
                     } completion:^(BOOL finished) {
-                        self.webView.y = self.webView.height;
+                        self.topView.y = kScreenHeight;
+                        self.webView.y = kScreenHeight;
                         self.story = story;
                         [UIView animateWithDuration:0.2 animations:^{
-                            self.webView.y = 0;
+                            self.topView.y = -40;
+                            self.webView.y = 20;
                         }];
-
                     }];
                 }
             }
@@ -253,7 +242,6 @@
 - (UILabel *)footer {
     if (!_footer) {
         UILabel *footer = [[UILabel alloc] init];
-        [self.webView.scrollView addSubview:footer];
         footer.textColor = [UIColor grayColor];
         footer.textAlignment = NSTextAlignmentCenter;
         footer.text = @"载入下一篇";
@@ -275,16 +263,12 @@
 - (UILabel *)header {
     if (!_header) {
         UILabel *header = [[UILabel alloc] init];
-        [self.webView.scrollView insertSubview:header aboveSubview:self.topView];
-        //[self.webView.scrollView addSubview:header];
         
         header.textColor = [UIColor whiteColor];
         header.textAlignment = NSTextAlignmentCenter;
         header.text = @"载入上一篇";
-        
         header.center = CGPointMake(kScreenWidth*0.5, -40);
         _header = header;
-        
         UIImage *image = [UIImage imageNamed:@"downArrow"];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
         [header addSubview:imageView];
@@ -296,9 +280,17 @@
         }];
         _downArrow = imageView;
     }
-    
-
     return _header;
+}
+
+- (SYStoryNavigationView *)storyNav {
+    if (!_storyNav) {
+        _storyNav = [[[NSBundle mainBundle] loadNibNamed:@"SYStoryNavigationView" owner:self options:nil] firstObject];
+        _storyNav.frame = CGRectMake(0, kScreenHeight-40, kScreenWidth, 40);
+        [self.view addSubview:_storyNav];
+        _storyNav.delegate = self;
+    }
+    return _storyNav;
 }
 
 
@@ -308,13 +300,12 @@
     
     if (!story) return;
     
+    
     [SYZhihuTool getDetailWithId:self.story.id completed:^(id obj) {
         dispatch_async(dispatch_get_main_queue(), ^{
             SYDetailStory *ds = (SYDetailStory *)obj;
             [self.webView loadHTMLString:ds.htmlStr baseURL:nil];
-            self.topView.title.text = ds.title;
-            [self.topView.image sd_setImageWithURL:[NSURL URLWithString:ds.image]];
-            self.topView.author.text = ds.image_source;
+            self.topView.story = ds;
         });
     }];
     
@@ -344,10 +335,17 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if ([keyPath isEqualToString:@"contentOffset"]) {
         CGFloat yoffset = [change[@"new"] CGPointValue].y;
-        if (yoffset < 0) {
-            self.topView.frame = CGRectMake(0, yoffset, kScreenWidth, 200-yoffset);
-        }
 
+        NSLog(@"%f", yoffset);
+        
+        if (yoffset > 0) {
+            self.topView.y = -yoffset-40;
+        } else {
+            self.topView.height = 260-yoffset;
+        }
+        
+        
+        self.header.y = -40-yoffset;
         CGAffineTransform transform = CGAffineTransformIdentity;
         if (yoffset < -80) {
             transform = CGAffineTransformMakeRotation(M_PI);
@@ -363,7 +361,6 @@
         [UIView animateWithDuration:0.25 animations:^{
             self.upArrow.transform = transform;
         }];
-        
     }
 }
 

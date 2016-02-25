@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SYMainViewController.h"
 @interface SYLeftDrawerController : UIViewController
+
+@property (nonatomic, strong) UINavigationController *naviHome;
+
+@property (nonatomic, weak) SYMainViewController *mainController;
 
 @end

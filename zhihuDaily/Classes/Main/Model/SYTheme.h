@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface SYTheme : NSObject
+
+@property (nonatomic, copy) NSString *thumbnail;
+
 /**
  *  title
  */

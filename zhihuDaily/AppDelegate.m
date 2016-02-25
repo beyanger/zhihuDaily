@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 
-#import "YSHttpTool.h"
 #import "SYZhihuTool.h"
 #import "UIImageView+WebCache.h"
 #import "SYLeftDrawerController.h"
@@ -30,14 +29,9 @@
     self.window = [[UIWindow alloc] initWithFrame:kScreenBounds];
     [self.window makeKeyAndVisible];
     
-    SYHomeController *uvc = [[SYHomeController alloc] init];
-    SYLeftDrawerController *ldc = [[SYLeftDrawerController alloc] init];
     
-    SYMainViewController *mmdc = [[SYMainViewController alloc] initWithCenterViewController:uvc leftDrawerViewController:ldc];
-    self.window.rootViewController = mmdc;
-    
-
-
+    self.mainController = [[SYMainViewController alloc] init];
+    self.window.rootViewController = self.mainController;
     
     
     return YES;

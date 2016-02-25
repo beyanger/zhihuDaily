@@ -12,11 +12,14 @@
 
 @interface SYWebViewController () <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
-@property (nonatomic, weak) UIActivityIndicatorView *indicator;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicator;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
 @property (nonatomic, weak) UIView *cover;
 @property (nonatomic, weak) SYShareView  *shareView;
 @property (weak, nonatomic) IBOutlet UIButton *back;
 @property (weak, nonatomic) IBOutlet UIButton *forward;
+
 
 @end
 
@@ -26,18 +29,16 @@
     [super viewDidLoad];
 
     [self updateButton];
-    
-    
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back_White"] style:UIBarButtonItemStylePlain target:self action:@selector(dismis)];
    
     self.webView.delegate = self;
     [self.webView loadRequest:self.request];
 }
 
 
-- (IBAction)dismis {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+
+
+- (IBAction)pop {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)reload {
     [self.webView reload];
@@ -55,19 +56,8 @@
 
 
 
-
-- (UIActivityIndicatorView *)indicator {
-    if (!_indicator) {
-        UIActivityIndicatorView *aiv = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:aiv];
-        _indicator = aiv;
-    }
-    return _indicator;
-}
-
 - (void)setRequest:(NSURLRequest *)request {
     _request = request;
-    
 }
 
 
@@ -81,9 +71,7 @@
     [self updateButton];
     
     
-    NSString *theTitle=[webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    self.title = theTitle;
-    
+    self.titleLabel.text = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 }
 
 

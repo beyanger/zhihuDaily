@@ -17,10 +17,12 @@
 #import "SYZhihuTool.h"
 #import "UIImageView+WebCache.h"
 #import "Masonry.h"
+#import "AppDelegate.h"
+#import "SYRefreshView.h"
+
 
 @interface SYHomeController () <SYDetailControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
-//@property (nonatomic, weak) SYDetailController *currentDetailController;
 @property (nonatomic, strong) NSIndexPath *currentIndexPath;
 @property (nonatomic, strong) NSMutableArray<SYLastestGroup *> *storyGroup;
 @property (nonatomic, strong) NSMutableArray<SYStory *> *topStory;
@@ -33,6 +35,8 @@
 @property (nonatomic, weak) UIButton *leftButton;
 
 @property (nonatomic, weak) UIScrollView *picturesView;
+
+@property (nonatomic, weak) SYRefreshView *refreshView;
 
 @end
 
@@ -50,6 +54,7 @@ static NSString *reuseid = @"useid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
     [self setupTableView];
     [self picturesView];
     [self headerView];
@@ -63,9 +68,13 @@ static NSString *reuseid = @"useid";
     
     [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     
+    [self reload];
+}
+
+- (void)reload {
     [SYZhihuTool getLastestStoryWithCompleted:^(id obj) {
         SYLastestParamResult *result = (SYLastestParamResult *)obj;
-
+        
         SYLastestGroup *group = [[SYLastestGroup alloc] init];
         group.stories = result.stories;
         
@@ -76,10 +85,11 @@ static NSString *reuseid = @"useid";
         dispatch_async(dispatch_get_main_queue(), ^{
             [self updatePictureView];
             [self.tableView reloadData];
+            [self.refreshView endRefresh];
         });
     }];
-    
 }
+
 
 - (void)updatePictureView {
     
@@ -136,7 +146,7 @@ static NSString *reuseid = @"useid";
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"menuActionClose" object:nil];
+
     self.currentIndexPath = indexPath;
     
     SYLastestGroup *group = self.storyGroup[indexPath.section];
@@ -147,11 +157,11 @@ static NSString *reuseid = @"useid";
     dc.delegate = self;
     dc.position = indexPath.row==(group.stories.count-1) ? -1 : indexPath.row;
     
-    //self.currentDetailController = dc;
-    [self presentViewController:dc animated:YES completion:nil];
+    //[self presentViewController:dc animated:YES completion:nil];
+    
+    [self.navigationController pushViewController:dc animated:YES];
+    
 }
-
-
 
 - (SYStory *)nextStoryForDetailController:(SYDetailController *)detailController {
     SYLastestGroup *group = self.storyGroup[self.currentIndexPath.section];
@@ -181,6 +191,15 @@ static NSString *reuseid = @"useid";
     detailController.position = self.currentIndexPath.row==(group.stories.count-1) ? -1 : self.currentIndexPath.row;
     return story;
 }
+
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (scrollView.contentOffset.y <= -80) {
+        [self reload];
+    }
+}
+
+
 
 
 - (UITableView *)tableView {
@@ -225,6 +244,13 @@ static NSString *reuseid = @"useid";
         titleLabel.center = CGPointMake(kScreenWidth*0.5, 35);
         _titleLabel = titleLabel;
         [self.view addSubview:titleLabel];
+        
+        SYRefreshView *refresh = [SYRefreshView refreshViewWithScrollView:self.tableView];
+        refresh.bounds = CGRectMake(0, 0, 24, 24);
+        refresh.center = CGPointMake(kScreenWidth*0.5 - 60, 35);
+        [self.view addSubview:refresh];
+        _refreshView = refresh;
+        
     }
     return _titleLabel;
 }

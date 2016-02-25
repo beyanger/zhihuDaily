@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SYDetailStory.h"
 @interface SYTopView : UIView
-@property (weak, nonatomic) IBOutlet UIImageView *image;
-@property (weak, nonatomic) IBOutlet UILabel *title;
-@property (weak, nonatomic) IBOutlet UILabel *author;
+
+@property (nonatomic, strong) SYDetailStory *story;
+
 
 @end
