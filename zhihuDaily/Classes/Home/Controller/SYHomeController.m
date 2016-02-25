@@ -157,8 +157,6 @@ static NSString *reuseid = @"useid";
     dc.delegate = self;
     dc.position = indexPath.row==(result.stories.count-1) ? -1 : indexPath.row;
     
-    //[self presentViewController:dc animated:YES completion:nil];
-    
     [self.navigationController pushViewController:dc animated:YES];
 }
 
@@ -171,47 +169,73 @@ static NSString *reuseid = @"useid";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    //    写成0  display  不会在0的section 执行
-    return 42;
+    // 这里的 section == 0 时，不能返回0
+    return section ? 36 : CGFLOAT_MIN;
 }
 
 
 
-
-- (SYStory *)nextStoryForDetailController:(SYDetailController *)detailController {
-    SYBeforeStoryResult *result = self.storyGroup[self.currentIndexPath.section];
-    if (self.currentIndexPath.row == result.stories.count-1) {
-        result = self.storyGroup[self.currentIndexPath.section+1];
-        self.currentIndexPath = [NSIndexPath indexPathForRow:0 inSection:self.currentIndexPath.section+1];
-    } else {
-        self.currentIndexPath = [NSIndexPath indexPathForRow:self.currentIndexPath.row+1 inSection:self.currentIndexPath.section];
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    if (section == 0) {
+        self.headerView.height = 55;
+        self.titleLabel.alpha = 1;
     }
-    SYStory *story = result.stories[self.currentIndexPath.row];
+    // 当显示最后一组时，加载更早之前的数据
+    if (section == self.storyGroup.count-1) {
+        [self loadMoreBefore];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section {
+    if (section == 0) {
+        self.headerView.height = 20;
+        self.titleLabel.alpha = 0;
+    }
+}
+
+// 下一篇永远都会有
+- (SYStory *)nextStoryForDetailController:(SYDetailController *)detailController {
+    NSInteger row = self.currentIndexPath.row;
+    NSInteger section = self.currentIndexPath.section;
+    
+    SYBeforeStoryResult *result = self.storyGroup[section];
+    if (row == result.stories.count-1) {
+        section += 1;
+        result = self.storyGroup[section];
+        row = 0;
+    } else {
+        row += 1;
+    }
+    SYStory *story = result.stories[row];
     detailController.story = story;
     detailController.position = 1;
+    self.currentIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
     return story;
 }
 
 - (SYStory *)prevStoryForDetailController:(SYDetailController *)detailController {
-    if (self.currentIndexPath.row == 0 && self.currentIndexPath.section ==0) {
-        return nil;
-    }
-
-    SYBeforeStoryResult *result = nil;
-    if (self.currentIndexPath.row == 0) {
-        result = self.storyGroup[self.currentIndexPath.section-1];
-        self.currentIndexPath = [NSIndexPath indexPathForRow:result.stories.count-1 inSection:self.currentIndexPath.section-1];
-    } else {
-        self.currentIndexPath = [NSIndexPath indexPathForRow:self.currentIndexPath.row-1 inSection:self.currentIndexPath.section];
-    }
-    result = self.storyGroup[self.currentIndexPath.section];
     
-    if (self.currentIndexPath.row == 0 && self.currentIndexPath.section ==0) {
+    NSInteger row = self.currentIndexPath.row;
+    NSInteger section = self.currentIndexPath.section;
+    
+    if (row == 0 && section ==0) return nil;
+
+    if (row == 0) {
+        section -= 1;
+        row = self.storyGroup[section].stories.count-1;
+    } else {
+        row -= 1;
+    }
+    
+    SYBeforeStoryResult *result = self.storyGroup[section];
+    if (row == 0 && section ==0) {
         detailController.position = 0;
     } else {
         detailController.position = 1;
     }
-    return result.stories[self.currentIndexPath.row];
+    
+    self.currentIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    return result.stories[row];
 }
 
 
@@ -319,8 +343,6 @@ static NSString *reuseid = @"useid";
             alpha = 1.;
         }
         self.headerView.backgroundColor = SYColor(23, 144, 211, alpha);
-        
-        
     }
 
 }

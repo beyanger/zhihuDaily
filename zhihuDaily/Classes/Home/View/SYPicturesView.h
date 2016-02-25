@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SYStory.h"
-@interface SYPicturesView : UIScrollView
+@interface SYPicturesView : UIView
 
 @property (nonatomic, strong) NSArray<SYStory *> *topStroies;
 
