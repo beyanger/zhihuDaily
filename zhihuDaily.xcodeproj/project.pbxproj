@@ -58,6 +58,8 @@
 		2F6CF2841C7FB6AA00C4B346 /* SYCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2831C7FB6AA00C4B346 /* SYCacheTool.m */; };
 		2F6CF2971C80329400C4B346 /* SYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2951C80329400C4B346 /* SYLoginViewController.m */; };
 		2F6CF2981C80329400C4B346 /* SYLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F6CF2961C80329400C4B346 /* SYLoginViewController.xib */; };
+		2F6CF29B1C80451500C4B346 /* SYTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF29A1C80451500C4B346 /* SYTableHeader.m */; };
+		2F6CF29D1C80452E00C4B346 /* SYTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F6CF29C1C80452E00C4B346 /* SYTableHeader.xib */; };
 		2F9995DC1C7C206D0072C8F0 /* SYShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995DB1C7C206D0072C8F0 /* SYShareView.m */; };
 		2F9995E11C7C39190072C8F0 /* SYCommentsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E01C7C39190072C8F0 /* SYCommentsTableController.m */; };
 		2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E31C7C3D100072C8F0 /* SYComment.m */; };
@@ -246,6 +248,9 @@
 		2F6CF2941C80329400C4B346 /* SYLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYLoginViewController.h; sourceTree = "<group>"; };
 		2F6CF2951C80329400C4B346 /* SYLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYLoginViewController.m; sourceTree = "<group>"; };
 		2F6CF2961C80329400C4B346 /* SYLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYLoginViewController.xib; sourceTree = "<group>"; };
+		2F6CF2991C80451500C4B346 /* SYTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYTableHeader.h; sourceTree = "<group>"; };
+		2F6CF29A1C80451500C4B346 /* SYTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYTableHeader.m; sourceTree = "<group>"; };
+		2F6CF29C1C80452E00C4B346 /* SYTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYTableHeader.xib; sourceTree = "<group>"; };
 		2F9995DA1C7C206D0072C8F0 /* SYShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYShareView.h; sourceTree = "<group>"; };
 		2F9995DB1C7C206D0072C8F0 /* SYShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYShareView.m; sourceTree = "<group>"; };
 		2F9995DF1C7C39190072C8F0 /* SYCommentsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCommentsTableController.h; sourceTree = "<group>"; };
@@ -965,6 +970,9 @@
 			children = (
 				2FE7078F1C7DBF4E005CB13B /* SYThemeViewCell.h */,
 				2FE707901C7DBF4E005CB13B /* SYThemeViewCell.m */,
+				2F6CF2991C80451500C4B346 /* SYTableHeader.h */,
+				2F6CF29A1C80451500C4B346 /* SYTableHeader.m */,
+				2F6CF29C1C80452E00C4B346 /* SYTableHeader.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1129,6 +1137,7 @@
 				2FE707AC1C7DDC69005CB13B /* SYLeftDrawerController.xib in Resources */,
 				2FE707A71C7DD6B6005CB13B /* SYMainToolBox.xib in Resources */,
 				2F4F1A871C7FA09500AF3BDF /* Info.plist in Resources */,
+				2F6CF29D1C80452E00C4B346 /* SYTableHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1231,6 +1240,7 @@
 				2FC588031C7A0974003C9A7A /* ViewController+MASAdditions.m in Sources */,
 				2F2CCB971C7B016500C45E3D /* SYTableViewCell.m in Sources */,
 				2FE707821C7D86C4005CB13B /* SYHomeHeaderView.m in Sources */,
+				2F6CF29B1C80451500C4B346 /* SYTableHeader.m in Sources */,
 				2F2CCB9E1C7B043000C45E3D /* SYLastestGroup.m in Sources */,
 				2FC588071C7A0B50003C9A7A /* YSHttpTool.m in Sources */,
 				2F9995DC1C7C206D0072C8F0 /* SYShareView.m in Sources */,

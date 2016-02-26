@@ -15,6 +15,7 @@
 #import "UIImageView+WebCache.h"
 #import "UIView+Extension.h"
 #import "MBProgressHUD+YS.h"
+#import "SYTableHeader.h"
 
 
 @interface SYThemeController () <UITableViewDataSource, UITableViewDelegate>
@@ -28,6 +29,8 @@
 @property (nonatomic, strong) UIButton *backBtn;
 @property (nonatomic, strong) UIButton *collectBtn;
 @property (nonatomic, strong) SYRefreshView *refreshView;
+@property (nonatomic, strong) SYTableHeader *tableHeader;
+
 @end
 
 static NSString *theme_reuseid = @"theme_reuseid";
@@ -82,9 +85,27 @@ static NSString *theme_reuseid = @"theme_reuseid";
         _tableView.frame = CGRectMake(0, 60, kScreenWidth, kScreenHeight-60);
         _tableView.delegate =self;
         _tableView.dataSource = self;
+        
+        _tableView.tableHeaderView = self.tableHeader;
     }
     return _tableView;
 }
+
+- (UIView *)tableHeader {
+    if (!_tableHeader) {
+        _tableHeader = [[NSBundle mainBundle] loadNibNamed:@"SYTableHeader" owner:nil options:nil].firstObject;
+        _tableView.backgroundColor = randomColor;
+        _tableHeader.bounds = CGRectMake(0, 0, kScreenWidth, 40);
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickedHeader)];
+        [_tableHeader addGestureRecognizer:tap];
+    }
+    return _tableHeader;
+}
+
+- (void)clickedHeader {
+    NSLog(@"电解铝 。。。。");
+}
+
 
 - (UIImageView *)headerView {
     if (!_headerView) {
@@ -173,7 +194,7 @@ static NSString *theme_reuseid = @"theme_reuseid";
             self.refreshView.centerY = self.titleLabel.centerY;
             self.refreshView.x = self.titleLabel.x-30;
             [self.headerView sd_setImageWithURL:[NSURL URLWithString:self.themeItem.image]];
-            
+            self.tableHeader.editors = self.themeItem.editors;
             [self.tableView reloadData];
             [self.refreshView endRefresh];
         });
