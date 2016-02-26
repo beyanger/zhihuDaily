@@ -28,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    White_StatusBar;
+
     [self updateButton];
    
     self.webView.delegate = self;
@@ -35,6 +37,9 @@
 }
 
 
+- (void)dealloc{
+    Black_StatusBar;
+}
 
 
 - (IBAction)pop {

@@ -32,7 +32,7 @@
     
     self.mainController = [[SYMainViewController alloc] init];
     self.window.rootViewController = self.mainController;
-    
+
     
     return YES;
     

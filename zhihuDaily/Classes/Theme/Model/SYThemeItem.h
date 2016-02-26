@@ -12,7 +12,10 @@
 
 @property (nonatomic, strong) NSArray *stories;
 
+
 @property (nonatomic, copy) NSString *desc;
+
+@property (nonatomic, copy) NSString *background;
 
 @property (nonatomic, assign) long color;
 

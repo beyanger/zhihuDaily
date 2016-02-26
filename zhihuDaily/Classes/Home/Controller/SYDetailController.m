@@ -194,12 +194,6 @@
     
 }
 
-
-
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-
-}
-
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (scrollView.contentOffset.y < -80) {
   
@@ -336,6 +330,13 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if ([keyPath isEqualToString:@"contentOffset"]) {
         CGFloat yoffset = [change[@"new"] CGPointValue].y;
+        
+        if (yoffset > 220) {
+            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+        } else {
+            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        }
+        
         
         if (!self.isChanging) {
             if (yoffset < 0) {

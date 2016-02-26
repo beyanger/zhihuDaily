@@ -29,6 +29,7 @@
     if (self) {
         WEAKSELF;
         UIScrollView *scrollerView = [[UIScrollView alloc] init];
+        scrollerView.pagingEnabled = YES;
         [self addSubview:scrollerView];
         scrollerView.bounces = NO;
         scrollerView.delegate = self;

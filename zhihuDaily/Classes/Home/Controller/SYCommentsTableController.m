@@ -44,6 +44,11 @@ static NSString *comment_reuseid = @"comment_reuseid";
     [self setupBackBtn];
 }
 
+- (void)dealloc
+{
+    
+}
+
 - (void)setupTableView {
     UITableView *tableView = [[UITableView alloc] init];
     tableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-40);

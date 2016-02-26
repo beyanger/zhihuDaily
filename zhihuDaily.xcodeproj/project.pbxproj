@@ -56,7 +56,6 @@
 		2F6CF27C1C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2781C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		2F6CF27D1C7FB20700C4B346 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF27A1C7FB20700C4B346 /* UIView+Extension.m */; };
 		2F6CF2841C7FB6AA00C4B346 /* SYCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2831C7FB6AA00C4B346 /* SYCacheTool.m */; };
-		2F6CF28C1C7FF84A00C4B346 /* SYThemeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF28B1C7FF84A00C4B346 /* SYThemeHeaderView.m */; };
 		2F9995DC1C7C206D0072C8F0 /* SYShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995DB1C7C206D0072C8F0 /* SYShareView.m */; };
 		2F9995E11C7C39190072C8F0 /* SYCommentsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E01C7C39190072C8F0 /* SYCommentsTableController.m */; };
 		2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E31C7C3D100072C8F0 /* SYComment.m */; };
@@ -242,8 +241,6 @@
 		2F6CF27A1C7FB20700C4B346 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		2F6CF2821C7FB6AA00C4B346 /* SYCacheTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCacheTool.h; sourceTree = "<group>"; };
 		2F6CF2831C7FB6AA00C4B346 /* SYCacheTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCacheTool.m; sourceTree = "<group>"; };
-		2F6CF28A1C7FF84A00C4B346 /* SYThemeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYThemeHeaderView.h; sourceTree = "<group>"; };
-		2F6CF28B1C7FF84A00C4B346 /* SYThemeHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYThemeHeaderView.m; sourceTree = "<group>"; };
 		2F9995DA1C7C206D0072C8F0 /* SYShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYShareView.h; sourceTree = "<group>"; };
 		2F9995DB1C7C206D0072C8F0 /* SYShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYShareView.m; sourceTree = "<group>"; };
 		2F9995DF1C7C39190072C8F0 /* SYCommentsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCommentsTableController.h; sourceTree = "<group>"; };
@@ -928,8 +925,6 @@
 			children = (
 				2FE7078F1C7DBF4E005CB13B /* SYThemeViewCell.h */,
 				2FE707901C7DBF4E005CB13B /* SYThemeViewCell.m */,
-				2F6CF28A1C7FF84A00C4B346 /* SYThemeHeaderView.h */,
-				2F6CF28B1C7FF84A00C4B346 /* SYThemeHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1126,7 +1121,6 @@
 				2F9995E11C7C39190072C8F0 /* SYCommentsTableController.m in Sources */,
 				2F9995FF1C7C75C70072C8F0 /* SYPresentAnimation.m in Sources */,
 				2FC588001C7A0974003C9A7A /* NSArray+MASAdditions.m in Sources */,
-				2F6CF28C1C7FF84A00C4B346 /* SYThemeHeaderView.m in Sources */,
 				2FC5879E1C7A0956003C9A7A /* AFHTTPRequestOperation.m in Sources */,
 				2F2CCBA41C7B088E00C45E3D /* SYLastestParamResult.m in Sources */,
 				2FB923151C7F369A000A0A2D /* SYVersion.m in Sources */,
@@ -1363,7 +1357,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = zhihuDaily/zhihuDaily.pch;
 				INFOPLIST_FILE = zhihuDaily/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.beyanger.zhihuDaily;
 				PRODUCT_NAME = "知乎日报";
@@ -1378,7 +1372,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = zhihuDaily/zhihuDaily.pch;
 				INFOPLIST_FILE = zhihuDaily/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.beyanger.zhihuDaily;
 				PRODUCT_NAME = "知乎日报";

@@ -57,6 +57,7 @@ static NSString *reuseid = @"useid";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    White_StatusBar;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     

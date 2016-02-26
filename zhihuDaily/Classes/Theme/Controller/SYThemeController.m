@@ -8,11 +8,11 @@
 
 #import "SYThemeController.h"
 #import "SYRefreshView.h"
-#import "SYThemeHeaderView.h"
 #import "SYThemeItem.h"
 #import "SYZhihuTool.h"
 #import "SYStory.h"
-
+#import "Masonry.h"
+#import "UIImageView+WebCache.h"
 
 @interface SYThemeController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -20,10 +20,11 @@
 @property (nonatomic, strong) SYThemeItem *themeItem;
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) SYThemeHeaderView *headerView;
-
-
-
+@property (nonatomic, strong) UIImageView *headerView;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UIButton *backBtn;
+@property (nonatomic, strong) UIButton *collectBtn;
+@property (nonatomic, strong) SYRefreshView *refreshView;
 @end
 
 static NSString *theme_reuseid = @"theme_reuseid";
@@ -34,36 +35,29 @@ static NSString *theme_reuseid = @"theme_reuseid";
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+
+    
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.headerView];
-}
-
-- (UITableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] init];
-        _tableView.frame = CGRectMake(0, 60, kScreenWidth, kScreenHeight-60);
-        _tableView.delegate =self;
-        _tableView.dataSource = self;
-    }
-    return _tableView;
-}
-
-- (SYThemeHeaderView *)headerView {
-    if (!_headerView) {
-        _headerView = [[SYThemeHeaderView alloc] initWithAttachScrollView:self.tableView];
-        _headerView.frame = CGRectMake(0, 0, kScreenWidth, 60);
-        _headerView.backgroundColor = [UIColor purpleColor];
-    }
-    return _headerView;
+    [self.view addSubview:self.titleLabel];
+    [self.view addSubview:self.backBtn];
+    [self.view addSubview:self.collectBtn];
+    [self.view addSubview:self.refreshView];
+    
+    WEAKSELF;
+    
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(CGPointMake(kScreenWidth*0.5, 40));
+    }];
+    
+    [self.refreshView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(ws.titleLabel);
+        make.right.mas_equalTo(ws.titleLabel.mas_left).offset(-16);
+    }];
+    
 }
 
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return self.stories.count;
@@ -81,15 +75,70 @@ static NSString *theme_reuseid = @"theme_reuseid";
 }
 
 
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.frame = CGRectMake(0, 60, kScreenWidth, kScreenHeight-60);
+        _tableView.delegate =self;
+        _tableView.dataSource = self;
+    }
+    return _tableView;
+}
+
+- (UIImageView *)headerView {
+    if (!_headerView) {
+        _headerView = [[UIImageView alloc] init];
+        _headerView.frame = CGRectMake(0, 0, kScreenWidth, 60);
+    }
+    return _headerView;
+}
+
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.textColor = [UIColor whiteColor];
+        _titleLabel.font = [UIFont systemFontOfSize:18];
+    }
+    return _titleLabel;
+}
+
+- (SYRefreshView *)refreshView {
+    if (!_refreshView) {
+        _refreshView = [SYRefreshView refreshViewWithScrollView:self.tableView];
+    }
+    return _refreshView;
+}
+
+- (UIButton *)backBtn {
+    if (!_backBtn) {
+        _backBtn = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        _backBtn.center = CGPointMake(20, 40);
+    }
+    return _backBtn;
+}
+
+- (UIButton *)collectBtn {
+    if (!_collectBtn) {
+        _collectBtn = [UIButton buttonWithType:UIButtonTypeContactAdd];
+        _collectBtn.center = CGPointMake(kScreenWidth-20, 40);
+    }
+    return _collectBtn;
+}
+
+
 
 - (void)setThemeid:(int)themeid {
     _themeid = themeid;
     [SYZhihuTool getThemeWithThemeId:themeid completed:^(id obj) {
         self.themeItem = obj;
-        self.headerView.themeItem = obj;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
+        
+        [self.tableView reloadData];
+        
+        self.titleLabel.text = self.themeItem.name;
+        [self.titleLabel sizeToFit];
+        
+        [self.headerView sd_setImageWithURL:[NSURL URLWithString:self.themeItem.image]];
+        
     }];
 }
 
@@ -98,48 +147,6 @@ static NSString *theme_reuseid = @"theme_reuseid";
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
