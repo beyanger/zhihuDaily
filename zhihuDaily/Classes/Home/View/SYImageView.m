@@ -74,19 +74,19 @@
 
 
 + (instancetype)imageWithURLString:(NSString *)url {
-    SYImageView *imageView = [[self alloc] init];
+    SYImageView *view = [[self alloc] init];
     
-    imageView.frame = kScreenBounds;
-    imageView.transform = CGAffineTransformMakeScale(0.5, 0.5);
-    imageView.alpha = 0.0;
-    [imageView setImage:url];
+    view.frame = kScreenBounds;
+    view.imageView.transform = CGAffineTransformMakeScale(0.5, 0.5);
+    view.alpha = 0.0;
+    [view setImage:url];
     
-    [[UIApplication sharedApplication].keyWindow addSubview:imageView];
+    [[UIApplication sharedApplication].keyWindow addSubview:view];
     [UIView animateWithDuration:0.25 animations:^{
-        imageView.transform = CGAffineTransformIdentity;
-        imageView.alpha = 1.0;
+        view.imageView.transform = CGAffineTransformIdentity;
+        view.alpha = 1.0;
     }];
-    return imageView;
+    return view;
 }
 
 
@@ -102,7 +102,7 @@
 - (void)remove {
     [UIView animateWithDuration:0.25 animations:^{
         self.alpha = 0;
-        self.transform = CGAffineTransformMakeScale(0.5, 0.5);
+        self.imageView.transform = CGAffineTransformMakeScale(0.5, 0.5);
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
     }];
