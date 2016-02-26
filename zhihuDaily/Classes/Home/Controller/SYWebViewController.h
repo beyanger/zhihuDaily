@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYBaseViewController.h"
 
-@interface SYWebViewController : UIViewController
+@interface SYWebViewController : SYBaseViewController
 @property (nonatomic, strong) NSURLRequest *request;
 @end

@@ -60,6 +60,8 @@
 		2F6CF2981C80329400C4B346 /* SYLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F6CF2961C80329400C4B346 /* SYLoginViewController.xib */; };
 		2F6CF29B1C80451500C4B346 /* SYTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF29A1C80451500C4B346 /* SYTableHeader.m */; };
 		2F6CF29D1C80452E00C4B346 /* SYTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F6CF29C1C80452E00C4B346 /* SYTableHeader.xib */; };
+		2F6CF2A01C8053C500C4B346 /* SYEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF29F1C8053C500C4B346 /* SYEditorController.m */; };
+		2F6CF2A51C80612100C4B346 /* SYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2A31C80612100C4B346 /* SYBaseViewController.m */; };
 		2F9995DC1C7C206D0072C8F0 /* SYShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995DB1C7C206D0072C8F0 /* SYShareView.m */; };
 		2F9995E11C7C39190072C8F0 /* SYCommentsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E01C7C39190072C8F0 /* SYCommentsTableController.m */; };
 		2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E31C7C3D100072C8F0 /* SYComment.m */; };
@@ -251,6 +253,10 @@
 		2F6CF2991C80451500C4B346 /* SYTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYTableHeader.h; sourceTree = "<group>"; };
 		2F6CF29A1C80451500C4B346 /* SYTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYTableHeader.m; sourceTree = "<group>"; };
 		2F6CF29C1C80452E00C4B346 /* SYTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYTableHeader.xib; sourceTree = "<group>"; };
+		2F6CF29E1C8053C500C4B346 /* SYEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEditorController.h; sourceTree = "<group>"; };
+		2F6CF29F1C8053C500C4B346 /* SYEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEditorController.m; sourceTree = "<group>"; };
+		2F6CF2A21C80612100C4B346 /* SYBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYBaseViewController.h; sourceTree = "<group>"; };
+		2F6CF2A31C80612100C4B346 /* SYBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYBaseViewController.m; sourceTree = "<group>"; };
 		2F9995DA1C7C206D0072C8F0 /* SYShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYShareView.h; sourceTree = "<group>"; };
 		2F9995DB1C7C206D0072C8F0 /* SYShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYShareView.m; sourceTree = "<group>"; };
 		2F9995DF1C7C39190072C8F0 /* SYCommentsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCommentsTableController.h; sourceTree = "<group>"; };
@@ -777,6 +783,8 @@
 				2FE707B11C7DECDD005CB13B /* SYDemoViewController.m */,
 				2F1319D61C7E113700FA146F /* SYNavigationController.h */,
 				2F1319D71C7E113700FA146F /* SYNavigationController.m */,
+				2F6CF2A21C80612100C4B346 /* SYBaseViewController.h */,
+				2F6CF2A31C80612100C4B346 /* SYBaseViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -950,6 +958,8 @@
 			children = (
 				2FE7078B1C7DBF4E005CB13B /* SYThemeController.h */,
 				2FE7078C1C7DBF4E005CB13B /* SYThemeController.m */,
+				2F6CF29E1C8053C500C4B346 /* SYEditorController.h */,
+				2F6CF29F1C8053C500C4B346 /* SYEditorController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1178,6 +1188,7 @@
 				2FC587A11C7A0956003C9A7A /* AFNetworkReachabilityManager.m in Sources */,
 				2FE707B21C7DECDD005CB13B /* SYDemoViewController.m in Sources */,
 				2FC587A61C7A0956003C9A7A /* AFURLSessionManager.m in Sources */,
+				2F6CF2A01C8053C500C4B346 /* SYEditorController.m in Sources */,
 				2F2CCBC01C7B0C1400C45E3D /* MJExtensionConst.m in Sources */,
 				2FE707AF1C7DE3F4005CB13B /* SYLeftDrawerCell.m in Sources */,
 				2F2CCBC31C7B0C1400C45E3D /* MJPropertyKey.m in Sources */,
@@ -1213,6 +1224,7 @@
 				2FC587D01C7A096A003C9A7A /* MKAnnotationView+WebCache.m in Sources */,
 				2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */,
 				2FC587FE1C7A0974003C9A7A /* MASViewAttribute.m in Sources */,
+				2F6CF2A51C80612100C4B346 /* SYBaseViewController.m in Sources */,
 				2F2CCBA71C7B08F600C45E3D /* SYStory.m in Sources */,
 				2F2CCBC71C7B0C1400C45E3D /* NSObject+MJKeyValue.m in Sources */,
 				2FC587D11C7A096A003C9A7A /* NSData+ImageContentType.m in Sources */,

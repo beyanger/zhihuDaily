@@ -12,8 +12,7 @@
 
 @interface SYWebViewController () <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
-@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicator;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (nonatomic, strong) UIActivityIndicatorView *indicator;
 
 @property (nonatomic, weak) UIView *cover;
 @property (nonatomic, weak) SYShareView  *shareView;
@@ -30,6 +29,7 @@
 
     White_StatusBar;
 
+    [self.view addSubview:self.indicator];
     [self updateButton];
    
     self.webView.delegate = self;
@@ -59,10 +59,12 @@
     [shareView show];
 }
 
-
-
-- (void)setRequest:(NSURLRequest *)request {
-    _request = request;
+- (UIActivityIndicatorView *)indicator {
+    if (!_indicator) {
+        _indicator  = [[UIActivityIndicatorView alloc] init];
+        _indicator.frame = CGRectMake(kScreenWidth-44, 20, 44, 44);
+    }
+    return _indicator;
 }
 
 
@@ -76,7 +78,7 @@
     [self updateButton];
     
     
-    self.titleLabel.text = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 }
 
 

@@ -10,7 +10,7 @@
 #define zhihuDaily_pch
 
 #define WEAKSELF    __weak __typeof(&*self) ws = self;
-#define SYColor(r, g, b, a) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:a]
+#define SYColor(r, g, b, a) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:a*1.0]
 
 #define randomColor       SYColor(arc4random()%255, arc4random()%255, arc4random()%255, 1.)
 

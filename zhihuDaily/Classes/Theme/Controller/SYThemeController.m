@@ -16,7 +16,7 @@
 #import "UIView+Extension.h"
 #import "MBProgressHUD+YS.h"
 #import "SYTableHeader.h"
-
+#import "SYEditorController.h"
 
 @interface SYThemeController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -50,7 +50,14 @@ static NSString *theme_reuseid = @"theme_reuseid";
     [self.view addSubview:self.collectBtn];
     [self.view addSubview:self.refreshView];
     [self.view addSubview:self.titleLabel];
+
     WEAKSELF;
+    
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(ws.view);
+        make.centerY.mas_equalTo(ws.view.mas_top).offset(42);
+    }];
+
   
     [self.refreshView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(ws.titleLabel);
@@ -94,7 +101,6 @@ static NSString *theme_reuseid = @"theme_reuseid";
 - (UIView *)tableHeader {
     if (!_tableHeader) {
         _tableHeader = [[NSBundle mainBundle] loadNibNamed:@"SYTableHeader" owner:nil options:nil].firstObject;
-        _tableView.backgroundColor = randomColor;
         _tableHeader.bounds = CGRectMake(0, 0, kScreenWidth, 40);
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickedHeader)];
         [_tableHeader addGestureRecognizer:tap];
@@ -103,7 +109,8 @@ static NSString *theme_reuseid = @"theme_reuseid";
 }
 
 - (void)clickedHeader {
-    NSLog(@"电解铝 。。。。");
+    SYEditorController *evc = [[SYEditorController alloc] init];
+    [self.navigationController pushViewController:evc animated:YES];
 }
 
 
@@ -188,9 +195,6 @@ static NSString *theme_reuseid = @"theme_reuseid";
         
         dispatch_async(dispatch_get_main_queue(), ^{
             self.titleLabel.text = self.themeItem.name;
-            self.titleLabel.size = [self.themeItem.name sizeWithAttributes:@{NSFontAttributeName:self.titleLabel.font}];
-            
-            _titleLabel.center = CGPointMake(kScreenWidth*0.5, 40);
             self.refreshView.centerY = self.titleLabel.centerY;
             self.refreshView.x = self.titleLabel.x-30;
             [self.headerView sd_setImageWithURL:[NSURL URLWithString:self.themeItem.image]];
