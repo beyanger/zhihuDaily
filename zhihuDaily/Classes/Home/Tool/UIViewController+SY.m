@@ -10,26 +10,33 @@
 #import "SYPresentAnimation.h"
 #import "SYDismisAnimation.h"
 #import <objc/runtime.h>
-
+#import "SYLoginViewController.h"
 
 @implementation UIViewController (SY) 
 
 - (void)new_presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag completion:(void (^ __nullable)(void))completion {
 
-    viewControllerToPresent.modalPresentationStyle = UIModalPresentationCustom;
-    viewControllerToPresent.transitioningDelegate = self;
+    if (![viewControllerToPresent isKindOfClass:[SYLoginViewController class]]) {
+        viewControllerToPresent.modalPresentationStyle = UIModalPresentationCustom;
+        viewControllerToPresent.transitioningDelegate = self;
+    }
     
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         [self new_presentViewController:viewControllerToPresent animated:YES completion:completion];
     });
+    
+    
+    
 }
 
 
 - (void)new_dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
-    
-    self.modalPresentationStyle = UIModalPresentationCustom;
-    self.transitioningDelegate = self;
+    if (![self isKindOfClass:[SYLoginViewController class]]) {
+        self.modalPresentationStyle = UIModalPresentationCustom;
+        self.transitioningDelegate = self;
+    }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         

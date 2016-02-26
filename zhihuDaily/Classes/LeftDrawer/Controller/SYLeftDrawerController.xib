@@ -7,10 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYLeftDrawerController">
             <connections>
-                <outlet property="avatarView" destination="nyY-iu-1Mk" id="Bpg-sC-E3b"/>
                 <outlet property="bottomContainer" destination="Z2y-rx-axp" id="rpP-fk-iVY"/>
                 <outlet property="dayNightButton" destination="4OM-8E-Ada" id="6yc-Za-Cn0"/>
-                <outlet property="nameLabel" destination="CSA-JC-FiO" id="fQZ-Ym-VcL"/>
                 <outlet property="offlineButton" destination="ouR-em-HCb" id="Chj-km-9wc"/>
                 <outlet property="tableView" destination="2ct-Rg-CXs" id="q2D-CB-VpE"/>
                 <outlet property="view" destination="wIS-YN-ehO" id="VV2-tV-tSd"/>
@@ -82,35 +80,31 @@
                                 <constraint firstAttribute="bottom" secondItem="dmM-KK-dCi" secondAttribute="bottom" id="y5y-Ty-OGo"/>
                             </constraints>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Comment_Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="nyY-iu-1Mk">
-                            <rect key="frame" x="15" y="5" width="40" height="40"/>
-                            <animations/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="40" id="Oqt-of-oww"/>
-                            </constraints>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我发现你爹" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSA-JC-FiO">
-                            <rect key="frame" x="71" y="0.0" width="129" height="50"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbX-T9-v3G">
+                            <rect key="frame" x="0.0" y="0.0" width="200" height="60"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.50588235294117645" green="0.52549019607843139" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                            <inset key="titleEdgeInsets" minX="35" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="请登录" image="Menu_Avatar">
+                                <color key="titleColor" red="0.88627450980392153" green="0.8901960784313725" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="login" destination="-1" eventType="touchUpInside" id="SbT-fk-hnr"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" red="0.10196078431372549" green="0.12156862745098039" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="120" id="7Wq-U2-cpa"/>
-                        <constraint firstItem="CSA-JC-FiO" firstAttribute="leading" secondItem="nyY-iu-1Mk" secondAttribute="trailing" constant="16" id="CQP-x2-LjL"/>
                         <constraint firstItem="GBX-SP-FKl" firstAttribute="leading" secondItem="0Zn-t0-lhY" secondAttribute="leading" id="NiM-lM-yRo"/>
-                        <constraint firstItem="CSA-JC-FiO" firstAttribute="top" secondItem="0Zn-t0-lhY" secondAttribute="top" id="a6C-sN-QTK"/>
+                        <constraint firstItem="kbX-T9-v3G" firstAttribute="leading" secondItem="0Zn-t0-lhY" secondAttribute="leading" id="U2w-dt-4N6"/>
+                        <constraint firstItem="kbX-T9-v3G" firstAttribute="top" secondItem="0Zn-t0-lhY" secondAttribute="top" id="UbC-xp-z3T"/>
+                        <constraint firstAttribute="trailing" secondItem="kbX-T9-v3G" secondAttribute="trailing" id="WCK-4O-cSJ"/>
                         <constraint firstAttribute="bottom" secondItem="GBX-SP-FKl" secondAttribute="bottom" id="bdR-dL-oRs"/>
-                        <constraint firstItem="nyY-iu-1Mk" firstAttribute="top" secondItem="0Zn-t0-lhY" secondAttribute="top" constant="5" id="dtb-RJ-nL8"/>
-                        <constraint firstAttribute="trailing" secondItem="CSA-JC-FiO" secondAttribute="trailing" id="fnB-px-rIi"/>
-                        <constraint firstItem="GBX-SP-FKl" firstAttribute="top" secondItem="nyY-iu-1Mk" secondAttribute="bottom" constant="15" id="jeE-g2-92J"/>
-                        <constraint firstItem="GBX-SP-FKl" firstAttribute="top" secondItem="CSA-JC-FiO" secondAttribute="bottom" constant="10" id="nBE-RR-H6Y"/>
+                        <constraint firstItem="GBX-SP-FKl" firstAttribute="top" secondItem="kbX-T9-v3G" secondAttribute="bottom" id="e8F-bk-iNR"/>
                         <constraint firstAttribute="trailing" secondItem="GBX-SP-FKl" secondAttribute="trailing" id="qiB-5o-d4F"/>
-                        <constraint firstItem="nyY-iu-1Mk" firstAttribute="leading" secondItem="0Zn-t0-lhY" secondAttribute="leading" constant="15" id="zQs-af-rG5"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z2y-rx-axp">
@@ -192,7 +186,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Comment_Avatar" width="30" height="30"/>
+        <image name="Menu_Avatar" width="35" height="35"/>
         <image name="Menu_Dark" width="22" height="22"/>
         <image name="Menu_Download" width="22" height="22"/>
         <image name="Menu_Icon_Collect" width="20" height="20"/>

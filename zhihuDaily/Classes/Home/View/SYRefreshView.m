@@ -63,7 +63,7 @@
 }
 
 - (void)dealloc {
-    [self removeObserver:self.scrollView forKeyPath:@"contentOffset"];
+    [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
@@ -71,7 +71,9 @@
     
     if (self.refreshing)  return;
     
+    
     CGFloat height = [change[@"new"] CGPointValue].y;
+    
     if (height > 0) {
         height = 0.;
     } else if (height <= -80) {
@@ -80,7 +82,9 @@
         height = height / -80.0;
     }
     
+    
     if (self.scrollView.isDragging) {
+        
         self.hidden = NO;
         self.refreshFlag = height;
         self.progressLayer.hidden = NO;
