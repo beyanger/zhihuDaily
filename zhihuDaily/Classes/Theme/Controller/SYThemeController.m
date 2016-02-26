@@ -40,12 +40,9 @@ static NSString *theme_reuseid = @"theme_reuseid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
 
-    
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.headerView];
-   
+    [self.view addSubview:self.headerView];   
     [self.view addSubview:self.backBtn];
     [self.view addSubview:self.collectBtn];
     [self.view addSubview:self.refreshView];
@@ -55,7 +52,7 @@ static NSString *theme_reuseid = @"theme_reuseid";
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(ws.view);
-        make.centerY.mas_equalTo(ws.view.mas_top).offset(42);
+        make.centerY.mas_equalTo(ws.view.mas_top).offset(40);
     }];
 
   
@@ -92,7 +89,6 @@ static NSString *theme_reuseid = @"theme_reuseid";
         _tableView.frame = CGRectMake(0, 60, kScreenWidth, kScreenHeight-60);
         _tableView.delegate =self;
         _tableView.dataSource = self;
-        
         _tableView.tableHeaderView = self.tableHeader;
     }
     return _tableView;
@@ -110,6 +106,7 @@ static NSString *theme_reuseid = @"theme_reuseid";
 
 - (void)clickedHeader {
     SYEditorController *evc = [[SYEditorController alloc] init];
+    evc.editors = self.themeItem.editors;
     [self.navigationController pushViewController:evc animated:YES];
 }
 
@@ -192,7 +189,6 @@ static NSString *theme_reuseid = @"theme_reuseid";
 - (void)reload {
     [SYZhihuTool getThemeWithThemeId:self.themeid completed:^(id obj) {
         self.themeItem = obj;
-        
         dispatch_async(dispatch_get_main_queue(), ^{
             self.titleLabel.text = self.themeItem.name;
             self.refreshView.centerY = self.titleLabel.centerY;
@@ -212,7 +208,6 @@ static NSString *theme_reuseid = @"theme_reuseid";
     }
 }
 
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat yoffset = scrollView.contentOffset.y;
     if (yoffset <= 0 && yoffset >= -90) {
@@ -220,16 +215,9 @@ static NSString *theme_reuseid = @"theme_reuseid";
     } else if (yoffset < -90) {
         self.tableView.contentOffset = CGPointMake(0, -90);
     }
-
 }
-
-
 
 - (NSArray<SYStory *> *)stories {
     return self.themeItem.stories;
 }
-
-
-
-
 @end

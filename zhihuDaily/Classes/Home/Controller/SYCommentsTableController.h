@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "SYStory.h"
 #import "SYComment.h"
-@interface SYCommentsTableController : UIViewController
+#import "SYBaseViewController.h"
+
+
+@interface SYCommentsTableController : SYBaseViewController
 
 @property (nonatomic, strong) SYStory *story;
 

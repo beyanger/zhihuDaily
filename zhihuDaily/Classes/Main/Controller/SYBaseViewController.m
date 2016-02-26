@@ -29,7 +29,7 @@
     [self.view addSubview:self.sy_titleLabel];
     [self.view addSubview:self.sy_backButton];
     [self.sy_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(ws.view.mas_top).offset(44);
+        make.centerY.mas_equalTo(ws.view.mas_top).offset(40);
         make.left.mas_equalTo(ws.view.mas_left).offset(44);
         make.right.mas_equalTo(ws.view.mas_right).offset(-44);
     }];
@@ -38,7 +38,7 @@
 - (UIImageView *)sy_headerBackgroundView {
     if (!_sy_headerBackgroundView) {
         _sy_headerBackgroundView = [[UIImageView alloc] init];
-        _sy_headerBackgroundView.frame = CGRectMake(0, 0, kScreenWidth, 64);
+        _sy_headerBackgroundView.frame = CGRectMake(0, 0, kScreenWidth, 60);
         _sy_headerBackgroundView.backgroundColor = SYColor(48, 127, 255, 1.0);;
     }
     return _sy_headerBackgroundView;
@@ -60,7 +60,7 @@
     if (!_sy_backButton) {
         _sy_backButton = [[UIButton alloc] init];
         [_sy_backButton setImage:[UIImage imageNamed:@"Field_Back"] forState:UIControlStateNormal];
-        _sy_backButton.frame = CGRectMake(0, 20, 44, 44);
+        _sy_backButton.frame = CGRectMake(0, 20, 40, 40);
         [_sy_backButton addTarget:self action:@selector(sy_back) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sy_backButton;

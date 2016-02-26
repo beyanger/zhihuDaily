@@ -19,9 +19,6 @@ static NSString *comment_reuseid = @"comment_reuseid";
 @property (nonatomic, strong) NSMutableDictionary *allComments;
 
 @property (nonatomic, strong) SYCommentCell *prototypeCell;
-
-@property (nonatomic, weak) UIButton *backButton;
-
 @end
 
 @implementation SYCommentsTableController
@@ -30,11 +27,6 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self.navigationController.navigationBar lt_setBackgroundColor:SYColor(23, 144, 211, 1.)];
-    NSDictionary *attr = @{
-            NSForegroundColorAttributeName:[UIColor whiteColor]};
-    self.navigationController.navigationBar.titleTextAttributes = attr;
     self.title = @"评论";
 
     [self setupTableView];
@@ -51,7 +43,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
 - (void)setupTableView {
     UITableView *tableView = [[UITableView alloc] init];
-    tableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight-40);
+    tableView.frame = CGRectMake(0, 60, kScreenWidth, kScreenHeight-104);
     [self.view addSubview:tableView];
     self.tableView = tableView;
     tableView.delegate = self;
@@ -67,12 +59,11 @@ static NSString *comment_reuseid = @"comment_reuseid";
     [button setTitle:@"返回" forState:UIControlStateNormal];
     [self.view addSubview:button];
     [button addTarget:self action:@selector(backGo) forControlEvents:UIControlEventTouchUpInside];
-    self.backButton = button;
 }
 
 
 - (void)backGo {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)setupDataSource {

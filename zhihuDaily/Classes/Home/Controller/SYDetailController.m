@@ -91,12 +91,8 @@
         case 4: {// comment
             SYCommentsTableController *ctc = [[SYCommentsTableController alloc] init];
             ctc.story = self.story;
+            [self.navigationController pushViewController:ctc animated:ctc];
             
-            UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:ctc];
-            
-            //[self.navigationController pushViewController:ctc animated:ctc];
-            
-            [self presentViewController:navi animated:YES completion:nil];
             
         }
             break;
