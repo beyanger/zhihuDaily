@@ -208,7 +208,7 @@
             // 加载上一篇
             if (story) {
                 self.isChanging = YES;
-                [UIView animateWithDuration:4.3 animations:^{
+                [UIView animateWithDuration:0.3 animations:^{
                     self.topView.transform = CGAffineTransformMakeTranslation( 0, kScreenHeight);
                     self.webView.transform = CGAffineTransformMakeTranslation(0, kScreenHeight);
                 } completion:^(BOOL finished) {
@@ -225,7 +225,7 @@
                 
                 if (story) {
                     self.isChanging = YES;
-                    [UIView animateWithDuration:4.3 animations:^{
+                    [UIView animateWithDuration:.3 animations:^{
                         self.webView.transform = CGAffineTransformMakeTranslation(0, -kScreenHeight);
                     } completion:^(BOOL finished) {
                         self.story = story;
@@ -296,6 +296,8 @@
 - (void)setStory:(SYStory *)story {
     if (!story) return;
     _story = story;
+    
+    NSLog(@"story id: %lld", story.id);
     
     self.topView.transform = CGAffineTransformIdentity;
     self.webView.transform = CGAffineTransformIdentity;

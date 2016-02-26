@@ -6,11 +6,19 @@
 //  Copyright © 2016年 yang. All rights reserved.
 //
 
+// 本文件中API大部分来自于
+// https://github.com/izzyleung/ZhihuDailyPurify/wiki/%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5-API-%E5%88%86%E6%9E%90
+
 #import "SYZhihuTool.h"
+#import "fmdb.h"
 
 
 
 @implementation SYZhihuTool
+
+
+
+
 
 + (void)getDetailWithId:(long long)storyid completed:(Completed)completed {
     NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/news/%lld", storyid];
@@ -103,14 +111,27 @@
     [SYBeforeStoryResult mj_setupObjectClassInArray:^NSDictionary *{
         return @{@"stories":@"SYStory"};
     }];
+    
+    
+    NSString *jsonString = [SYCacheTool queryStoryWithDateString:dateString];
+    
+    if (jsonString.length > 0) {
+        NSDictionary *response = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+        SYBeforeStoryResult *result = [SYBeforeStoryResult mj_objectWithKeyValues:response];
+        completed(result);
+        return;
+    }
+    
+    NSLog(@"网络请求更多历史数据：.%@", dateString);
     [YSHttpTool GETWithURL:beforeUrl params:nil success:^(id responseObject) {
         SYBeforeStoryResult *result = [SYBeforeStoryResult mj_objectWithKeyValues:responseObject];
         completed(result);
+        [SYCacheTool cacheStoryWithObject:responseObject];
     } failure:nil];
 }
 
 
-+ (void)getThemeWithThemeId:(int)themeId Completed:(Completed)completed {
++ (void)getThemeWithThemeId:(int)themeId completed:(Completed)completed {
     NSString *themeUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/theme/%d", themeId];
     
     [SYThemeItem mj_setupObjectClassInArray:^NSDictionary *{
@@ -126,8 +147,20 @@
         completed(item);
         
     } failure:nil];
-    
 }
 
+
++ (void)queryAppWithVersion:(NSString *)version  Completed:(Completed)completed {
+    
+    // http://news-at.zhihu.com/api/4/version/android/2.3.0
+    // http://news-at.zhihu.com/api/4/version/ios/2.3.0
+    NSString *versionUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/version/ios/%@", version];
+    
+    [YSHttpTool GETWithURL:versionUrl params:nil success:^(id responseObject) {
+        NSLog(@"%@", responseObject);
+        SYVersion *ver = [SYVersion mj_objectWithKeyValues:responseObject];
+        completed(ver);
+    } failure:nil];
+}
 
 @end

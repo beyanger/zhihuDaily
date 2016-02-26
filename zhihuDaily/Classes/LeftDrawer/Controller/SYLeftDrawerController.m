@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *dayNightButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property (weak, nonatomic) IBOutlet UIView *bottomContainer;
 @property (nonatomic, strong) UINavigationController *naviTheme;
 @property (nonatomic, strong)  SYThemeController *themeController;
 
@@ -34,14 +35,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.avatarView.layer.cornerRadius = 20;
-    self.avatarView.clipsToBounds = YES;
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    
+    [self setupSubviews];
     [self setupDataSource];
     
+}
+
+- (void)setupSubviews {
+    self.avatarView.layer.cornerRadius = 20;
+    self.avatarView.clipsToBounds = YES;
+    self.tableView.bounces = NO;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.bottomContainer.layer.shadowColor = SYColor(26, 31, 36, 1.0).CGColor;
+    self.bottomContainer.layer.shadowOffset = CGSizeMake(0, -30);
+    self.bottomContainer.layer.shadowOpacity = 0;
+    self.bottomContainer.layer.shadowRadius = 5.;
+}
+
+- (void)setupDataSource {
+    [SYZhihuTool getThemesWithCompleted:^(id obj) {
+        SYTheme *home = [[SYTheme alloc] init];
+        home.name = @"首页";
+        self.dataSource = [obj mutableCopy];
+        [self.dataSource insertObject:home atIndex:0];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
 }
 
 - (IBAction)didClickedMenuButton:(UIButton *)sender {
@@ -59,19 +81,6 @@
 }
 
 
-- (void)setupDataSource {
-    [SYZhihuTool getThemesWithCompleted:^(id obj) {
-        SYTheme *home = [[SYTheme alloc] init];
-        home.name = @"首页";
-        self.dataSource = [obj mutableCopy];
-        [self.dataSource insertObject:home atIndex:0];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    }];
-}
-
-
 #pragma mark toolBox中tableView的代理方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataSource.count;
@@ -81,14 +90,18 @@
     SYLeftDrawerCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse_id];
     if (!cell) {
         cell = [[SYLeftDrawerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuse_id];
+        UIView *bgView = [[UIView alloc] initWithFrame:cell.frame];
+        bgView.backgroundColor = SYColor(21, 26, 31, 1.0);
+        cell.selectedBackgroundView = bgView;
+        cell.backgroundColor = SYColor(26, 31, 36, 1.0);
         cell.textLabel.textColor = [UIColor whiteColor];
-        cell.backgroundColor = SYColor(100, 100, 100, 1.);
     }
     cell.theme = self.dataSource[indexPath.row];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (indexPath.row == 0) {
         [self.mainController setCenterViewController:self.naviHome withCloseAnimation:YES completion:nil];
     } else {

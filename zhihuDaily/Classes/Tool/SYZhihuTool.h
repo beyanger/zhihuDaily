@@ -19,8 +19,8 @@
 #import "SYBeforeStoryResult.h"
 #import "SYEditor.h"
 #import "SYThemeItem.h"
-
-
+#import "SYVersion.h"
+#import "SYCacheTool.h"
 
 typedef void(^Completed)(id obj);
 
@@ -69,8 +69,9 @@ typedef void(^Completed)(id obj);
 /**
  *  根据 主题 id 获取主题详情
  */
-+ (void)getThemeWithThemeId:(int)themeId Completed:(Completed)completed;
++ (void)getThemeWithThemeId:(int)themeId completed:(Completed)completed;
 
 
++ (void)queryAppWithVersion:(NSString *)version  Completed:(Completed)completed;
 
 @end

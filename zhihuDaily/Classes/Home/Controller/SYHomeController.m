@@ -23,6 +23,8 @@
 #import "UIView+Extension.h"
 #import "SYBeforeStoryResult.h"
 #import "SYHomeHeaderView.h"
+
+
 @interface SYHomeController () <SYDetailControllerDelegate, UITableViewDataSource, UITableViewDelegate, SYPicturesViewDelegate>
 
 @property (nonatomic, strong) NSIndexPath *currentIndexPath;
@@ -63,13 +65,7 @@ static NSString *reuseid = @"useid";
     [self.view addSubview:self.headerView];
     [self leftButton];
     [self titleLabel];
-
-    [SYZhihuTool getThemeWithThemeId:11 Completed:^(id obj) {
-        SYThemeItem *item = obj;
-        for (SYEditor *editor in item.editors) {
-            NSLog(@"%@", editor.name);
-        }
-    }];
+    
     
 }
 
@@ -95,7 +91,6 @@ static NSString *reuseid = @"useid";
             self.picturesView.topStroies = result.top_stories;
             [self.tableView reloadData];
             [self.refreshView endRefresh];
-            [self loadMoreBefore];
         });
     }];
 }
@@ -106,8 +101,8 @@ static NSString *reuseid = @"useid";
     SYBeforeStoryResult *result = self.storyGroup.lastObject;
     [SYZhihuTool getBeforeStroyWithDateString:result.date completed:^(id obj) {
         SYBeforeStoryResult *result = obj;
-        [self.storyGroup addObject:result];
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self.storyGroup addObject:result];
             [self.tableView reloadData];
         });
     }];

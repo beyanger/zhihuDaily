@@ -60,15 +60,18 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自动离线下载" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QU9-NS-t2z">
-                                                    <rect key="frame" x="12" y="12" width="102" height="20.5"/>
+                                                    <rect key="frame" x="12" y="12" width="102" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="skU-1K-CE8">
-                                                    <rect key="frame" x="539" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="539" y="7" width="51" height="31"/>
                                                     <animations/>
+                                                    <connections>
+                                                        <action selector="didClickedSwitch:" destination="9K0-05-c2J" eventType="valueChanged" id="MHd-Wa-1Gx"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <animations/>
@@ -93,15 +96,18 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="移动网络下载图片" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCh-QS-xT6">
-                                                    <rect key="frame" x="12" y="11" width="136" height="20.5"/>
+                                                    <rect key="frame" x="12" y="11" width="136" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ylr-Au-uSl">
-                                                    <rect key="frame" x="539" y="6.5" width="51" height="31"/>
+                                                <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ylr-Au-uSl">
+                                                    <rect key="frame" x="539" y="7" width="51" height="31"/>
                                                     <animations/>
+                                                    <connections>
+                                                        <action selector="didClickedSwitch:" destination="9K0-05-c2J" eventType="valueChanged" id="daq-Bh-XDB"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <animations/>
@@ -122,15 +128,18 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大号字" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QUD-yV-j1j">
-                                                    <rect key="frame" x="12" y="11.5" width="51" height="20.5"/>
+                                                    <rect key="frame" x="12" y="11" width="51" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WXz-QU-1gY">
+                                                <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WXz-QU-1gY">
                                                     <rect key="frame" x="539" y="6" width="51" height="31"/>
                                                     <animations/>
+                                                    <connections>
+                                                        <action selector="didClickedSwitch:" destination="9K0-05-c2J" eventType="valueChanged" id="mIo-Pj-YD5"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <animations/>
@@ -155,15 +164,18 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="消息推送" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmH-Qr-EIV">
-                                                    <rect key="frame" x="12" y="11.5" width="68" height="20.5"/>
+                                                    <rect key="frame" x="12" y="12" width="68" height="20"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KBx-ad-fF1">
+                                                <switch opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KBx-ad-fF1">
                                                     <rect key="frame" x="539" y="6" width="51" height="31"/>
                                                     <animations/>
+                                                    <connections>
+                                                        <action selector="didClickedSwitch:" destination="9K0-05-c2J" eventType="valueChanged" id="bmt-iu-b4P"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <animations/>
@@ -183,17 +195,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8qp-dk-hZj">
-                                                    <rect key="frame" x="539" y="6" width="51" height="31"/>
-                                                    <animations/>
-                                                </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点评分享到微博" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jN3-DF-nvW">
-                                                    <rect key="frame" x="12" y="11.5" width="119" height="20.5"/>
+                                                    <rect key="frame" x="12" y="11" width="119" height="21"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <switch opaque="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8qp-dk-hZj">
+                                                    <rect key="frame" x="539" y="6" width="51" height="31"/>
+                                                    <animations/>
+                                                    <connections>
+                                                        <action selector="didClickedSwitch:" destination="9K0-05-c2J" eventType="valueChanged" id="D9l-ks-Nhd"/>
+                                                    </connections>
+                                                </switch>
                                             </subviews>
                                             <animations/>
                                             <constraints>
@@ -284,11 +299,11 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EJZ-Vu-U0g">
-                                                    <rect key="frame" x="543.5" y="12" width="41.5" height="19.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="4.5MB" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EJZ-Vu-U0g">
+                                                    <rect key="frame" x="540.5" y="13" width="44.5" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -340,6 +355,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="cachedSize" destination="EJZ-Vu-U0g" id="pwc-G0-trQ"/>
+                        <outletCollection property="switches" destination="skU-1K-CE8" id="H4Y-QR-GBv"/>
+                        <outletCollection property="switches" destination="Ylr-Au-uSl" id="DPk-I8-k8j"/>
+                        <outletCollection property="switches" destination="WXz-QU-1gY" id="cpO-aJ-H7e"/>
+                        <outletCollection property="switches" destination="KBx-ad-fF1" id="mFY-ac-Lcn"/>
+                        <outletCollection property="switches" destination="8qp-dk-hZj" id="t1v-5p-Ayc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rIi-7P-XMZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

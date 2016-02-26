@@ -7,28 +7,69 @@
 //
 
 #import "SYSettingController.h"
+#import "MBProgressHUD+YS.h"
+#import "SYCacheTool.h"
 
 @interface SYSettingController ()
+@property (strong, nonatomic) IBOutletCollection(UISwitch) NSArray *switches;
+@property (weak, nonatomic) IBOutlet UILabel *cachedSize;
+@property (nonatomic, strong) NSArray *switchTitle;
 
 @end
 
 @implementation SYSettingController
 
+- (IBAction)didClickedSwitch:(UISwitch *)sender {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setBool:sender.isOn forKey:self.switchTitle[sender.tag]];
+    [ud synchronize];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupSubviews];
+}
 
+- (void)setupSubviews {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    for (NSUInteger i = 0; i < self.switches.count; i++) {
+        UISwitch *switcher = self.switches[i];
+        switcher.on = [ud boolForKey:self.switchTitle[switcher.tag]];
+    }
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.cachedSize.text = [NSString stringWithFormat:@"共 %.1fMB",
+                            [SYCacheTool cachedSize]/1024./1024.];
 }
 
 - (IBAction)back:(UIBarButtonItem *)sender {
        [[NSNotificationCenter defaultCenter] postNotificationName:ToggleDrawer object:nil];
 }
+
+#pragma mark tableView delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 5) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (indexPath.row == 0) {
+                [SYCacheTool clearCache];
+                [MBProgressHUD showSuccess:@"清除成功..."];
+                self.cachedSize.text = [NSString stringWithFormat:@"共 %.1fMB",
+                                        [SYCacheTool cachedSize]/1024./1024.];
+            } else {
+                [MBProgressHUD showSuccess:@"恭喜，已经是最新版本"];
+            }
+        });
+    }
+}
+
+- (NSArray *)switchTitle {
+    if (!_switchTitle) {
+        _switchTitle = @[@"自动离线缓存", @"移动网络下载图片", @"大号字", @"消息推送", @"点评分享到微博"];
+    }
+    return _switchTitle;
+}
+
 
 
 

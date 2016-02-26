@@ -7,7 +7,10 @@
 //
 
 #import "SYBeforeStoryResult.h"
-
+#import "MJExtension.h"
 @implementation SYBeforeStoryResult
 
+
+
+MJCodingImplementation
 @end

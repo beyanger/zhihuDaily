@@ -36,17 +36,26 @@
 		2F2CCBCF1C7B26F100C45E3D /* SYSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBCE1C7B26F100C45E3D /* SYSettingController.m */; };
 		2F37AB651C7B4A0F00D3CD65 /* SYProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB631C7B4A0F00D3CD65 /* SYProfileController.m */; };
 		2F37AB691C7B4EFF00D3CD65 /* SYDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB681C7B4EFF00D3CD65 /* SYDetailController.m */; };
-		2F37AB6D1C7B63F000D3CD65 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB6C1C7B63F000D3CD65 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		2F37AB781C7B675100D3CD65 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB701C7B675100D3CD65 /* MMDrawerBarButtonItem.m */; };
 		2F37AB791C7B675100D3CD65 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB731C7B675100D3CD65 /* MMDrawerController.m */; };
 		2F37AB7A1C7B675100D3CD65 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB751C7B675100D3CD65 /* MMDrawerVisualState.m */; };
 		2F37AB7B1C7B675100D3CD65 /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB771C7B675100D3CD65 /* UIViewController+MMDrawerController.m */; };
-		2F37AB7E1C7B6D5200D3CD65 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB7D1C7B6D5200D3CD65 /* UIView+Extension.m */; };
 		2F37AB811C7B6E0300D3CD65 /* SYTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB801C7B6E0300D3CD65 /* SYTopView.m */; };
 		2F37AB831C7B6E0F00D3CD65 /* SYTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F37AB821C7B6E0F00D3CD65 /* SYTopView.xib */; };
 		2F37AB861C7B7D7C00D3CD65 /* SYWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB851C7B7D7C00D3CD65 /* SYWebViewController.m */; };
 		2F37AB891C7B7F0B00D3CD65 /* SYStoryNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB881C7B7F0B00D3CD65 /* SYStoryNavigationView.m */; };
 		2F37AB8B1C7B7F1600D3CD65 /* SYStoryNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F37AB8A1C7B7F1600D3CD65 /* SYStoryNavigationView.xib */; };
+		2F4F1A821C7FA09500AF3BDF /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4F1A771C7FA09500AF3BDF /* FMDatabase.m */; };
+		2F4F1A831C7FA09500AF3BDF /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4F1A791C7FA09500AF3BDF /* FMDatabaseAdditions.m */; };
+		2F4F1A841C7FA09500AF3BDF /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4F1A7B1C7FA09500AF3BDF /* FMDatabasePool.m */; };
+		2F4F1A851C7FA09500AF3BDF /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4F1A7D1C7FA09500AF3BDF /* FMDatabaseQueue.m */; };
+		2F4F1A861C7FA09500AF3BDF /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4F1A801C7FA09500AF3BDF /* FMResultSet.m */; };
+		2F4F1A871C7FA09500AF3BDF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F4F1A811C7FA09500AF3BDF /* Info.plist */; };
+		2F4F1A891C7FA12100AF3BDF /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4F1A881C7FA12100AF3BDF /* libsqlite3.tbd */; };
+		2F6CF27B1C7FB20700C4B346 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2761C7FB20700C4B346 /* UINavigationBar+Awesome.m */; };
+		2F6CF27C1C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2781C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.m */; };
+		2F6CF27D1C7FB20700C4B346 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF27A1C7FB20700C4B346 /* UIView+Extension.m */; };
+		2F6CF2841C7FB6AA00C4B346 /* SYCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2831C7FB6AA00C4B346 /* SYCacheTool.m */; };
 		2F9995DC1C7C206D0072C8F0 /* SYShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995DB1C7C206D0072C8F0 /* SYShareView.m */; };
 		2F9995E11C7C39190072C8F0 /* SYCommentsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E01C7C39190072C8F0 /* SYCommentsTableController.m */; };
 		2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E31C7C3D100072C8F0 /* SYComment.m */; };
@@ -61,7 +70,7 @@
 		2FB923091C7EE353000A0A2D /* SYTopImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB923081C7EE353000A0A2D /* SYTopImageView.m */; };
 		2FB9230C1C7EEBC6000A0A2D /* SYThemeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB9230B1C7EEBC6000A0A2D /* SYThemeItem.m */; };
 		2FB9230F1C7EEBE8000A0A2D /* SYEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB9230E1C7EEBE8000A0A2D /* SYEditor.m */; };
-		2FB923121C7F104A000A0A2D /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB923111C7F104A000A0A2D /* UINavigationBar+Awesome.m */; };
+		2FB923151C7F369A000A0A2D /* SYVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB923141C7F369A000A0A2D /* SYVersion.m */; };
 		2FC5874B1C79FDEB003C9A7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874A1C79FDEB003C9A7A /* main.m */; };
 		2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */; };
 		2FC587541C79FDEB003C9A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587521C79FDEB003C9A7A /* Main.storyboard */; };
@@ -194,8 +203,6 @@
 		2F37AB631C7B4A0F00D3CD65 /* SYProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYProfileController.m; sourceTree = "<group>"; };
 		2F37AB671C7B4EFF00D3CD65 /* SYDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYDetailController.h; sourceTree = "<group>"; };
 		2F37AB681C7B4EFF00D3CD65 /* SYDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYDetailController.m; sourceTree = "<group>"; };
-		2F37AB6B1C7B63F000D3CD65 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
-		2F37AB6C1C7B63F000D3CD65 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		2F37AB6F1C7B675100D3CD65 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		2F37AB701C7B675100D3CD65 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
 		2F37AB711C7B675100D3CD65 /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
@@ -205,8 +212,6 @@
 		2F37AB751C7B675100D3CD65 /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
 		2F37AB761C7B675100D3CD65 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
 		2F37AB771C7B675100D3CD65 /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
-		2F37AB7C1C7B6D5200D3CD65 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
-		2F37AB7D1C7B6D5200D3CD65 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		2F37AB7F1C7B6E0300D3CD65 /* SYTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYTopView.h; sourceTree = "<group>"; };
 		2F37AB801C7B6E0300D3CD65 /* SYTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYTopView.m; sourceTree = "<group>"; };
 		2F37AB821C7B6E0F00D3CD65 /* SYTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYTopView.xib; sourceTree = "<group>"; };
@@ -215,6 +220,27 @@
 		2F37AB871C7B7F0B00D3CD65 /* SYStoryNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYStoryNavigationView.h; sourceTree = "<group>"; };
 		2F37AB881C7B7F0B00D3CD65 /* SYStoryNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYStoryNavigationView.m; sourceTree = "<group>"; };
 		2F37AB8A1C7B7F1600D3CD65 /* SYStoryNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYStoryNavigationView.xib; sourceTree = "<group>"; };
+		2F4F1A761C7FA09500AF3BDF /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		2F4F1A771C7FA09500AF3BDF /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		2F4F1A781C7FA09500AF3BDF /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		2F4F1A791C7FA09500AF3BDF /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		2F4F1A7A1C7FA09500AF3BDF /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		2F4F1A7B1C7FA09500AF3BDF /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		2F4F1A7C1C7FA09500AF3BDF /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		2F4F1A7D1C7FA09500AF3BDF /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		2F4F1A7E1C7FA09500AF3BDF /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		2F4F1A7F1C7FA09500AF3BDF /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		2F4F1A801C7FA09500AF3BDF /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		2F4F1A811C7FA09500AF3BDF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F4F1A881C7FA12100AF3BDF /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		2F6CF2751C7FB20700C4B346 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
+		2F6CF2761C7FB20700C4B346 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
+		2F6CF2771C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
+		2F6CF2781C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
+		2F6CF2791C7FB20700C4B346 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		2F6CF27A1C7FB20700C4B346 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		2F6CF2821C7FB6AA00C4B346 /* SYCacheTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCacheTool.h; sourceTree = "<group>"; };
+		2F6CF2831C7FB6AA00C4B346 /* SYCacheTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCacheTool.m; sourceTree = "<group>"; };
 		2F9995DA1C7C206D0072C8F0 /* SYShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYShareView.h; sourceTree = "<group>"; };
 		2F9995DB1C7C206D0072C8F0 /* SYShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYShareView.m; sourceTree = "<group>"; };
 		2F9995DF1C7C39190072C8F0 /* SYCommentsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCommentsTableController.h; sourceTree = "<group>"; };
@@ -241,9 +267,9 @@
 		2FB9230B1C7EEBC6000A0A2D /* SYThemeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYThemeItem.m; sourceTree = "<group>"; };
 		2FB9230D1C7EEBE8000A0A2D /* SYEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEditor.h; sourceTree = "<group>"; };
 		2FB9230E1C7EEBE8000A0A2D /* SYEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEditor.m; sourceTree = "<group>"; };
-		2FB923101C7F104A000A0A2D /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
-		2FB923111C7F104A000A0A2D /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
-		2FC587461C79FDEB003C9A7A /* zhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FB923131C7F369A000A0A2D /* SYVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYVersion.h; sourceTree = "<group>"; };
+		2FB923141C7F369A000A0A2D /* SYVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYVersion.m; sourceTree = "<group>"; };
+		2FC587461C79FDEB003C9A7A /* 知乎日报.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "知乎日报.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5874A1C79FDEB003C9A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -365,6 +391,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F4F1A891C7FA12100AF3BDF /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,19 +580,6 @@
 			path = MJExtension;
 			sourceTree = "<group>";
 		};
-		2F37AB6A1C7B63E600D3CD65 /* Catagories */ = {
-			isa = PBXGroup;
-			children = (
-				2FB923101C7F104A000A0A2D /* UINavigationBar+Awesome.h */,
-				2FB923111C7F104A000A0A2D /* UINavigationBar+Awesome.m */,
-				2F37AB7C1C7B6D5200D3CD65 /* UIView+Extension.h */,
-				2F37AB7D1C7B6D5200D3CD65 /* UIView+Extension.m */,
-				2F37AB6B1C7B63F000D3CD65 /* UINavigationController+FDFullscreenPopGesture.h */,
-				2F37AB6C1C7B63F000D3CD65 /* UINavigationController+FDFullscreenPopGesture.m */,
-			);
-			path = Catagories;
-			sourceTree = "<group>";
-		};
 		2F37AB6E1C7B675100D3CD65 /* MMDrawerController */ = {
 			isa = PBXGroup;
 			children = (
@@ -582,6 +596,45 @@
 			path = MMDrawerController;
 			sourceTree = "<group>";
 		};
+		2F4F1A751C7FA09500AF3BDF /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				2F4F1A761C7FA09500AF3BDF /* FMDatabase.h */,
+				2F4F1A771C7FA09500AF3BDF /* FMDatabase.m */,
+				2F4F1A781C7FA09500AF3BDF /* FMDatabaseAdditions.h */,
+				2F4F1A791C7FA09500AF3BDF /* FMDatabaseAdditions.m */,
+				2F4F1A7A1C7FA09500AF3BDF /* FMDatabasePool.h */,
+				2F4F1A7B1C7FA09500AF3BDF /* FMDatabasePool.m */,
+				2F4F1A7C1C7FA09500AF3BDF /* FMDatabaseQueue.h */,
+				2F4F1A7D1C7FA09500AF3BDF /* FMDatabaseQueue.m */,
+				2F4F1A7E1C7FA09500AF3BDF /* FMDB.h */,
+				2F4F1A7F1C7FA09500AF3BDF /* FMResultSet.h */,
+				2F4F1A801C7FA09500AF3BDF /* FMResultSet.m */,
+				2F4F1A811C7FA09500AF3BDF /* Info.plist */,
+			);
+			path = fmdb;
+			sourceTree = "<group>";
+		};
+		2F6CF2741C7FB20700C4B346 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				2F6CF2751C7FB20700C4B346 /* UINavigationBar+Awesome.h */,
+				2F6CF2761C7FB20700C4B346 /* UINavigationBar+Awesome.m */,
+				2F6CF2771C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.h */,
+				2F6CF2781C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.m */,
+				2F6CF2791C7FB20700C4B346 /* UIView+Extension.h */,
+				2F6CF27A1C7FB20700C4B346 /* UIView+Extension.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		2F6CF27E1C7FB22500C4B346 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		2FC5873D1C79FDEB003C9A7A = {
 			isa = PBXGroup;
 			children = (
@@ -595,7 +648,7 @@
 		2FC587471C79FDEB003C9A7A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FC587461C79FDEB003C9A7A /* zhihuDaily.app */,
+				2FC587461C79FDEB003C9A7A /* 知乎日报.app */,
 				2FC5875F1C79FDEB003C9A7A /* zhihuDailyTests.xctest */,
 				2FC5876A1C79FDEB003C9A7A /* zhihuDailyUITests.xctest */,
 			);
@@ -649,6 +702,7 @@
 		2FC5877C1C79FE74003C9A7A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2F6CF27E1C7FB22500C4B346 /* Categories */,
 				2FE7079C1C7DD339005CB13B /* LeftDrawer */,
 				2FE707891C7DBF4E005CB13B /* Theme */,
 				2F2CCB851C7AF19F00C45E3D /* Home */,
@@ -687,6 +741,8 @@
 			children = (
 				2F2CCB791C7AE49000C45E3D /* SYTheme.h */,
 				2F2CCB7A1C7AE49000C45E3D /* SYTheme.m */,
+				2FB923131C7F369A000A0A2D /* SYVersion.h */,
+				2FB923141C7F369A000A0A2D /* SYVersion.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -703,9 +759,10 @@
 		2FC587891C7A0937003C9A7A /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				2F6CF2741C7FB20700C4B346 /* Categories */,
+				2F4F1A751C7FA09500AF3BDF /* fmdb */,
 				2F0E2CBE1C7BF071004FDA0F /* MBProgressHUD */,
 				2F37AB6E1C7B675100D3CD65 /* MMDrawerController */,
-				2F37AB6A1C7B63E600D3CD65 /* Catagories */,
 				2F2CCBAA1C7B0C1400C45E3D /* MJExtension */,
 				2FC587E01C7A0974003C9A7A /* Masonry */,
 				2FC587A71C7A096A003C9A7A /* SDWebImage */,
@@ -819,6 +876,8 @@
 				2FE7079A1C7DC2A3005CB13B /* SYZhihuTool.m */,
 				2FC588051C7A0B50003C9A7A /* YSHttpTool.h */,
 				2FC588061C7A0B50003C9A7A /* YSHttpTool.m */,
+				2F6CF2821C7FB6AA00C4B346 /* SYCacheTool.h */,
+				2F6CF2831C7FB6AA00C4B346 /* SYCacheTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -826,6 +885,7 @@
 		2FE707751C7CA281005CB13B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2F4F1A881C7FA12100AF3BDF /* libsqlite3.tbd */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -925,7 +985,7 @@
 			);
 			name = zhihuDaily;
 			productName = zhihuDaily;
-			productReference = 2FC587461C79FDEB003C9A7A /* zhihuDaily.app */;
+			productReference = 2FC587461C79FDEB003C9A7A /* 知乎日报.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2FC5875E1C79FDEB003C9A7A /* zhihuDailyTests */ = {
@@ -1027,6 +1087,7 @@
 				2F9995E91C7C47760072C8F0 /* SYCommentCell.xib in Resources */,
 				2FE707AC1C7DDC69005CB13B /* SYLeftDrawerController.xib in Resources */,
 				2FE707A71C7DD6B6005CB13B /* SYMainToolBox.xib in Resources */,
+				2F4F1A871C7FA09500AF3BDF /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1062,6 +1123,7 @@
 				2FC588001C7A0974003C9A7A /* NSArray+MASAdditions.m in Sources */,
 				2FC5879E1C7A0956003C9A7A /* AFHTTPRequestOperation.m in Sources */,
 				2F2CCBA41C7B088E00C45E3D /* SYLastestParamResult.m in Sources */,
+				2FB923151C7F369A000A0A2D /* SYVersion.m in Sources */,
 				2F2CCBC21C7B0C1400C45E3D /* MJProperty.m in Sources */,
 				2FC587A11C7A0956003C9A7A /* AFNetworkReachabilityManager.m in Sources */,
 				2FE707B21C7DECDD005CB13B /* SYDemoViewController.m in Sources */,
@@ -1069,8 +1131,6 @@
 				2F2CCBC01C7B0C1400C45E3D /* MJExtensionConst.m in Sources */,
 				2FE707AF1C7DE3F4005CB13B /* SYLeftDrawerCell.m in Sources */,
 				2F2CCBC31C7B0C1400C45E3D /* MJPropertyKey.m in Sources */,
-				2F37AB6D1C7B63F000D3CD65 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
-				2FB923121C7F104A000A0A2D /* UINavigationBar+Awesome.m in Sources */,
 				2F37AB651C7B4A0F00D3CD65 /* SYProfileController.m in Sources */,
 				2FC588021C7A0974003C9A7A /* View+MASAdditions.m in Sources */,
 				2F9996021C7C799D0072C8F0 /* SYDismisAnimation.m in Sources */,
@@ -1080,22 +1140,26 @@
 				2F37AB781C7B675100D3CD65 /* MMDrawerBarButtonItem.m in Sources */,
 				2FB923091C7EE353000A0A2D /* SYTopImageView.m in Sources */,
 				2F1319D81C7E113700FA146F /* SYNavigationController.m in Sources */,
+				2F4F1A861C7FA09500AF3BDF /* FMResultSet.m in Sources */,
 				2F37AB7B1C7B675100D3CD65 /* UIViewController+MMDrawerController.m in Sources */,
 				2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */,
 				2F2CCBC41C7B0C1400C45E3D /* MJPropertyType.m in Sources */,
 				2FE707A21C7DD358005CB13B /* SYLeftDrawerController.m in Sources */,
 				2FB923041C7EACA1000A0A2D /* SYBeforeStoryResult.m in Sources */,
 				2F2CCBC91C7B0C1400C45E3D /* NSString+MJExtension.m in Sources */,
+				2F6CF2841C7FB6AA00C4B346 /* SYCacheTool.m in Sources */,
 				2FB9230C1C7EEBC6000A0A2D /* SYThemeItem.m in Sources */,
+				2F4F1A841C7FA09500AF3BDF /* FMDatabasePool.m in Sources */,
 				2F0E2CBD1C7BE7F7004FDA0F /* SYImageView.m in Sources */,
 				2FC587D51C7A096A003C9A7A /* SDWebImageDownloader.m in Sources */,
-				2F37AB7E1C7B6D5200D3CD65 /* UIView+Extension.m in Sources */,
+				2F6CF27B1C7FB20700C4B346 /* UINavigationBar+Awesome.m in Sources */,
 				2FC587A41C7A0956003C9A7A /* AFURLRequestSerialization.m in Sources */,
 				2F37AB691C7B4EFF00D3CD65 /* SYDetailController.m in Sources */,
 				2FB923011C7E2BF8000A0A2D /* SYRefreshView.m in Sources */,
 				2FC587A51C7A0956003C9A7A /* AFURLResponseSerialization.m in Sources */,
 				2F37AB891C7B7F0B00D3CD65 /* SYStoryNavigationView.m in Sources */,
 				2F37AB7A1C7B675100D3CD65 /* MMDrawerVisualState.m in Sources */,
+				2F6CF27C1C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				2FC587D01C7A096A003C9A7A /* MKAnnotationView+WebCache.m in Sources */,
 				2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */,
 				2FC587FE1C7A0974003C9A7A /* MASViewAttribute.m in Sources */,
@@ -1109,6 +1173,7 @@
 				2F2CCBCF1C7B26F100C45E3D /* SYSettingController.m in Sources */,
 				2F37AB861C7B7D7C00D3CD65 /* SYWebViewController.m in Sources */,
 				2F2CCBC51C7B0C1400C45E3D /* NSObject+MJClass.m in Sources */,
+				2F4F1A821C7FA09500AF3BDF /* FMDatabase.m in Sources */,
 				2F9995E71C7C476A0072C8F0 /* SYCommentCell.m in Sources */,
 				2F9995F91C7C70E50072C8F0 /* UIViewController+SY.m in Sources */,
 				2F2CCBCC1C7B156500C45E3D /* SYMainViewController.m in Sources */,
@@ -1138,12 +1203,15 @@
 				2FC587A21C7A0956003C9A7A /* AFSecurityPolicy.m in Sources */,
 				2FC587FD1C7A0974003C9A7A /* MASLayoutConstraint.m in Sources */,
 				2FE707911C7DBF4E005CB13B /* SYThemeController.m in Sources */,
+				2F6CF27D1C7FB20700C4B346 /* UIView+Extension.m in Sources */,
+				2F4F1A851C7FA09500AF3BDF /* FMDatabaseQueue.m in Sources */,
 				2FC587D61C7A096A003C9A7A /* SDWebImageDownloaderOperation.m in Sources */,
 				2F37AB811C7B6E0300D3CD65 /* SYTopView.m in Sources */,
 				2FC5874B1C79FDEB003C9A7A /* main.m in Sources */,
 				2FC587DE1C7A096A003C9A7A /* UIImageView+WebCache.m in Sources */,
 				2F2CCB7B1C7AE49000C45E3D /* SYTheme.m in Sources */,
 				2FB9230F1C7EEBE8000A0A2D /* SYEditor.m in Sources */,
+				2F4F1A831C7FA09500AF3BDF /* FMDatabaseAdditions.m in Sources */,
 				2FC587DD1C7A096A003C9A7A /* UIImageView+HighlightedWebCache.m in Sources */,
 				2FC587A01C7A0956003C9A7A /* AFHTTPSessionManager.m in Sources */,
 				2F2CCB8B1C7AF1C100C45E3D /* SYHomeController.m in Sources */,
@@ -1285,13 +1353,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = zhihuDaily/zhihuDaily.pch;
 				INFOPLIST_FILE = zhihuDaily/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.beyanger.zhihuDaily;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "知乎日报";
 			};
 			name = Debug;
 		};
@@ -1299,13 +1368,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = zhihuDaily/zhihuDaily.pch;
 				INFOPLIST_FILE = zhihuDaily/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.beyanger.zhihuDaily;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "知乎日报";
 			};
 			name = Release;
 		};

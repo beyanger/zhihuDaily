@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2FC587451C79FDEB003C9A7A"
-               BuildableName = "zhihuDaily.app"
+               BuildableName = "&#x77e5;&#x4e4e;&#x65e5;&#x62a5;.app"
                BlueprintName = "zhihuDaily"
                ReferencedContainer = "container:zhihuDaily.xcodeproj">
             </BuildableReference>
@@ -53,7 +53,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2FC587451C79FDEB003C9A7A"
-            BuildableName = "zhihuDaily.app"
+            BuildableName = "&#x77e5;&#x4e4e;&#x65e5;&#x62a5;.app"
             BlueprintName = "zhihuDaily"
             ReferencedContainer = "container:zhihuDaily.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2FC587451C79FDEB003C9A7A"
-            BuildableName = "zhihuDaily.app"
+            BuildableName = "&#x77e5;&#x4e4e;&#x65e5;&#x62a5;.app"
             BlueprintName = "zhihuDaily"
             ReferencedContainer = "container:zhihuDaily.xcodeproj">
          </BuildableReference>
@@ -95,7 +95,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2FC587451C79FDEB003C9A7A"
-            BuildableName = "zhihuDaily.app"
+            BuildableName = "&#x77e5;&#x4e4e;&#x65e5;&#x62a5;.app"
             BlueprintName = "zhihuDaily"
             ReferencedContainer = "container:zhihuDaily.xcodeproj">
          </BuildableReference>

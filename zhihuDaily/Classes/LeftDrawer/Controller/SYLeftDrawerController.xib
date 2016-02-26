@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYLeftDrawerController">
             <connections>
                 <outlet property="avatarView" destination="nyY-iu-1Mk" id="Bpg-sC-E3b"/>
+                <outlet property="bottomContainer" destination="Z2y-rx-axp" id="rpP-fk-iVY"/>
                 <outlet property="dayNightButton" destination="4OM-8E-Ada" id="6yc-Za-Cn0"/>
                 <outlet property="nameLabel" destination="CSA-JC-FiO" id="fQZ-Ym-VcL"/>
                 <outlet property="offlineButton" destination="ouR-em-HCb" id="Chj-km-9wc"/>
@@ -27,7 +28,7 @@
                             <rect key="frame" x="0.0" y="60" width="200" height="60"/>
                             <subviews>
                                 <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCi-4n-Uff">
-                                    <rect key="frame" x="133.5" y="0.0" width="66.5" height="60"/>
+                                    <rect key="frame" x="133" y="0.0" width="66.5" height="60"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                     <inset key="contentEdgeInsets" minX="15" minY="5" maxX="0.0" maxY="0.0"/>
@@ -39,7 +40,7 @@
                                     </connections>
                                 </button>
                                 <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmM-KK-dCi">
-                                    <rect key="frame" x="66.5" y="0.0" width="67" height="60"/>
+                                    <rect key="frame" x="66" y="0.0" width="67" height="60"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                     <inset key="contentEdgeInsets" minX="15" minY="5" maxX="0.0" maxY="0.0"/>
@@ -64,7 +65,7 @@
                                 </button>
                             </subviews>
                             <animations/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.10196078431372549" green="0.12156862745098039" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="dmM-KK-dCi" firstAttribute="top" secondItem="GBX-SP-FKl" secondAttribute="top" id="3RV-Mj-DkA"/>
                                 <constraint firstAttribute="bottom" secondItem="dCi-4n-Uff" secondAttribute="bottom" id="CHx-h9-t29"/>
@@ -92,12 +93,12 @@
                             <rect key="frame" x="71" y="0.0" width="129" height="50"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.50588235294117645" green="0.52549019607843139" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <animations/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.10196078431372549" green="0.12156862745098039" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="120" id="7Wq-U2-cpa"/>
                         <constraint firstItem="CSA-JC-FiO" firstAttribute="leading" secondItem="nyY-iu-1Mk" secondAttribute="trailing" constant="16" id="CQP-x2-LjL"/>
@@ -113,10 +114,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z2y-rx-axp">
-                    <rect key="frame" x="0.0" y="540" width="200" height="60"/>
+                    <rect key="frame" x="0.0" y="556" width="200" height="44"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ouR-em-HCb">
-                            <rect key="frame" x="0.0" y="0.0" width="100" height="60"/>
+                            <rect key="frame" x="0.0" y="0.0" width="99" height="44"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="titleEdgeInsets" minX="15" minY="3" maxX="0.0" maxY="0.0"/>
@@ -125,7 +126,7 @@
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4OM-8E-Ada">
-                            <rect key="frame" x="100" y="0.0" width="100" height="60"/>
+                            <rect key="frame" x="101" y="0.0" width="99" height="44"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="titleEdgeInsets" minX="15" minY="3" maxX="0.0" maxY="0.0"/>
@@ -135,29 +136,44 @@
                         </button>
                     </subviews>
                     <animations/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.10196078431372549" green="0.12156862745098039" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="4OM-8E-Ada" firstAttribute="leading" secondItem="ouR-em-HCb" secondAttribute="trailing" id="2i3-uM-9re"/>
+                        <constraint firstItem="4OM-8E-Ada" firstAttribute="leading" secondItem="ouR-em-HCb" secondAttribute="trailing" constant="2" id="2i3-uM-9re"/>
                         <constraint firstAttribute="bottom" secondItem="4OM-8E-Ada" secondAttribute="bottom" id="3H4-D8-96w"/>
                         <constraint firstItem="ouR-em-HCb" firstAttribute="leading" secondItem="Z2y-rx-axp" secondAttribute="leading" id="5Ko-Hz-sfn"/>
+                        <constraint firstAttribute="trailing" secondItem="4OM-8E-Ada" secondAttribute="trailing" id="B6m-TO-PYP"/>
                         <constraint firstItem="4OM-8E-Ada" firstAttribute="top" secondItem="Z2y-rx-axp" secondAttribute="top" id="EfC-GT-EHS"/>
                         <constraint firstAttribute="bottom" secondItem="ouR-em-HCb" secondAttribute="bottom" id="H8k-oj-t3V"/>
                         <constraint firstItem="ouR-em-HCb" firstAttribute="top" secondItem="Z2y-rx-axp" secondAttribute="top" id="Xoz-Pj-vKT"/>
                         <constraint firstAttribute="trailing" secondItem="4OM-8E-Ada" secondAttribute="trailing" id="YOU-rU-6QP"/>
+                        <constraint firstItem="4OM-8E-Ada" firstAttribute="width" secondItem="ouR-em-HCb" secondAttribute="width" id="bLA-Is-Amx"/>
                         <constraint firstItem="4OM-8E-Ada" firstAttribute="leading" secondItem="ouR-em-HCb" secondAttribute="trailing" id="dZp-fT-neO"/>
-                        <constraint firstAttribute="height" constant="60" id="rTl-uc-i8p"/>
+                        <constraint firstItem="4OM-8E-Ada" firstAttribute="leading" secondItem="ouR-em-HCb" secondAttribute="trailing" constant="2" id="kVD-Zk-czM"/>
+                        <constraint firstAttribute="bottom" secondItem="4OM-8E-Ada" secondAttribute="bottom" id="lor-6g-OPv"/>
+                        <constraint firstAttribute="height" constant="44" id="rTl-uc-i8p"/>
                         <constraint firstItem="4OM-8E-Ada" firstAttribute="width" secondItem="ouR-em-HCb" secondAttribute="width" id="sw3-8y-Q6m"/>
+                        <constraint firstItem="4OM-8E-Ada" firstAttribute="top" secondItem="Z2y-rx-axp" secondAttribute="top" id="vCq-xF-ad9"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="2i3-uM-9re"/>
+                            <exclude reference="3H4-D8-96w"/>
+                            <exclude reference="EfC-GT-EHS"/>
+                            <exclude reference="YOU-rU-6QP"/>
+                            <exclude reference="dZp-fT-neO"/>
+                            <exclude reference="sw3-8y-Q6m"/>
+                        </mask>
+                    </variation>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2ct-Rg-CXs">
-                    <rect key="frame" x="0.0" y="140" width="200" height="400"/>
+                    <rect key="frame" x="0.0" y="140" width="200" height="416"/>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="sectionIndexBackgroundColor" red="0.49014008050000002" green="0.49022829530000001" blue="0.49013447760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </tableView>
             </subviews>
             <animations/>
-            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.10196078431372549" green="0.12156862745098039" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="Z2y-rx-axp" firstAttribute="leading" secondItem="wIS-YN-ehO" secondAttribute="leading" id="2FX-N1-WEh"/>
                 <constraint firstAttribute="trailing" secondItem="0Zn-t0-lhY" secondAttribute="trailing" id="EXE-o7-k44"/>
