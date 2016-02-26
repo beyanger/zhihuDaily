@@ -9,8 +9,13 @@
 #import <Foundation/Foundation.h>
 @interface SYCacheTool : NSObject
 
-+ (NSString *)queryStoryWithDateString:(NSString *)dateString;
++ (id)queryStoryListWithDateString:(NSString *)dateString;
++ (void)cacheStoryListWithObject:(id)respObject;
+
++ (id)queryStoryWithId:(long long)storyid;
 + (void)cacheStoryWithObject:(id)respObject;
+
+
 
 + (NSUInteger)cachedSize;
 

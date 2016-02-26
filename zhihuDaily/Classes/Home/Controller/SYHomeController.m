@@ -154,6 +154,7 @@ static NSString *reuseid = @"useid";
     
     SYBeforeStoryResult *result = self.storyGroup[indexPath.section];
     SYStory *story = result.stories[indexPath.row];
+
     [self gotoDetailControllerWithStory:story];
 }
 
@@ -226,6 +227,11 @@ static NSString *reuseid = @"useid";
     NSInteger row = self.currentIndexPath.row;
     NSInteger section = self.currentIndexPath.section;
     
+    if (section == self.storyGroup.count-1) {
+        [self loadMoreBefore];
+    }
+    
+    
     SYBeforeStoryResult *result = self.storyGroup[section];
     if (row == result.stories.count-1) {
         section += 1;
@@ -235,7 +241,6 @@ static NSString *reuseid = @"useid";
         row += 1;
     }
     SYStory *story = result.stories[row];
-    detailController.story = story;
     detailController.position = 1;
     self.currentIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
     return story;

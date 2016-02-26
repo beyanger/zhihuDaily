@@ -24,7 +24,7 @@
 /** 源url */
 @property (nonatomic, copy) NSString *share_url;
 
-/**点赞数*/
+/**推荐者*/
 @property (nonatomic,copy) NSString *recommenders;
 
 /**id  新闻的 id*/

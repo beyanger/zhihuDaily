@@ -16,16 +16,23 @@
 
 @implementation SYZhihuTool
 
-
-
-
-
 + (void)getDetailWithId:(long long)storyid completed:(Completed)completed {
     NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/news/%lld", storyid];
+
+    id jsonObject = [SYCacheTool queryStoryWithId:storyid];
+    if (jsonObject) {
+        SYDetailStory *ds = [SYDetailStory mj_objectWithKeyValues:jsonObject];
+        ds.htmlStr = [NSString stringWithFormat:@"<html><head><link rel=\"stylesheet\" href=%@></head><body>%@</body></html>", ds.css[0], ds.body];
+        completed(ds);
+        return;
+    }
+    
     [YSHttpTool GETWithURL:url params:nil success:^(id responseObject) {
         SYDetailStory *ds = [SYDetailStory mj_objectWithKeyValues:responseObject];
         ds.htmlStr = [NSString stringWithFormat:@"<html><head><link rel=\"stylesheet\" href=%@></head><body>%@</body></html>", ds.css[0], ds.body];
         completed(ds);
+    
+        [SYCacheTool cacheStoryWithObject:responseObject];
         
     } failure:nil];
     
@@ -112,21 +119,18 @@
         return @{@"stories":@"SYStory"};
     }];
     
+    id jsonObject = [SYCacheTool queryStoryListWithDateString:dateString];
     
-    NSString *jsonString = [SYCacheTool queryStoryWithDateString:dateString];
-    
-    if (jsonString.length > 0) {
-        NSDictionary *response = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
-        SYBeforeStoryResult *result = [SYBeforeStoryResult mj_objectWithKeyValues:response];
+    if (jsonObject) {
+        SYBeforeStoryResult *result = [SYBeforeStoryResult mj_objectWithKeyValues:jsonObject];
         completed(result);
         return;
     }
     
-    NSLog(@"网络请求更多历史数据：.%@", dateString);
     [YSHttpTool GETWithURL:beforeUrl params:nil success:^(id responseObject) {
         SYBeforeStoryResult *result = [SYBeforeStoryResult mj_objectWithKeyValues:responseObject];
         completed(result);
-        [SYCacheTool cacheStoryWithObject:responseObject];
+        [SYCacheTool cacheStoryListWithObject:responseObject];
     } failure:nil];
 }
 
@@ -156,7 +160,6 @@
     NSString *versionUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/version/ios/%@", version];
     
     [YSHttpTool GETWithURL:versionUrl params:nil success:^(id responseObject) {
-        NSLog(@"%@", responseObject);
         SYVersion *ver = [SYVersion mj_objectWithKeyValues:responseObject];
         completed(ver);
     } failure:nil];

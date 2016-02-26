@@ -42,12 +42,15 @@
 
 @implementation SYDetailController
 
+
+
 - (instancetype)initWithStory:(SYStory *)story
 {
     self = [super init];
     if (self) {
-        self.view.backgroundColor = [UIColor whiteColor];
         self.story = story;
+        self.view.backgroundColor = [UIColor whiteColor];
+
     }
     return self;
 }
@@ -65,9 +68,13 @@
     [self.webView.scrollView addSubview:self.footer];
     
     self.position = _position;
-    
-
 }
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
 - (void)storyNavigationView:(SYStoryNavigationView *)navView didClicked:(NSInteger)index {
     switch (index) {
         case 0: // dismis
@@ -75,6 +82,7 @@
             break;
         case 1: // next
             if ([self.delegate respondsToSelector:@selector(nextStoryForDetailController:)]) {
+                
                 self.story = [self.delegate nextStoryForDetailController:self];
             }
             
@@ -190,7 +198,10 @@
     
 }
 
+
+
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
     if (scrollView.contentOffset.y < -80) {
   
         if ([self.delegate respondsToSelector:@selector(prevStoryForDetailController:)]) {
@@ -213,6 +224,7 @@
             if ([self.delegate respondsToSelector:@selector(nextStoryForDetailController:)]) {
                 SYStory *story  = [self.delegate nextStoryForDetailController:self];
                 
+                
                 if (story) {
                     self.isChanging = YES;
                     [UIView animateWithDuration:.3 animations:^{
@@ -222,7 +234,6 @@
                         self.isChanging = NO;
                     }];
                 }
-
             }
     }
 }
@@ -287,11 +298,9 @@
     if (!story) return;
     _story = story;
     
-    NSLog(@"story id: %lld", story.id);
-    
     self.topView.transform = CGAffineTransformIdentity;
     self.webView.transform = CGAffineTransformIdentity;
-    
+//    
     [SYZhihuTool getDetailWithId:self.story.id completed:^(id obj) {
         dispatch_async(dispatch_get_main_queue(), ^{
             SYDetailStory *ds = (SYDetailStory *)obj;
@@ -321,6 +330,9 @@
     }
     [self.header sizeToFit];
 }
+
+
+
 
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {

@@ -23,14 +23,15 @@ static FMDatabaseQueue *_zhihu_queue;
         
         _zhihu_queue = [FMDatabaseQueue databaseQueueWithPath:pathName];
         [_zhihu_queue inDatabase:^(FMDatabase *db) {
-            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_story (date INTEGER PRIMARY KEY, story TEXT);"];
+            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_storylist (date INTEGER PRIMARY KEY, storylist TEXT);"];
+            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_story (storyid INTEGER PRIMARY KEY, story TEXT);"];
         }];
     });
     return _zhihu_queue;
 }
 
 
-+ (NSString *)queryStoryWithDateString:(NSString *)dateString {
++ (id)queryStoryListWithDateString:(NSString *)dateString {
     static NSDateFormatter *formatter;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -42,18 +43,26 @@ static FMDatabaseQueue *_zhihu_queue;
     date = [NSDate dateWithTimeInterval:-24*60*60 sinceDate:date];
     dateString = [formatter stringFromDate:date];
     
+    
     __block NSString *jsonString = @"";
     // 先从数据库中查找，是否存在
     [[self queue] inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT story FROM t_story WHERE date = ?", dateString];
+        FMResultSet *rs = [db executeQuery:@"SELECT storylist FROM t_storylist WHERE date = ?", dateString];
         while (rs.next) {
             jsonString =  [rs stringForColumnIndex:0];
         }
     }];
-    return jsonString;
+    
+    if (jsonString.length > 0) {
+        NSDictionary *response = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+        return response;
+    }
+    return nil;
 }
 
-+ (void)cacheStoryWithObject:(id)respObject {
+
+
++ (void)cacheStoryListWithObject:(id)respObject {
 
     // 进行缓存数据
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:respObject options:0 error:nil];
@@ -61,12 +70,45 @@ static FMDatabaseQueue *_zhihu_queue;
     
     NSString *dateString = respObject[@"date"];
     [[self queue] inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"INSERT INTO t_story (date, story) VALUES (?, ?);", dateString, jsonString];
+        [db executeUpdate:@"INSERT INTO t_storylist (date, storylist) VALUES (?, ?);", dateString, jsonString];
     }];
 }
 
++ (id)queryStoryWithId:(long long)storyid {
+    
+    __block NSString *jsonString = @"";
+    // 先从数据库中查找，是否存在
+    [[self queue] inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT story FROM t_story WHERE storyid = ?", @(storyid)];
+        while (rs.next) {
+            jsonString =  [rs stringForColumnIndex:0];
+        }
+    }];
+    
+    if (jsonString.length > 0) {
+        NSDictionary *response = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+        return response;
+    }
+    return nil;
+}
+
++ (void)cacheStoryWithObject:(id)respObject {
+    // 进行缓存数据
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:respObject options:0 error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    long long storyid = [respObject[@"id"] longLongValue];
+    
+    [[self queue] inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"INSERT INTO t_story (storyid, story) VALUES (?, ?);", @(storyid), jsonString];
+    }];
+}
+
+
+
+
 + (void)clearCachedStroy {
     [[self queue] inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"DELETE FROM t_storylist"];
         [db executeUpdate:@"DELETE FROM t_story"];
     }];
 }
