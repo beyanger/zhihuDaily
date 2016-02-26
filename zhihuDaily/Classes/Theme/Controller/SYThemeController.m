@@ -7,8 +7,22 @@
 //
 
 #import "SYThemeController.h"
+#import "SYRefreshView.h"
+#import "SYThemeHeaderView.h"
+#import "SYThemeItem.h"
+#import "SYZhihuTool.h"
+#import "SYStory.h"
 
-@interface SYThemeController ()
+
+@interface SYThemeController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) NSArray<SYStory *> *stories;
+@property (nonatomic, strong) SYThemeItem *themeItem;
+
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) SYThemeHeaderView *headerView;
+
+
 
 @end
 
@@ -18,19 +32,29 @@ static NSString *theme_reuseid = @"theme_reuseid";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
-  
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.headerView];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.frame = CGRectMake(0, 60, kScreenWidth, kScreenHeight-60);
+        _tableView.delegate =self;
+        _tableView.dataSource = self;
+    }
+    return _tableView;
+}
+
+- (SYThemeHeaderView *)headerView {
+    if (!_headerView) {
+        _headerView = [[SYThemeHeaderView alloc] initWithAttachScrollView:self.tableView];
+        _headerView.frame = CGRectMake(0, 0, kScreenWidth, 60);
+        _headerView.backgroundColor = [UIColor purpleColor];
+    }
+    return _headerView;
 }
 
 #pragma mark - Table view data source
@@ -42,15 +66,35 @@ static NSString *theme_reuseid = @"theme_reuseid";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 10;
+    return self.stories.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:theme_reuseid forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:theme_reuseid];
     
-    // Configure the cell...
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:theme_reuseid];
+    }
     
+    cell.textLabel.text = self.stories[indexPath.row].title;
     return cell;
+}
+
+
+
+- (void)setThemeid:(int)themeid {
+    _themeid = themeid;
+    [SYZhihuTool getThemeWithThemeId:themeid completed:^(id obj) {
+        self.themeItem = obj;
+        self.headerView.themeItem = obj;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
+}
+
+- (NSArray<SYStory *> *)stories {
+    return self.themeItem.stories;
 }
 
 

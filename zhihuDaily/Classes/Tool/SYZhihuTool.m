@@ -145,7 +145,6 @@
     [YSHttpTool GETWithURL:themeUrl params:nil success:^(id responseObject) {
         SYThemeItem *item = [SYThemeItem mj_objectWithKeyValues:responseObject];
         completed(item);
-        
     } failure:nil];
 }
 

@@ -16,7 +16,9 @@
 
 @property (nonatomic, weak) UIActivityIndicatorView *indicatorView;
 
-@property (nonatomic, assign) CGFloat offsetY;
+@property (nonatomic, assign) CGFloat refreshFlag;
+
+@property (nonatomic, assign, getter=isRefreshing) BOOL refreshing;
 
 @end
 
@@ -25,6 +27,7 @@
 
 + (instancetype)refreshViewWithScrollView:(UIScrollView *)scrollView {
     SYRefreshView *refreshView = [[self alloc] init];
+    refreshView.bounds = CGRectMake(0, 0, 18, 18);
     refreshView.scrollView = scrollView;
 
     CAShapeLayer *progressLayer = [CAShapeLayer layer];
@@ -39,6 +42,7 @@
     
     
     UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] init];
+    indicatorView.bounds = CGRectMake(0, 0, 18, 18);
     [refreshView addSubview:indicatorView];
     refreshView.indicatorView = indicatorView;
     
@@ -63,6 +67,10 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    
+    
+    if (self.refreshing)  return;
+    
     CGFloat height = [change[@"new"] CGPointValue].y;
     if (height > 0) {
         height = 0.;
@@ -74,12 +82,14 @@
     
     if (self.scrollView.isDragging) {
         self.hidden = NO;
-        self.offsetY = height;
+        self.refreshFlag = height;
         self.progressLayer.hidden = NO;
         self.progressLayer.strokeEnd = height;
         [self.indicatorView stopAnimating];
     } else {
-        if (self.offsetY == 1.) {
+        if (self.refreshFlag == 1.) {
+            self.refreshFlag = 0;
+            self.refreshing = YES;
             [self.indicatorView startAnimating];
             self.progressLayer.hidden = YES;
             self.progressLayer.strokeEnd = 0;
@@ -89,12 +99,12 @@
             self.progressLayer.strokeEnd = height;
         }
     }
-    
 }
 
 
 - (void)endRefresh {
     self.hidden = YES;
+    self.refreshing = NO;
     self.progressLayer.strokeEnd = 0;
     self.progressLayer.hidden = NO;
     [self.indicatorView stopAnimating];

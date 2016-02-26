@@ -27,6 +27,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *bottomContainer;
 @property (nonatomic, strong) UINavigationController *naviTheme;
+
 @property (nonatomic, strong)  SYThemeController *themeController;
 
 @end
@@ -106,8 +107,9 @@
         [self.mainController setCenterViewController:self.naviHome withCloseAnimation:YES completion:nil];
     } else {
         
+        self.themeController.themeid = self.dataSource[indexPath.row].id;
+        [self.mainController setCenterViewController:self.naviTheme withCloseAnimation:YES completion:nil];
     }
-    
 }
 
 
@@ -121,6 +123,14 @@
     return _naviHome;
 }
 
+
+- (UINavigationController *)naviTheme {
+    if (!_naviTheme) {
+        _naviTheme = [[SYNavigationController alloc] initWithRootViewController:self.themeController];
+        _naviTheme.navigationBar.hidden = YES;
+    }
+    return _naviTheme;
+}
 
 - (SYThemeController *)themeController {
     if (!_themeController) {

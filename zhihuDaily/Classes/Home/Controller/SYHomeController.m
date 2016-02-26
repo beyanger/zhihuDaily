@@ -318,7 +318,6 @@ static NSString *reuseid = @"useid";
         [self.view addSubview:titleLabel];
         
         SYRefreshView *refresh = [SYRefreshView refreshViewWithScrollView:self.tableView];
-        refresh.bounds = CGRectMake(0, 0, 24, 24);
         refresh.center = CGPointMake(kScreenWidth*0.5 - 60, 35);
         [self.view addSubview:refresh];
         _refreshView = refresh;

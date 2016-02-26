@@ -10,6 +10,6 @@
 
 @interface SYThemeController : UIViewController
 
-@property (nonatomic, assign) int id;
+@property (nonatomic, assign) int themeid;
 
 @end
