@@ -332,11 +332,10 @@
         CGFloat yoffset = [change[@"new"] CGPointValue].y;
         
         if (yoffset > 220) {
-            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+            Black_StatusBar;
         } else {
-            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+            White_StatusBar;
         }
-        
         
         if (!self.isChanging) {
             if (yoffset < 0) {
