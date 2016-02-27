@@ -10,7 +10,10 @@
 #import "MJExtension.h"
 @implementation SYBeforeStoryResult
 
-
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    // value should be Class or Class name.
+    return @{@"stories" : @"SYStory"};
+}
 
 MJCodingImplementation
 @end

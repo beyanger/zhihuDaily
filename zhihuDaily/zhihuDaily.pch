@@ -28,5 +28,7 @@
 
 #define Black_StatusBar     do {[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;} while (0)
 
+#import "YYModel.h"
+
 
 #endif /* zhihuDaily_pch */

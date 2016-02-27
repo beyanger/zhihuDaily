@@ -187,11 +187,12 @@ static FMDatabaseQueue *_zhihu_queue;
     }];
 
     NSArray *tableArray = [self queryTables];
-    for (NSString *table in tableArray) {
-        [[self queue] inDatabase:^(FMDatabase *db) {
-            [db executeQuery:@"DELETE FROM ?", table];
-        }];
-    }
+    [[self queue] inDatabase:^(FMDatabase *db) {
+        for (NSString *table in tableArray) {
+            NSString *sql = [@"DELETE FROM " stringByAppendingString:table];
+            [db executeUpdate:sql];
+        }
+    }];
 }
 
 

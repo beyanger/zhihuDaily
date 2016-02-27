@@ -122,6 +122,17 @@ static NSString *theme_reuseid = @"theme_reuseid";
 
 - (void)setThemeid:(int)themeid {
     _themeid = themeid;
+    [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
+
+    UIView *view = [[UIView alloc] initWithFrame:kScreenBounds];
+    view.backgroundColor = SYColor(255, 255, 255, 0);
+    [self.view addSubview:view];
+    [UIView animateWithDuration:0.25 animations:^{
+        view.backgroundColor = SYColor(255, 255, 255, 0.8);
+    } completion:^(BOOL finished) {
+        [view removeFromSuperview];
+    }];
+    
     [self reload];
 }
 

@@ -162,13 +162,13 @@
     id jsonObject = [SYCacheTool queryStoryListWithDateString:dateString];
     
     if (jsonObject) {
-        SYBeforeStoryResult *result = [SYBeforeStoryResult mj_objectWithKeyValues:jsonObject];
+        SYBeforeStoryResult *result = [SYBeforeStoryResult yy_modelWithDictionary:jsonObject];
         !completed ? : completed(result);
         return;
     }
     
     [YSHttpTool GETWithURL:beforeUrl params:nil success:^(id responseObject) {
-        SYBeforeStoryResult *result = [SYBeforeStoryResult mj_objectWithKeyValues:responseObject];
+        SYBeforeStoryResult *result = [SYBeforeStoryResult yy_modelWithDictionary:responseObject];
         !completed ? : completed(result);
         [SYCacheTool cacheStoryListWithObject:responseObject];
     } failure:nil];
@@ -205,6 +205,8 @@
         NSMutableArray *storyArray = [@[] mutableCopy];
         for (NSDictionary *obj in objArray) {
             SYStory *story = [SYStory mj_objectWithKeyValues:obj];
+            
+            
             [storyArray addObject:story];
         }
         !completed ? :completed(storyArray);

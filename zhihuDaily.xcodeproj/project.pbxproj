@@ -61,6 +61,8 @@
 		2F6AC5FF1C8173910090CD8A /* SYSettingSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC5FE1C8173910090CD8A /* SYSettingSwitch.m */; };
 		2F6AC6021C8173AB0090CD8A /* SYSettingText.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC6011C8173AB0090CD8A /* SYSettingText.m */; };
 		2F6AC6051C817CCA0090CD8A /* SYSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC6041C817CCA0090CD8A /* SYSettingCell.m */; };
+		2F6AC60C1C81B8550090CD8A /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC6081C81B8550090CD8A /* NSObject+YYModel.m */; };
+		2F6AC60D1C81B8550090CD8A /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC60A1C81B8550090CD8A /* YYClassInfo.m */; };
 		2F6CF27B1C7FB20700C4B346 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2761C7FB20700C4B346 /* UINavigationBar+Awesome.m */; };
 		2F6CF27C1C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2781C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		2F6CF27D1C7FB20700C4B346 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF27A1C7FB20700C4B346 /* UIView+Extension.m */; };
@@ -265,6 +267,11 @@
 		2F6AC6011C8173AB0090CD8A /* SYSettingText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYSettingText.m; sourceTree = "<group>"; };
 		2F6AC6031C817CCA0090CD8A /* SYSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYSettingCell.h; sourceTree = "<group>"; };
 		2F6AC6041C817CCA0090CD8A /* SYSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYSettingCell.m; sourceTree = "<group>"; };
+		2F6AC6071C81B8550090CD8A /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
+		2F6AC6081C81B8550090CD8A /* NSObject+YYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
+		2F6AC6091C81B8550090CD8A /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
+		2F6AC60A1C81B8550090CD8A /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
+		2F6AC60B1C81B8550090CD8A /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
 		2F6CF2751C7FB20700C4B346 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
 		2F6CF2761C7FB20700C4B346 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		2F6CF2771C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
@@ -703,6 +710,18 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		2F6AC6061C81B8550090CD8A /* YYModel */ = {
+			isa = PBXGroup;
+			children = (
+				2F6AC6071C81B8550090CD8A /* NSObject+YYModel.h */,
+				2F6AC6081C81B8550090CD8A /* NSObject+YYModel.m */,
+				2F6AC6091C81B8550090CD8A /* YYClassInfo.h */,
+				2F6AC60A1C81B8550090CD8A /* YYClassInfo.m */,
+				2F6AC60B1C81B8550090CD8A /* YYModel.h */,
+			);
+			path = YYModel;
+			sourceTree = "<group>";
+		};
 		2F6CF2741C7FB20700C4B346 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -885,6 +904,7 @@
 		2FC587891C7A0937003C9A7A /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				2F6AC6061C81B8550090CD8A /* YYModel */,
 				2F6CF2741C7FB20700C4B346 /* Categories */,
 				2F4F1A751C7FA09500AF3BDF /* fmdb */,
 				2F0E2CBE1C7BF071004FDA0F /* MBProgressHUD */,
@@ -1283,6 +1303,7 @@
 				2F6AC5F21C8167A50090CD8A /* SYLaunchController.m in Sources */,
 				2F6AC5FC1C8173110090CD8A /* SYSettingArrow.m in Sources */,
 				2F37AB7B1C7B675100D3CD65 /* UIViewController+MMDrawerController.m in Sources */,
+				2F6AC60C1C81B8550090CD8A /* NSObject+YYModel.m in Sources */,
 				2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */,
 				2F2CCBC41C7B0C1400C45E3D /* MJPropertyType.m in Sources */,
 				2FE707A21C7DD358005CB13B /* SYLeftDrawerController.m in Sources */,
@@ -1308,6 +1329,7 @@
 				2F2CCBA71C7B08F600C45E3D /* SYStory.m in Sources */,
 				2F6AC5FF1C8173910090CD8A /* SYSettingSwitch.m in Sources */,
 				2F2CCBC71C7B0C1400C45E3D /* NSObject+MJKeyValue.m in Sources */,
+				2F6AC60D1C81B8550090CD8A /* YYClassInfo.m in Sources */,
 				2FC587D11C7A096A003C9A7A /* NSData+ImageContentType.m in Sources */,
 				2FD803B71C7A3B5500C15EB7 /* SYToolButton.m in Sources */,
 				2F0E2CC41C7BF071004FDA0F /* MBProgressHUD+YS.m in Sources */,
