@@ -55,6 +55,12 @@
 		2F6AC5E71C8141DD0090CD8A /* SYContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC5E61C8141DD0090CD8A /* SYContainerView.m */; };
 		2F6AC5F21C8167A50090CD8A /* SYLaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC5F01C8167A50090CD8A /* SYLaunchController.m */; };
 		2F6AC5F31C8167A50090CD8A /* SYLaunchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F6AC5F11C8167A50090CD8A /* SYLaunchController.xib */; };
+		2F6AC5F61C8171D60090CD8A /* SYSettingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC5F51C8171D60090CD8A /* SYSettingItem.m */; };
+		2F6AC5F91C8171FD0090CD8A /* SYSettingGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC5F81C8171FD0090CD8A /* SYSettingGroup.m */; };
+		2F6AC5FC1C8173110090CD8A /* SYSettingArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC5FB1C8173110090CD8A /* SYSettingArrow.m */; };
+		2F6AC5FF1C8173910090CD8A /* SYSettingSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC5FE1C8173910090CD8A /* SYSettingSwitch.m */; };
+		2F6AC6021C8173AB0090CD8A /* SYSettingText.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC6011C8173AB0090CD8A /* SYSettingText.m */; };
+		2F6AC6051C817CCA0090CD8A /* SYSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC6041C817CCA0090CD8A /* SYSettingCell.m */; };
 		2F6CF27B1C7FB20700C4B346 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2761C7FB20700C4B346 /* UINavigationBar+Awesome.m */; };
 		2F6CF27C1C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2781C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		2F6CF27D1C7FB20700C4B346 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF27A1C7FB20700C4B346 /* UIView+Extension.m */; };
@@ -247,6 +253,18 @@
 		2F6AC5EF1C8167A50090CD8A /* SYLaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYLaunchController.h; sourceTree = "<group>"; };
 		2F6AC5F01C8167A50090CD8A /* SYLaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYLaunchController.m; sourceTree = "<group>"; };
 		2F6AC5F11C8167A50090CD8A /* SYLaunchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYLaunchController.xib; sourceTree = "<group>"; };
+		2F6AC5F41C8171D60090CD8A /* SYSettingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYSettingItem.h; sourceTree = "<group>"; };
+		2F6AC5F51C8171D60090CD8A /* SYSettingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYSettingItem.m; sourceTree = "<group>"; };
+		2F6AC5F71C8171FD0090CD8A /* SYSettingGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYSettingGroup.h; sourceTree = "<group>"; };
+		2F6AC5F81C8171FD0090CD8A /* SYSettingGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYSettingGroup.m; sourceTree = "<group>"; };
+		2F6AC5FA1C8173110090CD8A /* SYSettingArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYSettingArrow.h; sourceTree = "<group>"; };
+		2F6AC5FB1C8173110090CD8A /* SYSettingArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYSettingArrow.m; sourceTree = "<group>"; };
+		2F6AC5FD1C8173910090CD8A /* SYSettingSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYSettingSwitch.h; sourceTree = "<group>"; };
+		2F6AC5FE1C8173910090CD8A /* SYSettingSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYSettingSwitch.m; sourceTree = "<group>"; };
+		2F6AC6001C8173AB0090CD8A /* SYSettingText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYSettingText.h; sourceTree = "<group>"; };
+		2F6AC6011C8173AB0090CD8A /* SYSettingText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYSettingText.m; sourceTree = "<group>"; };
+		2F6AC6031C817CCA0090CD8A /* SYSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYSettingCell.h; sourceTree = "<group>"; };
+		2F6AC6041C817CCA0090CD8A /* SYSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYSettingCell.m; sourceTree = "<group>"; };
 		2F6CF2751C7FB20700C4B346 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
 		2F6CF2761C7FB20700C4B346 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		2F6CF2771C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
@@ -485,6 +503,16 @@
 		2F2CCB831C7AF09800C45E3D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2F6AC5F41C8171D60090CD8A /* SYSettingItem.h */,
+				2F6AC5F51C8171D60090CD8A /* SYSettingItem.m */,
+				2F6AC5FA1C8173110090CD8A /* SYSettingArrow.h */,
+				2F6AC5FB1C8173110090CD8A /* SYSettingArrow.m */,
+				2F6AC5FD1C8173910090CD8A /* SYSettingSwitch.h */,
+				2F6AC5FE1C8173910090CD8A /* SYSettingSwitch.m */,
+				2F6AC6001C8173AB0090CD8A /* SYSettingText.h */,
+				2F6AC6011C8173AB0090CD8A /* SYSettingText.m */,
+				2F6AC5F71C8171FD0090CD8A /* SYSettingGroup.h */,
+				2F6AC5F81C8171FD0090CD8A /* SYSettingGroup.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -492,6 +520,8 @@
 		2F2CCB841C7AF09800C45E3D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2F6AC6031C817CCA0090CD8A /* SYSettingCell.h */,
+				2F6AC6041C817CCA0090CD8A /* SYSettingCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1229,6 +1259,8 @@
 				2FC588001C7A0974003C9A7A /* NSArray+MASAdditions.m in Sources */,
 				2FC5879E1C7A0956003C9A7A /* AFHTTPRequestOperation.m in Sources */,
 				2F2CCBA41C7B088E00C45E3D /* SYLastestParamResult.m in Sources */,
+				2F6AC6051C817CCA0090CD8A /* SYSettingCell.m in Sources */,
+				2F6AC5F61C8171D60090CD8A /* SYSettingItem.m in Sources */,
 				2FB923151C7F369A000A0A2D /* SYVersion.m in Sources */,
 				2F2CCBC21C7B0C1400C45E3D /* MJProperty.m in Sources */,
 				2FC587A11C7A0956003C9A7A /* AFNetworkReachabilityManager.m in Sources */,
@@ -1249,6 +1281,7 @@
 				2F1319D81C7E113700FA146F /* SYNavigationController.m in Sources */,
 				2F4F1A861C7FA09500AF3BDF /* FMResultSet.m in Sources */,
 				2F6AC5F21C8167A50090CD8A /* SYLaunchController.m in Sources */,
+				2F6AC5FC1C8173110090CD8A /* SYSettingArrow.m in Sources */,
 				2F37AB7B1C7B675100D3CD65 /* UIViewController+MMDrawerController.m in Sources */,
 				2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */,
 				2F2CCBC41C7B0C1400C45E3D /* MJPropertyType.m in Sources */,
@@ -1273,6 +1306,7 @@
 				2FC587FE1C7A0974003C9A7A /* MASViewAttribute.m in Sources */,
 				2F6CF2A51C80612100C4B346 /* SYBaseViewController.m in Sources */,
 				2F2CCBA71C7B08F600C45E3D /* SYStory.m in Sources */,
+				2F6AC5FF1C8173910090CD8A /* SYSettingSwitch.m in Sources */,
 				2F2CCBC71C7B0C1400C45E3D /* NSObject+MJKeyValue.m in Sources */,
 				2FC587D11C7A096A003C9A7A /* NSData+ImageContentType.m in Sources */,
 				2FD803B71C7A3B5500C15EB7 /* SYToolButton.m in Sources */,
@@ -1294,6 +1328,7 @@
 				2FC5879F1C7A0956003C9A7A /* AFHTTPRequestOperationManager.m in Sources */,
 				2FC587FC1C7A0974003C9A7A /* MASConstraintMaker.m in Sources */,
 				2FC587D81C7A096A003C9A7A /* SDWebImagePrefetcher.m in Sources */,
+				2F6AC6021C8173AB0090CD8A /* SYSettingText.m in Sources */,
 				2FC587D41C7A096A003C9A7A /* SDWebImageDecoder.m in Sources */,
 				2FE707921C7DBF4E005CB13B /* SYThemeViewCell.m in Sources */,
 				2FC588031C7A0974003C9A7A /* ViewController+MASAdditions.m in Sources */,
@@ -1322,6 +1357,7 @@
 				2FC587DE1C7A096A003C9A7A /* UIImageView+WebCache.m in Sources */,
 				2F2CCB7B1C7AE49000C45E3D /* SYTheme.m in Sources */,
 				2FB9230F1C7EEBE8000A0A2D /* SYEditor.m in Sources */,
+				2F6AC5F91C8171FD0090CD8A /* SYSettingGroup.m in Sources */,
 				2F4F1A831C7FA09500AF3BDF /* FMDatabaseAdditions.m in Sources */,
 				2FC587DD1C7A096A003C9A7A /* UIImageView+HighlightedWebCache.m in Sources */,
 				2FC587A01C7A0956003C9A7A /* AFHTTPSessionManager.m in Sources */,

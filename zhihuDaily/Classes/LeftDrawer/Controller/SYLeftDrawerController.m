@@ -75,9 +75,9 @@
 
 - (IBAction)didClickedMenuButton:(UIButton *)sender {
     if ([sender.currentTitle isEqualToString:@"设置"]) {
-        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        SYSettingController *sc = [sb instantiateViewControllerWithIdentifier:@"setting"];
+        SYSettingController *sc = [[SYSettingController alloc] init];
         SYNavigationController *navi = [[SYNavigationController alloc] initWithRootViewController:sc];
+        navi.navigationBar.hidden = YES;
         [self.mainController setCenterViewController:navi withCloseAnimation:YES completion:nil];
         return;
     }

@@ -11,6 +11,8 @@
 #import "SYZhihuTool.h"
 #import "SYMainViewController.h"
 #import "AppDelegate.h"
+#import "MBProgressHUD+YS.h"
+
 
 
 @interface SYLaunchController ()
@@ -27,25 +29,28 @@
     
     NSString *url = [ud stringForKey:@"launchScreen"];
     
-    if (url) {
-        [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:url]];
-    }
-    [SYZhihuTool getLauchImageWithCompleted:^(NSString *obj) {
+    if (url) [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:url]];
+    
+    [SYZhihuTool getLauchImageWithCompleted:^(id obj) {
         [ud setObject:obj forKey:@"launchScreen"];
         [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:obj]];
         
+        SYMainViewController *mainvc = [[SYMainViewController alloc] init];
+        
+        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        delegate.mainController = mainvc;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            SYMainViewController *mainvc = [[SYMainViewController alloc] init];
+
             [UIView animateWithDuration:0.68 animations:^{
                 self.backgroundImageView.alpha = 0.;
                 self.backgroundImageView.transform = CGAffineTransformMakeScale(1.2, 1.2);
-            } completion:^(BOOL finished) {
                 [UIApplication sharedApplication].keyWindow.rootViewController = mainvc;
-                AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-                delegate.mainController = mainvc;
-            }];
+            } completion:nil];
         });
+    } failure:^{
+        [MBProgressHUD showError:@"网络状况差，请稍后再试..."];
     }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

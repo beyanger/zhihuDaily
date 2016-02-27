@@ -21,19 +21,37 @@
                     <animations/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="70g-cJ-vVV">
-                    <rect key="frame" x="237.5" y="471" width="125" height="45"/>
+                    <rect key="frame" x="237" y="457" width="125" height="45"/>
                     <animations/>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Thomas Yang" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQz-1j-KGf">
+                    <rect key="frame" x="232" y="512" width="137" height="27.5"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="IowanOldStyle-BoldItalic" family="Iowan Old Style" pointSize="20"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="blog.beyanger.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJO-rI-ok8">
+                    <rect key="frame" x="239.5" y="546.5" width="121.5" height="23.5"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="IowanOldStyle-Italic" family="Iowan Old Style" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="70g-cJ-vVV" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="6bZ-BV-5af"/>
                 <constraint firstItem="bGB-fw-D4I" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8fg-SU-ALC"/>
-                <constraint firstAttribute="bottom" secondItem="70g-cJ-vVV" secondAttribute="bottom" constant="84" id="CpU-cW-rnc"/>
+                <constraint firstAttribute="bottom" secondItem="70g-cJ-vVV" secondAttribute="bottom" constant="98" id="CpU-cW-rnc"/>
                 <constraint firstAttribute="trailing" secondItem="bGB-fw-D4I" secondAttribute="trailing" id="JL5-YS-PAC"/>
                 <constraint firstAttribute="bottom" secondItem="bGB-fw-D4I" secondAttribute="bottom" id="PSS-6b-f0k"/>
                 <constraint firstItem="bGB-fw-D4I" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Suy-Bo-1hu"/>
+                <constraint firstItem="AJO-rI-ok8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="iry-Gt-1tR"/>
+                <constraint firstAttribute="bottom" secondItem="pQz-1j-KGf" secondAttribute="bottom" constant="60" id="k8G-0i-CKM"/>
+                <constraint firstItem="pQz-1j-KGf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="kHN-nD-9c6"/>
+                <constraint firstAttribute="bottom" secondItem="AJO-rI-ok8" secondAttribute="bottom" constant="30" id="w3r-Fh-Jql"/>
             </constraints>
         </view>
     </objects>

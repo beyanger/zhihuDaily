@@ -22,7 +22,9 @@
 #import "SYVersion.h"
 #import "SYCacheTool.h"
 
-typedef void(^Completed)(id obj);
+typedef void (^Completed)(id obj);
+
+typedef void  (^Failure)();
 
 @interface SYZhihuTool : NSObject
 /**
@@ -56,7 +58,7 @@ typedef void(^Completed)(id obj);
 /**
  *  获取LaunchImage
  */
-+ (void)getLauchImageWithCompleted:(Completed)completed;
++ (void)getLauchImageWithCompleted:(Completed)completed failure:(Failure)failure;
 /**
  *  根据 NSDate类型时间获取当日之前的story
  */

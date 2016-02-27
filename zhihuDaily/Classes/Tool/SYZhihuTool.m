@@ -110,6 +110,19 @@
 
 }
 
+
++ (void)getLauchImageWithCompleted:(Completed)completed failure:(Failure)failure {
+    NSString *launchImgUrl = @"http://news-at.zhihu.com/api/4/start-image/720*1184";
+    
+    [YSHttpTool GETWithURL:launchImgUrl params:nil success:^(id responseObject) {
+        NSString *urlStr = responseObject[@"img"];
+        completed(urlStr);
+    } failure:^(NSError *error) {
+        failure();
+    }];
+}
+
+
 + (void)getBeforeStroyWithDate:(NSDate *)date completed:(Completed)completed {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyyMMdd"];

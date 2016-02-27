@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYBaseViewController.h"
 
-@interface SYSettingController : UITableViewController
+
+@interface SYSettingController : SYBaseViewController
 
 @end
