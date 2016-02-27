@@ -12,6 +12,7 @@
 #import "SYMainViewController.h"
 #import "AppDelegate.h"
 #import "MBProgressHUD+YS.h"
+#import "SYCacheTool.h"
 
 
 
@@ -25,8 +26,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [SYCacheTool queryTables];
     
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *url = [ud stringForKey:@"launchScreen"];
     
     if (url) [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:url]];

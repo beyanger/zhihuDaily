@@ -16,6 +16,14 @@
 + (void)cacheStoryWithObject:(id)respObject;
 
 
++ (void)cacheTheme:(int)themeid;
+
++ (void)cacheThemeSotryListWithId:(int)themeid respObject:(id)respObject;
++ (id)queryBeforeStoryListWithId:(int)themeid storyId:(long long)storyId;
+
+
+
++ (NSArray *)queryTables;
 
 + (NSUInteger)cachedSize;
 

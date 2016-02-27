@@ -21,12 +21,25 @@
 #import "SYThemeItem.h"
 #import "SYVersion.h"
 #import "SYCacheTool.h"
+#import "SYStory.h"
+
 
 typedef void (^Completed)(id obj);
 
 typedef void  (^Failure)();
 
 @interface SYZhihuTool : NSObject
+
+/**
+ *  获取LaunchImage
+ */
++ (void)getLauchImageWithCompleted:(Completed)completed failure:(Failure)failure;
+
+
++ (void)queryAppWithVersion:(NSString *)version  Completed:(Completed)completed;
+
+
+
 /**
  *  获取story详情
  */
@@ -55,10 +68,7 @@ typedef void  (^Failure)();
  *  获取所有的 theme
  */
 + (void)getThemesWithCompleted:(Completed)completed;
-/**
- *  获取LaunchImage
- */
-+ (void)getLauchImageWithCompleted:(Completed)completed failure:(Failure)failure;
+
 /**
  *  根据 NSDate类型时间获取当日之前的story
  */
@@ -69,11 +79,11 @@ typedef void  (^Failure)();
 + (void)getBeforeStroyWithDateString:(NSString *)dateString completed:(Completed)completed;
 
 /**
- *  根据 主题 id 获取主题详情
+ *  根据 主题 id 获取主题 最新列表
  */
-+ (void)getThemeWithThemeId:(int)themeId completed:(Completed)completed;
++ (void)getThemeWithId:(int)themeId completed:(Completed)completed;
 
 
-+ (void)queryAppWithVersion:(NSString *)version  Completed:(Completed)completed;
++ (void)getBeforeThemeStoryWithId:(int)themeid storyId:(long long)storyId completed:(Completed)completed;
 
 @end

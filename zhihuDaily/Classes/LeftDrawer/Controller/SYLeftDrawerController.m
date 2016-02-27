@@ -38,7 +38,6 @@
     [super viewDidLoad];
     [self setupSubviews];
     [self setupDataSource];
-    
 }
 
 - (void)setupSubviews {

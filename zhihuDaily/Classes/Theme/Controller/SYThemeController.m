@@ -61,6 +61,12 @@ static NSString *theme_reuseid = @"theme_reuseid";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == self.stories.count-18) {
+        [self loadMoreData];
+    }
+}
+
 
 - (UITableView *)tableView {
     if (!_tableView) {
@@ -120,7 +126,7 @@ static NSString *theme_reuseid = @"theme_reuseid";
 }
 
 - (void)reload {
-    [SYZhihuTool getThemeWithThemeId:self.themeid completed:^(id obj) {
+    [SYZhihuTool getThemeWithId:self.themeid completed:^(id obj) {
         self.themeItem = obj;
         dispatch_async(dispatch_get_main_queue(), ^{
             self.title = self.themeItem.name;
@@ -134,6 +140,18 @@ static NSString *theme_reuseid = @"theme_reuseid";
         });
     }];
 }
+
+
+- (void)loadMoreData {
+    long long storyid = self.stories.lastObject.id;
+    int themeid = self.themeid;
+    [SYZhihuTool getBeforeThemeStoryWithId:themeid storyId:storyid completed:^(id obj) {
+        [self.themeItem.stories addObjectsFromArray:obj];
+        [self.tableView reloadData];
+    }];
+}
+
+
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (scrollView.contentOffset.y <= -80) {

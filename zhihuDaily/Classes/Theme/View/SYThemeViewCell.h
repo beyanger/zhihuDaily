@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SYStory.h"
 
 @interface  SYThemeViewCell: UITableViewCell
+
+
+- (instancetype)cellWithTableView:(UITableView *)tableView story:(SYStory *)story;
 
 @end

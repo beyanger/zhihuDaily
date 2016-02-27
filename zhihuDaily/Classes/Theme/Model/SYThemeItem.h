@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYStory.h"
 
 @interface SYThemeItem : NSObject
 
-@property (nonatomic, strong) NSArray *stories;
+@property (nonatomic, strong) NSMutableArray<SYStory *> *stories;
 
 
 @property (nonatomic, copy) NSString *desc;

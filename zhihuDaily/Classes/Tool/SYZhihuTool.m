@@ -20,6 +20,34 @@
 
 @implementation SYZhihuTool
 
++ (void)getLauchImageWithCompleted:(Completed)completed failure:(Failure)failure {
+    NSString *launchImgUrl = @"http://news-at.zhihu.com/api/4/start-image/720*1184";
+    
+    [YSHttpTool GETWithURL:launchImgUrl params:nil success:^(id responseObject) {
+        NSString *urlStr = responseObject[@"img"];
+        !completed ? : completed(urlStr);
+    } failure:^(NSError *error) {
+        failure();
+    }];
+}
+
+
+
++ (void)queryAppWithVersion:(NSString *)version  Completed:(Completed)completed {
+    
+    // http://news-at.zhihu.com/api/4/version/android/2.3.0
+    // http://news-at.zhihu.com/api/4/version/ios/2.3.0
+    NSString *versionUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/version/ios/%@", version];
+    
+    [YSHttpTool GETWithURL:versionUrl params:nil success:^(id responseObject) {
+        SYVersion *ver = [SYVersion mj_objectWithKeyValues:responseObject];
+        !completed ? : completed(ver);
+    } failure:nil];
+}
+
+
+
+
 + (void)getDetailWithId:(long long)storyid completed:(Completed)completed {
     NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/news/%lld", storyid];
 
@@ -27,14 +55,14 @@
     if (jsonObject) {
         SYDetailStory *ds = [SYDetailStory mj_objectWithKeyValues:jsonObject];
         ds.htmlStr = [NSString stringWithFormat:@"<html><head><link rel=\"stylesheet\" href=%@></head><body>%@</body></html>", ds.css[0], ds.body];
-        completed(ds);
+        !completed ? : completed(ds);
         return;
     }
     
     [YSHttpTool GETWithURL:url params:nil success:^(id responseObject) {
         SYDetailStory *ds = [SYDetailStory mj_objectWithKeyValues:responseObject];
         ds.htmlStr = [NSString stringWithFormat:@"<html><head><link rel=\"stylesheet\" href=%@></head><body>%@</body></html>", ds.css[0], ds.body];
-        completed(ds);
+        !completed ? : completed(ds);
     
         [SYCacheTool cacheStoryWithObject:responseObject];
         
@@ -47,7 +75,7 @@
     NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/story-extra/%lld",storyid];
     [YSHttpTool GETWithURL:url params:nil success:^(id responseObject) {
         SYExtraStory *es = [SYExtraStory mj_objectWithKeyValues:responseObject];
-        completed(es);
+        !completed ? : completed(es);
     } failure:nil];
     
 }
@@ -64,7 +92,7 @@
 
     [YSHttpTool GETWithURL:url params:nil success:^(id responseObject) {
         SYLastestParamResult *result = [SYLastestParamResult mj_objectWithKeyValues:responseObject];
-        completed(result);
+        !completed ? : completed(result);
     } failure:nil];
 }
 
@@ -73,7 +101,7 @@
     
     [YSHttpTool GETWithURL:longCommentUrl params:nil success:^(id responseObject) {
         NSArray *comment = [SYComment mj_objectArrayWithKeyValuesArray:responseObject[@"comments"]];
-        completed(comment);
+        !completed ? : completed(comment);
     } failure:nil];
     
     
@@ -84,7 +112,7 @@
     NSString *shortCommentUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/story/%lld/short-comments", storyid];
     [YSHttpTool GETWithURL:shortCommentUrl params:nil success:^(id responseObject) {
         NSArray *comment = [SYComment mj_objectArrayWithKeyValuesArray:responseObject[@"comments"]];
-        completed(comment);
+        !completed ? : completed(comment);
     } failure:nil];
 }
 
@@ -93,10 +121,13 @@
     NSString *themeUrl = @"http://news-at.zhihu.com/api/4/themes";
     
     [YSHttpTool GETWithURL:themeUrl params:nil success:^(id responseObject) {
-        NSArray *themeArray = [SYTheme mj_objectArrayWithKeyValuesArray:responseObject[@"others"]];
-        completed(themeArray);
+        NSArray<SYTheme *> *themeArray = [SYTheme mj_objectArrayWithKeyValuesArray:responseObject[@"others"]];
+        !completed ? : completed(themeArray);
+        for (SYTheme *theme in themeArray) {
+            [SYCacheTool cacheTheme:theme.id];
+        }
+        
     } failure:nil];
-
 }
 
 
@@ -105,22 +136,12 @@
     
     [YSHttpTool GETWithURL:launchImgUrl params:nil success:^(id responseObject) {
         NSString *urlStr = responseObject[@"img"];
-        completed(urlStr);
+        !completed ? : completed(urlStr);
     } failure:nil];
 
 }
 
 
-+ (void)getLauchImageWithCompleted:(Completed)completed failure:(Failure)failure {
-    NSString *launchImgUrl = @"http://news-at.zhihu.com/api/4/start-image/720*1184";
-    
-    [YSHttpTool GETWithURL:launchImgUrl params:nil success:^(id responseObject) {
-        NSString *urlStr = responseObject[@"img"];
-        completed(urlStr);
-    } failure:^(NSError *error) {
-        failure();
-    }];
-}
 
 
 + (void)getBeforeStroyWithDate:(NSDate *)date completed:(Completed)completed {
@@ -142,19 +163,20 @@
     
     if (jsonObject) {
         SYBeforeStoryResult *result = [SYBeforeStoryResult mj_objectWithKeyValues:jsonObject];
-        completed(result);
+        !completed ? : completed(result);
         return;
     }
     
     [YSHttpTool GETWithURL:beforeUrl params:nil success:^(id responseObject) {
         SYBeforeStoryResult *result = [SYBeforeStoryResult mj_objectWithKeyValues:responseObject];
-        completed(result);
+        !completed ? : completed(result);
         [SYCacheTool cacheStoryListWithObject:responseObject];
     } failure:nil];
 }
 
 
-+ (void)getThemeWithThemeId:(int)themeId completed:(Completed)completed {
++ (void)getThemeWithId:(int)themeId completed:(Completed)completed {
+    
     NSString *themeUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/theme/%d", themeId];
     
     [SYThemeItem mj_setupObjectClassInArray:^NSDictionary *{
@@ -167,21 +189,44 @@
     
     [YSHttpTool GETWithURL:themeUrl params:nil success:^(id responseObject) {
         SYThemeItem *item = [SYThemeItem mj_objectWithKeyValues:responseObject];
-        completed(item);
+        !completed ? : completed(item);
     } failure:nil];
 }
 
 
-+ (void)queryAppWithVersion:(NSString *)version  Completed:(Completed)completed {
++ (void)getBeforeThemeStoryWithId:(int)themeid storyId:(long long)storyId completed:(Completed)completed {
+
+    NSLog(@"----> %d", themeid);
     
-    // http://news-at.zhihu.com/api/4/version/android/2.3.0
-    // http://news-at.zhihu.com/api/4/version/ios/2.3.0
-    NSString *versionUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/version/ios/%@", version];
+    NSArray *objArray = [SYCacheTool queryBeforeStoryListWithId:themeid storyId:storyId];
     
-    [YSHttpTool GETWithURL:versionUrl params:nil success:^(id responseObject) {
-        SYVersion *ver = [SYVersion mj_objectWithKeyValues:responseObject];
-        completed(ver);
+    if (objArray.count > 0) {
+        
+        NSMutableArray *storyArray = [@[] mutableCopy];
+        for (NSDictionary *obj in objArray) {
+            SYStory *story = [SYStory mj_objectWithKeyValues:obj];
+            [storyArray addObject:story];
+        }
+        !completed ? :completed(storyArray);
+        return;
+    }
+    
+    
+    NSLog(@"从网络中获取更多 之前数据");
+    
+    NSString *beforeUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/theme/%d/before/%lld", themeid, storyId];
+    
+    [YSHttpTool GETWithURL:beforeUrl params:nil success:^(id responseObject) {
+        NSArray<SYStory *> *storyArray = [SYStory mj_objectArrayWithKeyValuesArray:responseObject[@"stories"]];
+    
+        !completed ? :completed(storyArray);
+        
+        for (NSDictionary *respObject in responseObject[@"stories"]) {
+            [SYCacheTool cacheThemeSotryListWithId:themeid respObject:respObject];
+        }
+        
     } failure:nil];
 }
+
 
 @end
