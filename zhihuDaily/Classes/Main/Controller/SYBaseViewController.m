@@ -8,6 +8,7 @@
 
 #import "SYBaseViewController.h"
 #import "Masonry.h"
+#import "SYRefreshView.h"
 
 
 @interface SYBaseViewController ()
@@ -18,32 +19,53 @@
 
 @property (nonatomic, strong) UIButton *sy_backButton;
 
+@property (nonatomic, weak) SYRefreshView *refreshView;
+
 @end
 
 @implementation SYBaseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    WEAKSELF;
-    [self.view addSubview:self.sy_headerBackgroundView];
-    [self.view addSubview:self.sy_titleLabel];
-    [self.view addSubview:self.sy_backButton];
-    [self.sy_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(ws.view.mas_top).offset(40);
-        make.left.mas_equalTo(ws.view.mas_left).offset(44);
-        make.right.mas_equalTo(ws.view.mas_right).offset(-44);
-    }];
+    [self.view addSubview:self.sy_header];
+}
+
+- (UIView *)sy_header {
+    if (!_sy_header) {
+        _sy_header = [[UIView alloc] init];
+        _sy_header.frame = CGRectMake(0, 0, kScreenWidth, 64);
+        _sy_header.backgroundColor = SYColor(48, 127, 255, 1.0);
+        _sy_header.clipsToBounds = YES;
+        
+        [_sy_header addSubview:self.sy_headerBackgroundView];
+        [_sy_header addSubview:self.sy_titleLabel];
+        [_sy_header addSubview:self.sy_backButton];
+
+        
+        
+        [self.sy_headerBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.mas_equalTo(_sy_header).offset(-40);
+            make.right.mas_equalTo(_sy_header).offset(40);
+            make.bottom.mas_equalTo(_sy_header);
+        }];
+        
+        
+        
+        [self.sy_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(_sy_header.mas_top).offset(42);
+            make.centerX.mas_equalTo(_sy_header);
+        }];
+    }
+    return _sy_header;
 }
 
 - (UIImageView *)sy_headerBackgroundView {
     if (!_sy_headerBackgroundView) {
         _sy_headerBackgroundView = [[UIImageView alloc] init];
-        _sy_headerBackgroundView.frame = CGRectMake(0, 0, kScreenWidth, 60);
-        _sy_headerBackgroundView.backgroundColor = SYColor(48, 127, 255, 1.0);;
+        _sy_headerBackgroundView.contentMode = UIViewContentModeCenter;
     }
     return _sy_headerBackgroundView;
 }
-
 
 
 - (UILabel *)sy_titleLabel {
@@ -51,7 +73,6 @@
         _sy_titleLabel = [[UILabel alloc] init];
         _sy_titleLabel.textColor = [UIColor whiteColor];
         _sy_titleLabel.textAlignment = NSTextAlignmentCenter;
-        
     }
     return _sy_titleLabel;
 }
@@ -60,7 +81,7 @@
     if (!_sy_backButton) {
         _sy_backButton = [[UIButton alloc] init];
         [_sy_backButton setImage:[UIImage imageNamed:@"Field_Back"] forState:UIControlStateNormal];
-        _sy_backButton.frame = CGRectMake(0, 20, 40, 40);
+        _sy_backButton.frame = CGRectMake(0, 20, 44, 44);
         [_sy_backButton addTarget:self action:@selector(sy_back) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sy_backButton;
@@ -70,6 +91,31 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+- (void)setSy_attachScrollView:(UIScrollView *)sy_attachScrollView {
+    if (!sy_attachScrollView) return;
+    if (_sy_attachScrollView) return;
+
+    _sy_attachScrollView = sy_attachScrollView;
+    SYRefreshView *refresh = [SYRefreshView refreshViewWithScrollView:sy_attachScrollView];
+    [self.sy_header addSubview:refresh];
+    _refreshView = refresh;
+    WEAKSELF;
+    [refresh mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(ws.sy_titleLabel);
+        make.right.mas_equalTo(ws.sy_titleLabel.mas_left).offset(-10);
+        make.size.mas_equalTo(CGSizeMake(18, 18));
+    }];
+}
+
+
+- (UIImageView *)sy_backgoundImageView {
+    return self.sy_headerBackgroundView;
+}
+
+- (SYRefreshView *)sy_refreshView {
+    return self.refreshView;
+}
 
 - (void)setTitle:(NSString *)title {
     self.sy_titleLabel.text = title;

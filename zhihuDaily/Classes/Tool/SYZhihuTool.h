@@ -37,7 +37,7 @@ typedef void(^Completed)(id obj);
 + (void)getExtraWithId:(long long)storyid completed:(Completed)completed;
 
 /**
- *  获取最新的story
+ *  获取最新的storyList
  */
 + (void)getLastestStoryWithCompleted:(Completed)completed;
 

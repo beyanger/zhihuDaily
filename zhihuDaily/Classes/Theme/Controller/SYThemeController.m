@@ -24,11 +24,7 @@
 @property (nonatomic, strong) SYThemeItem *themeItem;
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UIImageView *headerView;
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UIButton *backBtn;
 @property (nonatomic, strong) UIButton *collectBtn;
-@property (nonatomic, strong) SYRefreshView *refreshView;
 @property (nonatomic, strong) SYTableHeader *tableHeader;
 
 @end
@@ -40,33 +36,17 @@ static NSString *theme_reuseid = @"theme_reuseid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.headerView];   
-    [self.view addSubview:self.backBtn];
-    [self.view addSubview:self.collectBtn];
-    [self.view addSubview:self.refreshView];
-    [self.view addSubview:self.titleLabel];
-
-    WEAKSELF;
     
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(ws.view);
-        make.centerY.mas_equalTo(ws.view.mas_top).offset(40);
-    }];
-
-  
-    [self.refreshView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(ws.titleLabel);
-        make.right.mas_equalTo(ws.titleLabel.mas_left).offset(-12);
-        make.size.mas_equalTo(CGSizeMake(18, 18));
-    }];
-    [self reload];
+    [self.sy_header addSubview:self.collectBtn];
+    [self.view bringSubviewToFront:self.sy_header];
+    
+    self.sy_attachScrollView = self.tableView;
 }
+
 
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     return self.stories.count;
 }
 
@@ -110,52 +90,6 @@ static NSString *theme_reuseid = @"theme_reuseid";
     [self.navigationController pushViewController:evc animated:YES];
 }
 
-
-- (UIImageView *)headerView {
-    if (!_headerView) {
-        _headerView = [[UIImageView alloc] init];
-        _headerView.contentMode = UIViewContentModeCenter;
-        _headerView.clipsToBounds = YES;
-        _headerView.frame = CGRectMake(-40, -40, kScreenWidth+80, 100);
-        
-    }
-    return _headerView;
-}
-
-- (UILabel *)titleLabel {
-    if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] init];
-        _titleLabel.textColor = [UIColor whiteColor];
-        
-        _titleLabel.font = [UIFont systemFontOfSize:18];
-    }
-    return _titleLabel;
-}
-
-- (SYRefreshView *)refreshView {
-    if (!_refreshView) {
-        _refreshView = [SYRefreshView refreshViewWithScrollView:self.tableView];
-    }
-    return _refreshView;
-}
-
-- (UIButton *)backBtn {
-    if (!_backBtn) {
-        _backBtn = [[UIButton alloc] init];
-        _backBtn.size = CGSizeMake(22, 22);
-        _backBtn.center = CGPointMake(20, 40);
-        
-        [_backBtn addTarget:self action:@selector(didClickedBackBtn) forControlEvents:UIControlEventTouchUpInside];
-        [_backBtn setImage:[UIImage imageNamed:@"News_Arrow"] forState:UIControlStateNormal];
-    }
-    return _backBtn;
-}
-
-- (void)didClickedBackBtn {
-    [[NSNotificationCenter defaultCenter] postNotificationName:ToggleDrawer object:nil];
-}
-
-
 - (UIButton *)collectBtn {
     if (!_collectBtn) {
         _collectBtn = [[UIButton alloc] init];
@@ -180,26 +114,25 @@ static NSString *theme_reuseid = @"theme_reuseid";
 }
 
 
-
-
 - (void)setThemeid:(int)themeid {
     _themeid = themeid;
+    [self reload];
 }
 
 - (void)reload {
     [SYZhihuTool getThemeWithThemeId:self.themeid completed:^(id obj) {
         self.themeItem = obj;
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.titleLabel.text = self.themeItem.name;
-            self.refreshView.centerY = self.titleLabel.centerY;
-            self.refreshView.x = self.titleLabel.x-30;
-            [self.headerView sd_setImageWithURL:[NSURL URLWithString:self.themeItem.image]];
+            self.title = self.themeItem.name;
+            [self.sy_backgoundImageView sd_setImageWithURL:[NSURL URLWithString:self.themeItem.image]];
             self.tableHeader.editors = self.themeItem.editors;
             [self.tableView reloadData];
-            [self.refreshView endRefresh];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.sy_refreshView endRefresh];
+            });
         });
     }];
-
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
@@ -211,7 +144,7 @@ static NSString *theme_reuseid = @"theme_reuseid";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat yoffset = scrollView.contentOffset.y;
     if (yoffset <= 0 && yoffset >= -90) {
-        self.headerView.height = 100-yoffset;
+        self.sy_header.height = 60-yoffset;
     } else if (yoffset < -90) {
         self.tableView.contentOffset = CGPointMake(0, -90);
     }

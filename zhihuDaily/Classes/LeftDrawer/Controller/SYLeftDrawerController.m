@@ -26,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet UIView *bottomContainer;
-@property (nonatomic, strong) UINavigationController *naviTheme;
+@property (nonatomic, strong) SYNavigationController *naviTheme;
 
 @property (nonatomic, strong)  SYThemeController *themeController;
 
@@ -77,11 +77,10 @@
     if ([sender.currentTitle isEqualToString:@"设置"]) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         SYSettingController *sc = [sb instantiateViewControllerWithIdentifier:@"setting"];
-        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:sc];
+        SYNavigationController *navi = [[SYNavigationController alloc] initWithRootViewController:sc];
         [self.mainController setCenterViewController:navi withCloseAnimation:YES completion:nil];
         return;
     }
-    
 }
 
 
@@ -109,17 +108,12 @@
     if (indexPath.row == 0) {
         [self.mainController setCenterViewController:self.naviHome withCloseAnimation:YES completion:nil];
     } else {
-        SYThemeController *mvc = [[SYThemeController alloc] init];
-        mvc.themeid = self.dataSource[indexPath.row].id;
-     
-        SYNavigationController *navi = [[SYNavigationController alloc] initWithRootViewController:mvc];
-        navi.navigationBar.hidden = YES;
-        [self.mainController setCenterViewController:navi withCloseAnimation:YES completion:nil];
+        self.themeController.themeid = self.dataSource[indexPath.row].id;
+        [self.mainController setCenterViewController:self.naviTheme withCloseAnimation:YES completion:nil];
     }
 }
 
-
-- (UINavigationController *)naviHome {
+- (SYNavigationController *)naviHome {
     if (!_naviHome) {
         SYHomeController *home = [[SYHomeController alloc] init];
         _naviHome = [[SYNavigationController alloc] initWithRootViewController:home];
@@ -128,11 +122,18 @@
     return _naviHome;
 }
 
-
+- (SYNavigationController *)naviTheme {
+    if (!_naviTheme) {
+        _naviTheme = [[SYNavigationController alloc] initWithRootViewController:self.themeController];
+        _naviTheme.navigationBar.hidden = YES;
+    }
+    return _naviTheme;
+}
 
 - (SYThemeController *)themeController {
     if (!_themeController) {
         _themeController = [[SYThemeController alloc] init];
+        _themeController.view.backgroundColor = [UIColor whiteColor];
     }
     return _themeController;
 }

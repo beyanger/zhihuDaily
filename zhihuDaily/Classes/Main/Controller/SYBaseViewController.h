@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYRefreshView.h"
+
 
 @interface SYBaseViewController : UIViewController
+
+@property (nonatomic, strong) UIView *sy_header;
+
+@property (nonatomic, weak) UIScrollView *sy_attachScrollView;
+
+
+
+- (UIImageView *)sy_backgoundImageView;
+
+- (SYRefreshView *)sy_refreshView;
 
 @end

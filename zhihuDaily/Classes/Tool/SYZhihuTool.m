@@ -14,6 +14,10 @@
 
 
 
+
+//推荐者 http://news-at.zhihu.com/api/4/story/7101963(storyid)/recommenders
+// 编辑的主页： http://news-at.zhihu.com/api/4/editor/79(这里填入editor的id)/profile-page/ios
+
 @implementation SYZhihuTool
 
 + (void)getDetailWithId:(long long)storyid completed:(Completed)completed {
@@ -54,6 +58,8 @@
         return @{@"top_stories":@"SYStory", @"stories":@"SYStory"};
     }];
     
+    // 返回结果相同
+    NSString *storyUrl = @"http://news-at.zhihu.com/api/4/stories/latest";
     NSString *url = @"http://news-at.zhihu.com/api/4/news/latest";
 
     [YSHttpTool GETWithURL:url params:nil success:^(id responseObject) {

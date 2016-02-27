@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SYThemeController : UIViewController
+#import "SYBaseViewController.h"
+
+@interface SYThemeController : SYBaseViewController
 
 @property (nonatomic, assign) int themeid;
 

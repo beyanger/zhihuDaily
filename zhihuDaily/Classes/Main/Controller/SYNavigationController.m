@@ -23,6 +23,11 @@
 
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated {
+    if (self.childViewControllers.count == 1) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:ToggleDrawer object:nil];
+        return nil;
+    }
+    
     UIViewController *vc = [super popViewControllerAnimated:animated];
     [self updateGesture];
     return vc;
