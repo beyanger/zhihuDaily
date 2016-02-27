@@ -76,6 +76,7 @@ static NSString *theme_reuseid = @"theme_reuseid";
         _tableView.delegate =self;
         _tableView.dataSource = self;
         _tableView.tableHeaderView = self.tableHeader;
+        _tableView.rowHeight = 80;
     }
     return _tableView;
 }

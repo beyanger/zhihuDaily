@@ -51,20 +51,22 @@
 + (void)getDetailWithId:(long long)storyid completed:(Completed)completed {
     NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/news/%lld", storyid];
 
-    id jsonObject = [SYCacheTool queryStoryWithId:storyid];
-    if (jsonObject) {
-        SYDetailStory *ds = [SYDetailStory mj_objectWithKeyValues:jsonObject];
-        ds.htmlStr = [NSString stringWithFormat:@"<html><head><link rel=\"stylesheet\" href=%@></head><body>%@</body></html>", ds.css[0], ds.body];
-        !completed ? : completed(ds);
+    SYDetailStory *story = [SYCacheTool queryStoryWithId:storyid];
+    
+    if (story) {
+        !completed ? : completed(story);
         return;
     }
+    
+    NSLog(@"从网络中获取的故事, %lld", storyid);
+    
     
     [YSHttpTool GETWithURL:url params:nil success:^(id responseObject) {
         SYDetailStory *ds = [SYDetailStory mj_objectWithKeyValues:responseObject];
         ds.htmlStr = [NSString stringWithFormat:@"<html><head><link rel=\"stylesheet\" href=%@></head><body>%@</body></html>", ds.css[0], ds.body];
         !completed ? : completed(ds);
     
-        [SYCacheTool cacheStoryWithObject:responseObject];
+        [SYCacheTool cacheStoryWithObject:ds];
         
     } failure:nil];
     
@@ -160,17 +162,20 @@
     }];
     
     id jsonObject = [SYCacheTool queryStoryListWithDateString:dateString];
+
     
     if (jsonObject) {
-        SYBeforeStoryResult *result = [SYBeforeStoryResult yy_modelWithDictionary:jsonObject];
+        SYBeforeStoryResult *result = [SYBeforeStoryResult mj_objectWithKeyValues:jsonObject];
         !completed ? : completed(result);
         return;
     }
     
+    NSLog(@" 从网络中获取更多数据");
+    
     [YSHttpTool GETWithURL:beforeUrl params:nil success:^(id responseObject) {
-        SYBeforeStoryResult *result = [SYBeforeStoryResult yy_modelWithDictionary:responseObject];
+        SYBeforeStoryResult *result = [SYBeforeStoryResult mj_objectWithKeyValues:responseObject];
         !completed ? : completed(result);
-        [SYCacheTool cacheStoryListWithObject:responseObject];
+        [SYCacheTool cacheStoryListWithObject:result];
     } failure:nil];
 }
 
@@ -196,25 +201,14 @@
 
 + (void)getBeforeThemeStoryWithId:(int)themeid storyId:(long long)storyId completed:(Completed)completed {
 
-    NSLog(@"----> %d", themeid);
-    
     NSArray *objArray = [SYCacheTool queryBeforeStoryListWithId:themeid storyId:storyId];
     
     if (objArray.count > 0) {
-        
-        NSMutableArray *storyArray = [@[] mutableCopy];
-        for (NSDictionary *obj in objArray) {
-            SYStory *story = [SYStory mj_objectWithKeyValues:obj];
-            
-            
-            [storyArray addObject:story];
-        }
-        !completed ? :completed(storyArray);
+        !completed ? :completed(objArray);
         return;
     }
     
-    
-    NSLog(@"从网络中获取更多 之前数据");
+    NSLog(@"从网络中获取更多主题： %d", themeid);
     
     NSString *beforeUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/theme/%d/before/%lld", themeid, storyId];
     
@@ -223,12 +217,15 @@
     
         !completed ? :completed(storyArray);
         
-        for (NSDictionary *respObject in responseObject[@"stories"]) {
-            [SYCacheTool cacheThemeSotryListWithId:themeid respObject:respObject];
-        }
+        [SYCacheTool cacheThemeSotryListWithId:themeid respObject:storyArray];
         
     } failure:nil];
 }
 
+
+
++ (void)likeStoryWithId:(long long)storyid {
+    NSString *likeUrl = @"http://news-at.zhihu.com/api/4/vote/stories";
+}
 
 @end

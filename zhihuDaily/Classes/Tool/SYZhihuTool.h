@@ -86,4 +86,7 @@ typedef void  (^Failure)();
 
 + (void)getBeforeThemeStoryWithId:(int)themeid storyId:(long long)storyId completed:(Completed)completed;
 
++ (void)likeStoryWithId:(long long)storyid;
+
+
 @end

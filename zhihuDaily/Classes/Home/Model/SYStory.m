@@ -7,7 +7,9 @@
 //
 
 #import "SYStory.h"
+#import "MJExtension.h"
 
 @implementation SYStory
 
+MJCodingImplementation
 @end

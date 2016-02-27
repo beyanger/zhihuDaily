@@ -95,6 +95,9 @@
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
         self.imageView.image = image;
     }];
+    
+    
+    
 }
 
 - (void)remove {

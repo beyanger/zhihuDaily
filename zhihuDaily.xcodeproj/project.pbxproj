@@ -63,6 +63,9 @@
 		2F6AC6051C817CCA0090CD8A /* SYSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC6041C817CCA0090CD8A /* SYSettingCell.m */; };
 		2F6AC60C1C81B8550090CD8A /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC6081C81B8550090CD8A /* NSObject+YYModel.m */; };
 		2F6AC60D1C81B8550090CD8A /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC60A1C81B8550090CD8A /* YYClassInfo.m */; };
+		2F6AC6141C81F40C0090CD8A /* SYShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F6AC6131C81F40C0090CD8A /* SYShareView.xib */; };
+		2F6AC6191C81FA650090CD8A /* SYShareButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC6181C81FA650090CD8A /* SYShareButton.m */; };
+		2F6AC61C1C81FD090090CD8A /* SYNetworkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC61B1C81FD090090CD8A /* SYNetworkTool.m */; };
 		2F6CF27B1C7FB20700C4B346 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2761C7FB20700C4B346 /* UINavigationBar+Awesome.m */; };
 		2F6CF27C1C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2781C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		2F6CF27D1C7FB20700C4B346 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF27A1C7FB20700C4B346 /* UIView+Extension.m */; };
@@ -272,6 +275,11 @@
 		2F6AC6091C81B8550090CD8A /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
 		2F6AC60A1C81B8550090CD8A /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
 		2F6AC60B1C81B8550090CD8A /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
+		2F6AC6131C81F40C0090CD8A /* SYShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYShareView.xib; sourceTree = "<group>"; };
+		2F6AC6171C81FA650090CD8A /* SYShareButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYShareButton.h; sourceTree = "<group>"; };
+		2F6AC6181C81FA650090CD8A /* SYShareButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYShareButton.m; sourceTree = "<group>"; };
+		2F6AC61A1C81FD090090CD8A /* SYNetworkTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNetworkTool.h; sourceTree = "<group>"; };
+		2F6AC61B1C81FD090090CD8A /* SYNetworkTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNetworkTool.m; sourceTree = "<group>"; };
 		2F6CF2751C7FB20700C4B346 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
 		2F6CF2761C7FB20700C4B346 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		2F6CF2771C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
@@ -597,6 +605,9 @@
 				2F0E2CBC1C7BE7F7004FDA0F /* SYImageView.m */,
 				2F9995DA1C7C206D0072C8F0 /* SYShareView.h */,
 				2F9995DB1C7C206D0072C8F0 /* SYShareView.m */,
+				2F6AC6131C81F40C0090CD8A /* SYShareView.xib */,
+				2F6AC6171C81FA650090CD8A /* SYShareButton.h */,
+				2F6AC6181C81FA650090CD8A /* SYShareButton.m */,
 				2F9995E51C7C476A0072C8F0 /* SYCommentCell.h */,
 				2F9995E61C7C476A0072C8F0 /* SYCommentCell.m */,
 				2F9995E81C7C47760072C8F0 /* SYCommentCell.xib */,
@@ -1024,6 +1035,8 @@
 				2FC588061C7A0B50003C9A7A /* YSHttpTool.m */,
 				2F6CF2821C7FB6AA00C4B346 /* SYCacheTool.h */,
 				2F6CF2831C7FB6AA00C4B346 /* SYCacheTool.m */,
+				2F6AC61A1C81FD090090CD8A /* SYNetworkTool.h */,
+				2F6AC61B1C81FD090090CD8A /* SYNetworkTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1242,6 +1255,7 @@
 				2F9995E91C7C47760072C8F0 /* SYCommentCell.xib in Resources */,
 				2FE707AC1C7DDC69005CB13B /* SYLeftDrawerController.xib in Resources */,
 				2FE707A71C7DD6B6005CB13B /* SYMainToolBox.xib in Resources */,
+				2F6AC6141C81F40C0090CD8A /* SYShareView.xib in Resources */,
 				2F4F1A871C7FA09500AF3BDF /* Info.plist in Resources */,
 				2F6CF29D1C80452E00C4B346 /* SYTableHeader.xib in Resources */,
 			);
@@ -1321,6 +1335,7 @@
 				2FC587A51C7A0956003C9A7A /* AFURLResponseSerialization.m in Sources */,
 				2F37AB891C7B7F0B00D3CD65 /* SYStoryNavigationView.m in Sources */,
 				2F37AB7A1C7B675100D3CD65 /* MMDrawerVisualState.m in Sources */,
+				2F6AC61C1C81FD090090CD8A /* SYNetworkTool.m in Sources */,
 				2F6CF27C1C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				2FC587D01C7A096A003C9A7A /* MKAnnotationView+WebCache.m in Sources */,
 				2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */,
@@ -1369,6 +1384,7 @@
 				2F6AC5E71C8141DD0090CD8A /* SYContainerView.m in Sources */,
 				2FC587FF1C7A0974003C9A7A /* MASViewConstraint.m in Sources */,
 				2FC587A21C7A0956003C9A7A /* AFSecurityPolicy.m in Sources */,
+				2F6AC6191C81FA650090CD8A /* SYShareButton.m in Sources */,
 				2FC587FD1C7A0974003C9A7A /* MASLayoutConstraint.m in Sources */,
 				2FE707911C7DBF4E005CB13B /* SYThemeController.m in Sources */,
 				2F6CF27D1C7FB20700C4B346 /* UIView+Extension.m in Sources */,

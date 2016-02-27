@@ -77,7 +77,7 @@
 
 - (void)storyNavigationView:(SYStoryNavigationView *)navView didClicked:(NSInteger)index {
     switch (index) {
-        case 0: // dismis
+        case 0: // pop
             [self.navigationController popViewControllerAnimated:YES];
             break;
         case 1: // next
@@ -89,9 +89,12 @@
             break;
         case 2: // like
             
+            
+            
+            
             break;
         case 3: { // share {
-            SYShareView *shareView = [[SYShareView alloc] init];
+            SYShareView *shareView = [[NSBundle mainBundle] loadNibNamed:@"SYShareView" owner:nil options:nil].firstObject;
             [shareView show];
         }
             break;
@@ -161,11 +164,20 @@
     return YES;
 }
 
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
+    
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     //调整字号
-    NSString *str = @"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '100%'";
-    [webView stringByEvaluatingJavaScriptFromString:str];
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    BOOL font = [ud boolForKey:@"大号字"];
+    NSString *str = [@"document.body.style.webkitTextSizeAdjust=" stringByAppendingString:font?@"'120%'":@"'100%'"];
+    
+    
+    NSLog(@"--> %@", [webView stringByEvaluatingJavaScriptFromString:str]);
     
     //js方法遍历图片添加点击事件 返回图片个数
     static  NSString * const jsGetImages = @"function setImages(){"\
@@ -293,18 +305,15 @@
 }
 
 
-
 - (void)setStory:(SYStory *)story {
     if (!story) return;
     _story = story;
-    
-    self.topView.transform = CGAffineTransformIdentity;
-    self.webView.transform = CGAffineTransformIdentity;
-//    
+ 
     [SYZhihuTool getDetailWithId:self.story.id completed:^(id obj) {
         dispatch_async(dispatch_get_main_queue(), ^{
             SYDetailStory *ds = (SYDetailStory *)obj;
             [self.webView loadHTMLString:ds.htmlStr baseURL:nil];
+            
             self.topView.story = ds;
         });
     }];

@@ -7,19 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SYBeforeStoryResult.h"
+#import "SYDetailStory.h"
+#import "SYStory.h"
+
+
 @interface SYCacheTool : NSObject
 
-+ (id)queryStoryListWithDateString:(NSString *)dateString;
-+ (void)cacheStoryListWithObject:(id)respObject;
++ (SYBeforeStoryResult *)queryStoryListWithDateString:(NSString *)dateString;
++ (void)cacheStoryListWithObject:(SYBeforeStoryResult *)respObject;
 
-+ (id)queryStoryWithId:(long long)storyid;
-+ (void)cacheStoryWithObject:(id)respObject;
++ (SYDetailStory *)queryStoryWithId:(long long)storyid;
++ (void)cacheStoryWithObject:(SYDetailStory *)story;
 
 
 + (void)cacheTheme:(int)themeid;
 
-+ (void)cacheThemeSotryListWithId:(int)themeid respObject:(id)respObject;
-+ (id)queryBeforeStoryListWithId:(int)themeid storyId:(long long)storyId;
++ (void)cacheThemeSotryListWithId:(int)themeid respObject:(NSArray<SYStory *> *)respObject;
++ (NSArray<SYStory *> *)queryBeforeStoryListWithId:(int)themeid storyId:(long long)storyId;
 
 
 

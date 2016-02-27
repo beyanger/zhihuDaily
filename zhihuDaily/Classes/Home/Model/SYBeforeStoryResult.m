@@ -8,12 +8,16 @@
 
 #import "SYBeforeStoryResult.h"
 #import "MJExtension.h"
+#import "SYStory.h"
+
+
 @implementation SYBeforeStoryResult
 
 + (NSDictionary *)modelContainerPropertyGenericClass {
     // value should be Class or Class name.
     return @{@"stories" : @"SYStory"};
 }
+
 
 MJCodingImplementation
 @end
