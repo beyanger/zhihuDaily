@@ -16,6 +16,8 @@
 #import "SYDemoViewController.h"
 #import "SYHomeController.h"
 
+#import "SYLaunchController.h"
+
 
 @interface AppDelegate ()
 @property (nonatomic, weak) UIImageView *imageView;
@@ -30,39 +32,7 @@
     [self.window makeKeyAndVisible];
     
     
-    self.mainController = [[SYMainViewController alloc] init];
-    self.window.rootViewController = self.mainController;
-
-    
-    return YES;
-    
-    
-    [self.window makeKeyAndVisible];
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    [self.window addSubview:imageView];
-    self.imageView = imageView;
-    
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    
-    NSString *url = [ud stringForKey:@"launchScreen"];
-    
-    if (url) {
-        [imageView sd_setImageWithURL:[NSURL URLWithString:url]];
-    }
-    [SYZhihuTool getLauchImageWithCompleted:^(NSString *obj) {
-        [ud setObject:obj forKey:@"launchScreen"];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:obj]];
-    }];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:0.67 animations:^{
-            self.imageView.alpha = 0.0;
-            self.imageView.transform = CGAffineTransformMakeScale(1.2, 1.2);
-        } completion:^(BOOL finished) {
-            [self.imageView removeFromSuperview];
-        }];
-    });
+    self.window.rootViewController = [[SYLaunchController alloc] init];
     
     return YES;
 }

@@ -28,12 +28,12 @@
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EHA-o0-zKJ">
-                        <rect key="frame" x="320" y="12" width="24" height="24"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Comment_Vote" translatesAutoresizingMaskIntoConstraints="NO" id="EHA-o0-zKJ">
+                        <rect key="frame" x="333" y="16" width="11" height="12"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="24" id="aOk-1r-Qy7"/>
-                            <constraint firstAttribute="height" constant="24" id="dqg-FI-ukL"/>
+                            <constraint firstAttribute="width" constant="11" id="aOk-1r-Qy7"/>
+                            <constraint firstAttribute="height" constant="12" id="dqg-FI-ukL"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDP-Xb-udA">
@@ -44,9 +44,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02-23 11:30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZg-0p-SSf">
-                        <rect key="frame" x="64" y="77" width="88" height="19.5"/>
+                        <rect key="frame" x="64" y="77" width="78.5" height="17"/>
                         <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.49014008045196533" green="0.49022829532623291" blue="0.49013447761535645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -54,7 +54,7 @@
                         <rect key="frame" x="64" y="44" width="299" height="17"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -69,11 +69,17 @@
                     <constraint firstItem="oJu-Vg-RVE" firstAttribute="leading" secondItem="duO-3N-3Pi" secondAttribute="trailing" constant="12" id="bsh-pk-qwi"/>
                     <constraint firstItem="duO-3N-3Pi" firstAttribute="top" secondItem="E6z-C6-mXq" secondAttribute="top" constant="12" id="eV4-7O-HH6"/>
                     <constraint firstItem="tk6-q5-pVY" firstAttribute="top" secondItem="oJu-Vg-RVE" secondAttribute="bottom" constant="12" id="i24-KS-UxP"/>
+                    <constraint firstItem="BDP-Xb-udA" firstAttribute="centerY" secondItem="EHA-o0-zKJ" secondAttribute="centerY" id="oEi-xF-pX2"/>
                     <constraint firstItem="duO-3N-3Pi" firstAttribute="leading" secondItem="E6z-C6-mXq" secondAttribute="leading" constant="12" id="omg-ZY-rLC"/>
                     <constraint firstItem="BDP-Xb-udA" firstAttribute="leading" secondItem="EHA-o0-zKJ" secondAttribute="trailing" constant="4" id="ww0-AT-cwB"/>
                     <constraint firstItem="EHA-o0-zKJ" firstAttribute="top" secondItem="E6z-C6-mXq" secondAttribute="top" constant="12" id="xCP-I2-h3h"/>
                     <constraint firstItem="pZg-0p-SSf" firstAttribute="top" secondItem="tk6-q5-pVY" secondAttribute="bottom" constant="16" id="z9t-bG-lMt"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="xCP-I2-h3h"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <animations/>
             <connections>
@@ -87,4 +93,7 @@
             <point key="canvasLocation" x="704.5" y="294"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Comment_Vote" width="11" height="12"/>
+    </resources>
 </document>

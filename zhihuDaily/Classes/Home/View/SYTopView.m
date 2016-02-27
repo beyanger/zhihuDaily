@@ -12,18 +12,18 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sourceLabel;
-
 @end
 
 
 @implementation SYTopView
+
 
 - (void)setStory:(SYDetailStory *)story {
     _story = story;
     
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:story.image]];
     self.titleLabel.text = story.title;
-    self.sourceLabel.text = story.image_source;
+    self.sourceLabel.text = [@"来源 " stringByAppendingString:story.image_source];
     [self setNeedsLayout];
 }
 

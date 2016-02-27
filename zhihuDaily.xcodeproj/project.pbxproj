@@ -52,6 +52,9 @@
 		2F4F1A861C7FA09500AF3BDF /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4F1A801C7FA09500AF3BDF /* FMResultSet.m */; };
 		2F4F1A871C7FA09500AF3BDF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F4F1A811C7FA09500AF3BDF /* Info.plist */; };
 		2F4F1A891C7FA12100AF3BDF /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4F1A881C7FA12100AF3BDF /* libsqlite3.tbd */; };
+		2F6AC5E71C8141DD0090CD8A /* SYContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC5E61C8141DD0090CD8A /* SYContainerView.m */; };
+		2F6AC5F21C8167A50090CD8A /* SYLaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AC5F01C8167A50090CD8A /* SYLaunchController.m */; };
+		2F6AC5F31C8167A50090CD8A /* SYLaunchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F6AC5F11C8167A50090CD8A /* SYLaunchController.xib */; };
 		2F6CF27B1C7FB20700C4B346 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2761C7FB20700C4B346 /* UINavigationBar+Awesome.m */; };
 		2F6CF27C1C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2781C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		2F6CF27D1C7FB20700C4B346 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF27A1C7FB20700C4B346 /* UIView+Extension.m */; };
@@ -239,6 +242,11 @@
 		2F4F1A801C7FA09500AF3BDF /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		2F4F1A811C7FA09500AF3BDF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F4F1A881C7FA12100AF3BDF /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		2F6AC5E51C8141DD0090CD8A /* SYContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYContainerView.h; sourceTree = "<group>"; };
+		2F6AC5E61C8141DD0090CD8A /* SYContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYContainerView.m; sourceTree = "<group>"; };
+		2F6AC5EF1C8167A50090CD8A /* SYLaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYLaunchController.h; sourceTree = "<group>"; };
+		2F6AC5F01C8167A50090CD8A /* SYLaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYLaunchController.m; sourceTree = "<group>"; };
+		2F6AC5F11C8167A50090CD8A /* SYLaunchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYLaunchController.xib; sourceTree = "<group>"; };
 		2F6CF2751C7FB20700C4B346 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
 		2F6CF2761C7FB20700C4B346 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		2F6CF2771C7FB20700C4B346 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
@@ -631,6 +639,40 @@
 			path = fmdb;
 			sourceTree = "<group>";
 		};
+		2F6AC5E81C8166F60090CD8A /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				2F6AC5E91C8166F60090CD8A /* Controller */,
+				2F6AC5EA1C8166F60090CD8A /* Model */,
+				2F6AC5EB1C8166F60090CD8A /* View */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		2F6AC5E91C8166F60090CD8A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2F6AC5EF1C8167A50090CD8A /* SYLaunchController.h */,
+				2F6AC5F01C8167A50090CD8A /* SYLaunchController.m */,
+				2F6AC5F11C8167A50090CD8A /* SYLaunchController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2F6AC5EA1C8166F60090CD8A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2F6AC5EB1C8166F60090CD8A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		2F6CF2741C7FB20700C4B346 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -752,6 +794,7 @@
 		2FC5877C1C79FE74003C9A7A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2F6AC5E81C8166F60090CD8A /* Launch */,
 				2F6CF28D1C80326E00C4B346 /* Login */,
 				2F6CF27E1C7FB22500C4B346 /* Categories */,
 				2FE7079C1C7DD339005CB13B /* LeftDrawer */,
@@ -1022,6 +1065,8 @@
 				2FE707A31C7DD6B6005CB13B /* SYMainToolBox.h */,
 				2FE707A41C7DD6B6005CB13B /* SYMainToolBox.m */,
 				2FE707A51C7DD6B6005CB13B /* SYMainToolBox.xib */,
+				2F6AC5E51C8141DD0090CD8A /* SYContainerView.h */,
+				2F6AC5E61C8141DD0090CD8A /* SYContainerView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1135,6 +1180,7 @@
 			files = (
 				2F1319DA1C7E18A200FA146F /* SYWebViewController.xib in Resources */,
 				2FB923061C7EE232000A0A2D /* SYTopImageView.xib in Resources */,
+				2F6AC5F31C8167A50090CD8A /* SYLaunchController.xib in Resources */,
 				2FC587591C79FDEB003C9A7A /* LaunchScreen.storyboard in Resources */,
 				2F2CCB981C7B016500C45E3D /* SYTableViewCell.xib in Resources */,
 				2FC587561C79FDEB003C9A7A /* Assets.xcassets in Resources */,
@@ -1202,6 +1248,7 @@
 				2FB923091C7EE353000A0A2D /* SYTopImageView.m in Sources */,
 				2F1319D81C7E113700FA146F /* SYNavigationController.m in Sources */,
 				2F4F1A861C7FA09500AF3BDF /* FMResultSet.m in Sources */,
+				2F6AC5F21C8167A50090CD8A /* SYLaunchController.m in Sources */,
 				2F37AB7B1C7B675100D3CD65 /* UIViewController+MMDrawerController.m in Sources */,
 				2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */,
 				2F2CCBC41C7B0C1400C45E3D /* MJPropertyType.m in Sources */,
@@ -1262,6 +1309,7 @@
 				2FC588011C7A0974003C9A7A /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				2FE7079B1C7DC2A3005CB13B /* SYZhihuTool.m in Sources */,
 				2FC587DF1C7A096A003C9A7A /* UIView+WebCacheOperation.m in Sources */,
+				2F6AC5E71C8141DD0090CD8A /* SYContainerView.m in Sources */,
 				2FC587FF1C7A0974003C9A7A /* MASViewConstraint.m in Sources */,
 				2FC587A21C7A0956003C9A7A /* AFSecurityPolicy.m in Sources */,
 				2FC587FD1C7A0974003C9A7A /* MASLayoutConstraint.m in Sources */,

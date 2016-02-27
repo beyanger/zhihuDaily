@@ -28,15 +28,14 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = SYColor(128, 128, 128, 0.9);
+        self.backgroundColor = SYColor(128, 128, 128, 0.4);
         [self setupSubviews];
     }
     return self;
 }
 
 - (void)setupSubviews {
-    WEAKSELF(ws);
-
+    WEAKSELF;
     UIImageView *imageView = [[UIImageView alloc] init];
     [self addSubview:imageView];
     self.imageView = imageView;
@@ -73,7 +72,7 @@
 
 
 
-+ (instancetype)imageWithURLString:(NSString *)url {
++ (void)showImageWithURLString:(NSString *)url {
     SYImageView *view = [[self alloc] init];
     
     view.frame = kScreenBounds;
@@ -86,7 +85,6 @@
         view.imageView.transform = CGAffineTransformIdentity;
         view.alpha = 1.0;
     }];
-    return view;
 }
 
 

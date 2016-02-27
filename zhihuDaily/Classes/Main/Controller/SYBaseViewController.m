@@ -54,6 +54,8 @@
         [self.sy_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_sy_header.mas_top).offset(42);
             make.centerX.mas_equalTo(_sy_header);
+            make.width.mas_lessThanOrEqualTo(kScreenWidth-88);
+            
         }];
     }
     return _sy_header;

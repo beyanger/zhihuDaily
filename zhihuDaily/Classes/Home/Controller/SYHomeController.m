@@ -66,8 +66,6 @@ static NSString *reuseid = @"useid";
     [self.view addSubview:self.headerView];
     [self leftButton];
     [self titleLabel];
-    
-    
 }
 
 - (void)setupTableView {
@@ -198,7 +196,7 @@ static NSString *reuseid = @"useid";
 
     SYStory *story = self.topStory[index];
     SYBeforeStoryResult *result = self.storyGroup[0];
-    for (NSUInteger i = 0; result.stories.count; i++) {
+    for (NSUInteger i = 0; i < result.stories.count; i++) {
         if ([story.title isEqualToString:[result.stories[i] title]]) {
             self.currentIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
             break;

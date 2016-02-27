@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.sy_header.backgroundColor = [UIColor blueColor];
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"主编";    
 }

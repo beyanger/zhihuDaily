@@ -10,6 +10,5 @@
 
 @interface SYImageView : UIView
 
-+ (instancetype)imageWithURLString:(NSString *)url;
-
++ (void)showImageWithURLString:(NSString *)url;
 @end

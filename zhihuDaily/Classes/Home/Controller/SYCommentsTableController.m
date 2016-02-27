@@ -43,7 +43,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
 - (void)setupTableView {
     UITableView *tableView = [[UITableView alloc] init];
-    tableView.frame = CGRectMake(0, 60, kScreenWidth, kScreenHeight-104);
+    tableView.frame = CGRectMake(0, 60, kScreenWidth, kScreenHeight-100);
     [self.view addSubview:tableView];
     self.tableView = tableView;
     tableView.delegate = self;

@@ -10,6 +10,7 @@
 #import "SYDetailStory.h"
 @interface SYTopView : UIView
 
+
 @property (nonatomic, strong) SYDetailStory *story;
 
 

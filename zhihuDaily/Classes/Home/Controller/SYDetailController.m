@@ -155,7 +155,7 @@
     } else if ([absoString hasPrefix:@"detailimage:"]) {
         NSString *url = [absoString stringByReplacingOccurrencesOfString:@"detailimage:"
                                        withString:@""];
-        [SYImageView imageWithURLString:url];
+        [SYImageView showImageWithURLString:url];
         return NO;
     }
     return YES;
@@ -347,9 +347,9 @@
         
         if (!self.isChanging) {
             if (yoffset < 0) {
-                self.topView.transform = CGAffineTransformMakeScale(1, -yoffset/self.topView.height+1);
+                self.topView.height = 260-yoffset;
             } else {
-                self.topView.transform = CGAffineTransformMakeTranslation(0, -yoffset);
+                self.topView.y = -40-yoffset;
             }
         }
         

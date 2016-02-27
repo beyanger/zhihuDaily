@@ -33,7 +33,6 @@
     if ([keyPath isEqualToString:@"selected"]) {
             self.popularityLabel.textColor = self.popularityButton.selected ? SYColor(22, 164, 220, 1.) : [UIColor lightGrayColor];
         if (self.popularityButton.selected) {
-#warning  添加动画
             [self changeValue:self.popularityButton];
         } else {
             self.popularityLabel.text = [NSString stringWithFormat:@"%d", self.popularityLabel.text.intValue-1];
@@ -50,23 +49,23 @@
     view.clipsToBounds = YES;
     view.text = self.popularityLabel.text;
     
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    [window addSubview:view];
+    [self.popularityButton addSubview:view];
+    
+    
     CGSize buttonSize = button.frame.size;
-    CGRect originFrame = CGRectMake(buttonSize.width*0.5, buttonSize.height*0.5, 0, 0);
-    view.frame = [self.popularityButton convertRect:originFrame toView:window];
+    view.frame = CGRectMake(buttonSize.width*0.5, buttonSize.height*0.5, 0, 0);
+    
     
     [UIView animateWithDuration:0.2 animations:^{
-        CGRect frame = CGRectMake(0, -15, buttonSize.width, 15);
-        view.frame = [button convertRect:frame toView:window];
+        view.frame = CGRectMake(0, -15, buttonSize.width, 15);
     } completion:^(BOOL finished) {
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             view.text = [NSString stringWithFormat:@"%d", self.popularityLabel.text.intValue+1];
             self.popularityLabel.text = view.text;
         });
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [view removeFromSuperview];
         });
     }];

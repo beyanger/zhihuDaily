@@ -9,6 +9,8 @@
 #import "SYCommentCell.h"
 #import "UIImageView+WebCache.h"
 
+
+
 @interface SYCommentCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *avatar;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -28,7 +30,17 @@
     self.nameLabel.text = comment.author;
     self.commentLabel.text = comment.content;
     self.likeLabel.text = [NSString stringWithFormat:@"%ld", comment.likes];
-    self.timeLabel.text = [NSString stringWithFormat:@"%ld", comment.time];
+    
+    static NSDateFormatter *_formatter;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _formatter=[[NSDateFormatter alloc]init];
+        [_formatter setLocale:[NSLocale currentLocale]];
+        [_formatter setDateFormat:@"MM-dd HH:mm"];
+
+    });
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:comment.time];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@", [_formatter stringFromDate:date]];
 }
 
 
