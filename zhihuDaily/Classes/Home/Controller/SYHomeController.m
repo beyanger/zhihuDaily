@@ -206,11 +206,7 @@ static NSString *reuseid = @"useid";
     SYDetailController *dc = [[SYDetailController alloc] initWithStory:story];
     
     dc.delegate =self;
-    if (self.currentIndexPath.row == 0 && self.currentIndexPath.section == 0) {
-        dc.position = 0;
-    } else {
-        dc.position = 1;
-    }
+
     [self.navigationController pushViewController:dc animated:YES];
 }
 
@@ -235,7 +231,6 @@ static NSString *reuseid = @"useid";
         row += 1;
     }
     SYStory *story = result.stories[row];
-    detailController.position = 1;
     self.currentIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
     return story;
 }
@@ -255,11 +250,7 @@ static NSString *reuseid = @"useid";
     }
     
     SYBeforeStoryResult *result = self.storyGroup[section];
-    if (row == 0 && section ==0) {
-        detailController.position = 0;
-    } else {
-        detailController.position = 1;
-    }
+
     
     self.currentIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
     return result.stories[row];

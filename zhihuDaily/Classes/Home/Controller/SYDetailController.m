@@ -24,6 +24,10 @@
 @interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate, UIScrollViewDelegate>
 
 
+
+
+@property (nonatomic, strong) SYStory *story;
+
 @property (nonatomic, strong) SYTopView   *topView;
 @property (nonatomic, strong) UIWebView *webView;
 
@@ -35,7 +39,7 @@
 
 @property (nonatomic, strong) SYStoryNavigationView *storyNav;
 
-@property (nonatomic, assign) BOOL isChanging;
+
 
 
 @end
@@ -50,7 +54,6 @@
     if (self) {
         self.story = story;
         self.view.backgroundColor = [UIColor whiteColor];
-
     }
     return self;
 }
@@ -62,18 +65,23 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
 
     [self.view addSubview:self.webView];
-    [self.view addSubview:self.topView];
+    [self.webView addSubview:self.topView];
     [self.view addSubview:self.header];
+    [self.view addSubview:self.footer];
     
-    [self.webView.scrollView addSubview:self.footer];
+    WEAKSELF;
     
-    self.position = _position;
+    [self.header mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(ws.view);
+        make.centerY.mas_equalTo(ws.view.mas_top).offset(-20);
+    }];
+    
+    [self.footer mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(ws.view);
+        make.centerY.mas_equalTo(ws.view.mas_bottom);
+    }];
 }
 
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
 
 - (void)storyNavigationView:(SYStoryNavigationView *)navView didClicked:(NSInteger)index {
     switch (index) {
@@ -114,16 +122,12 @@
     
 }
 
-- (void)dealloc {
-    [self.webView.scrollView removeObserver:self forKeyPath:@"contentOffset"];
-}
 
 - (SYTopView *)topView {
     if (!_topView) {
         _topView = [[[NSBundle mainBundle] loadNibNamed:@"SYTopView" owner:self options:nil] firstObject];
-        _topView.layer.anchorPoint = CGPointMake(0.5, 0);
         _topView.clipsToBounds = YES;
-        _topView.frame = CGRectMake(0, -40, kScreenWidth, 220+40);
+        _topView.frame = CGRectMake(0, -60, kScreenWidth, 220+40);
     }
     return _topView;
 }
@@ -136,8 +140,6 @@
         _webView.delegate = self;
         _webView.scrollView.delegate = self;
         _webView.backgroundColor = [UIColor whiteColor];
-        [self.webView.scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
-        
     }
     return _webView;
 }
@@ -163,7 +165,6 @@
     }
     return YES;
 }
-
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -203,50 +204,63 @@
     
     NSArray *imageArray = [imageUrls componentsSeparatedByString:@"...beyanger...."];
 #pragma todo 设置图片浏览界面的上一张和下一张功能
-    
 
-    self.footer.center = CGPointMake(kScreenWidth*0.5, self.webView.scrollView.contentSize.height+25);
-    self.header.center = CGPointMake(kScreenWidth*0.5, -40);
     
 }
 
 
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    CGFloat yoffset = scrollView.contentOffset.y;
+    if ( yoffset < -60) {
+    if ([self.delegate respondsToSelector:@selector(prevStoryForDetailController:)]) {
+        SYStory *story  = [self.delegate prevStoryForDetailController:self];
+        }
+        
+        
+        
+    } else if ((kScreenHeight -60 - scrollView.contentSize.height + yoffset) > 60) {
+        if ([self.delegate respondsToSelector:@selector(nextStoryForDetailController:)]) {
+            SYStory *story  = [self.delegate nextStoryForDetailController:self];
+            }
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat yoffset = scrollView.contentOffset.y;
+    if (yoffset > 220) {
+        Black_StatusBar;
+    } else {
+        White_StatusBar;
+    }
     
-    if (scrollView.contentOffset.y < -80) {
-  
-        if ([self.delegate respondsToSelector:@selector(prevStoryForDetailController:)]) {
-            SYStory *story  = [self.delegate prevStoryForDetailController:self];
-            // 加载上一篇
-            if (story) {
-                self.isChanging = YES;
-                [UIView animateWithDuration:0.3 animations:^{
-                    self.topView.transform = CGAffineTransformMakeTranslation( 0, kScreenHeight);
-                    self.webView.transform = CGAffineTransformMakeTranslation(0, kScreenHeight);
-                } completion:^(BOOL finished) {
-                    self.story = story;
-                    self.isChanging = NO;
+    if (yoffset < 0) {
+        self.topView.frame = CGRectMake(0, -60, kScreenWidth, 260-yoffset);
+        self.header.transform = CGAffineTransformMakeTranslation(0, -yoffset);
+        
+        CGAffineTransform transform = CGAffineTransformIdentity;
+        if (yoffset < -60.) transform = CGAffineTransformMakeRotation(M_PI);
+        
+        if (!CGAffineTransformEqualToTransform(self.downArrow.transform, transform)) {
+            [UIView animateWithDuration:0.25 animations:^{
+                self.downArrow.transform = transform;
+            }];
+        }
+    } else {
+        self.topView.frame = CGRectMake(0, -60-yoffset, kScreenWidth, 260);
+    
+        CGFloat boffset = kScreenHeight-60-scrollView.contentSize.height + yoffset;
+        if (boffset > 0) {
+            self.footer.transform = CGAffineTransformMakeTranslation(0, -boffset);
+            CGAffineTransform transform = CGAffineTransformIdentity;
+            if (boffset > 60.) transform = CGAffineTransformMakeRotation(M_PI);
+            
+            if (!CGAffineTransformEqualToTransform(self.upArrow.transform, transform)) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.upArrow.transform = transform;
                 }];
             }
         }
-    
-    } else if (scrollView.contentSize.height - scrollView.contentOffset.y-kScreenHeight < -120) {
-
-            if ([self.delegate respondsToSelector:@selector(nextStoryForDetailController:)]) {
-                SYStory *story  = [self.delegate nextStoryForDetailController:self];
-                
-                
-                if (story) {
-                    self.isChanging = YES;
-                    [UIView animateWithDuration:.3 animations:^{
-                        self.webView.transform = CGAffineTransformMakeTranslation(0, -kScreenHeight);
-                    } completion:^(BOOL finished) {
-                        self.story = story;
-                        self.isChanging = NO;
-                    }];
-                }
-            }
     }
 }
 
@@ -256,7 +270,6 @@
         footer.textColor = [UIColor grayColor];
         footer.textAlignment = NSTextAlignmentCenter;
         footer.text = @"载入下一篇";
-        [footer sizeToFit];
         _footer = footer;
         UIImage *image = [UIImage imageNamed:@"upArrow"];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
@@ -278,7 +291,6 @@
         header.textColor = [UIColor whiteColor];
         header.textAlignment = NSTextAlignmentCenter;
         header.text = @"载入上一篇";
-        header.center = CGPointMake(kScreenWidth*0.5, -40);
         _header = header;
         UIImage *image = [UIImage imageNamed:@"downArrow"];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
@@ -325,61 +337,6 @@
             self.storyNav.extraStory = es;
         });
     }];
-}
-
-
-- (void)setPosition:(long)position {
-    _position = position;
-    if (position == 0) {
-        self.header.text = @"已经是第一篇";
-        self.downArrow.alpha = 0.0;
-    } else {
-        self.header.text = @"载入上一篇";
-        self.downArrow.alpha = 1.0;
-    }
-    [self.header sizeToFit];
-}
-
-
-
-
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"contentOffset"]) {
-        CGFloat yoffset = [change[@"new"] CGPointValue].y;
-        
-        if (yoffset > 220) {
-            Black_StatusBar;
-        } else {
-            White_StatusBar;
-        }
-        
-        if (!self.isChanging) {
-            if (yoffset < 0) {
-                self.topView.height = 260-yoffset;
-            } else {
-                self.topView.y = -40-yoffset;
-            }
-        }
-        
-        self.header.transform = CGAffineTransformMakeTranslation(0, -yoffset);
-        
-        CGAffineTransform transform = CGAffineTransformIdentity;
-        if (yoffset < -80) {
-            transform = CGAffineTransformMakeRotation(M_PI);
-        }
-        [UIView animateWithDuration:0.25 animations:^{
-            self.downArrow.transform = transform;
-        }];
-        
-        transform = CGAffineTransformIdentity;
-        if (self.webView.scrollView.contentSize.height - self.webView.scrollView.contentOffset.y-kScreenHeight < -120) {
-            transform = CGAffineTransformMakeRotation(M_PI);
-        }
-        [UIView animateWithDuration:0.25 animations:^{
-            self.upArrow.transform = transform;
-        }];
-    }
 }
 
 
