@@ -88,5 +88,8 @@ typedef void  (^Failure)();
 
 + (void)likeStoryWithId:(long long)storyid;
 
++ (void)getStoryRecommendersWithId:(long long)storyid completed:(Completed)completed;
+
+
 
 @end

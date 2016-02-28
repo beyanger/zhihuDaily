@@ -11,6 +11,9 @@
 
 @interface SYTableHeader : UIView
 
-@property (nonatomic, strong) NSArray<SYEditor *> *editors;
+@property (nonatomic, strong) NSArray<NSString *> *avatars;
+
++ (instancetype)headerViewWitTitle:(NSString *)title hidenRight:(BOOL)hiden;
+
 
 @end

@@ -51,6 +51,8 @@
 + (void)getDetailWithId:(long long)storyid completed:(Completed)completed {
     NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/news/%lld", storyid];
 
+    NSLog(@"---> %@", url);
+    
     SYDetailStory *story = [SYCacheTool queryStoryWithId:storyid];
     
     if (story) {
@@ -58,12 +60,10 @@
         return;
     }
     
-    NSLog(@"从网络中获取的故事, %lld", storyid);
-    
-    
     [YSHttpTool GETWithURL:url params:nil success:^(id responseObject) {
         SYDetailStory *ds = [SYDetailStory mj_objectWithKeyValues:responseObject];
         ds.htmlStr = [NSString stringWithFormat:@"<html><head><link rel=\"stylesheet\" href=%@></head><body>%@</body></html>", ds.css[0], ds.body];
+        
         !completed ? : completed(ds);
     
         [SYCacheTool cacheStoryWithObject:ds];
@@ -226,6 +226,16 @@
 
 + (void)likeStoryWithId:(long long)storyid {
     NSString *likeUrl = @"http://news-at.zhihu.com/api/4/vote/stories";
+}
+
+
++ (void)getStoryRecommendersWithId:(long long)storyid completed:(Completed)completed {
+    NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/story/%lld/recommenders", storyid];
+    NSLog(@": %@", url);
+    [YSHttpTool GETWithURL:url params:nil success:^(id responseObject) {
+        NSArray<SYEditor *> *editors = [SYEditor mj_objectArrayWithKeyValuesArray:responseObject[@"editors"]];
+        !completed ? : completed(editors);
+    } failure:nil];
 }
 
 @end

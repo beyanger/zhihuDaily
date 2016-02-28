@@ -49,7 +49,7 @@
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClicked)];
         [self addGestureRecognizer:tap];
-        [self addTimer];
+        
     }
     return self;
 }
@@ -110,6 +110,10 @@
         [self.allImages addObject:imageView];
         [self.scrollerView addSubview:imageView];
     }
+ 
+    !self.timer? : [self removeTimer];
+    
+    [self addTimer];
     [self setNeedsLayout];
 }
 

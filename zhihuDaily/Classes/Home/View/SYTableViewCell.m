@@ -31,8 +31,7 @@
         self.image.hidden = YES;
         self.titleLeft.constant = 18-60;
     }
-    
-    
+
     self.multiImage.hidden = !story.multipic;
 }
 

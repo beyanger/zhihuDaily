@@ -18,8 +18,10 @@
 #import "SYTableHeader.h"
 #import "SYEditorController.h"
 #import "SYTableViewCell.h"
+#import "SYDetailController.h"
 
-@interface SYThemeController () <UITableViewDataSource, UITableViewDelegate>
+
+@interface SYThemeController () <UITableViewDataSource, UITableViewDelegate, SYDetailControllerDelegate>
 
 @property (nonatomic, strong) NSArray<SYStory *> *stories;
 @property (nonatomic, strong) SYThemeItem *themeItem;
@@ -59,10 +61,50 @@ static NSString *theme_reuseid = @"useid";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SYDetailController *dvc = [[SYDetailController alloc] init];
+    dvc.delegate = self;
+    dvc.story = self.stories[indexPath.row];
+    [self.navigationController pushViewController:dvc animated:YES];
+}
+
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == self.stories.count-18) {
         [self loadMoreData];
     }
+}
+
+- (NSInteger)loacateStory:(SYStory *)story {
+    for (NSInteger i = 0; i < self.stories.count; i++) {
+        if (self.stories[i].id == story.id) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+- (SYStory *)nextStoryForDetailController:(SYDetailController *)detailController story:(SYStory *)story {
+    NSInteger location = [self loacateStory:story];
+    if (location == self.stories.count-1) {
+        return nil;
+    }
+    return self.stories[location+1];
+}
+- (SYStory *)prevStoryForDetailController:(SYDetailController *)detailController story:(SYStory *)story {
+    NSInteger location = [self loacateStory:story];
+    if (location == 0) {
+        return nil;
+    }
+    return self.stories[location-1];
+}
+- (SYStoryPositionType)detailController:(SYDetailController *)detailController story:(SYStory *)story {
+    if (self.stories.firstObject.id == story.id) {
+        return SYStoryPositionTypeFirst;
+    } else if ( self.stories.lastObject.id == story.id) {
+        return SYStoryPositionTypeLast;
+    }
+    return SYStoryPositionTypeOther;
 }
 
 
@@ -80,10 +122,10 @@ static NSString *theme_reuseid = @"useid";
     return _tableView;
 }
 
-- (UIView *)tableHeader {
+- (SYTableHeader *)tableHeader {
     if (!_tableHeader) {
-        _tableHeader = [[NSBundle mainBundle] loadNibNamed:@"SYTableHeader" owner:nil options:nil].firstObject;
-        _tableHeader.bounds = CGRectMake(0, 0, kScreenWidth, 40);
+        _tableHeader = [SYTableHeader headerViewWitTitle:@"编辑" hidenRight:NO];
+        _tableHeader.bounds = CGRectMake(0, 0, kScreenWidth, 48);
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickedHeader)];
         [_tableHeader addGestureRecognizer:tap];
     }
@@ -111,17 +153,14 @@ static NSString *theme_reuseid = @"useid";
     return _collectBtn;
 }
 - (void)didClickedCollectBtn:(UIButton *)sender {
-    if (sender.selected) {
-        [MBProgressHUD showError:@"已经取消关注"];
-    } else {
-        [MBProgressHUD showSuccess:@"成功关注"];
-    }
+    sender.selected ? [MBProgressHUD showError:@"已经取消关注"] : [MBProgressHUD showSuccess:@"成功关注"];
     sender.selected = !sender.selected;
 }
 
 
 - (void)setThemeid:(int)themeid {
     _themeid = themeid;
+    NSLog(@"---> themeid: %d", themeid);
     [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 
     UIView *view = [[UIView alloc] initWithFrame:kScreenBounds];
@@ -142,7 +181,11 @@ static NSString *theme_reuseid = @"useid";
         dispatch_async(dispatch_get_main_queue(), ^{
             self.title = self.themeItem.name;
             [self.sy_backgoundImageView sd_setImageWithURL:[NSURL URLWithString:self.themeItem.image]];
-            self.tableHeader.editors = self.themeItem.editors;
+            NSMutableArray *avatarArray = [@[] mutableCopy];
+            [self.themeItem.editors enumerateObjectsUsingBlock:^(SYEditor *obj, NSUInteger idx, BOOL *stop) {
+                [avatarArray addObject:obj.avatar];
+            }];
+            self.tableHeader.avatars = avatarArray;
             [self.tableView reloadData];
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -177,9 +220,6 @@ static NSString *theme_reuseid = @"useid";
     } else if (yoffset < -90) {
         self.tableView.contentOffset = CGPointMake(0, -90);
     }
-    
-    
-    
 }
 
 - (NSArray<SYStory *> *)stories {

@@ -12,6 +12,8 @@
 
 @interface SYTableHeader ()
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray<UIImageView *> *editorsImage;
+@property (weak, nonatomic) IBOutlet UIImageView *rightView;
+@property (weak, nonatomic) IBOutlet UILabel *title;
 
 @end
 
@@ -28,19 +30,26 @@
     
 }
 
-- (void)setEditors:(NSArray<SYEditor *> *)editors {
-    _editors = editors;
+
+
+- (void)setAvatars:(NSArray<NSString *> *)avatars {
+    _avatars = avatars;
     for (NSUInteger i = 0; i < 5; i++) {
-        if (i < editors.count) {
-            [self.editorsImage[i] sd_setImageWithURL:[NSURL URLWithString:editors[i].avatar]];
+        if (i < avatars.count) {
+            [self.editorsImage[i] sd_setImageWithURL:[NSURL URLWithString:avatars[i]]];
         } else {
             self.editorsImage[i].image = nil;
         }
+  
     }
-    
-    
-    
-    
+
+}
+
++ (instancetype)headerViewWitTitle:(NSString *)title hidenRight:(BOOL)hiden {
+    SYTableHeader *header = [[NSBundle mainBundle] loadNibNamed:@"SYTableHeader" owner:nil options:nil].firstObject;
+    header.title.text = title;
+    header.rightView.hidden = hiden;
+    return header;
 }
 
 

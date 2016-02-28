@@ -55,7 +55,7 @@
     [self.webView goForward];
 }
 - (IBAction)share:(id)sender {
-    SYShareView *shareView = [[SYShareView alloc] init];
+    SYShareView *shareView = [[NSBundle mainBundle] loadNibNamed:@"SYShareView" owner:nil options:nil].firstObject;
     [shareView show];
 }
 

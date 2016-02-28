@@ -20,10 +20,11 @@
 
 - (void)setStory:(SYDetailStory *)story {
     _story = story;
-    
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:story.image]];
-    self.titleLabel.text = story.title;
-    self.sourceLabel.text = [@"来源 " stringByAppendingString:story.image_source];
+    if (story.image) {
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:story.image]];
+        self.titleLabel.text = story.title;
+        self.sourceLabel.text = [@"来源 " stringByAppendingString:story.image_source];
+    }
     [self setNeedsLayout];
 }
 

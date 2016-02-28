@@ -20,12 +20,14 @@
 #import "SYCommentsController.h"
 #import "UIView+Extension.h"
 #import "Masonry.h"
-
+#import "SYTableHeader.h"
 
 
 @interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) SYTopView   *topView;
+@property (nonatomic, strong) SYTableHeader *headerView;
+
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UILabel *footer;
 @property (nonatomic, strong) UILabel *header;
@@ -33,6 +35,8 @@
 @property (nonatomic, weak) UIImageView *downArrow;
 
 @property (nonatomic, strong) SYStoryNavigationView *storyNav;
+
+@property (nonatomic, strong) NSArray<SYEditor *> *recommenders;
 
 @end
 
@@ -44,10 +48,12 @@
     self.view.backgroundColor = kWhiteColor;
     
     [self.view addSubview:self.webView];
-    [self.webView addSubview:self.topView];
+    [self.view addSubview:self.topView];
     [self.view addSubview:self.header];
+    [self.view addSubview:self.headerView];
     [self.view addSubview:self.footer];
     [self.view bringSubviewToFront:self.storyNav];
+    
     WEAKSELF;
     
     [self.header mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -139,9 +145,17 @@
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     BOOL font = [ud boolForKey:@"大号字"];
     NSString *str = [@"document.body.style.webkitTextSizeAdjust=" stringByAppendingString:font?@"'120%'":@"'100%'"];
-    
-    
     [webView stringByEvaluatingJavaScriptFromString:str];
+    
+    
+    
+    
+    NSString *string = @"var d = document.createElement(\"div\");"
+                    "d.style.height=\"200px\";"
+    "document.body.appendChild(d);";
+    
+    
+    //[webView stringByEvaluatingJavaScriptFromString:string];
     
     //js方法遍历图片添加点击事件 返回图片个数
     static  NSString * const jsGetImages = @"function setImages(){"\
@@ -183,7 +197,7 @@
     }
     if (!story) return;
 
-    
+    // 切换过程动画
     UIView *v = [self.view snapshotViewAfterScreenUpdates:NO];
     self.story = story;
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, -kScreenHeight, kScreenWidth, 3*kScreenHeight)];
@@ -202,14 +216,15 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat yoffset = scrollView.contentOffset.y;
-    if (yoffset > 220) {
-        Black_StatusBar;
-    } else {
-        White_StatusBar;
-    }
     
+    if (yoffset > [self currentTopView].height-40) Black_StatusBar;
+    else White_StatusBar;
     if (yoffset < 0) {
-        self.topView.frame = CGRectMake(0, -60, kScreenWidth, 260-yoffset);
+        if (self.topView == self.currentTopView) {
+            self.topView.frame = CGRectMake(0, -40, kScreenWidth, 260-yoffset);
+        }
+        
+        
         self.header.transform = CGAffineTransformMakeTranslation(0, -yoffset);
         
         CGAffineTransform transform = CGAffineTransformIdentity;
@@ -221,9 +236,11 @@
             }];
         }
     } else {
-        self.topView.frame = CGRectMake(0, -60-yoffset, kScreenWidth, 260);
     
+        self.currentTopView.frame = CGRectMake(0, -40-yoffset, kScreenWidth, self.currentTopView.height);
+        
         CGFloat boffset = kScreenHeight-60-scrollView.contentSize.height + yoffset;
+        
         if (boffset > 0) {
             self.footer.transform = CGAffineTransformMakeTranslation(0, -boffset);
             CGAffineTransform transform = CGAffineTransformIdentity;
@@ -246,8 +263,37 @@
     [SYZhihuTool getDetailWithId:self.story.id completed:^(id obj) {
         dispatch_async(dispatch_get_main_queue(), ^{
             SYDetailStory *ds = (SYDetailStory *)obj;
+            
+            if (!ds.image) {
+                NSMutableString *str = [ds.htmlStr mutableCopy];
+                // 当有图片时，网页会自己添加一个高度200px的holder
+                // 但网页没有图片时，需要给网页添加一个高度44px的 holder，用来添加推荐者很条幅
+                NSRange range = [ds.htmlStr rangeOfString:@"<body>"];
+                [str insertString:@"<div style=\"height: 40px\"></div>" atIndex:range.length+range.location];
+                ds.htmlStr = [str copy];
+                
+                self.topView.hidden = YES;
+                [SYZhihuTool getStoryRecommendersWithId:self.story.id completed:^(id obj) {
+                    NSMutableArray *avatars = [@[] mutableCopy];
+                    for (SYEditor *editor in obj) {
+                        [avatars addObject:editor.avatar];
+                    }
+                    if (avatars.count > 0) {
+                       self.headerView.avatars = avatars;
+                        self.headerView.hidden = NO;
+                    } else {
+                        self.headerView.hidden = YES;
+                    }
+                }];
+                
+            } else {
+                self.headerView.hidden = YES;
+                self.topView.hidden = NO;
+            }
+            
             [self.webView loadHTMLString:ds.htmlStr baseURL:nil];
             self.topView.story = ds;
+          
         });
     }];
     
@@ -260,13 +306,32 @@
     }];
 }
 
+
+- (UIView *)currentTopView {
+    if (!self.topView.hidden) {
+        return self.topView;
+    } else if (!self.headerView.hidden) {
+        return self.headerView;
+    }
+    return nil;
+}
+
 - (SYTopView *)topView {
     if (!_topView) {
         _topView = [[[NSBundle mainBundle] loadNibNamed:@"SYTopView" owner:self options:nil] firstObject];
         _topView.clipsToBounds = YES;
-        _topView.frame = CGRectMake(0, -60, kScreenWidth, 220+40);
+        _topView.frame = CGRectMake(0, -40, kScreenWidth, 220+40);
+        _topView.hidden = YES;
     }
     return _topView;
+}
+
+- (SYTableHeader *)headerView {
+    if (!_headerView) {
+        _headerView = [SYTableHeader headerViewWitTitle:@"推荐者" hidenRight:YES];
+        _headerView.frame = CGRectMake(0, -40, kScreenWidth, 64+40);
+    }
+    return _headerView;
 }
 
 - (UIWebView *)webView {
@@ -304,7 +369,7 @@
 - (UILabel *)header {
     if (!_header) {
         UILabel *header = [[UILabel alloc] init];
-        
+        header.backgroundColor = randomColor;
         header.textColor = kWhiteColor;
         header.textAlignment = NSTextAlignmentCenter;
         header.text = @"载入上一篇";

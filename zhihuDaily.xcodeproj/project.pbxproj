@@ -50,6 +50,7 @@
 		2F3A8CC71C8289A900D5C527 /* SYEditorDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A8CC51C8289A900D5C527 /* SYEditorDetailController.m */; };
 		2F3A8CC81C8289A900D5C527 /* SYEditorDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F3A8CC61C8289A900D5C527 /* SYEditorDetailController.xib */; };
 		2F3A8D2C1C82C9E400D5C527 /* UIView+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A8D2B1C82C9E400D5C527 /* UIView+YYAdd.m */; };
+		2F3A8D2F1C8335DC00D5C527 /* SYRecommender.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A8D2E1C8335DC00D5C527 /* SYRecommender.m */; };
 		2F4F1A821C7FA09500AF3BDF /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4F1A771C7FA09500AF3BDF /* FMDatabase.m */; };
 		2F4F1A831C7FA09500AF3BDF /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4F1A791C7FA09500AF3BDF /* FMDatabaseAdditions.m */; };
 		2F4F1A841C7FA09500AF3BDF /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4F1A7B1C7FA09500AF3BDF /* FMDatabasePool.m */; };
@@ -251,6 +252,8 @@
 		2F3A8CC61C8289A900D5C527 /* SYEditorDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYEditorDetailController.xib; sourceTree = "<group>"; };
 		2F3A8D2A1C82C9E400D5C527 /* UIView+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YYAdd.h"; sourceTree = "<group>"; };
 		2F3A8D2B1C82C9E400D5C527 /* UIView+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YYAdd.m"; sourceTree = "<group>"; };
+		2F3A8D2D1C8335DC00D5C527 /* SYRecommender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYRecommender.h; sourceTree = "<group>"; };
+		2F3A8D2E1C8335DC00D5C527 /* SYRecommender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYRecommender.m; sourceTree = "<group>"; };
 		2F4F1A761C7FA09500AF3BDF /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		2F4F1A771C7FA09500AF3BDF /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		2F4F1A781C7FA09500AF3BDF /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -593,6 +596,8 @@
 				2F0E2CB91C7BE1A0004FDA0F /* SYExtraStory.m */,
 				2F9995E21C7C3D100072C8F0 /* SYComment.h */,
 				2F9995E31C7C3D100072C8F0 /* SYComment.m */,
+				2F3A8D2D1C8335DC00D5C527 /* SYRecommender.h */,
+				2F3A8D2E1C8335DC00D5C527 /* SYRecommender.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1375,6 +1380,7 @@
 				2F2CCBCC1C7B156500C45E3D /* SYMainViewController.m in Sources */,
 				2F0E2CBA1C7BE1A0004FDA0F /* SYExtraStory.m in Sources */,
 				2FC587FB1C7A0974003C9A7A /* MASConstraint.m in Sources */,
+				2F3A8D2F1C8335DC00D5C527 /* SYRecommender.m in Sources */,
 				2F3A8D2C1C82C9E400D5C527 /* UIView+YYAdd.m in Sources */,
 				2FC587DA1C7A096A003C9A7A /* UIImage+GIF.m in Sources */,
 				2FC587D91C7A096A003C9A7A /* UIButton+WebCache.m in Sources */,
