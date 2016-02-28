@@ -34,9 +34,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openDrawer) name:OpenDrawer object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeDrawer) name:CloseDrawer object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleDrawer) name:ToggleDrawer object:nil];
-    
 
-    
     SYLeftDrawerController *drawerController = [[SYLeftDrawerController alloc] init];
     
     UINavigationController *homeController = [drawerController naviHome];

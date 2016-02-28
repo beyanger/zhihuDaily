@@ -21,25 +21,19 @@
 #import "UIView+Extension.h"
 #import "Masonry.h"
 
+#import "UIView+YYAdd.h"
+
+
 @interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate, UIScrollViewDelegate>
-
-
-
-
 
 @property (nonatomic, strong) SYTopView   *topView;
 @property (nonatomic, strong) UIWebView *webView;
-
 @property (nonatomic, strong) UILabel *footer;
 @property (nonatomic, strong) UILabel *header;
-
 @property (nonatomic, weak) UIImageView *upArrow;
 @property (nonatomic, weak) UIImageView *downArrow;
 
 @property (nonatomic, strong) SYStoryNavigationView *storyNav;
-
-
-
 
 @end
 
@@ -68,7 +62,7 @@
     }];
 }
 
-
+#pragma mark bottom navigation delegate
 - (void)storyNavigationView:(SYStoryNavigationView *)navView didClicked:(NSInteger)index {
     switch (index) {
         case 0: // pop
@@ -76,12 +70,9 @@
             break;
         case 1: // next
             self.story = [self.delegate nextStoryForDetailController:self story:self.story];
-       
+            
             break;
         case 2: // like
-            
-            
-            
             
             break;
         case 3: { // share {
@@ -94,40 +85,13 @@
             SYCommentsTableController *ctc = [[SYCommentsTableController alloc] init];
             ctc.story = self.story;
             [self.navigationController pushViewController:ctc animated:YES];
-            
-            
         }
             break;
             
         default:
             break;
     }
-    
 }
-
-
-- (SYTopView *)topView {
-    if (!_topView) {
-        _topView = [[[NSBundle mainBundle] loadNibNamed:@"SYTopView" owner:self options:nil] firstObject];
-        _topView.clipsToBounds = YES;
-        _topView.frame = CGRectMake(0, -60, kScreenWidth, 220+40);
-    }
-    return _topView;
-}
-
-- (UIWebView *)webView {
-    if (!_webView) {
-        UIWebView *webView = [[UIWebView alloc] init];
-        webView.frame = CGRectMake(0, 20, kScreenWidth, kScreenHeight-40-20);
-        _webView = webView;
-        _webView.delegate = self;
-        _webView.scrollView.delegate = self;
-        _webView.backgroundColor = [UIColor whiteColor];
-    }
-    return _webView;
-}
-
-
 
 #pragma mark webView delegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -206,14 +170,35 @@
 #pragma todo 设置图片浏览界面的上一张和下一张功能
 }
 
-
+#pragma mark webView.scrollView delegate
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     CGFloat yoffset = scrollView.contentOffset.y;
-    if ( yoffset < -60) {
-        self.story  = [self.delegate prevStoryForDetailController:self story:self.story];
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    SYStory *story = nil;
+    if (yoffset < -60) {
+        story = [self.delegate prevStoryForDetailController:self story:self.story];
+        transform = CGAffineTransformMakeTranslation(0, kScreenHeight);
     } else if ((kScreenHeight -60 - scrollView.contentSize.height + yoffset) > 60) {
-        self.story  = [self.delegate nextStoryForDetailController:self story:self.story];
+        story = [self.delegate nextStoryForDetailController:self story:self.story];
+        transform = CGAffineTransformMakeTranslation(0, -kScreenHeight);
     }
+    if (!story) return;
+
+    
+    self.story = story;
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, -kScreenHeight, kScreenWidth, 3*kScreenHeight)];
+    backView.backgroundColor = [UIColor whiteColor];
+    UIView *v = [self.view snapshotViewAfterScreenUpdates:NO];
+    v.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenHeight);
+    [backView addSubview:v];
+    [[UIApplication sharedApplication].keyWindow addSubview:backView];
+    [UIView animateWithDuration:0.25 animations:^{
+        backView.transform = transform;
+    } completion:^(BOOL finished) {
+        [backView removeFromSuperview];
+        self.footer.transform = CGAffineTransformIdentity;
+        self.header.transform = CGAffineTransformIdentity;
+    }];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -252,6 +237,49 @@
             }
         }
     }
+}
+
+#pragma setter & getter
+- (void)setStory:(SYStory *)story {
+    if (!story) return;
+    _story = story;
+    
+    [SYZhihuTool getDetailWithId:self.story.id completed:^(id obj) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            SYDetailStory *ds = (SYDetailStory *)obj;
+            [self.webView loadHTMLString:ds.htmlStr baseURL:nil];
+            self.topView.story = ds;
+        });
+    }];
+    
+    // 设置 extraStory
+    [SYZhihuTool getExtraWithId:self.story.id completed:^(id obj) {
+        SYExtraStory *es = (SYExtraStory *)obj;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.storyNav.extraStory = es;
+        });
+    }];
+}
+
+- (SYTopView *)topView {
+    if (!_topView) {
+        _topView = [[[NSBundle mainBundle] loadNibNamed:@"SYTopView" owner:self options:nil] firstObject];
+        _topView.clipsToBounds = YES;
+        _topView.frame = CGRectMake(0, -60, kScreenWidth, 220+40);
+    }
+    return _topView;
+}
+
+- (UIWebView *)webView {
+    if (!_webView) {
+        UIWebView *webView = [[UIWebView alloc] init];
+        webView.frame = CGRectMake(0, 20, kScreenWidth, kScreenHeight-40-20);
+        _webView = webView;
+        _webView.delegate = self;
+        _webView.scrollView.delegate = self;
+        _webView.backgroundColor = [UIColor whiteColor];
+    }
+    return _webView;
 }
 
 - (UILabel *)footer {
@@ -305,31 +333,6 @@
     }
     return _storyNav;
 }
-
-
-- (void)setStory:(SYStory *)story {
-    if (!story) return;
-    _story = story;
- 
-    
-    [SYZhihuTool getDetailWithId:self.story.id completed:^(id obj) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            SYDetailStory *ds = (SYDetailStory *)obj;
-            [self.webView loadHTMLString:ds.htmlStr baseURL:nil];
-            self.topView.story = ds;
-        });
-    }];
-    
-    // 设置 extraStory
-    [SYZhihuTool getExtraWithId:self.story.id completed:^(id obj) {
-        SYExtraStory *es = (SYExtraStory *)obj;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.storyNav.extraStory = es;
-        });
-    }];
-}
-
-
 
 
 @end
