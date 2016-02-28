@@ -26,7 +26,6 @@
 
 
 
-@property (nonatomic, strong) SYStory *story;
 
 @property (nonatomic, strong) SYTopView   *topView;
 @property (nonatomic, strong) UIWebView *webView;
@@ -46,24 +45,11 @@
 
 @implementation SYDetailController
 
-
-
-- (instancetype)initWithStory:(SYStory *)story
-{
-    self = [super init];
-    if (self) {
-        self.story = story;
-        self.view.backgroundColor = [UIColor whiteColor];
-    }
-    return self;
-}
-
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     [self.view addSubview:self.webView];
     [self.webView addSubview:self.topView];
     [self.view addSubview:self.header];
@@ -89,11 +75,8 @@
             [self.navigationController popViewControllerAnimated:YES];
             break;
         case 1: // next
-            if ([self.delegate respondsToSelector:@selector(nextStoryForDetailController:)]) {
-                
-                self.story = [self.delegate nextStoryForDetailController:self];
-            }
-            
+            self.story = [self.delegate nextStoryForDetailController:self story:self.story];
+       
             break;
         case 2: // like
             
@@ -168,6 +151,23 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    SYStoryPositionType position = [self.delegate detailController:self story:self.story];
+    if (position == SYStoryPositionTypeFirst) {
+        self.header.text = @"已经是第一篇";
+        self.downArrow.hidden = YES;
+        self.footer.text = @"载入下一篇";
+        self.upArrow.hidden = NO;
+    } else if (position == SYStoryPositionTypeOther) {
+        self.header.text = @"载入上一篇";
+        self.downArrow.hidden = NO;
+        self.footer.text = @"载入下一篇";
+        self.upArrow.hidden = NO;
+    } else {
+        self.header.text = @"载入上一篇";
+        self.downArrow.hidden = NO;
+        self.header.text = @"已经是最后一篇了";
+        self.upArrow.hidden = YES;
+    }
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     
@@ -178,7 +178,7 @@
     NSString *str = [@"document.body.style.webkitTextSizeAdjust=" stringByAppendingString:font?@"'120%'":@"'100%'"];
     
     
-    NSLog(@"--> %@", [webView stringByEvaluatingJavaScriptFromString:str]);
+    [webView stringByEvaluatingJavaScriptFromString:str];
     
     //js方法遍历图片添加点击事件 返回图片个数
     static  NSString * const jsGetImages = @"function setImages(){"\
@@ -204,25 +204,15 @@
     
     NSArray *imageArray = [imageUrls componentsSeparatedByString:@"...beyanger...."];
 #pragma todo 设置图片浏览界面的上一张和下一张功能
-
-    
 }
-
 
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     CGFloat yoffset = scrollView.contentOffset.y;
     if ( yoffset < -60) {
-    if ([self.delegate respondsToSelector:@selector(prevStoryForDetailController:)]) {
-        SYStory *story  = [self.delegate prevStoryForDetailController:self];
-        }
-        
-        
-        
+        self.story  = [self.delegate prevStoryForDetailController:self story:self.story];
     } else if ((kScreenHeight -60 - scrollView.contentSize.height + yoffset) > 60) {
-        if ([self.delegate respondsToSelector:@selector(nextStoryForDetailController:)]) {
-            SYStory *story  = [self.delegate nextStoryForDetailController:self];
-            }
+        self.story  = [self.delegate nextStoryForDetailController:self story:self.story];
     }
 }
 
@@ -321,11 +311,11 @@
     if (!story) return;
     _story = story;
  
+    
     [SYZhihuTool getDetailWithId:self.story.id completed:^(id obj) {
         dispatch_async(dispatch_get_main_queue(), ^{
             SYDetailStory *ds = (SYDetailStory *)obj;
             [self.webView loadHTMLString:ds.htmlStr baseURL:nil];
-            
             self.topView.story = ds;
         });
     }];

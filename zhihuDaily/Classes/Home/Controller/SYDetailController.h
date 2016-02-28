@@ -11,18 +11,26 @@
 
 @class SYDetailController;
 
+
+typedef NS_ENUM(NSInteger, SYStoryPositionType) {
+    SYStoryPositionTypeFirst = 1,
+    SYStoryPositionTypeLast = 2,
+    SYStoryPositionTypeOther = 3,
+};
+
 @protocol SYDetailControllerDelegate <NSObject>
 
-@optional
-- (SYStory *)nextStoryForDetailController:(SYDetailController *)detailController;
-- (SYStory *)prevStoryForDetailController:(SYDetailController *)detailController;
+@required
+- (SYStory *)nextStoryForDetailController:(SYDetailController *)detailController story:(SYStory *)story;
+- (SYStory *)prevStoryForDetailController:(SYDetailController *)detailController story:(SYStory *)story;
+- (SYStoryPositionType)detailController:(SYDetailController *)detailController story:(SYStory *)story;
 
 @end
 
 
 @interface SYDetailController : UIViewController
 
-- (instancetype)initWithStory:(SYStory *)story;
+@property (nonatomic, strong) SYStory *story;
 
 @property (nonatomic, weak) id<SYDetailControllerDelegate> delegate;
 

@@ -29,10 +29,11 @@
     if (self) {
         WEAKSELF;
         UIScrollView *scrollerView = [[UIScrollView alloc] init];
-        scrollerView.pagingEnabled = YES;
         [self addSubview:scrollerView];
+        scrollerView.pagingEnabled = YES;
         scrollerView.bounces = NO;
         scrollerView.delegate = self;
+        scrollerView.showsHorizontalScrollIndicator = NO;
         self.scrollerView = scrollerView;
         [scrollerView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.bottom.right.mas_equalTo(ws);
@@ -87,12 +88,7 @@
 
 
 - (void)nextImage {
-    NSInteger page = self.pageControl.currentPage;
-    if (page == self.pageControl.numberOfPages-1) {
-        page = 0;
-    } else {
-        page++;
-    }
+    NSInteger page = (self.pageControl.currentPage+1)%self.pageControl.numberOfPages;
     
     CGFloat x = page *kScreenWidth;
     [self.scrollerView setContentOffset:CGPointMake(x, 0) animated:YES];
@@ -105,9 +101,7 @@
     }
     [self.allImages removeAllObjects];
     
-    
     self.pageControl.numberOfPages = topStroies.count;
-    
     
     for (NSUInteger i = 0; i < topStroies.count; i++) {
         SYStory *story = topStroies[i];
@@ -137,7 +131,5 @@
     }
     return _allImages;
 }
-
-
 
 @end

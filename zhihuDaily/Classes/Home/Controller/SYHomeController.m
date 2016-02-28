@@ -27,7 +27,6 @@
 
 @interface SYHomeController () <SYDetailControllerDelegate, UITableViewDataSource, UITableViewDelegate, SYPicturesViewDelegate>
 
-@property (nonatomic, strong) NSIndexPath *currentIndexPath;
 @property (nonatomic, strong) NSMutableArray<SYBeforeStoryResult *> *storyGroup;
 @property (nonatomic, strong) NSMutableArray<SYStory *> *topStory;
 
@@ -143,9 +142,6 @@ static NSString *reuseid = @"useid";
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    self.currentIndexPath = indexPath;
-    
     SYBeforeStoryResult *result = self.storyGroup[indexPath.section];
     SYStory *story = result.stories[indexPath.row];
 
@@ -192,79 +188,80 @@ static NSString *reuseid = @"useid";
 
     SYStory *story = self.topStory[index];
     SYBeforeStoryResult *result = self.storyGroup[0];
-    for (NSUInteger i = 0; i < result.stories.count; i++) {
-        if ([story.title isEqualToString:[result.stories[i] title]]) {
-            self.currentIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
-            break;
-        }
-    }
     [self gotoDetailControllerWithStory:story];
 }
 
 - (void)gotoDetailControllerWithStory:(SYStory *)story {
     
-    SYDetailController *dc = [[SYDetailController alloc] initWithStory:story];
-    
+    SYDetailController *dc = [[SYDetailController alloc] init];
     dc.delegate =self;
+    dc.story = story;
+    
 
     [self.navigationController pushViewController:dc animated:YES];
 }
 
 
+struct SYPoint {
+    NSInteger x;
+    NSInteger y;
+};
+
+typedef struct SYPoint SYPoint;
 
 // 下一篇永远都会有
-- (SYStory *)nextStoryForDetailController:(SYDetailController *)detailController {
-    NSInteger row = self.currentIndexPath.row;
-    NSInteger section = self.currentIndexPath.section;
-    
-    if (section == self.storyGroup.count-1) {
-        [self loadMoreBefore];
-    }
-    
-    
-    SYBeforeStoryResult *result = self.storyGroup[section];
-    if (row == result.stories.count-1) {
-        section += 1;
-        result = self.storyGroup[section];
-        row = 0;
+- (SYStory *)nextStoryForDetailController:(SYDetailController *)detailController story:(SYStory *)story {
+
+    if([self detailController:nil story:story] == SYStoryPositionTypeLast) return nil;
+    SYPoint location = [self locationStory:story];
+    if (location.x == (self.storyGroup[location.y].stories.count-1)) {
+        return self.storyGroup[location.y+1].stories.firstObject;
     } else {
-        row += 1;
+        return self.storyGroup[location.y].stories[location.x+1];
     }
-    SYStory *story = result.stories[row];
-    self.currentIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
-    return story;
 }
 
-- (SYStory *)prevStoryForDetailController:(SYDetailController *)detailController {
-    
-    NSInteger row = self.currentIndexPath.row;
-    NSInteger section = self.currentIndexPath.section;
-    
-    if (row == 0 && section ==0) return nil;
 
-    if (row == 0) {
-        section -= 1;
-        row = self.storyGroup[section].stories.count-1;
+
+- (SYStory *)prevStoryForDetailController:(SYDetailController *)detailController story:(SYStory *)story {
+    
+    if ([self detailController:nil story:story] == SYStoryPositionTypeFirst) return nil;
+    SYPoint location = [self locationStory:story];
+    if (location.x == 0) {
+        return self.storyGroup[location.y-1].stories.lastObject;
     } else {
-        row -= 1;
+        return self.storyGroup[location.y].stories[location.x-1];
     }
-    
-    SYBeforeStoryResult *result = self.storyGroup[section];
-
-    
-    self.currentIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
-    return result.stories[row];
 }
 
+
+- (SYPoint)locationStory:(SYStory *)story {
+    for (NSUInteger y = 0; y < self.storyGroup.count; y++) {
+        NSArray<SYStory *> *stories = self.storyGroup[y].stories;
+        for (NSUInteger x = 0; x < stories.count; x++) {
+            if (story.id == stories[x].id) {
+                return (SYPoint){x, y};
+            }
+        }
+    }
+    return (SYPoint){-1, -1};
+}
+
+
+- (SYStoryPositionType)detailController:(SYDetailController *)detailController story:(SYStory *)story {
+    if (story.id == self.storyGroup.firstObject.stories.firstObject.id) {
+        return SYStoryPositionTypeFirst;
+    } else if (story.id == self.storyGroup.lastObject.stories.lastObject.id) {
+        return SYStoryPositionTypeLast;
+    }
+    return SYStoryPositionTypeOther;
+}
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (scrollView.contentOffset.y <= -80) {
         [self reload];
     }
 }
-
-
-
 
 - (UITableView *)tableView {
     if (!_tableView) {

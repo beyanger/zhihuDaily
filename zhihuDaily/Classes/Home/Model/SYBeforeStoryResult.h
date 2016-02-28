@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "SYStory.h"
 @interface SYBeforeStoryResult : NSObject
 
 @property (nonatomic, copy) NSString *date;
-@property (nonatomic, strong) NSArray *stories;
+@property (nonatomic, strong) NSArray<SYStory *> *stories;
 @end
