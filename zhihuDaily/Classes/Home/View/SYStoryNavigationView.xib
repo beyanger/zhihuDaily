@@ -20,7 +20,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7V-Ps-hua">
-                    <rect key="frame" x="104" y="0.0" width="104.5" height="40"/>
+                    <rect key="frame" x="104" y="0.0" width="105" height="40"/>
                     <animations/>
                     <state key="normal" image="News_Navigation_Next"/>
                     <connections>
@@ -28,7 +28,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ux-4l-7sQ">
-                    <rect key="frame" x="312" y="0.0" width="104.5" height="40"/>
+                    <rect key="frame" x="312" y="0.0" width="105" height="40"/>
                     <animations/>
                     <state key="normal" image="News_Navigation_Share"/>
                     <connections>
@@ -51,7 +51,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vp4-Yi-VeK">
-                    <rect key="frame" x="266.5" y="5.5" width="19" height="13.5"/>
+                    <rect key="frame" x="267" y="6" width="19" height="13"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" red="0.62738096714019775" green="0.62749135494232178" blue="0.62737399339675903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

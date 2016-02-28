@@ -26,7 +26,7 @@
                             <rect key="frame" x="0.0" y="60" width="200" height="60"/>
                             <subviews>
                                 <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCi-4n-Uff">
-                                    <rect key="frame" x="133" y="0.0" width="66.5" height="60"/>
+                                    <rect key="frame" x="133" y="0.0" width="67" height="60"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                     <inset key="contentEdgeInsets" minX="15" minY="5" maxX="0.0" maxY="0.0"/>
@@ -50,7 +50,7 @@
                                     </connections>
                                 </button>
                                 <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBN-6P-rXm">
-                                    <rect key="frame" x="0.0" y="0.0" width="66.5" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="67" height="60"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                     <inset key="contentEdgeInsets" minX="15" minY="5" maxX="0.0" maxY="0.0"/>

@@ -25,7 +25,7 @@ static NSString *header_reuseid = @"header_reuseid";
         header = [[SYHomeHeaderView alloc] init];
         UILabel *label = [[UILabel alloc] init];
         [header.contentView addSubview:label];
-        label.textColor = [UIColor whiteColor];
+        label.textColor = kWhiteColor;
         [header.contentView addSubview:label];
         label.font = [UIFont boldSystemFontOfSize:18.];
         header.dateLabel = label;

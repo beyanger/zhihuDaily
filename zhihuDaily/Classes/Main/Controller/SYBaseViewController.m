@@ -27,6 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = kWhiteColor;
     [self.view addSubview:self.sy_header];
 }
 
@@ -73,7 +74,7 @@
 - (UILabel *)sy_titleLabel {
     if (!_sy_titleLabel) {
         _sy_titleLabel = [[UILabel alloc] init];
-        _sy_titleLabel.textColor = [UIColor whiteColor];
+        _sy_titleLabel.textColor = kWhiteColor;
         _sy_titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _sy_titleLabel;

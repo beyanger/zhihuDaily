@@ -17,11 +17,10 @@
 #import "SYImageView.h"
 #import "SYStoryNavigationView.h"
 #import "SYShareView.h"
-#import "SYCommentsTableController.h"
+#import "SYCommentsController.h"
 #import "UIView+Extension.h"
 #import "Masonry.h"
 
-#import "UIView+YYAdd.h"
 
 
 @interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate, UIScrollViewDelegate>
@@ -42,13 +41,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = kWhiteColor;
     
     [self.view addSubview:self.webView];
     [self.webView addSubview:self.topView];
     [self.view addSubview:self.header];
     [self.view addSubview:self.footer];
-    
+    [self.view bringSubviewToFront:self.storyNav];
     WEAKSELF;
     
     [self.header mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -82,7 +81,7 @@
             break;
         
         case 4: {// comment
-            SYCommentsTableController *ctc = [[SYCommentsTableController alloc] init];
+            SYCommentsController *ctc = [[SYCommentsController alloc] init];
             ctc.story = self.story;
             [self.navigationController pushViewController:ctc animated:YES];
         }
@@ -185,10 +184,10 @@
     if (!story) return;
 
     
+    UIView *v = [self.view snapshotViewAfterScreenUpdates:NO];
     self.story = story;
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, -kScreenHeight, kScreenWidth, 3*kScreenHeight)];
-    backView.backgroundColor = [UIColor whiteColor];
-    UIView *v = [self.view snapshotViewAfterScreenUpdates:NO];
+    backView.backgroundColor = kWhiteColor;
     v.frame = CGRectMake(0, kScreenHeight, kScreenWidth, kScreenHeight);
     [backView addSubview:v];
     [[UIApplication sharedApplication].keyWindow addSubview:backView];
@@ -277,7 +276,7 @@
         _webView = webView;
         _webView.delegate = self;
         _webView.scrollView.delegate = self;
-        _webView.backgroundColor = [UIColor whiteColor];
+        _webView.backgroundColor = kWhiteColor;
     }
     return _webView;
 }
@@ -306,7 +305,7 @@
     if (!_header) {
         UILabel *header = [[UILabel alloc] init];
         
-        header.textColor = [UIColor whiteColor];
+        header.textColor = kWhiteColor;
         header.textAlignment = NSTextAlignmentCenter;
         header.text = @"载入上一篇";
         _header = header;

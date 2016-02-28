@@ -58,7 +58,7 @@ static NSString *reuseid = @"useid";
     [super viewDidLoad];
     White_StatusBar;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = kWhiteColor;
     
     [self setupTableView];
     [self.view addSubview:self.picturesView];

@@ -127,7 +127,7 @@
                              NSString *url = @"https://itunes.apple.com/cn/app/zhi-hu-ri-bao-mei-ri-ti-gong/id639087967?l=en&mt=8";
                              [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
                          }],
-                         [SYSettingArrow itemWithTitle:@"去吐槽" operation:nil destvc:[SYBaseViewController class]]];
+                         [SYSettingArrow itemWithTitle:@"去吐槽" operation:nil destvc:nil]];
         
         SYSettingGroup *group5 = [[SYSettingGroup alloc] init];
         group5.items = @[

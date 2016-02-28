@@ -12,7 +12,7 @@
 #import "SYBaseViewController.h"
 
 
-@interface SYCommentsTableController : SYBaseViewController
+@interface SYCommentsController : SYBaseViewController
 
 @property (nonatomic, strong) SYStory *story;
 

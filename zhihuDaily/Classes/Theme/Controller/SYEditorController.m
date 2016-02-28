@@ -21,7 +21,7 @@ static NSString *editor_reuseid = @"editor_reuseid";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = kWhiteColor;
     [self.view addSubview:self.tableView];
     self.title = @"主编";    
 }

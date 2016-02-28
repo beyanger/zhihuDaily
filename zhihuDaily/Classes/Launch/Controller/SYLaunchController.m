@@ -26,19 +26,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [SYCacheTool queryTables];
-    
+
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *url = [ud stringForKey:@"launchScreen"];
     
     if (url) [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:url]];
     
+    
+    SYMainViewController *mainvc = [[SYMainViewController alloc] init];
+    [mainvc view];
     [SYZhihuTool getLauchImageWithCompleted:^(id obj) {
         [ud setObject:obj forKey:@"launchScreen"];
         [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:obj]];
         
-        SYMainViewController *mainvc = [[SYMainViewController alloc] init];
         
         AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         delegate.mainController = mainvc;

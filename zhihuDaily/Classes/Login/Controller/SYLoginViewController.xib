@@ -21,7 +21,7 @@
                     <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ee5-Dt-sbJ">
-                            <rect key="frame" x="277" y="8.5" width="46" height="27.5"/>
+                            <rect key="frame" x="277" y="9" width="46" height="27"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="23"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -69,6 +69,9 @@
                     <state key="normal" title="腾讯微博" backgroundImage="Login_Button_Tencent">
                         <color key="titleColor" red="0.1019607843" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="login:" destination="-1" eventType="touchUpInside" id="1pm-jz-wet"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7p-ak-kia">
                     <rect key="frame" x="170" y="414" width="260" height="51"/>

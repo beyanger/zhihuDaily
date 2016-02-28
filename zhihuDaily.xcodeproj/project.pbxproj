@@ -82,7 +82,7 @@
 		2F6CF2A01C8053C500C4B346 /* SYEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF29F1C8053C500C4B346 /* SYEditorController.m */; };
 		2F6CF2A51C80612100C4B346 /* SYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2A31C80612100C4B346 /* SYBaseViewController.m */; };
 		2F9995DC1C7C206D0072C8F0 /* SYShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995DB1C7C206D0072C8F0 /* SYShareView.m */; };
-		2F9995E11C7C39190072C8F0 /* SYCommentsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E01C7C39190072C8F0 /* SYCommentsTableController.m */; };
+		2F9995E11C7C39190072C8F0 /* SYCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E01C7C39190072C8F0 /* SYCommentsController.m */; };
 		2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E31C7C3D100072C8F0 /* SYComment.m */; };
 		2F9995E71C7C476A0072C8F0 /* SYCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E61C7C476A0072C8F0 /* SYCommentCell.m */; };
 		2F9995E91C7C47760072C8F0 /* SYCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F9995E81C7C47760072C8F0 /* SYCommentCell.xib */; };
@@ -98,7 +98,6 @@
 		2FB923151C7F369A000A0A2D /* SYVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB923141C7F369A000A0A2D /* SYVersion.m */; };
 		2FC5874B1C79FDEB003C9A7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874A1C79FDEB003C9A7A /* main.m */; };
 		2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */; };
-		2FC587541C79FDEB003C9A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587521C79FDEB003C9A7A /* Main.storyboard */; };
 		2FC587561C79FDEB003C9A7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587551C79FDEB003C9A7A /* Assets.xcassets */; };
 		2FC587591C79FDEB003C9A7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587571C79FDEB003C9A7A /* LaunchScreen.storyboard */; };
 		2FC587641C79FDEB003C9A7A /* zhihuDailyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC587631C79FDEB003C9A7A /* zhihuDailyTests.m */; };
@@ -312,8 +311,8 @@
 		2F6CF2A31C80612100C4B346 /* SYBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYBaseViewController.m; sourceTree = "<group>"; };
 		2F9995DA1C7C206D0072C8F0 /* SYShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYShareView.h; sourceTree = "<group>"; };
 		2F9995DB1C7C206D0072C8F0 /* SYShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYShareView.m; sourceTree = "<group>"; };
-		2F9995DF1C7C39190072C8F0 /* SYCommentsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCommentsTableController.h; sourceTree = "<group>"; };
-		2F9995E01C7C39190072C8F0 /* SYCommentsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCommentsTableController.m; sourceTree = "<group>"; };
+		2F9995DF1C7C39190072C8F0 /* SYCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCommentsController.h; sourceTree = "<group>"; };
+		2F9995E01C7C39190072C8F0 /* SYCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCommentsController.m; sourceTree = "<group>"; };
 		2F9995E21C7C3D100072C8F0 /* SYComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYComment.h; sourceTree = "<group>"; };
 		2F9995E31C7C3D100072C8F0 /* SYComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYComment.m; sourceTree = "<group>"; };
 		2F9995E51C7C476A0072C8F0 /* SYCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCommentCell.h; sourceTree = "<group>"; };
@@ -342,7 +341,6 @@
 		2FC5874A1C79FDEB003C9A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2FC587531C79FDEB003C9A7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2FC587551C79FDEB003C9A7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FC587581C79FDEB003C9A7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2FC5875A1C79FDEB003C9A7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -572,8 +570,8 @@
 				2F37AB841C7B7D7C00D3CD65 /* SYWebViewController.h */,
 				2F37AB851C7B7D7C00D3CD65 /* SYWebViewController.m */,
 				2F1319D91C7E18A200FA146F /* SYWebViewController.xib */,
-				2F9995DF1C7C39190072C8F0 /* SYCommentsTableController.h */,
-				2F9995E01C7C39190072C8F0 /* SYCommentsTableController.m */,
+				2F9995DF1C7C39190072C8F0 /* SYCommentsController.h */,
+				2F9995E01C7C39190072C8F0 /* SYCommentsController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -827,7 +825,6 @@
 				2FC5877C1C79FE74003C9A7A /* Classes */,
 				2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */,
 				2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */,
-				2FC587521C79FDEB003C9A7A /* Main.storyboard */,
 				2FC587551C79FDEB003C9A7A /* Assets.xcassets */,
 				2FC587571C79FDEB003C9A7A /* LaunchScreen.storyboard */,
 				2FC5875A1C79FDEB003C9A7A /* Info.plist */,
@@ -1268,7 +1265,6 @@
 				2F37AB8B1C7B7F1600D3CD65 /* SYStoryNavigationView.xib in Resources */,
 				2F37AB831C7B6E0F00D3CD65 /* SYTopView.xib in Resources */,
 				2F6CF2981C80329400C4B346 /* SYLoginViewController.xib in Resources */,
-				2FC587541C79FDEB003C9A7A /* Main.storyboard in Resources */,
 				2F9995E91C7C47760072C8F0 /* SYCommentCell.xib in Resources */,
 				2FE707AC1C7DDC69005CB13B /* SYLeftDrawerController.xib in Resources */,
 				2FE707A71C7DD6B6005CB13B /* SYMainToolBox.xib in Resources */,
@@ -1306,7 +1302,7 @@
 				2FC587DC1C7A096A003C9A7A /* UIImage+WebP.m in Sources */,
 				2FC587A31C7A0956003C9A7A /* AFURLConnectionOperation.m in Sources */,
 				2FC587D71C7A096A003C9A7A /* SDWebImageManager.m in Sources */,
-				2F9995E11C7C39190072C8F0 /* SYCommentsTableController.m in Sources */,
+				2F9995E11C7C39190072C8F0 /* SYCommentsController.m in Sources */,
 				2F9995FF1C7C75C70072C8F0 /* SYPresentAnimation.m in Sources */,
 				2FC588001C7A0974003C9A7A /* NSArray+MASAdditions.m in Sources */,
 				2FC5879E1C7A0956003C9A7A /* AFHTTPRequestOperation.m in Sources */,
@@ -1456,14 +1452,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		2FC587521C79FDEB003C9A7A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2FC587531C79FDEB003C9A7A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2FC587571C79FDEB003C9A7A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

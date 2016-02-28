@@ -6,13 +6,13 @@
 //  Copyright © 2016年 yang. All rights reserved.
 //
 
-#import "SYCommentsTableController.h"
+#import "SYCommentsController.h"
 #import "SYCommentCell.h"
 #import "SYZhihuTool.h"
 #import "UINavigationBar+Awesome.h"
 static NSString *comment_reuseid = @"comment_reuseid";
 
-@interface SYCommentsTableController () <UITableViewDataSource, UITableViewDelegate>
+@interface SYCommentsController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
 
@@ -21,7 +21,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
 @property (nonatomic, strong) SYCommentCell *prototypeCell;
 @end
 
-@implementation SYCommentsTableController
+@implementation SYCommentsController
 
 
 
@@ -42,8 +42,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
 }
 
 - (void)setupTableView {
-    UITableView *tableView = [[UITableView alloc] init];
-    tableView.frame = CGRectMake(0, 60, kScreenWidth, kScreenHeight-100);
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, kScreenWidth, kScreenHeight-100) style:UITableViewStyleGrouped];
     [self.view addSubview:tableView];
     self.tableView = tableView;
     tableView.delegate = self;
@@ -55,7 +54,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     button.backgroundColor = [UIColor lightGrayColor];
     button.frame = CGRectMake(0, kScreenHeight-40, kScreenWidth, 40);
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button setTitleColor:kWhiteColor forState:UIControlStateNormal];
     [button setTitle:@"返回" forState:UIControlStateNormal];
     [self.view addSubview:button];
     [button addTarget:self action:@selector(backGo) forControlEvents:UIControlEventTouchUpInside];
@@ -85,7 +84,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.allComments.allKeys.count;
+    return self.allComments.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

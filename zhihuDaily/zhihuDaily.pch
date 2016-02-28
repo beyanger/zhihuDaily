@@ -31,6 +31,9 @@
 
 #define kGroundColor        SYColor(48, 127, 255, 1.0)
 
+#define kWhiteColor         [UIColor whiteColor]
+
+
 #import "YYModel.h"
 
 
