@@ -28,6 +28,9 @@
 
 #define Black_StatusBar     do {[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;} while (0)
 
+
+#define kGroundColor        SYColor(48, 127, 255, 1.0)
+
 #import "YYModel.h"
 
 

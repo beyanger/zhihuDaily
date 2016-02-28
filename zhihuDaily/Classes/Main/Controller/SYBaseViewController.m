@@ -34,7 +34,7 @@
     if (!_sy_header) {
         _sy_header = [[UIView alloc] init];
         _sy_header.frame = CGRectMake(0, 0, kScreenWidth, 64);
-        _sy_header.backgroundColor = SYColor(48, 127, 255, 1.0);
+        _sy_header.backgroundColor = kGroundColor;
         _sy_header.clipsToBounds = YES;
         
         [_sy_header addSubview:self.sy_headerBackgroundView];

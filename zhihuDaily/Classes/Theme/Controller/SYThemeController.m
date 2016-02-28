@@ -17,6 +17,7 @@
 #import "MBProgressHUD+YS.h"
 #import "SYTableHeader.h"
 #import "SYEditorController.h"
+#import "SYTableViewCell.h"
 
 @interface SYThemeController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -29,7 +30,7 @@
 
 @end
 
-static NSString *theme_reuseid = @"theme_reuseid";
+static NSString *theme_reuseid = @"useid";
 
 @implementation SYThemeController
 
@@ -50,14 +51,11 @@ static NSString *theme_reuseid = @"theme_reuseid";
     return self.stories.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:theme_reuseid];
+- (SYTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    SYTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:theme_reuseid forIndexPath:indexPath];
+
+   cell.story = self.stories[indexPath.row];
     
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:theme_reuseid];
-    }
-    
-    cell.textLabel.text = self.stories[indexPath.row].title;
     return cell;
 }
 
@@ -77,6 +75,7 @@ static NSString *theme_reuseid = @"theme_reuseid";
         _tableView.dataSource = self;
         _tableView.tableHeaderView = self.tableHeader;
         _tableView.rowHeight = 80;
+        [_tableView registerNib:[UINib nibWithNibName:@"SYTableViewCell" bundle:nil] forCellReuseIdentifier:theme_reuseid];
     }
     return _tableView;
 }
@@ -178,6 +177,9 @@ static NSString *theme_reuseid = @"theme_reuseid";
     } else if (yoffset < -90) {
         self.tableView.contentOffset = CGPointMake(0, -90);
     }
+    
+    
+    
 }
 
 - (NSArray<SYStory *> *)stories {

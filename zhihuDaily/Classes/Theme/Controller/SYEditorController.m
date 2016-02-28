@@ -7,20 +7,56 @@
 //
 
 #import "SYEditorController.h"
+#import "SYEditorCell.h"
+#import "SYEditorDetailController.h"
 
-@interface SYEditorController () //<UITableViewDataSource, UITableViewDelegate>
+static NSString *editor_reuseid = @"editor_reuseid";
 
+@interface SYEditorController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView *tableView;
 @end
 
 @implementation SYEditorController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.sy_header.backgroundColor = [UIColor blueColor];
     self.view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.tableView];
     self.title = @"主编";    
 }
 
+#pragma mark tableView delegate and dataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.editors.count;
+}
+
+- (SYEditorCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    SYEditorCell *cell = [tableView dequeueReusableCellWithIdentifier:editor_reuseid];
+
+    cell.editor = self.editors[indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SYEditorDetailController *edvc = [[SYEditorDetailController alloc] init];
+    edvc.editor = self.editors[indexPath.row];
+    [self.navigationController pushViewController:edvc animated:YES];
+}
+
+
+
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight-64) style:UITableViewStylePlain];
+        [_tableView registerNib:[UINib nibWithNibName:@"SYEditorCell" bundle:nil] forCellReuseIdentifier:editor_reuseid];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.rowHeight = 44;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+    }
+    return _tableView;
+}
 
 
 - (void)setEditors:(NSArray<SYEditor *> *)editors {

@@ -55,6 +55,7 @@
                 <outlet property="image" destination="OF8-qr-F4X" id="ILP-qS-tP6"/>
                 <outlet property="multiImage" destination="4oG-To-um1" id="EjB-HV-WIB"/>
                 <outlet property="title" destination="E0N-Hm-9ez" id="u0c-5W-H8D"/>
+                <outlet property="titleLeft" destination="RR2-2e-f0b" id="a4N-6I-W0I"/>
             </connections>
             <point key="canvasLocation" x="355" y="272.5"/>
         </tableViewCell>

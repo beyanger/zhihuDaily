@@ -102,7 +102,7 @@
         case 4: {// comment
             SYCommentsTableController *ctc = [[SYCommentsTableController alloc] init];
             ctc.story = self.story;
-            [self.navigationController pushViewController:ctc animated:ctc];
+            [self.navigationController pushViewController:ctc animated:YES];
             
             
         }

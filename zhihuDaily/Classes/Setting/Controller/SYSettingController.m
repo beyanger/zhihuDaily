@@ -81,14 +81,18 @@
     SYSettingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     SYSettingItem *item = cell.item;
     
-    if (item.operation) {
-        item.operation();
-    }
+    !item.operation?:item.operation();
+    
+//    if (item.operation) {
+//        item.operation();
+//    }
     
     if ([item isKindOfClass:[SYSettingArrow class]]) {
         SYSettingArrow *arrow = (SYSettingArrow *)item;
-        UIViewController *vc = [[arrow.destvc alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        if (arrow.destvc) {
+            UIViewController *vc = [[arrow.destvc alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     } else if (indexPath.section == 5 && indexPath.row == 0){
         SYSettingText *text = (SYSettingText *)item;
         text.text = [NSString stringWithFormat:@"清除完毕"];
@@ -117,7 +121,12 @@
         
         SYSettingGroup *group4 = [[SYSettingGroup alloc] init];
         group4.items = @[
-                         [SYSettingArrow itemWithTitle:@"去好评" operation:nil destvc:[SYBaseViewController class]],
+                         
+                         [SYSettingArrow itemWithTitle:@"去好评" operation:^{
+                             
+                             NSString *url = @"https://itunes.apple.com/cn/app/zhi-hu-ri-bao-mei-ri-ti-gong/id639087967?l=en&mt=8";
+                             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+                         }],
                          [SYSettingArrow itemWithTitle:@"去吐槽" operation:nil destvc:[SYBaseViewController class]]];
         
         SYSettingGroup *group5 = [[SYSettingGroup alloc] init];

@@ -30,9 +30,16 @@
 
 - (void)setEditors:(NSArray<SYEditor *> *)editors {
     _editors = editors;
-    for (NSUInteger i = 0; i < editors.count && i < 5; i++) {
-        [self.editorsImage[i] sd_setImageWithURL:[NSURL URLWithString:editors[i].avatar]];
+    for (NSUInteger i = 0; i < 5; i++) {
+        if (i < editors.count) {
+            [self.editorsImage[i] sd_setImageWithURL:[NSURL URLWithString:editors[i].avatar]];
+        } else {
+            self.editorsImage[i].image = nil;
+        }
     }
+    
+    
+    
     
 }
 

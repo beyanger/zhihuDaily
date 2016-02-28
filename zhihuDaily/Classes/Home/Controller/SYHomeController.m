@@ -135,13 +135,9 @@ static NSString *reuseid = @"useid";
 
 - (SYTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SYTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseid forIndexPath:indexPath];
-    if (!cell) {
-        cell = [[SYTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseid];
-    }
-    
+
     SYBeforeStoryResult *result = self.storyGroup[indexPath.section];
     cell.story = result.stories[indexPath.row];
-    
     return cell;
 }
 

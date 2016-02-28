@@ -11,6 +11,7 @@
 @interface SYTableViewCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLeft;
 @property (weak, nonatomic) IBOutlet UIImageView *multiImage;
 
 @end
@@ -22,7 +23,16 @@
     _story = story;
     self.title.text = story.title;
     
-    [self.image sd_setImageWithURL:[NSURL URLWithString:story.images.firstObject]];
+    if (story.images.count > 0) {
+        [self.image sd_setImageWithURL:[NSURL URLWithString:story.images.firstObject]];
+        self.image.hidden = NO;
+        self.titleLeft.constant = 18;
+    } else {
+        self.image.hidden = YES;
+        self.titleLeft.constant = 18-60;
+    }
+    
+    
     self.multiImage.hidden = !story.multipic;
 }
 

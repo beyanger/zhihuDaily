@@ -15,7 +15,8 @@ static FMDatabaseQueue *_zhihu_queue;
 
 @implementation SYCacheTool
 
-+ (FMDatabaseQueue *)queue {
+
++ (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSString *path = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
@@ -26,11 +27,14 @@ static FMDatabaseQueue *_zhihu_queue;
         _zhihu_queue = [FMDatabaseQueue databaseQueueWithPath:pathName];
         [_zhihu_queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_storylist (date INTEGER PRIMARY KEY, storylist BLOB);"];
-            
             [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_story (storyid INTEGER PRIMARY KEY, story BLOB);"];
         }];
     });
-    return _zhihu_queue;
+    
+}
+
++ (FMDatabaseQueue *)queue {
+     return _zhihu_queue;
 }
 
 
@@ -76,7 +80,7 @@ static FMDatabaseQueue *_zhihu_queue;
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:respObject];
         NSString *dateString = respObject.date;
         [[self queue] inDatabase:^(FMDatabase *db) {
-            [db executeUpdate:@"INSERT INTO t_storylist (date, storylist) VALUES (?, ?);", dateString, data];
+            [db executeUpdate:@"INSERT OR IGNORE INTO t_storylist (date, storylist) VALUES (?, ?);", dateString, data];
         }];
     });
 }
@@ -109,7 +113,7 @@ static FMDatabaseQueue *_zhihu_queue;
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:story];
         
         [[self queue] inDatabase:^(FMDatabase *db) {
-            [db executeUpdate:@"INSERT INTO t_story (storyid, story) VALUES (?, ?);", @(story.id), data];
+            [db executeUpdate:@"INSERT OR IGNORE INTO t_story (storyid, story) VALUES (?, ?);", @(story.id), data];
         }];
     });
 }
@@ -144,7 +148,7 @@ static FMDatabaseQueue *_zhihu_queue;
 + (void)cacheThemeSotryListWithId:(int)themeid respObject:(NSArray<SYStory *>*)respObject {
     // 进行缓存数据
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *sql = [NSString stringWithFormat:@"INSERT INTO theme_%d (storyid, story) VALUES (?, ?);", themeid];
+        NSString *sql = [NSString stringWithFormat:@"INSERT OR IGNORE INTO theme_%d (storyid, story) VALUES (?, ?);", themeid];
         [[self queue] inDatabase:^(FMDatabase *db) {
             for (SYStory *story in respObject) {
                 NSData *data = [NSKeyedArchiver archivedDataWithRootObject:story];

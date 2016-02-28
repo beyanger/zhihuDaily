@@ -66,7 +66,7 @@
     if (!_switchView) {
         _switchView = [[UISwitch alloc] init];
         NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-        
+        _switchView.onTintColor = kGroundColor;
         _switchView.on = [ud boolForKey:self.item.title];
         [_switchView addTarget:self action:@selector(clickedSwitch:) forControlEvents:UIControlEventValueChanged];
     }
