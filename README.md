@@ -1,11 +1,12 @@
 #知乎日报(高仿)
 ----------
-所使用的数据均出自知乎服务器，其中API主要参考[@izzyleung](https://github.com/izzyleung/ZhihuDailyPurify/wiki/%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5-API-%E5%88%86%E6%9E%90)，表示感谢，另外，知乎的一些API返回的数据有的不规则，需要另作完善。
+#####所使用的数据均出自知乎服务器，其中API主要参考[@izzyleung](https://github.com/izzyleung/ZhihuDailyPurify/wiki/%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5-API-%E5%88%86%E6%9E%90)，表示感谢，另外，知乎的一些API返回的数据有的不规则，需要另作完善。
 -----------
->演示视频请移步[这里](www.youku.com)
+
+>演示视频请移步[这里](http://v.youku.com/v_show/id_XMTQ4NTg2NjI2NA==.html)
 
 
-主要界面高度还原知乎官方APP，除了和账号相关的操作尚未实现，其他基本功能均已经实现。包括动画效果，数据缓存，下拉自动刷新数据等。
+#####主要界面高度还原知乎官方APP，除了和账号相关的操作尚未实现，其他基本功能均已经实现。包括动画效果，数据缓存，下拉自动刷新数据等。
 -------------
 ##尚未完成：
 1. 登录和分享功能，包括点赞，收藏等(界面已经实现动画效果)
@@ -14,7 +15,7 @@
 
 
 -------------
-`beyanger@gmail.com`
-
+E-mail： `beyanger@gmail.com`
+[这里](blog.beyanger.com)
 -------------
-`求随手一个小⭐️
+`求随手一个小`⭐️
