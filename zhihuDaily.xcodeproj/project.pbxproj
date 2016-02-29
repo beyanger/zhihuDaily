@@ -139,6 +139,12 @@
 		2FC588021C7A0974003C9A7A /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC587F61C7A0974003C9A7A /* View+MASAdditions.m */; };
 		2FC588031C7A0974003C9A7A /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC587F91C7A0974003C9A7A /* ViewController+MASAdditions.m */; };
 		2FC588071C7A0B50003C9A7A /* YSHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC588061C7A0B50003C9A7A /* YSHttpTool.m */; };
+		2FCCAD0A1C83BDB000C19D35 /* UITableView+FDIndexPathHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCCAD031C83BDB000C19D35 /* UITableView+FDIndexPathHeightCache.m */; };
+		2FCCAD0B1C83BDB000C19D35 /* UITableView+FDKeyedHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCCAD051C83BDB000C19D35 /* UITableView+FDKeyedHeightCache.m */; };
+		2FCCAD0C1C83BDB000C19D35 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCCAD071C83BDB000C19D35 /* UITableView+FDTemplateLayoutCell.m */; };
+		2FCCAD0D1C83BDB000C19D35 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCCAD091C83BDB000C19D35 /* UITableView+FDTemplateLayoutCellDebug.m */; };
+		2FCCAD101C83C70000C19D35 /* SYCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCCAD0F1C83C70000C19D35 /* SYCommentView.m */; };
+		2FCCAD121C83C70E00C19D35 /* SYCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FCCAD111C83C70E00C19D35 /* SYCommentView.xib */; };
 		2FD803B71C7A3B5500C15EB7 /* SYToolButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD803B61C7A3B5500C15EB7 /* SYToolButton.m */; };
 		2FE707821C7D86C4005CB13B /* SYHomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE707811C7D86C4005CB13B /* SYHomeHeaderView.m */; };
 		2FE707851C7D9724005CB13B /* SYPicturesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE707841C7D9724005CB13B /* SYPicturesView.m */; };
@@ -432,6 +438,17 @@
 		2FC587F91C7A0974003C9A7A /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+MASAdditions.m"; sourceTree = "<group>"; };
 		2FC588051C7A0B50003C9A7A /* YSHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSHttpTool.h; sourceTree = "<group>"; };
 		2FC588061C7A0B50003C9A7A /* YSHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSHttpTool.m; sourceTree = "<group>"; };
+		2FCCAD021C83BDB000C19D35 /* UITableView+FDIndexPathHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDIndexPathHeightCache.h"; sourceTree = "<group>"; };
+		2FCCAD031C83BDB000C19D35 /* UITableView+FDIndexPathHeightCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDIndexPathHeightCache.m"; sourceTree = "<group>"; };
+		2FCCAD041C83BDB000C19D35 /* UITableView+FDKeyedHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDKeyedHeightCache.h"; sourceTree = "<group>"; };
+		2FCCAD051C83BDB000C19D35 /* UITableView+FDKeyedHeightCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDKeyedHeightCache.m"; sourceTree = "<group>"; };
+		2FCCAD061C83BDB000C19D35 /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
+		2FCCAD071C83BDB000C19D35 /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
+		2FCCAD081C83BDB000C19D35 /* UITableView+FDTemplateLayoutCellDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCellDebug.h"; sourceTree = "<group>"; };
+		2FCCAD091C83BDB000C19D35 /* UITableView+FDTemplateLayoutCellDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCellDebug.m"; sourceTree = "<group>"; };
+		2FCCAD0E1C83C70000C19D35 /* SYCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCommentView.h; sourceTree = "<group>"; };
+		2FCCAD0F1C83C70000C19D35 /* SYCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCommentView.m; sourceTree = "<group>"; };
+		2FCCAD111C83C70E00C19D35 /* SYCommentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYCommentView.xib; sourceTree = "<group>"; };
 		2FD803B51C7A3B5500C15EB7 /* SYToolButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYToolButton.h; sourceTree = "<group>"; };
 		2FD803B61C7A3B5500C15EB7 /* SYToolButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYToolButton.m; sourceTree = "<group>"; };
 		2FE707801C7D86C4005CB13B /* SYHomeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYHomeHeaderView.h; sourceTree = "<group>"; };
@@ -624,6 +641,9 @@
 				2F9995E51C7C476A0072C8F0 /* SYCommentCell.h */,
 				2F9995E61C7C476A0072C8F0 /* SYCommentCell.m */,
 				2F9995E81C7C47760072C8F0 /* SYCommentCell.xib */,
+				2FCCAD0E1C83C70000C19D35 /* SYCommentView.h */,
+				2FCCAD0F1C83C70000C19D35 /* SYCommentView.m */,
+				2FCCAD111C83C70E00C19D35 /* SYCommentView.xib */,
 				2FE707801C7D86C4005CB13B /* SYHomeHeaderView.h */,
 				2FE707811C7D86C4005CB13B /* SYHomeHeaderView.m */,
 				2FE707831C7D9724005CB13B /* SYPicturesView.h */,
@@ -929,6 +949,7 @@
 		2FC587891C7A0937003C9A7A /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				2FCCAD011C83BDB000C19D35 /* FDTemplateLayoutCell */,
 				2F6AC6061C81B8550090CD8A /* YYModel */,
 				2F6CF2741C7FB20700C4B346 /* Categories */,
 				2F4F1A751C7FA09500AF3BDF /* fmdb */,
@@ -1053,6 +1074,21 @@
 				2F6AC61B1C81FD090090CD8A /* SYNetworkTool.m */,
 			);
 			path = Tool;
+			sourceTree = "<group>";
+		};
+		2FCCAD011C83BDB000C19D35 /* FDTemplateLayoutCell */ = {
+			isa = PBXGroup;
+			children = (
+				2FCCAD021C83BDB000C19D35 /* UITableView+FDIndexPathHeightCache.h */,
+				2FCCAD031C83BDB000C19D35 /* UITableView+FDIndexPathHeightCache.m */,
+				2FCCAD041C83BDB000C19D35 /* UITableView+FDKeyedHeightCache.h */,
+				2FCCAD051C83BDB000C19D35 /* UITableView+FDKeyedHeightCache.m */,
+				2FCCAD061C83BDB000C19D35 /* UITableView+FDTemplateLayoutCell.h */,
+				2FCCAD071C83BDB000C19D35 /* UITableView+FDTemplateLayoutCell.m */,
+				2FCCAD081C83BDB000C19D35 /* UITableView+FDTemplateLayoutCellDebug.h */,
+				2FCCAD091C83BDB000C19D35 /* UITableView+FDTemplateLayoutCellDebug.m */,
+			);
+			path = FDTemplateLayoutCell;
 			sourceTree = "<group>";
 		};
 		2FE707751C7CA281005CB13B /* Resources */ = {
@@ -1266,6 +1302,7 @@
 				2FC587591C79FDEB003C9A7A /* LaunchScreen.storyboard in Resources */,
 				2F2CCB981C7B016500C45E3D /* SYTableViewCell.xib in Resources */,
 				2FC587561C79FDEB003C9A7A /* Assets.xcassets in Resources */,
+				2FCCAD121C83C70E00C19D35 /* SYCommentView.xib in Resources */,
 				2F0E2CC51C7BF071004FDA0F /* MBProgressHUD.bundle in Resources */,
 				2F37AB8B1C7B7F1600D3CD65 /* SYStoryNavigationView.xib in Resources */,
 				2F37AB831C7B6E0F00D3CD65 /* SYTopView.xib in Resources */,
@@ -1330,6 +1367,7 @@
 				2FE707A61C7DD6B6005CB13B /* SYMainToolBox.m in Sources */,
 				2FC587FA1C7A0974003C9A7A /* MASCompositeConstraint.m in Sources */,
 				2F37AB781C7B675100D3CD65 /* MMDrawerBarButtonItem.m in Sources */,
+				2FCCAD0D1C83BDB000C19D35 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				2FB923091C7EE353000A0A2D /* SYTopImageView.m in Sources */,
 				2F1319D81C7E113700FA146F /* SYNavigationController.m in Sources */,
 				2F4F1A861C7FA09500AF3BDF /* FMResultSet.m in Sources */,
@@ -1365,6 +1403,7 @@
 				2F6AC5FF1C8173910090CD8A /* SYSettingSwitch.m in Sources */,
 				2F2CCBC71C7B0C1400C45E3D /* NSObject+MJKeyValue.m in Sources */,
 				2F6AC60D1C81B8550090CD8A /* YYClassInfo.m in Sources */,
+				2FCCAD0B1C83BDB000C19D35 /* UITableView+FDKeyedHeightCache.m in Sources */,
 				2FC587D11C7A096A003C9A7A /* NSData+ImageContentType.m in Sources */,
 				2FD803B71C7A3B5500C15EB7 /* SYToolButton.m in Sources */,
 				2F0E2CC41C7BF071004FDA0F /* MBProgressHUD+YS.m in Sources */,
@@ -1389,14 +1428,17 @@
 				2FC587FC1C7A0974003C9A7A /* MASConstraintMaker.m in Sources */,
 				2FC587D81C7A096A003C9A7A /* SDWebImagePrefetcher.m in Sources */,
 				2F6AC6021C8173AB0090CD8A /* SYSettingText.m in Sources */,
+				2FCCAD0C1C83BDB000C19D35 /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				2FC587D41C7A096A003C9A7A /* SDWebImageDecoder.m in Sources */,
 				2FC588031C7A0974003C9A7A /* ViewController+MASAdditions.m in Sources */,
 				2F2CCB971C7B016500C45E3D /* SYTableViewCell.m in Sources */,
 				2FE707821C7D86C4005CB13B /* SYHomeHeaderView.m in Sources */,
 				2F6CF29B1C80451500C4B346 /* SYTableHeader.m in Sources */,
+				2FCCAD0A1C83BDB000C19D35 /* UITableView+FDIndexPathHeightCache.m in Sources */,
 				2F2CCB9E1C7B043000C45E3D /* SYLastestGroup.m in Sources */,
 				2FC588071C7A0B50003C9A7A /* YSHttpTool.m in Sources */,
 				2F9995DC1C7C206D0072C8F0 /* SYShareView.m in Sources */,
+				2FCCAD101C83C70000C19D35 /* SYCommentView.m in Sources */,
 				2F2CCBC61C7B0C1400C45E3D /* NSObject+MJCoding.m in Sources */,
 				2FC587D21C7A096A003C9A7A /* SDImageCache.m in Sources */,
 				2FC587D31C7A096A003C9A7A /* SDWebImageCompat.m in Sources */,

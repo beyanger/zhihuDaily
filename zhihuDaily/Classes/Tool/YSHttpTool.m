@@ -16,13 +16,9 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        if (success) {
-            success(responseObject);
-        }
+        !success ? : success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (failure) {
-            failure(error);
-        }
+        !failure ? : failure(error);
     }];
 }
 
@@ -38,13 +34,9 @@
         }
         
     } success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        if (success) {
-            success(responseObject);
-        }
+        !success ? : success(responseObject);
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        if (failure) {
-            failure(error);
-        }
+        !failure ? : failure(error);
     }];
 }
 
@@ -52,13 +44,9 @@
 + (void)GETWithURL:(NSString *)url params:(NSDictionary *)params success:(void (^)(id responseObject))success failure:(void (^)(NSError *))failure {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        if (success) {
-            success(responseObject);
-        }
+        !success ? : success(responseObject);
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        if (failure) {
-            failure(error);
-        }
+        !failure ? : failure(error);
     }];
 }
 

@@ -160,7 +160,7 @@ static NSString *theme_reuseid = @"useid";
 
 - (void)setThemeid:(int)themeid {
     _themeid = themeid;
-    NSLog(@"---> themeid: %d", themeid);
+    
     [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 
     UIView *view = [[UIView alloc] initWithFrame:kScreenBounds];

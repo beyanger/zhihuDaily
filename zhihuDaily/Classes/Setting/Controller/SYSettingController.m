@@ -15,7 +15,7 @@
 #import "SYSettingText.h"
 #import "SYSettingItem.h"
 #import "SYSettingCell.h"
-
+#import "SYLoginViewController.h"
 
 
 @interface SYSettingController () <UITableViewDataSource, UITableViewDelegate>
@@ -83,15 +83,16 @@
     
     !item.operation?:item.operation();
     
-//    if (item.operation) {
-//        item.operation();
-//    }
-    
     if ([item isKindOfClass:[SYSettingArrow class]]) {
         SYSettingArrow *arrow = (SYSettingArrow *)item;
         if (arrow.destvc) {
             UIViewController *vc = [[arrow.destvc alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+
+            if ([vc isKindOfClass:[SYLoginViewController class]]) {
+                [self presentViewController:vc animated:YES completion:nil];
+            } else {
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         }
     } else if (indexPath.section == 5 && indexPath.row == 0){
         SYSettingText *text = (SYSettingText *)item;

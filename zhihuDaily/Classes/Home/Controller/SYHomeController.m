@@ -187,7 +187,6 @@ static NSString *reuseid = @"useid";
     if (index < 0 || index >= self.topStory.count) return;
 
     SYStory *story = self.topStory[index];
-    SYBeforeStoryResult *result = self.storyGroup[0];
     [self gotoDetailControllerWithStory:story];
 }
 

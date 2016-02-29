@@ -18,6 +18,6 @@
 @property (nonatomic, assign) long likes;
 
 @property (nonatomic, assign) BOOL isLong;
-
+@property (nonatomic, assign) BOOL isLike;
 
 @end

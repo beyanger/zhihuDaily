@@ -10,13 +10,15 @@
 #import "SYCommentCell.h"
 #import "SYZhihuTool.h"
 #import "UINavigationBar+Awesome.h"
+#import "UITableView+FDTemplateLayoutCell.h"
+
 static NSString *comment_reuseid = @"comment_reuseid";
 
 @interface SYCommentsController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
 
-@property (nonatomic, strong) NSMutableDictionary *allComments;
+@property (nonatomic, strong) NSMutableArray<NSArray *> *allComments;
 
 @property (nonatomic, strong) SYCommentCell *prototypeCell;
 @end
@@ -29,6 +31,8 @@ static NSString *comment_reuseid = @"comment_reuseid";
     [super viewDidLoad];
     self.title = @"评论";
 
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     [self setupTableView];
     
     [self setupDataSource];
@@ -36,13 +40,12 @@ static NSString *comment_reuseid = @"comment_reuseid";
     [self setupBackBtn];
 }
 
-- (void)dealloc
-{
-    
-}
-
 - (void)setupTableView {
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, kScreenWidth, kScreenHeight-100) style:UITableViewStyleGrouped];
+    
+//    tableView.rowHeight = UITableViewAutomaticDimension;
+//    tableView.estimatedRowHeight = 120.0; //
+//    
     [self.view addSubview:tableView];
     self.tableView = tableView;
     tableView.delegate = self;
@@ -67,16 +70,17 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
 - (void)setupDataSource {
     [SYZhihuTool getLongCommentsWithId:self.story.id completed:^(id obj) {
-        self.allComments[@(0)] = obj;
+        self.allComments[0] = obj;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
     }];
 
     [SYZhihuTool getShortCommentsWithId:self.story.id completed:^(id obj) {
-        self.allComments[@(1)] = obj;
+        self.allComments[1] = obj;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
+            
         });
     }];
 }
@@ -89,16 +93,23 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    NSArray *comments = self.allComments[@(section)];
+    NSArray *comments = self.allComments[section];
     return comments.count;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return [NSString stringWithFormat:@"%lu条长评论", self.allComments[section].count];
+    }
+    
+    return [NSString stringWithFormat:@"%lu条短评论", self.allComments[section].count];
+}
 
 - (SYCommentCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     SYCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:comment_reuseid forIndexPath:indexPath];
 
-    NSArray *array = self.allComments[@(indexPath.section)];
+    NSArray *array = self.allComments[indexPath.section];
     
     cell.comment = array[indexPath.row];
     
@@ -107,14 +118,17 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    return 180;
+    CGFloat height =  [tableView fd_heightForCellWithIdentifier:comment_reuseid configuration:^(SYCommentCell *cell) {
+        NSArray *array = self.allComments[indexPath.section];
+        cell.comment = array[indexPath.row];
+    }];
     
-    
+    return height;
 }
 
-- (NSMutableDictionary *)allComments {
+- (NSMutableArray<NSArray *> *)allComments {
     if (!_allComments) {
-        _allComments = [@{} mutableCopy];
+        _allComments = [@[@[], @[]] mutableCopy];
     }
     return _allComments;
 }

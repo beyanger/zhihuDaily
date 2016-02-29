@@ -293,7 +293,6 @@
             
             [self.webView loadHTMLString:ds.htmlStr baseURL:nil];
             self.topView.story = ds;
-          
         });
     }];
     
@@ -369,8 +368,7 @@
 - (UILabel *)header {
     if (!_header) {
         UILabel *header = [[UILabel alloc] init];
-        header.backgroundColor = randomColor;
-        header.textColor = kWhiteColor;
+        header.textColor = SYColor(231, 231, 231, 1.0);
         header.textAlignment = NSTextAlignmentCenter;
         header.text = @"载入上一篇";
         _header = header;
