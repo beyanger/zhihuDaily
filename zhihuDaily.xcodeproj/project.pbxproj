@@ -149,6 +149,7 @@
 		2FCCAD171C83E7AB00C19D35 /* SYCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FCCAD161C83E7AB00C19D35 /* SYCommentView.xib */; };
 		2FCCAD1A1C8401FA00C19D35 /* SYAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCCAD191C8401FA00C19D35 /* SYAccount.m */; };
 		2FCCAD1D1C84195C00C19D35 /* SYCommentParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCCAD1C1C84195C00C19D35 /* SYCommentParam.m */; };
+		2FCCAD1F1C8466F300C19D35 /* 90.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2FCCAD1E1C8466F300C19D35 /* 90.gif */; };
 		2FD803B71C7A3B5500C15EB7 /* SYToolButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD803B61C7A3B5500C15EB7 /* SYToolButton.m */; };
 		2FE707821C7D86C4005CB13B /* SYHomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE707811C7D86C4005CB13B /* SYHomeHeaderView.m */; };
 		2FE707851C7D9724005CB13B /* SYPicturesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE707841C7D9724005CB13B /* SYPicturesView.m */; };
@@ -460,6 +461,7 @@
 		2FCCAD191C8401FA00C19D35 /* SYAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYAccount.m; sourceTree = "<group>"; };
 		2FCCAD1B1C84195C00C19D35 /* SYCommentParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCommentParam.h; sourceTree = "<group>"; };
 		2FCCAD1C1C84195C00C19D35 /* SYCommentParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCommentParam.m; sourceTree = "<group>"; };
+		2FCCAD1E1C8466F300C19D35 /* 90.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 90.gif; sourceTree = "<group>"; };
 		2FD803B51C7A3B5500C15EB7 /* SYToolButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYToolButton.h; sourceTree = "<group>"; };
 		2FD803B61C7A3B5500C15EB7 /* SYToolButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYToolButton.m; sourceTree = "<group>"; };
 		2FE707801C7D86C4005CB13B /* SYHomeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYHomeHeaderView.h; sourceTree = "<group>"; };
@@ -1112,6 +1114,7 @@
 		2FE707751C7CA281005CB13B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2FCCAD1E1C8466F300C19D35 /* 90.gif */,
 				2F4F1A881C7FA12100AF3BDF /* libsqlite3.tbd */,
 			);
 			path = Resources;
@@ -1322,6 +1325,7 @@
 				2FC587561C79FDEB003C9A7A /* Assets.xcassets in Resources */,
 				2FCCAD121C83C70E00C19D35 /* SYCommentPannel.xib in Resources */,
 				2F0E2CC51C7BF071004FDA0F /* MBProgressHUD.bundle in Resources */,
+				2FCCAD1F1C8466F300C19D35 /* 90.gif in Resources */,
 				2F37AB8B1C7B7F1600D3CD65 /* SYStoryNavigationView.xib in Resources */,
 				2F37AB831C7B6E0F00D3CD65 /* SYTopView.xib in Resources */,
 				2F6CF2981C80329400C4B346 /* SYLoginViewController.xib in Resources */,

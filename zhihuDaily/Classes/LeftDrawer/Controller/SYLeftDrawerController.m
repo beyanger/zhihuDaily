@@ -96,7 +96,8 @@
     static NSString *reuse_id = @"main_reuseid";
     SYLeftDrawerCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse_id];
     if (!cell) {
-        cell = [[SYLeftDrawerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuse_id];
+        cell = [[SYLeftDrawerCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuse_id];
+        
         UIView *bgView = [[UIView alloc] initWithFrame:cell.frame];
         bgView.backgroundColor = SYColor(21, 26, 31, 1.0);
         cell.selectedBackgroundView = bgView;
