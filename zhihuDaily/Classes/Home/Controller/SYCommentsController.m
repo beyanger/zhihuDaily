@@ -11,20 +11,27 @@
 #import "SYZhihuTool.h"
 #import "UINavigationBar+Awesome.h"
 #import "UITableView+FDTemplateLayoutCell.h"
+#import "SYCommentView.h"
+#import "SYCommentPannel.h"
+#import "MBProgressHUD+YS.h"
+
 
 static NSString *comment_reuseid = @"comment_reuseid";
 
-@interface SYCommentsController () <UITableViewDataSource, UITableViewDelegate>
+@interface SYCommentsController () <UITableViewDataSource, UITableViewDelegate, SYCommentPannelDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
 
 @property (nonatomic, strong) NSMutableArray<NSArray *> *allComments;
 
-@property (nonatomic, strong) SYCommentCell *prototypeCell;
+@property (nonatomic, weak) SYCommentPannel *pannel;
+
+@property (nonatomic, weak) SYCommentCell *cell;
+
+
 @end
 
 @implementation SYCommentsController
-
 
 
 - (void)viewDidLoad {
@@ -43,9 +50,11 @@ static NSString *comment_reuseid = @"comment_reuseid";
 - (void)setupTableView {
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, kScreenWidth, kScreenHeight-100) style:UITableViewStyleGrouped];
     
-//    tableView.rowHeight = UITableViewAutomaticDimension;
-//    tableView.estimatedRowHeight = 120.0; //
-//    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressHandler:)];
+    [tableView addGestureRecognizer:longPress];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandler)];
+    [tableView addGestureRecognizer:tap];
+    
     [self.view addSubview:tableView];
     self.tableView = tableView;
     tableView.delegate = self;
@@ -53,14 +62,78 @@ static NSString *comment_reuseid = @"comment_reuseid";
     [self.tableView registerNib:[UINib nibWithNibName:@"SYCommentCell" bundle:nil] forCellReuseIdentifier:comment_reuseid];
 }
 
+- (void)longPressHandler:(UILongPressGestureRecognizer *)longGesture {
+    if (longGesture.state == UIGestureRecognizerStateEnded) {
+        CGPoint location = [longGesture locationInView:self.tableView];
+    
+        NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:location];
+        self.cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        self.pannel = [self addCommentViewWithLocation:location];
+    } else if (longGesture.state == UIGestureRecognizerStateBegan) {
+        [self removeCommentPannel];
+    }
+}
+
+- (void)tapHandler {
+    [self removeCommentPannel];
+}
+
+
+#pragma mark commentView delegate
+- (void)commentView:(SYCommentPannel *)commentView didClicked:(NSUInteger)index {
+    
+    SYComment *comment = self.cell.comment;
+    if (index == 0) {
+        BOOL isLike = !comment.isLike;
+        comment.likes += isLike?+1:-1;
+        comment.isLike = isLike;
+    } else if (index == 2) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = comment.content;
+        [MBProgressHUD showSuccess:@"复制成功"];
+    }
+    [self removeCommentPannel];
+}
+
+- (void)removeCommentPannel {
+    
+    SYCommentPannel *pannel = self.pannel;
+    
+    if (pannel) {
+        [UIView animateWithDuration:0.2 animations:^{
+            pannel.alpha = 0.0;
+        } completion:^(BOOL finished) {
+            [pannel removeFromSuperview];
+        }];
+    }
+    self.pannel = nil;
+    self.cell = nil;
+}
+
+
+- (SYCommentPannel *)addCommentViewWithLocation:(CGPoint)location {
+    SYCommentPannel *cv = [SYCommentPannel commentPannelWithLiked:self.cell.comment.isLike];
+    cv.delegate  = self;
+    
+    cv.center = CGPointMake(kScreenWidth*0.5, location.y-20);
+  
+    cv.alpha = 0;
+    [self.tableView addSubview:cv];
+    [UIView animateWithDuration:0.5 animations:^{
+        cv.alpha = 1.0;
+    } completion:nil];
+    return cv;
+}
+
+
 - (void)setupBackBtn {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    button.backgroundColor = [UIColor lightGrayColor];
-    button.frame = CGRectMake(0, kScreenHeight-40, kScreenWidth, 40);
-    [button setTitleColor:kWhiteColor forState:UIControlStateNormal];
-    [button setTitle:@"返回" forState:UIControlStateNormal];
-    [self.view addSubview:button];
-    [button addTarget:self action:@selector(backGo) forControlEvents:UIControlEventTouchUpInside];
+    SYCommentView *commentView = [SYCommentView commentView];
+    commentView.frame = CGRectMake(0, kScreenHeight-40, kScreenWidth, 40);
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backGo)];
+    [commentView addGestureRecognizer:tap];
+    
+    [self.view addSubview:commentView];
 }
 
 
@@ -69,20 +142,25 @@ static NSString *comment_reuseid = @"comment_reuseid";
 }
 
 - (void)setupDataSource {
-    [SYZhihuTool getLongCommentsWithId:self.story.id completed:^(id obj) {
+    [SYZhihuTool getLongCommentsWithId:self.param.id completed:^(id obj) {
         self.allComments[0] = obj;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
     }];
 
-    [SYZhihuTool getShortCommentsWithId:self.story.id completed:^(id obj) {
+    [SYZhihuTool getShortCommentsWithId:self.param.id completed:^(id obj) {
         self.allComments[1] = obj;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
             
         });
     }];
+}
+
+
+- (void)dealloc {
+    [self removeCommentPannel];
 }
 
 #pragma mark - Table view data source
@@ -99,10 +177,10 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        return [NSString stringWithFormat:@"%lu条长评论", self.allComments[section].count];
+        return [NSString stringWithFormat:@"%ld条长评论", self.param.long_comments];
     }
     
-    return [NSString stringWithFormat:@"%lu条短评论", self.allComments[section].count];
+    return [NSString stringWithFormat:@"%lu条短评论", self.param.short_comments];
 }
 
 - (SYCommentCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,6 +203,11 @@ static NSString *comment_reuseid = @"comment_reuseid";
     
     return height;
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self removeCommentPannel];
+}
+
 
 - (NSMutableArray<NSArray *> *)allComments {
     if (!_allComments) {

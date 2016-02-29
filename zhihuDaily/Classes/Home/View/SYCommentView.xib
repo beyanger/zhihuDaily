@@ -7,86 +7,62 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="g4h-kx-h3Z" customClass="SYCommentView">
-            <rect key="frame" x="0.0" y="0.0" width="219" height="30"/>
+        <view contentMode="scaleToFill" id="PZ0-b2-a7W">
+            <rect key="frame" x="0.0" y="0.0" width="339" height="40"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DJB-9E-sqJ">
-                    <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zoq-V5-hSG">
+                    <rect key="frame" x="2" y="0.0" width="44" height="40"/>
                     <animations/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <inset key="contentEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="0.0"/>
-                    <state key="normal" title="取消点赞">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="clicked:" destination="g4h-kx-h3Z" eventType="touchUpInside" id="8XW-4F-HaV"/>
-                    </connections>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="VnY-Sz-91J"/>
+                    </constraints>
+                    <state key="normal" image="Comment_Icon_Back"/>
                 </button>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akO-YP-H7G">
-                    <rect key="frame" x="73" y="0.0" width="48" height="30"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qHA-D2-BON">
+                    <rect key="frame" x="46" y="0.0" width="1" height="40"/>
                     <animations/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <inset key="contentEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="0.0"/>
-                    <state key="normal" title="举报">
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="VN2-dK-xDq"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0z-6T-R6H">
+                    <rect key="frame" x="47" y="0.0" width="292" height="40"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="写点评" image="Comment_Icon_Compose">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="clicked:" destination="g4h-kx-h3Z" eventType="touchUpInside" id="8vg-GR-aLn"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gno-mW-Ian">
-                    <rect key="frame" x="122" y="0.0" width="48" height="30"/>
-                    <animations/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <inset key="contentEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="0.0"/>
-                    <state key="normal" title="复制">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="clicked:" destination="g4h-kx-h3Z" eventType="touchUpInside" id="AfD-Hv-G1B"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bd2-is-v6s">
-                    <rect key="frame" x="171" y="0.0" width="48" height="30"/>
-                    <animations/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <inset key="contentEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="0.0"/>
-                    <state key="normal" title="回复">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="clicked:" destination="g4h-kx-h3Z" eventType="touchUpInside" id="GRH-4s-mbb"/>
-                    </connections>
                 </button>
             </subviews>
             <animations/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Gno-mW-Ian" firstAttribute="top" secondItem="g4h-kx-h3Z" secondAttribute="top" id="1uJ-Yd-DDJ"/>
-                <constraint firstItem="akO-YP-H7G" firstAttribute="top" secondItem="g4h-kx-h3Z" secondAttribute="top" id="1ya-Ni-7kt"/>
-                <constraint firstItem="DJB-9E-sqJ" firstAttribute="leading" secondItem="g4h-kx-h3Z" secondAttribute="leading" id="E5U-cx-1Gl"/>
-                <constraint firstItem="bd2-is-v6s" firstAttribute="top" secondItem="g4h-kx-h3Z" secondAttribute="top" id="GLR-I6-dGD"/>
-                <constraint firstAttribute="bottom" secondItem="DJB-9E-sqJ" secondAttribute="bottom" id="KAE-3t-aDp"/>
-                <constraint firstAttribute="bottom" secondItem="akO-YP-H7G" secondAttribute="bottom" id="NKa-2q-unI"/>
-                <constraint firstAttribute="bottom" secondItem="Gno-mW-Ian" secondAttribute="bottom" id="PCj-54-VpY"/>
-                <constraint firstItem="Gno-mW-Ian" firstAttribute="leading" secondItem="akO-YP-H7G" secondAttribute="trailing" constant="1" id="PJZ-eV-Maa"/>
-                <constraint firstAttribute="trailing" secondItem="bd2-is-v6s" secondAttribute="trailing" id="VvE-Um-WC0"/>
-                <constraint firstItem="akO-YP-H7G" firstAttribute="leading" secondItem="DJB-9E-sqJ" secondAttribute="trailing" constant="1" id="egH-Cq-iFl"/>
-                <constraint firstItem="bd2-is-v6s" firstAttribute="leading" secondItem="Gno-mW-Ian" secondAttribute="trailing" constant="1" id="oXv-es-mIw"/>
-                <constraint firstItem="DJB-9E-sqJ" firstAttribute="top" secondItem="g4h-kx-h3Z" secondAttribute="top" id="ojb-Yw-WTR"/>
-                <constraint firstAttribute="bottom" secondItem="bd2-is-v6s" secondAttribute="bottom" id="x1Y-56-dTO"/>
+                <constraint firstItem="qHA-D2-BON" firstAttribute="leading" secondItem="PZ0-b2-a7W" secondAttribute="leading" id="0K9-5E-4mY"/>
+                <constraint firstItem="c0z-6T-R6H" firstAttribute="leading" secondItem="qHA-D2-BON" secondAttribute="trailing" id="E0U-oL-44T"/>
+                <constraint firstItem="qHA-D2-BON" firstAttribute="leading" secondItem="Zoq-V5-hSG" secondAttribute="trailing" id="FfK-X6-Pbl"/>
+                <constraint firstAttribute="bottom" secondItem="qHA-D2-BON" secondAttribute="bottom" id="IRD-V5-JrD"/>
+                <constraint firstItem="c0z-6T-R6H" firstAttribute="top" secondItem="PZ0-b2-a7W" secondAttribute="top" id="NRS-I9-a9Y"/>
+                <constraint firstAttribute="trailing" secondItem="c0z-6T-R6H" secondAttribute="trailing" id="afk-hK-RBh"/>
+                <constraint firstAttribute="bottom" secondItem="c0z-6T-R6H" secondAttribute="bottom" id="dON-lG-iiM"/>
+                <constraint firstItem="Zoq-V5-hSG" firstAttribute="top" secondItem="PZ0-b2-a7W" secondAttribute="top" id="lqp-nj-Ee5"/>
+                <constraint firstAttribute="bottom" secondItem="Zoq-V5-hSG" secondAttribute="bottom" id="mVJ-Ne-mO8"/>
+                <constraint firstItem="qHA-D2-BON" firstAttribute="top" secondItem="PZ0-b2-a7W" secondAttribute="top" id="rKa-Nq-N8a"/>
+                <constraint firstItem="Zoq-V5-hSG" firstAttribute="leading" secondItem="PZ0-b2-a7W" secondAttribute="leading" constant="2" id="uw4-5q-CRF"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="likeBtn" destination="DJB-9E-sqJ" id="qra-Ox-8i7"/>
-            </connections>
-            <point key="canvasLocation" x="455.5" y="22"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="0K9-5E-4mY"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="390.5" y="-255"/>
         </view>
     </objects>
+    <resources>
+        <image name="Comment_Icon_Back" width="48" height="38"/>
+        <image name="Comment_Icon_Compose" width="15" height="15"/>
+    </resources>
 </document>

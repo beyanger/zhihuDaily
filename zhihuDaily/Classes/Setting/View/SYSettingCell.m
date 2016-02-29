@@ -26,8 +26,8 @@
     
     if (!cell) {
         cell = [[self alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuse_id];
-        cell.imageView.layer.cornerRadius = 22;
-        cell.imageView.clipsToBounds = YES;
+    
+        //cell.imageView.maskView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Menu_Avatar_Mask"]];
     }
     return cell;
 }

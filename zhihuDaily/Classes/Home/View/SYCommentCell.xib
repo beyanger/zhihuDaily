@@ -27,6 +27,7 @@
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="19.5" id="ChY-wB-i8k"/>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="neJ-Oa-9xb"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                         <nil key="highlightedColor"/>
@@ -39,7 +40,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02-23 11:30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZg-0p-SSf">
-                        <rect key="frame" x="64" y="81.5" width="78.5" height="17"/>
+                        <rect key="frame" x="64" y="81" width="78.5" height="17"/>
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="hxX-67-dCZ"/>
@@ -49,7 +50,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tk6-q5-pVY">
-                        <rect key="frame" x="64" y="39.5" width="306" height="34"/>
+                        <rect key="frame" x="64" y="39" width="306" height="34"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -71,6 +72,7 @@
                     <constraint firstItem="pZg-0p-SSf" firstAttribute="leading" secondItem="tk6-q5-pVY" secondAttribute="leading" id="2Ge-Ua-33G"/>
                     <constraint firstAttribute="trailing" secondItem="tk6-q5-pVY" secondAttribute="trailing" constant="12" id="4bP-p1-PBL"/>
                     <constraint firstAttribute="trailing" secondItem="BDP-Xb-udA" secondAttribute="trailing" constant="12" id="8Qp-ls-25N"/>
+                    <constraint firstItem="EHA-o0-zKJ" firstAttribute="leading" secondItem="oJu-Vg-RVE" secondAttribute="trailing" constant="12" id="Mxz-nz-lPX"/>
                     <constraint firstItem="EHA-o0-zKJ" firstAttribute="top" secondItem="E6z-C6-mXq" secondAttribute="top" constant="17" id="XgY-Ng-GMQ"/>
                     <constraint firstItem="BDP-Xb-udA" firstAttribute="leading" secondItem="EHA-o0-zKJ" secondAttribute="trailing" constant="8" id="Zxb-Dx-6yR"/>
                     <constraint firstItem="oJu-Vg-RVE" firstAttribute="top" secondItem="E6z-C6-mXq" secondAttribute="top" constant="12.5" id="dhU-Fg-AXD"/>
@@ -81,6 +83,11 @@
                     <constraint firstItem="BDP-Xb-udA" firstAttribute="top" secondItem="E6z-C6-mXq" secondAttribute="top" constant="14" id="qYB-nu-qcO"/>
                     <constraint firstAttribute="bottom" secondItem="pZg-0p-SSf" secondAttribute="bottom" constant="12" id="zOE-8a-xcU"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Mxz-nz-lPX"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <animations/>
             <connections>

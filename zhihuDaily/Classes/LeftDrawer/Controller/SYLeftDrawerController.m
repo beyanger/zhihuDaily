@@ -15,11 +15,12 @@
 #import "SYHomeController.h"
 #import "SYNavigationController.h"
 #import "SYLoginViewController.h"
-
-
+#import "SYAccount.h"
+#import "UIButton+WebCache.h"
 @interface SYLeftDrawerController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray<SYTheme *> *dataSource;
 
+@property (weak, nonatomic) IBOutlet UIButton *avatarBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *offlineButton;
 @property (weak, nonatomic) IBOutlet UIButton *dayNightButton;
@@ -41,8 +42,6 @@
 }
 
 - (void)setupSubviews {
-    
- 
     self.tableView.bounces = NO;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -52,6 +51,12 @@
     self.bottomContainer.layer.shadowOffset = CGSizeMake(0, -30);
     self.bottomContainer.layer.shadowOpacity = 0;
     self.bottomContainer.layer.shadowRadius = 5.;
+    
+    SYAccount *account = [SYAccount sharedAccount];
+    
+    [self.avatarBtn sd_setImageWithURL:[NSURL URLWithString:account.avatar] forState:UIControlStateNormal];
+    [self.avatarBtn setTitle:account.name forState:UIControlStateNormal];
+    
 }
 
 

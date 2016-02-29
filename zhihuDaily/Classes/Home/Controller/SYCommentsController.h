@@ -10,10 +10,11 @@
 #import "SYStory.h"
 #import "SYComment.h"
 #import "SYBaseViewController.h"
+#import "SYCommentParam.h"
 
 
 @interface SYCommentsController : SYBaseViewController
 
-@property (nonatomic, strong) SYStory *story;
+@property (nonatomic, strong) SYCommentParam *param;
 
 @end

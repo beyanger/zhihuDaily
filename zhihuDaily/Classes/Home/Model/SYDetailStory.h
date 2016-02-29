@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SYRecommender.h"
 
 @interface SYDetailStory : NSObject
 
@@ -25,7 +26,7 @@
 @property (nonatomic, copy) NSString *share_url;
 
 /**推荐者*/
-@property (nonatomic,copy) NSString *recommenders;
+@property (nonatomic,strong) NSArray<SYRecommender *> *recommenders;
 
 /**id  新闻的 id*/
 @property (nonatomic, assign) long long id;

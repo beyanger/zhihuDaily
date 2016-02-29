@@ -53,6 +53,10 @@
 
     NSLog(@"---> %@", url);
     
+    [SYDetailStory mj_setupObjectClassInArray:^NSDictionary *{
+        return @{@"recommenders":@"SYRecommender"};
+    }];
+    
     SYDetailStory *story = [SYCacheTool queryStoryWithId:storyid];
     
     if (story) {

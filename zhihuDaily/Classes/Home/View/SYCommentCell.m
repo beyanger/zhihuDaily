@@ -8,52 +8,32 @@
 
 #import "SYCommentCell.h"
 #import "UIImageView+WebCache.h"
-#import "SYCommentView.h"
+#import "SYCommentPannel.h"
+#import "MBProgressHUD+YS.h"
 
 
 
-@interface SYCommentCell () <SYCommentViewDelegate>
+@interface SYCommentCell () 
 @property (weak, nonatomic) IBOutlet UIImageView *avatar;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *likeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *likeImage;
-@property (nonatomic, weak) SYCommentView *commentView;
+@property (nonatomic, weak) SYCommentPannel *commentPannel;
+@property (nonatomic, assign) BOOL isAnimatting;
 @end
 
 
 @implementation SYCommentCell
 
-- (void)awakeFromNib {
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressHandler:)];
-    [self addGestureRecognizer:longPress];
-}
-- (void)longPressHandler:(UILongPressGestureRecognizer *)gesture {
-    if (gesture.state == UIGestureRecognizerStateEnded) {
-        CGPoint location = [gesture locationInView:self];
-        self.commentView = [self addCommentViewWithLocation:location];
-    }
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
-    [self removeCommentView];
-}
 
 - (void)setComment:(SYComment *)comment {
     _comment = comment;
+    [comment addObserver:self forKeyPath:@"isLike" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    
     [self.avatar sd_setImageWithURL:[NSURL URLWithString:comment.avatar]];
     self.nameLabel.text = comment.author;
-    
-    if (comment.isLike) {
-        self.likeImage.image = [UIImage imageNamed:@"Comment_Voted"];
-        self.likeLabel.textColor = kGroundColor;
-    } else {
-        self.likeImage.image = [UIImage imageNamed:@"Comment_Vote"];
-        self.likeLabel.textColor = SYColor(128, 128, 128, 1.0);
-    }
-    
     
     self.commentLabel.text = comment.content;
     self.likeLabel.text = [NSString stringWithFormat:@"%ld", comment.likes];
@@ -68,44 +48,14 @@
     });
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:comment.time];
     self.timeLabel.text = [NSString stringWithFormat:@"%@", [_formatter stringFromDate:date]];
+
 }
 
-#pragma mark commentView delegate
-- (void)commentView:(SYCommentView *)commentView didClicked:(NSUInteger)index {
-    if (index == 0) {
-        self.comment.isLike = !self.comment.isLike;
-        self.comment.likes += self.comment.isLike?1:-1;
-        // 重新设置，更新UI
-        self.comment = _comment;
-        !self.comment.isLike ? : [self addLikeAnimation];
-        
-    } else if (index == 2) {
-        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-        pasteboard.string = self.commentLabel.text;
-    }
-
-    [self removeCommentView];
-}
-
-
-
-- (SYCommentView *)addCommentViewWithLocation:(CGPoint)location {
-    
-    SYCommentView *cv = [SYCommentView commentViewWithLiked:self.comment.isLike];
-    cv.delegate  = self;
-    cv.center = CGPointMake(kScreenWidth*0.5, location.y-20);
-    UIView *windows = [UIApplication sharedApplication].keyWindow;
-    CGRect frame = [self convertRect:cv.frame toView:windows];
-    cv.frame = frame;
-    cv.alpha = 0;
-    [windows addSubview:cv];
-    [UIView animateWithDuration:0.5 animations:^{
-        cv.alpha = 1.0;
-    } completion:nil];
-    return cv;
-}
 
 - (void)addLikeAnimation {
+    
+    if (self.isAnimatting) return;
+    self.isAnimatting = YES;
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"+1"]];
     CGRect frame  = CGRectMake(-30., -24, 30, 24);
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
@@ -117,33 +67,36 @@
         imageView.frame = [self.likeImage convertRect:endFrame toView:window];
     } completion:^(BOOL finished) {
         [imageView removeFromSuperview];
+        self.isAnimatting = NO;
     }];
-    
 }
 
 
-- (void)removeCommentView {
-    if (self.commentView) {
-        [UIView animateWithDuration:0.2 animations:^{
-            self.commentView.alpha = 0.0;
-        } completion:^(BOOL finished) {
-            [self.commentView removeFromSuperview];
-            self.commentView = nil;
-        }];
+- (void)prepareForReuse {
+    [self.comment removeObserver:self forKeyPath:@"isLike"];
+    [super prepareForReuse];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    BOOL isLike = [change[@"new"] boolValue];
+    !isLike ? : [self addLikeAnimation];
+    
+    
+    self.likeLabel.text = [NSString stringWithFormat:@"%ld", self.comment.likes];
+    
+    if (isLike) {
+        self.likeImage.image = [UIImage imageNamed:@"Comment_Voted"];
+        self.likeLabel.textColor = kGroundColor;
+    } else {
+        self.likeImage.image = [UIImage imageNamed:@"Comment_Vote"];
+        self.likeLabel.textColor = SYColor(128, 128, 128, 1.0);
     }
 }
 
-
-
-
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    if (!selected)
-        [self removeCommentView];
-    
-    
+- (void)dealloc {
+    if (self.comment) {
+        [self.comment removeObserver:self forKeyPath:@"isLike"];
+    }
 }
 
 @end

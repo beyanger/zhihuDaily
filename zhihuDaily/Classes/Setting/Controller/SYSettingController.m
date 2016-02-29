@@ -16,7 +16,8 @@
 #import "SYSettingItem.h"
 #import "SYSettingCell.h"
 #import "SYLoginViewController.h"
-
+#import "SYAccount.h"
+#import "UIImageView+WebCache.h"
 
 @interface SYSettingController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -64,11 +65,13 @@
     SYSettingCell *cell = [SYSettingCell cellWithTableView:tableView];
     
     if (indexPath.row == 0 && indexPath.section == 0) {
-        cell.imageView.image = [UIImage imageNamed:@"Account_Avatar"];
+        SYAccount *account = [SYAccount sharedAccount];
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:account.avatar]];
+        
     } else {
         cell.imageView.image = nil;
     }
-        cell.item = self.groups[indexPath.section].items[indexPath.row];
+    cell.item = self.groups[indexPath.section].items[indexPath.row];
     return cell;
 
 }
@@ -87,12 +90,7 @@
         SYSettingArrow *arrow = (SYSettingArrow *)item;
         if (arrow.destvc) {
             UIViewController *vc = [[arrow.destvc alloc] init];
-
-            if ([vc isKindOfClass:[SYLoginViewController class]]) {
-                [self presentViewController:vc animated:YES completion:nil];
-            } else {
-                [self.navigationController pushViewController:vc animated:YES];
-            }
+            [self.navigationController pushViewController:vc animated:YES];
         }
     } else if (indexPath.section == 5 && indexPath.row == 0){
         SYSettingText *text = (SYSettingText *)item;
@@ -105,7 +103,8 @@
 - (NSArray<SYSettingGroup *> *)groups {
     if (!_groups) {
         SYSettingGroup *group0 = [[SYSettingGroup alloc] init];
-        group0.items = @[[SYSettingArrow itemWithTitle:@"请登录" operation:nil destvc:[SYBaseViewController class]]];
+        
+        group0.items = @[[SYSettingArrow itemWithTitle:[SYAccount sharedAccount].name operation:nil destvc:[SYLoginViewController class]]];
         
         SYSettingGroup *group1 = [[SYSettingGroup alloc] init];
         group1.items = @[[SYSettingSwitch itemWithTitle:@"自动离线下载" operation:nil]];

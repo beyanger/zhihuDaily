@@ -7,7 +7,10 @@
 //
 
 #import "SYRecommender.h"
+#import "MJExtension.h"
 
 @implementation SYRecommender
+
+MJCodingImplementation
 
 @end

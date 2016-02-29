@@ -8,6 +8,9 @@
 
 #import "SYShareView.h"
 #import "MBProgressHUD+YS.h"
+#import "SYLoginViewController.h"
+#import "AppDelegate.h"
+#import "SYAccount.h"
 
 
 @interface SYShareView () <UIScrollViewDelegate>
@@ -22,8 +25,15 @@
 @implementation SYShareView
 
 - (IBAction)clickedCollected:(id)sender {
-    [MBProgressHUD showSuccess:@"收藏成功"];
-    [self handleTap];
+    if ([SYAccount sharedAccount].isLogin) {
+        [MBProgressHUD showSuccess:@"收藏成功"];
+       
+    } else {
+        SYLoginViewController *lvc = [[SYLoginViewController alloc] init];
+        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        [delegate.mainController presentViewController:lvc animated:YES completion:nil];
+    }
+     [self handleTap];
 }
 
 - (IBAction)cancel:(id)sender {
@@ -62,9 +72,5 @@
     }];
 }
 
-- (void)dealloc
-{
-    NSLog(@"sdfasde dealloc ");
-}
 
 @end

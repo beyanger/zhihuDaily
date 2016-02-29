@@ -18,7 +18,11 @@
 @implementation SYLoginViewController
 - (IBAction)back:(id)sender {
     White_StatusBar;
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (self.navigationController) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 - (IBAction)login:(UIButton *)sender {
     [MBProgressHUD showSuccess:sender.currentTitle];

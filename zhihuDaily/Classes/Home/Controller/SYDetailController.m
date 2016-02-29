@@ -21,7 +21,7 @@
 #import "UIView+Extension.h"
 #import "Masonry.h"
 #import "SYTableHeader.h"
-
+#import "SYCommentParam.h"
 
 @interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate, UIScrollViewDelegate>
 
@@ -88,7 +88,11 @@
         
         case 4: {// comment
             SYCommentsController *ctc = [[SYCommentsController alloc] init];
-            ctc.story = self.story;
+            
+            SYExtraStory *es =  self.storyNav.extraStory;
+            SYCommentParam *param = [SYCommentParam commentWithId:self.story.id longComments:es.long_comments shortComment:es.short_comments];
+            ctc.param = param;
+            
             [self.navigationController pushViewController:ctc animated:YES];
         }
             break;
@@ -217,18 +221,20 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat yoffset = scrollView.contentOffset.y;
     
-    if (yoffset > [self currentTopView].height-40) Black_StatusBar;
-    else White_StatusBar;
+    if ([self currentTopView] == self.topView) {
+        if (yoffset > 220) Black_StatusBar;
+        else White_StatusBar;
+    } else Black_StatusBar;
+
+    
     if (yoffset < 0) {
-        if (self.topView == self.currentTopView) {
+        if (self.topView == [self currentTopView]) {
             self.topView.frame = CGRectMake(0, -40, kScreenWidth, 260-yoffset);
         }
-        
-        
         self.header.transform = CGAffineTransformMakeTranslation(0, -yoffset);
         
         CGAffineTransform transform = CGAffineTransformIdentity;
-        if (yoffset < -60.) transform = CGAffineTransformMakeRotation(M_PI);
+        if (yoffset < -80.) transform = CGAffineTransformMakeRotation(M_PI);
         
         if (!CGAffineTransformEqualToTransform(self.downArrow.transform, transform)) {
             [UIView animateWithDuration:0.25 animations:^{
@@ -236,10 +242,11 @@
             }];
         }
     } else {
-    
-        self.currentTopView.frame = CGRectMake(0, -40-yoffset, kScreenWidth, self.currentTopView.height);
+        if (self.topView == [self currentTopView]) {
+            self.topView.frame = CGRectMake(0, -40-yoffset, kScreenWidth, 260);
+        }
         
-        CGFloat boffset = kScreenHeight-60-scrollView.contentSize.height + yoffset;
+        CGFloat boffset = kScreenHeight-80-scrollView.contentSize.height + yoffset;
         
         if (boffset > 0) {
             self.footer.transform = CGAffineTransformMakeTranslation(0, -boffset);
@@ -264,35 +271,34 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             SYDetailStory *ds = (SYDetailStory *)obj;
             
-            if (!ds.image) {
-                NSMutableString *str = [ds.htmlStr mutableCopy];
-                // 当有图片时，网页会自己添加一个高度200px的holder
-                // 但网页没有图片时，需要给网页添加一个高度44px的 holder，用来添加推荐者很条幅
-                NSRange range = [ds.htmlStr rangeOfString:@"<body>"];
-                [str insertString:@"<div style=\"height: 40px\"></div>" atIndex:range.length+range.location];
-                ds.htmlStr = [str copy];
-                
-                self.topView.hidden = YES;
-                [SYZhihuTool getStoryRecommendersWithId:self.story.id completed:^(id obj) {
-                    NSMutableArray *avatars = [@[] mutableCopy];
-                    for (SYEditor *editor in obj) {
-                        [avatars addObject:editor.avatar];
-                    }
-                    if (avatars.count > 0) {
-                       self.headerView.avatars = avatars;
-                        self.headerView.hidden = NO;
-                    } else {
-                        self.headerView.hidden = YES;
-                    }
-                }];
-                
-            } else {
+            if (ds.image) { // 有图
                 self.headerView.hidden = YES;
                 self.topView.hidden = NO;
+                self.topView.story = ds;
+            } else if (ds.recommenders.count) { // 有推荐者
+                // 为推荐者插入一段40高度的hodler
+                NSMutableString *htmlStr = [ds.htmlStr mutableCopy];
+                
+                NSRange range = [htmlStr rangeOfString:@"<body>"];
+                
+                [htmlStr insertString:@"<div style=\"height:40px\"></div>" atIndex:range.location+range.length];
+                ds.htmlStr = [htmlStr copy];
+                
+                NSMutableArray *avatars = [@[] mutableCopy];
+                for (SYRecommender *recommender in ds.recommenders) {
+                    [avatars addObject:recommender.avatar];
+                    self.headerView.avatars = avatars;
+                }
+                self.headerView.hidden = NO;
+                self.topView.hidden = YES;
+            } else { // 啥也没有
+                self.headerView.hidden = YES;
+                self.topView.hidden = YES;
             }
             
+            
             [self.webView loadHTMLString:ds.htmlStr baseURL:nil];
-            self.topView.story = ds;
+            
         });
     }];
     
@@ -328,7 +334,7 @@
 - (SYTableHeader *)headerView {
     if (!_headerView) {
         _headerView = [SYTableHeader headerViewWitTitle:@"推荐者" hidenRight:YES];
-        _headerView.frame = CGRectMake(0, -40, kScreenWidth, 64+40);
+        _headerView.frame = CGRectMake(0, -40, kScreenWidth, 60+40);
     }
     return _headerView;
 }

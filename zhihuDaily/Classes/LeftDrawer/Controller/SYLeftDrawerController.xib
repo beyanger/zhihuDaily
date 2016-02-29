@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYLeftDrawerController">
             <connections>
+                <outlet property="avatarBtn" destination="kbX-T9-v3G" id="IX8-BY-c4C"/>
                 <outlet property="bottomContainer" destination="Z2y-rx-axp" id="rpP-fk-iVY"/>
                 <outlet property="dayNightButton" destination="4OM-8E-Ada" id="6yc-Za-Cn0"/>
                 <outlet property="offlineButton" destination="ouR-em-HCb" id="Chj-km-9wc"/>
