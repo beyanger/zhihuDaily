@@ -192,10 +192,10 @@
     CGFloat yoffset = scrollView.contentOffset.y;
     CGAffineTransform transform = CGAffineTransformIdentity;
     SYStory *story = nil;
-    if (yoffset < -60) {
+    if (yoffset < -80) {
         story = [self.delegate prevStoryForDetailController:self story:self.story];
         transform = CGAffineTransformMakeTranslation(0, kScreenHeight);
-    } else if ((kScreenHeight -60 - scrollView.contentSize.height + yoffset) > 60) {
+    } else if ((kScreenHeight -60 - scrollView.contentSize.height + yoffset) > 80) {
         story = [self.delegate nextStoryForDetailController:self story:self.story];
         transform = CGAffineTransformMakeTranslation(0, -kScreenHeight);
     }

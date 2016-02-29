@@ -37,6 +37,14 @@
     
     self.commentLabel.text = comment.content;
     self.likeLabel.text = [NSString stringWithFormat:@"%ld", comment.likes];
+    if (comment.isLike) {
+        self.likeImage.image = [UIImage imageNamed:@"Comment_Voted"];
+        self.likeLabel.textColor = kGroundColor;
+    } else {
+        self.likeImage.image = [UIImage imageNamed:@"Comment_Vote"];
+        self.likeLabel.textColor = SYColor(128, 128, 128, 1.0);
+    }
+    
     
     static NSDateFormatter *_formatter;
     static dispatch_once_t onceToken;
