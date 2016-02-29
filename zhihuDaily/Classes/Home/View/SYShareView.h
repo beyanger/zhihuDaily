@@ -10,6 +10,8 @@
 
 @interface SYShareView : UIView
 
++ (instancetype)shareView;
+
 - (void)show;
 
 @end

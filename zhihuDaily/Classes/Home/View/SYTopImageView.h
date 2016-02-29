@@ -13,4 +13,7 @@
 
 @property (nonatomic, strong) SYStory *story;
 
+
++ (instancetype)topImageView;
+
 @end

@@ -24,4 +24,7 @@
 
 @property (nonatomic, weak) id<SYStoryNavigationViewDelegate> delegate;
 
+
++ (instancetype)storyNaviView;
+
 @end

@@ -73,4 +73,9 @@
 }
 
 
++ (instancetype)shareView {
+    return [[NSBundle mainBundle] loadNibNamed:@"SYShareView" owner:nil options:nil].firstObject;
+    
+}
+
 @end

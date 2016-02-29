@@ -29,4 +29,8 @@
 }
 
 
++ (instancetype)topImageView {
+    return [[NSBundle mainBundle] loadNibNamed:@"SYTopImageView" owner:nil options:nil].firstObject;
+}
+
 @end

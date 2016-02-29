@@ -14,4 +14,6 @@
 @property (nonatomic, strong) SYDetailStory *story;
 
 
++ (instancetype)topView;
+
 @end

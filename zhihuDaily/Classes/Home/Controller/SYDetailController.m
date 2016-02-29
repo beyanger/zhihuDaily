@@ -81,7 +81,7 @@
             
             break;
         case 3: { // share {
-            SYShareView *shareView = [[NSBundle mainBundle] loadNibNamed:@"SYShareView" owner:nil options:nil].firstObject;
+            SYShareView *shareView = [SYShareView shareView];
             [shareView show];
         }
             break;
@@ -323,7 +323,7 @@
 
 - (SYTopView *)topView {
     if (!_topView) {
-        _topView = [[[NSBundle mainBundle] loadNibNamed:@"SYTopView" owner:self options:nil] firstObject];
+        _topView = [SYTopView topView];
         _topView.clipsToBounds = YES;
         _topView.frame = CGRectMake(0, -40, kScreenWidth, 220+40);
         _topView.hidden = YES;
@@ -394,7 +394,7 @@
 
 - (SYStoryNavigationView *)storyNav {
     if (!_storyNav) {
-        _storyNav = [[[NSBundle mainBundle] loadNibNamed:@"SYStoryNavigationView" owner:self options:nil] firstObject];
+        _storyNav = [SYStoryNavigationView storyNaviView];
         _storyNav.frame = CGRectMake(0, kScreenHeight-40, kScreenWidth, 40);
         [self.view addSubview:_storyNav];
         _storyNav.delegate = self;

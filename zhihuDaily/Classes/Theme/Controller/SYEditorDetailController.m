@@ -32,7 +32,6 @@
 #pragma mark webView delegate
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     [self.indicatorView startAnimating];
-    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"http ://www.baidu.com"]];
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self.indicatorView stopAnimating];
@@ -40,8 +39,6 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     
-    
-    NSLog(@"--- %@", request.URL.absoluteString);
     
     NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/editor/%d/profile-page/ios", self.editor.id];
     
