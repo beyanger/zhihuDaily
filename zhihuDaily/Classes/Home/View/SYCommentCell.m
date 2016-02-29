@@ -25,6 +25,21 @@
 
 @implementation SYCommentCell
 
+- (void)awakeFromNib {
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressHandler:)];
+    [self addGestureRecognizer:longPress];
+}
+- (void)longPressHandler:(UILongPressGestureRecognizer *)gesture {
+    if (gesture.state == UIGestureRecognizerStateEnded) {
+        CGPoint location = [gesture locationInView:self];
+        self.commentView = [self addCommentViewWithLocation:location];
+    }
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    [self removeCommentView];
+}
 
 - (void)setComment:(SYComment *)comment {
     _comment = comment;
@@ -55,17 +70,6 @@
     self.timeLabel.text = [NSString stringWithFormat:@"%@", [_formatter stringFromDate:date]];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
-
-    
-    if (self.commentView) {
-        [self removeCommentView];
-    } else {
-        CGPoint location = [touches.anyObject locationInView:self];
-        self.commentView = [self addCommentViewWithLocation:location];
-    }
-}
 #pragma mark commentView delegate
 - (void)commentView:(SYCommentView *)commentView didClicked:(NSUInteger)index {
     if (index == 0) {
@@ -73,13 +77,13 @@
         self.comment.likes += self.comment.isLike?1:-1;
         // 重新设置，更新UI
         self.comment = _comment;
-        if (self.comment.isLike) {
-            #warning TODO  添加点赞动画效果
-
-            [self addLikeAnimation];
-        }
+        !self.comment.isLike ? : [self addLikeAnimation];
         
+    } else if (index == 2) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = self.commentLabel.text;
     }
+
     [self removeCommentView];
 }
 
