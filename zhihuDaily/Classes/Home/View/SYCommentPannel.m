@@ -29,19 +29,11 @@
 
 + (instancetype)commentPannelWithLiked:(BOOL)liked {
     SYCommentPannel *commentView = [[NSBundle mainBundle] loadNibNamed:@"SYCommentPannel" owner:nil options:nil].firstObject;
-    if (liked) {
-        [commentView.likeBtn setTitle:@"取消点赞" forState:UIControlStateNormal];
-    } else {
-        [commentView.likeBtn setTitle:@"点赞" forState:UIControlStateNormal];
-
-    }
     
+    [commentView.likeBtn setTitle:liked?@"取消点赞":@"点赞" forState:UIControlStateNormal];
     return commentView;
 }
 
-- (void)dealloc {
-    NSLog(@"pannel commnet dealloc");
-}
 
 
 

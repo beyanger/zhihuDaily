@@ -105,7 +105,7 @@
     
     for (NSUInteger i = 0; i < topStroies.count; i++) {
         SYStory *story = topStroies[i];
-        SYTopImageView *imageView = [[NSBundle mainBundle] loadNibNamed:@"SYTopImageView" owner:nil options:nil].firstObject;
+        SYTopImageView *imageView = [SYTopImageView topImageView];
         imageView.story = story;
         [self.allImages addObject:imageView];
         [self.scrollerView addSubview:imageView];
