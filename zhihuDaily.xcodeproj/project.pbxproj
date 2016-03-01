@@ -83,6 +83,9 @@
 		2F6CF29D1C80452E00C4B346 /* SYTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F6CF29C1C80452E00C4B346 /* SYTableHeader.xib */; };
 		2F6CF2A01C8053C500C4B346 /* SYEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF29F1C8053C500C4B346 /* SYEditorController.m */; };
 		2F6CF2A51C80612100C4B346 /* SYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6CF2A31C80612100C4B346 /* SYBaseViewController.m */; };
+		2F7F974D1C85D8CB0022A846 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F974C1C85D8CB0022A846 /* NSString+MD5.m */; };
+		2F7F97501C85E6C50022A846 /* SYCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F974F1C85E6C50022A846 /* SYCollectionController.m */; };
+		2F7F97531C85E75C0022A846 /* SYStoryListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F97521C85E75C0022A846 /* SYStoryListController.m */; };
 		2F9995DC1C7C206D0072C8F0 /* SYShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995DB1C7C206D0072C8F0 /* SYShareView.m */; };
 		2F9995E11C7C39190072C8F0 /* SYCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E01C7C39190072C8F0 /* SYCommentsController.m */; };
 		2F9995E41C7C3D100072C8F0 /* SYComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9995E31C7C3D100072C8F0 /* SYComment.m */; };
@@ -332,6 +335,12 @@
 		2F6CF29F1C8053C500C4B346 /* SYEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEditorController.m; sourceTree = "<group>"; };
 		2F6CF2A21C80612100C4B346 /* SYBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYBaseViewController.h; sourceTree = "<group>"; };
 		2F6CF2A31C80612100C4B346 /* SYBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYBaseViewController.m; sourceTree = "<group>"; };
+		2F7F974B1C85D8CB0022A846 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		2F7F974C1C85D8CB0022A846 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		2F7F974E1C85E6C50022A846 /* SYCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCollectionController.h; sourceTree = "<group>"; };
+		2F7F974F1C85E6C50022A846 /* SYCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCollectionController.m; sourceTree = "<group>"; };
+		2F7F97511C85E75C0022A846 /* SYStoryListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYStoryListController.h; sourceTree = "<group>"; };
+		2F7F97521C85E75C0022A846 /* SYStoryListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYStoryListController.m; sourceTree = "<group>"; };
 		2F9995DA1C7C206D0072C8F0 /* SYShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYShareView.h; sourceTree = "<group>"; };
 		2F9995DB1C7C206D0072C8F0 /* SYShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYShareView.m; sourceTree = "<group>"; };
 		2F9995DF1C7C39190072C8F0 /* SYCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCommentsController.h; sourceTree = "<group>"; };
@@ -629,6 +638,8 @@
 				2F1319D91C7E18A200FA146F /* SYWebViewController.xib */,
 				2F9995DF1C7C39190072C8F0 /* SYCommentsController.h */,
 				2F9995E01C7C39190072C8F0 /* SYCommentsController.m */,
+				2F7F974E1C85E6C50022A846 /* SYCollectionController.h */,
+				2F7F974F1C85E6C50022A846 /* SYCollectionController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -832,6 +843,8 @@
 				2FC7ED891C857C7B00AAD71D /* UIView+SY.m */,
 				2FC7ED8D1C857D2F00AAD71D /* UIImage+SY.h */,
 				2FC7ED8E1C857D2F00AAD71D /* UIImage+SY.m */,
+				2F7F974B1C85D8CB0022A846 /* NSString+MD5.h */,
+				2F7F974C1C85D8CB0022A846 /* NSString+MD5.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1164,6 +1177,8 @@
 		2FE7078A1C7DBF4E005CB13B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2F7F97511C85E75C0022A846 /* SYStoryListController.h */,
+				2F7F97521C85E75C0022A846 /* SYStoryListController.m */,
 				2FE7078B1C7DBF4E005CB13B /* SYThemeController.h */,
 				2FE7078C1C7DBF4E005CB13B /* SYThemeController.m */,
 				2F6CF29E1C8053C500C4B346 /* SYEditorController.h */,
@@ -1479,7 +1494,9 @@
 				2F2CCBA41C7B088E00C45E3D /* SYLastestParamResult.m in Sources */,
 				2F6AC6051C817CCA0090CD8A /* SYSettingCell.m in Sources */,
 				2F6AC5F61C8171D60090CD8A /* SYSettingItem.m in Sources */,
+				2F7F97501C85E6C50022A846 /* SYCollectionController.m in Sources */,
 				2FB923151C7F369A000A0A2D /* SYVersion.m in Sources */,
+				2F7F97531C85E75C0022A846 /* SYStoryListController.m in Sources */,
 				2F2CCBC21C7B0C1400C45E3D /* MJProperty.m in Sources */,
 				2FC587A11C7A0956003C9A7A /* AFNetworkReachabilityManager.m in Sources */,
 				2FE707B21C7DECDD005CB13B /* SYDemoViewController.m in Sources */,
@@ -1519,6 +1536,7 @@
 				2F6CF27B1C7FB20700C4B346 /* UINavigationBar+Awesome.m in Sources */,
 				2FC587A41C7A0956003C9A7A /* AFURLRequestSerialization.m in Sources */,
 				2F37AB691C7B4EFF00D3CD65 /* SYDetailController.m in Sources */,
+				2F7F974D1C85D8CB0022A846 /* NSString+MD5.m in Sources */,
 				2FB923011C7E2BF8000A0A2D /* SYRefreshView.m in Sources */,
 				2FC587A51C7A0956003C9A7A /* AFURLResponseSerialization.m in Sources */,
 				2FC7ED761C85453100AAD71D /* SYRecommenderResult.m in Sources */,

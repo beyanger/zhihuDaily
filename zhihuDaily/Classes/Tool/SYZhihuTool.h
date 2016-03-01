@@ -91,5 +91,10 @@ typedef void  (^Failure)();
 + (void)getStoryRecommendersWithId:(long long)storyid completed:(Completed)completed;
 
 
+// 获取当前用户的收藏
++ (void)getColltedStoriesWithCompleted:(Completed)completed;
++ (void)collectedStoryWithId:(long long)storyid;
+
+
 
 @end

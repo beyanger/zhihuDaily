@@ -8,10 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
+@class SYShareView;
+
+@protocol SYShareViewDelegate <NSObject>
+
+@optional
+- (void)shareView:(SYShareView *)shareView didSelected:(NSUInteger)index;
+
+@end
+
+
 @interface SYShareView : UIView
 
 + (instancetype)shareView;
 
 - (void)show;
+
+@property (nonatomic, weak) id<SYShareViewDelegate> delegate;
+
 
 @end

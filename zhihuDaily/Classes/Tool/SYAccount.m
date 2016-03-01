@@ -31,17 +31,11 @@
 }
 
 - (NSString *)avatar {
-    if (self.isLogin) {
-        return _avatar;
-    }
-    return @"http://i13.tietuku.com/e8a20966f7153539.png";
+    return self.isLogin ? _avatar : @"http://i13.tietuku.com/e8a20966f7153539.png";
 }
 
 - (NSString *)name {
-    if (self.isLogin) {
-        return _name;
-    }
-    return @"请登录";
+    return self.isLogin ? _name : @"请登录";
 }
 
 

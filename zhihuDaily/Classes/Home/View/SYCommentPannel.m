@@ -24,12 +24,23 @@
 }
 
 + (instancetype)commentPannelWithLiked:(BOOL)liked {
+    return [self commentPannelWithLiked:liked location:CGPointMake(0, 0)];
+}
+
+
++ (instancetype)commentPannelWithLiked:(BOOL)liked location:(CGPoint)location {
     SYCommentPannel *commentView = [[NSBundle mainBundle] loadNibNamed:@"SYCommentPannel" owner:nil options:nil].firstObject;
     
     commentView.layer.cornerRadius = 8;
     commentView.clipsToBounds = YES;
     [commentView.likeBtn setTitle:liked?@"取消点赞":@"点赞" forState:UIControlStateNormal];
     commentView.width = liked ? 225 : 203;
+    
+    
+    
+    
+    
+    
     return commentView;
 }
 

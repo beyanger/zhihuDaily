@@ -9,7 +9,8 @@
 #import "SYCacheTool.h"
 #import "fmdb.h"
 #import "SDImageCache.h"
-
+#import "SYAccount.h"
+#import "NSString+MD5.h"
 
 static FMDatabaseQueue *_zhihu_queue;
 
@@ -21,13 +22,21 @@ static FMDatabaseQueue *_zhihu_queue;
     dispatch_once(&onceToken, ^{
         NSString *path = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
         NSString *dbName = [NSString stringWithFormat:@"%@.cached.sqlite", @"zhihu"];
-        
         NSString *pathName = [path stringByAppendingPathComponent:dbName];
         
         _zhihu_queue = [FMDatabaseQueue databaseQueueWithPath:pathName];
         [_zhihu_queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_storylist (date INTEGER PRIMARY KEY, storylist BLOB);"];
             [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_story (storyid INTEGER PRIMARY KEY, story BLOB);"];
+            SYAccount *account = [SYAccount sharedAccount];
+            
+            NSString *collection = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_story_%@ (id INTEGER PRIMARY KEY AUTOINCREMENT, storyid TEXT UNIQUE);", account.name.md5sum];
+            [db executeUpdate:collection];
+            
+            NSLog(@"%@", collection);
+            NSString *collectedTheme = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_theme_%@ (id INTEGER PRIMARY KEY AUTOINCREMENT, themeid TEXT UNIQUE);", account.name.md5sum];
+            [db executeUpdate:collectedTheme];
+            
         }];
     });
     
@@ -36,6 +45,36 @@ static FMDatabaseQueue *_zhihu_queue;
 + (FMDatabaseQueue *)queue {
      return _zhihu_queue;
 }
+
++ (NSArray<NSNumber *> *)queryCollectedStroy {
+    NSMutableArray *collectedArray = [@[] mutableCopy];
+    SYAccount *account = [SYAccount sharedAccount];
+    
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [[self queue] inDatabase:^(FMDatabase *db) {
+            NSString *sql = [NSString stringWithFormat:@"SELECT storyid FROM ct_story_%@ ORDER BY id DESC;", account.name.md5sum];
+            FMResultSet *rs = [db executeQuery:sql];
+            while (rs.next) {
+                NSNumber *storyid = [rs objectForColumnIndex:0];
+                [collectedArray addObject:storyid];
+            }
+        }];
+    });
+    
+    return collectedArray.count >0 ? collectedArray : nil;
+}
+
++ (void)cacheCollectedStoryId:(long long)storyid {
+    SYAccount *account = [SYAccount sharedAccount];
+    
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[self queue] inDatabase:^(FMDatabase *db) {
+            NSString *sql = [NSString stringWithFormat:@"REPLACE INTO ct_story_%@ (storyid) VALUES (?);", account.name.md5sum];
+            [db executeUpdate:sql, @(storyid)];
+        }];
+    });
+}
+
 
 
 + (SYBeforeStoryResult *)queryStoryListWithDateString:(NSString *)dateString {

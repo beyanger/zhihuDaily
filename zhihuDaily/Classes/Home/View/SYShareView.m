@@ -24,17 +24,14 @@
 
 @implementation SYShareView
 
-- (IBAction)clickedCollected:(id)sender {
-    if ([SYAccount sharedAccount].isLogin) {
-        [MBProgressHUD showSuccess:@"收藏成功"];
-       
-    } else {
-        SYLoginViewController *lvc = [[SYLoginViewController alloc] init];
-        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        [delegate.mainController presentViewController:lvc animated:YES completion:nil];
+- (IBAction)clickedCollected:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(shareView:didSelected:)]) {
+        [self.delegate shareView:self didSelected:sender.tag];
     }
      [self handleTap];
 }
+
+
 
 - (IBAction)cancel:(id)sender {
     [self handleTap];

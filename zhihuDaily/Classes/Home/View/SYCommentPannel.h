@@ -24,6 +24,8 @@
 
 + (instancetype)commentPannelWithLiked:(BOOL)liked;
 
++ (instancetype)commentPannelWithLiked:(BOOL)liked location:(CGPoint)location;
+
 @property (nonatomic, weak) id<SYCommentPannelDelegate> delegate;
 
 @end

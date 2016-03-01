@@ -250,14 +250,24 @@
 
 + (void)getStoryRecommendersWithId:(long long)storyid completed:(Completed)completed {
     NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/story/%lld/recommenders", storyid];
-
-    
     [YSHttpTool GETWithURL:url params:nil success:^(id responseObject) {
         SYRecommenderResult *result = [SYRecommenderResult mj_objectWithKeyValues:responseObject];
-      
-        
         !completed ? : completed(result);
     } failure:nil];
 }
+
+
+// 获取当前用户的收藏
++ (void)getColltedStoriesWithCompleted:(Completed)completed {
+    // 这里应该从网络中获取，但是当前仅仅是本地收藏
+    NSArray *collted =  [SYCacheTool queryCollectedStroy];
+    !completed ? : completed(collted);
+}
++ (void)collectedStoryWithId:(long long)storyid {
+    
+    [SYCacheTool cacheCollectedStoryId:storyid];
+
+}
+
 
 @end

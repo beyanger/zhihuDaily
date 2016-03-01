@@ -24,9 +24,12 @@
 #import "SYCommentParam.h"
 #import "SYRecommendController.h"
 #import "SYRecommenderResult.h"
+#import "SYLoginViewController.h"
+#import "SYAccount.h"
+#import "SYZhihuTool.h"
+#import "MBProgressHUD+YS.h"
 
-
-@interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate, UIScrollViewDelegate, SYImageViewDelegate>
+@interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate, UIScrollViewDelegate, SYImageViewDelegate, SYShareViewDelegate>
 
 @property (nonatomic, strong) SYTopView   *topView;
 @property (nonatomic, strong) SYTableHeader *headerView;
@@ -91,6 +94,7 @@
             break;
         case 3: { // share {
             SYShareView *shareView = [SYShareView shareView];
+            shareView.delegate = self;
             [shareView show];
         }
             break;
@@ -163,10 +167,6 @@
         [webView stringByEvaluatingJavaScriptFromString:str];
     }
     
-    NSString *insertPlaceholder = @"var d = document.createElement(\"div\");"
-                    "d.style.height=\"200px\";"
-    "document.body.appendChild(d);";
-
     
     //js方法遍历图片添加点击事件 返回图片个数
     static  NSString * const jsGetImages = @"function setImages(){"\
@@ -294,6 +294,17 @@
 }
 
 
+#pragma mark shareView delegate
+- (void)shareView:(SYShareView *)shareView didSelected:(NSUInteger)index {
+    if (![SYAccount sharedAccount].isLogin) {
+        [SYZhihuTool collectedStoryWithId:self.story.id];
+        [MBProgressHUD showSuccess:@"缓存成功"];
+    } else {
+        SYLoginViewController *lvc = [[SYLoginViewController alloc] init];
+        [self presentViewController:lvc animated:YES completion:nil];
+    }
+
+}
 
 #pragma setter & getter
 - (void)setStory:(SYStory *)story {
@@ -352,7 +363,6 @@
     }];
 }
 
-
 - (UIView *)currentTopView {
     if (!self.topView.hidden) {
         return self.topView;
@@ -378,6 +388,8 @@
         _headerView.frame = CGRectMake(0, -40, kScreenWidth, 60+40);
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandler)];
         [_headerView addGestureRecognizer:tap];
+        // 初始状态应该是被隐藏的，由数据决定其是否显示
+        _headerView.hidden = YES;
     }
     return _headerView;
 }

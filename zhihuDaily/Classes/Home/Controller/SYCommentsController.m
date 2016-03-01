@@ -136,6 +136,11 @@ static NSString *comment_reuseid = @"comment_reuseid";
     } else {
         cv.center = CGPointMake(location.x, location.y-20);
     }
+    
+    
+    NSLog(@"%@", NSStringFromCGRect(cv.frame));
+    // 添加一个遮罩
+
 
     cv.alpha = 0;
     [self.tableView addSubview:cv];

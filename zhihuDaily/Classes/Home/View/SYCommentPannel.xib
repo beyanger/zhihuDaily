@@ -8,11 +8,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="a8Z-IV-7C4" customClass="SYCommentPannel">
-            <rect key="frame" x="0.0" y="0.0" width="203" height="34"/>
+            <rect key="frame" x="0.0" y="0.0" width="203" height="31"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IhH-Eo-cWh">
-                    <rect key="frame" x="51" y="0.0" width="50" height="34"/>
+                    <rect key="frame" x="51" y="0.0" width="50" height="31"/>
                     <animations/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -25,7 +25,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lXU-FP-P6q">
-                    <rect key="frame" x="102" y="0.0" width="50" height="34"/>
+                    <rect key="frame" x="102" y="0.0" width="50" height="31"/>
                     <animations/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -38,7 +38,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WBF-yj-q3s">
-                    <rect key="frame" x="153" y="0.0" width="50" height="34"/>
+                    <rect key="frame" x="153" y="0.0" width="50" height="31"/>
                     <animations/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -54,7 +54,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UR6-q0-iXe">
-                    <rect key="frame" x="0.0" y="0.0" width="50" height="34"/>
+                    <rect key="frame" x="0.0" y="0.0" width="50" height="31"/>
                     <animations/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -88,7 +88,7 @@
             <connections>
                 <outlet property="likeBtn" destination="UR6-q0-iXe" id="aY5-Hy-Idc"/>
             </connections>
-            <point key="canvasLocation" x="447.5" y="108"/>
+            <point key="canvasLocation" x="437.5" y="-26.5"/>
         </view>
     </objects>
 </document>

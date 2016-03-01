@@ -15,20 +15,20 @@
 
 @implementation SYNavigationController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    
-    
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    
+    NSLog(@"before -- push: %lu", self.childViewControllers.count);
+    
     [super pushViewController:viewController animated:animated];
+    
+    
+    NSLog(@"after -- push: %lu", self.childViewControllers.count);
+    
     [self updateGesture];
 }
 
@@ -38,19 +38,25 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:ToggleDrawer object:nil];
         return nil;
     }
+    NSLog(@"before --- pop %lu", self.childViewControllers.count);
+    
+   
     
     UIViewController *vc = [super popViewControllerAnimated:animated];
+    
+
+    
+    
+    NSLog(@"after --- pop %lu", self.childViewControllers.count);
     [self updateGesture];
     return vc;
 }
 
 - (void)updateGesture {
     
-    NSLog(@"----> 当前： %lu", self.viewControllers.count);
-    
     
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    if (self.viewControllers.count > 1) {
+    if (self.childViewControllers.count > 1) {
         delegate.mainController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
         delegate.mainController.closeDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
     } else {
