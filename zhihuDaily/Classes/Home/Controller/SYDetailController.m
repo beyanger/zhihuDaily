@@ -23,7 +23,7 @@
 #import "SYTableHeader.h"
 #import "SYCommentParam.h"
 
-@interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate, UIScrollViewDelegate>
+@interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate, UIScrollViewDelegate, SYImageViewDelegate>
 
 @property (nonatomic, strong) SYTopView   *topView;
 @property (nonatomic, strong) SYTableHeader *headerView;
@@ -35,6 +35,8 @@
 @property (nonatomic, weak) UIImageView *downArrow;
 
 @property (nonatomic, strong) SYStoryNavigationView *storyNav;
+
+@property (nonatomic, strong) NSArray<NSString *> *allImages;
 
 @property (nonatomic, strong) NSArray<SYEditor *> *recommenders;
 
@@ -116,7 +118,8 @@
     } else if ([absoString hasPrefix:@"detailimage:"]) {
         NSString *url = [absoString stringByReplacingOccurrencesOfString:@"detailimage:"
                                        withString:@""];
-        [SYImageView showImageWithURLString:url];
+        SYImageView *imageView = [SYImageView showImageWithURLString:url];
+        imageView.delegate = self;
         return NO;
     }
     return YES;
@@ -148,18 +151,15 @@
     //调整字号
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     BOOL font = [ud boolForKey:@"大号字"];
-    NSString *str = [@"document.body.style.webkitTextSizeAdjust=" stringByAppendingString:font?@"'120%'":@"'100%'"];
-    [webView stringByEvaluatingJavaScriptFromString:str];
+    if (font) {
+        NSString *str = @"document.body.style.webkitTextSizeAdjust='120%';";
+        [webView stringByEvaluatingJavaScriptFromString:str];
+    }
     
-    
-    
-    
-    NSString *string = @"var d = document.createElement(\"div\");"
+    NSString *insertPlaceholder = @"var d = document.createElement(\"div\");"
                     "d.style.height=\"200px\";"
     "document.body.appendChild(d);";
-    
-    
-    //[webView stringByEvaluatingJavaScriptFromString:string];
+
     
     //js方法遍历图片添加点击事件 返回图片个数
     static  NSString * const jsGetImages = @"function setImages(){"\
@@ -183,7 +183,7 @@
     
     NSString *imageUrls = [webView stringByEvaluatingJavaScriptFromString:jsImage];
     
-    NSArray *imageArray = [imageUrls componentsSeparatedByString:@"...beyanger...."];
+    self.allImages = [imageUrls componentsSeparatedByString:@"...beyanger...."];
 #pragma todo 设置图片浏览界面的上一张和下一张功能
 }
 
@@ -261,6 +261,32 @@
         }
     }
 }
+
+#pragma mark imageView delegate
+- (NSString *)prevImageOfImageView:(SYImageView *)imageView current:(NSString *)current {
+    NSInteger location = [self locateImage:current];
+    if (location==0 || location == -1) {
+        return nil;
+    }
+    return self.allImages[location-1];
+}
+- (NSString *)nextImageOfImageView:(SYImageView *)imageView current:(NSString *)current {
+    NSInteger location = [self locateImage:current];
+    if (location==(self.allImages.count-1) || location==-1) {
+        return nil;
+    }
+    return self.allImages[location+1];
+}
+- (NSInteger)locateImage:(NSString *)image {
+    for (NSUInteger i = 0; i < self.allImages.count; i++) {
+        if ([self.allImages[i] isEqualToString:image]) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
 
 #pragma setter & getter
 - (void)setStory:(SYStory *)story {

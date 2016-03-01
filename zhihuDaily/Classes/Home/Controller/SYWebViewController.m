@@ -30,6 +30,12 @@
     White_StatusBar;
 
     [self.view addSubview:self.indicator];
+    
+    
+    [RACObserve(self.webView, canGoBack) subscribeNext:^(id x) {
+        NSLog(@"=====> %@", x);
+    }];
+    
     [self updateButton];
    
     self.webView.delegate = self;
@@ -39,6 +45,7 @@
 
 - (void)dealloc{
     Black_StatusBar;
+    NSLog(@"... dealloc");
 }
 
 
@@ -81,8 +88,8 @@
 
 
 - (void)updateButton {
-    self.back.enabled = self.webView.canGoBack;
-    self.forward.enabled = self.webView.canGoForward;
+//    self.back.enabled = self.webView.canGoBack;
+//    self.forward.enabled = self.webView.canGoForward;
 }
 
 /*

@@ -33,8 +33,7 @@
 
 #define kWhiteColor         [UIColor whiteColor]
 
-
-#import "YYModel.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 
 #endif /* zhihuDaily_pch */

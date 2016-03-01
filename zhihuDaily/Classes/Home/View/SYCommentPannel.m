@@ -7,6 +7,7 @@
 //
 
 #import "SYCommentPannel.h"
+#import "UIView+Extension.h"
 
 @interface SYCommentPannel ()
 @property (weak, nonatomic) IBOutlet UIButton *likeBtn;
@@ -22,15 +23,13 @@
     
 }
 
-- (void)awakeFromNib {
-    self.layer.cornerRadius = 5;
-    self.clipsToBounds = YES;
-}
-
 + (instancetype)commentPannelWithLiked:(BOOL)liked {
     SYCommentPannel *commentView = [[NSBundle mainBundle] loadNibNamed:@"SYCommentPannel" owner:nil options:nil].firstObject;
     
+    commentView.layer.cornerRadius = 8;
+    commentView.clipsToBounds = YES;
     [commentView.likeBtn setTitle:liked?@"取消点赞":@"点赞" forState:UIControlStateNormal];
+    commentView.width = liked ? 225 : 203;
     return commentView;
 }
 

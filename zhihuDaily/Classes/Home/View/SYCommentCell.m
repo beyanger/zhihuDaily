@@ -22,21 +22,31 @@
 @property (weak, nonatomic) IBOutlet UIImageView *likeImage;
 @property (nonatomic, weak) SYCommentPannel *commentPannel;
 @property (nonatomic, assign) BOOL isAnimatting;
+
+
 @end
 
 
 @implementation SYCommentCell
 
 
+
+
 - (void)setComment:(SYComment *)comment {
     _comment = comment;
     [comment addObserver:self forKeyPath:@"isLike" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     
+    
     [self.avatar sd_setImageWithURL:[NSURL URLWithString:comment.avatar]];
     self.nameLabel.text = comment.author;
-    
     self.commentLabel.text = comment.content;
+    
+    
     self.likeLabel.text = [NSString stringWithFormat:@"%ld", comment.likes];
+    
+    
+    
+    
     if (comment.isLike) {
         self.likeImage.image = [UIImage imageNamed:@"Comment_Voted"];
         self.likeLabel.textColor = kGroundColor;
@@ -44,6 +54,10 @@
         self.likeImage.image = [UIImage imageNamed:@"Comment_Vote"];
         self.likeLabel.textColor = SYColor(128, 128, 128, 1.0);
     }
+    
+    
+    
+    
     
     
     static NSDateFormatter *_formatter;
@@ -56,6 +70,10 @@
     });
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:comment.time];
     self.timeLabel.text = [NSString stringWithFormat:@"%@", [_formatter stringFromDate:date]];
+  
+    
+    
+    
 
 }
 

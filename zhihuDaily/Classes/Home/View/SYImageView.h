@@ -8,8 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@class SYImageView;
+
+@protocol SYImageViewDelegate <NSObject>
+
+@optional
+- (NSString *)prevImageOfImageView:(SYImageView *)imageView current:(NSString *)current;
+- (NSString *)nextImageOfImageView:(SYImageView *)imageView current:(NSString *)current;
+
+@end
+
+
 @interface SYImageView : UIView
 
-+ (void)showImageWithURLString:(NSString *)url;
++ (instancetype)showImageWithURLString:(NSString *)url;
+
+@property (nonatomic, weak) id<SYImageViewDelegate> delegate;
 
 @end

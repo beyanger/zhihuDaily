@@ -14,7 +14,7 @@
 #import "SYCommentView.h"
 #import "SYCommentPannel.h"
 #import "MBProgressHUD+YS.h"
-
+#import "UIView+Extension.h"
 
 static NSString *comment_reuseid = @"comment_reuseid";
 
@@ -54,7 +54,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressHandler:)];
     [tableView addGestureRecognizer:longPress];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandler)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPressHandler:)];
     [tableView addGestureRecognizer:tap];
     
     [self.view addSubview:tableView];
@@ -73,11 +73,17 @@ static NSString *comment_reuseid = @"comment_reuseid";
     } else if (longGesture.state == UIGestureRecognizerStateBegan) {
         [self removeCommentPannel];
     }
+    [self setNeedsFocusUpdate];
+}
+- (void)tapPressHandler:(UITapGestureRecognizer *)tapGesture {
+    [self removeCommentPannel];
+    CGPoint location = [tapGesture locationInView:self.tableView];
+    NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:location];
+    self.cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    self.pannel = [self addCommentViewWithLocation:location];
 }
 
-- (void)tapHandler {
-    [self removeCommentPannel];
-}
+
 
 
 #pragma mark commentView delegate
@@ -99,6 +105,8 @@ static NSString *comment_reuseid = @"comment_reuseid";
     
     SYCommentPannel *pannel = self.pannel;
     
+    self.pannel = nil;
+    self.cell = nil;
     if (pannel) {
         [UIView animateWithDuration:0.2 animations:^{
             pannel.alpha = 0.0;
@@ -106,16 +114,23 @@ static NSString *comment_reuseid = @"comment_reuseid";
             [pannel removeFromSuperview];
         }];
     }
-    self.pannel = nil;
-    self.cell = nil;
 }
 
 
 - (SYCommentPannel *)addCommentViewWithLocation:(CGPoint)location {
     SYCommentPannel *cv = [SYCommentPannel commentPannelWithLiked:self.cell.comment.isLike];
     cv.delegate  = self;
-    cv.center = CGPointMake(kScreenWidth*0.5, location.y-20);
-  
+   
+    CGFloat xoffset = cv.width*0.5+12;
+    
+    if (location.x < xoffset) {
+        cv.center = CGPointMake(xoffset, location.y-20);
+    } else if (location.x > (kScreenWidth-xoffset)) {
+        cv.center = CGPointMake(kScreenWidth-xoffset, location.y-20);
+    } else {
+        cv.center = CGPointMake(location.x, location.y-20);
+    }
+
     cv.alpha = 0;
     [self.tableView addSubview:cv];
     [UIView animateWithDuration:0.5 animations:^{
@@ -188,18 +203,30 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
     SYCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:comment_reuseid forIndexPath:indexPath];
     
-    cell.comment = self.allComments[indexPath.section][indexPath.row];
     
+    if (!indexPath.section && self.allComments.firstObject.count) {
+        cell.comment = self.allComments[indexPath.section][indexPath.row];
+        return cell;
+    }
+    
+    
+    cell.comment = self.allComments.lastObject[indexPath.row];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     CGFloat height =  [tableView fd_heightForCellWithIdentifier:comment_reuseid configuration:^(SYCommentCell *cell) {
-        cell.comment = self.allComments[indexPath.section][indexPath.row];
+
+        if (!indexPath.section && self.allComments.firstObject.count) {
+            cell.comment = self.allComments[indexPath.section][indexPath.row];
+            return;
+        }
+        
+        
+        cell.comment = self.allComments.lastObject[indexPath.row];
     }];
     
-    ;
     return height;
 }
 
