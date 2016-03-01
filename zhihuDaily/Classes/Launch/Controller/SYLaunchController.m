@@ -25,9 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 
-    
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *url = [ud stringForKey:@"launchScreen"];
     
@@ -46,7 +44,7 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 
             [UIView animateWithDuration:.68 animations:^{
-                self.backgroundImageView.alpha = 0.6;
+                self.backgroundImageView.alpha = 0.0;
                 self.backgroundImageView.transform = CGAffineTransformMakeScale(1.2, 1.2);
             } completion:^(BOOL finished) {
                 
@@ -54,7 +52,7 @@
             }];
         });
     } failure:^{
-        [MBProgressHUD showError:@"网络状况差，请稍后再试..."];
+        [MBProgressHUD showError:@"网络不给力啊，亲~请稍后再试..."];
     }];
     
 }

@@ -61,7 +61,7 @@ static NSString *editor_reuseid = @"editor_reuseid";
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight-64) style:UITableViewStylePlain];
         [_tableView registerNib:[UINib nibWithNibName:@"SYEditorCell" bundle:nil] forCellReuseIdentifier:editor_reuseid];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.rowHeight = 44;
+        _tableView.rowHeight = 60;
         _tableView.delegate = self;
         _tableView.dataSource = self;
     }

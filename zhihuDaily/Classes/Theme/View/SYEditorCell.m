@@ -21,7 +21,7 @@
 
 
 - (void)awakeFromNib {
-    self.avatarImageView.layer.cornerRadius = 18;
+    self.avatarImageView.layer.cornerRadius = 24;
     self.avatarImageView.clipsToBounds = YES;
     self.editorImageView.hidden = YES;
 }
@@ -30,19 +30,11 @@
 - (void)setEditor:(id)obj {
     _editor = obj;
     
-    if ([obj isKindOfClass:[SYEditor class]]) {
-        SYEditor *editor = obj;
-        [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:editor.avatar]];
-        self.nameLabel.text = editor.name;
-        self.bioLabel.text = editor.bio;
-        self.editorImageView.hidden = NO;
-    } else if ([obj isKindOfClass:[SYRecommender class]]) {
-        SYRecommender *recommender = obj;
-        [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:recommender.avatar]];
-        self.nameLabel.text = recommender.name;
-        self.bioLabel.text = recommender.bio;
-        self.editorImageView.hidden = YES;
-    }
+    self.nameLabel.text = [obj valueForKey:@"name"];
+    self.bioLabel.text = [obj valueForKey:@"bio"];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[obj valueForKey:@"avatar"]]];
+    self.editorImageView.hidden = [obj isKindOfClass:[SYRecommender class]];
+    
 }
 
 static NSString *editor_reuseid = @"editor_reuseid";

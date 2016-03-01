@@ -41,16 +41,12 @@
         [_sy_header addSubview:self.sy_headerBackgroundView];
         [_sy_header addSubview:self.sy_titleLabel];
         [_sy_header addSubview:self.sy_backButton];
-
-        
         
         [self.sy_headerBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.mas_equalTo(_sy_header).offset(-40);
             make.right.mas_equalTo(_sy_header).offset(40);
             make.bottom.mas_equalTo(_sy_header);
         }];
-        
-        
         
         [self.sy_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_sy_header.mas_top).offset(42);
