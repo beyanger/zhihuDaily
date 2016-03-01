@@ -6,7 +6,14 @@
 >演示视频请移步[这里](http://v.youku.com/v_show/id_XMTQ4NTg2NjI2NA==.html)
 
 
-![](https://github.com/beyanger/zhihuDaily/blob/master/zhihuDaily/Resources/90.gif)
+![](https://github.com/beyanger/zhihuDaily/blob/master/zhihuDaily/Resources/1.gif)
+![](https://github.com/beyanger/zhihuDaily/blob/master/zhihuDaily/Resources/2.gif)
+![](https://github.com/beyanger/zhihuDaily/blob/master/zhihuDaily/Resources/3.gif)
+![](https://github.com/beyanger/zhihuDaily/blob/master/zhihuDaily/Resources/4.gif)
+![](https://github.com/beyanger/zhihuDaily/blob/master/zhihuDaily/Resources/5.gif)
+![](https://github.com/beyanger/zhihuDaily/blob/master/zhihuDaily/Resources/6.gif)
+
+
 
 #####主要界面高度还原知乎官方APP，除了和账号相关的操作尚未实现，其他基本功能均已经实现。包括动画效果，数据缓存，下拉自动刷新数据等。
 -------------
