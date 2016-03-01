@@ -62,13 +62,10 @@ static FMDatabaseQueue *_zhihu_queue;
         }];
     });
     
-
-    
     if (data.length > 0) {
         SYBeforeStoryResult *result = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         return result;
     }
-    
     
     return nil;
 }

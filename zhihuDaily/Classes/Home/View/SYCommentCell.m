@@ -30,6 +30,10 @@
 @implementation SYCommentCell
 
 
+- (void)awakeFromNib {
+    self.avatar.layer.cornerRadius = 20;
+    self.avatar.clipsToBounds = YES;
+}
 
 
 - (void)setComment:(SYComment *)comment {

@@ -34,7 +34,6 @@
         return @{@"stories":@"SYStory"};
     }];
     
-    
     [SYThemeItem mj_setupObjectClassInArray:^NSDictionary *{
         return @{@"stories": @"SYStory", @"editors":@"SYEditor"};
     }];
@@ -61,7 +60,7 @@
         NSString *urlStr = responseObject[@"img"];
         !completed ? : completed(urlStr);
     } failure:^(NSError *error) {
-        failure();
+        !failure ? :failure();
     }];
 }
 
@@ -85,8 +84,6 @@
 + (void)getDetailWithId:(long long)storyid completed:(Completed)completed {
     NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/news/%lld", storyid];
 
-    
-    
     SYDetailStory *story = [SYCacheTool queryStoryWithId:storyid];
     
     if (story) {

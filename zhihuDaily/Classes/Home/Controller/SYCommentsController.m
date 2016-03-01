@@ -39,14 +39,11 @@ static NSString *comment_reuseid = @"comment_reuseid";
     self.title = @"评论";
 
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    
-    
+
     [self setupTableView];
     
-    [self setupDataSource];
-    
     [self setupBackBtn];
+    [self.tableView reloadData];
 }
 
 - (void)setupTableView {
@@ -69,20 +66,29 @@ static NSString *comment_reuseid = @"comment_reuseid";
         CGPoint location = [longGesture locationInView:self.tableView];
         NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:location];
         self.cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        self.pannel = [self addCommentViewWithLocation:location];
+        if (self.cell) {
+            self.pannel = [self addCommentViewWithLocation:location];
+        }
     } else if (longGesture.state == UIGestureRecognizerStateBegan) {
         [self removeCommentPannel];
     }
-    [self setNeedsFocusUpdate];
+    
 }
 - (void)tapPressHandler:(UITapGestureRecognizer *)tapGesture {
     [self removeCommentPannel];
     CGPoint location = [tapGesture locationInView:self.tableView];
     NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:location];
     self.cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    self.pannel = [self addCommentViewWithLocation:location];
+    
+    if (self.cell) {
+        self.pannel = [self addCommentViewWithLocation:location];
+    }
 }
 
+- (void)setParam:(SYCommentParam *)param {
+    _param = param;
+    [self setupDataSource];
+}
 
 
 
@@ -179,8 +185,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSInteger count =  (self.allComments.firstObject.count!=0) + (self.allComments.lastObject.count!=0);
-    return count;
+    return  (self.allComments.firstObject.count!=0) + (self.allComments.lastObject.count!=0);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -202,7 +207,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
 - (SYCommentCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     SYCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:comment_reuseid forIndexPath:indexPath];
-    
+  
     
     if (!indexPath.section && self.allComments.firstObject.count) {
         cell.comment = self.allComments[indexPath.section][indexPath.row];

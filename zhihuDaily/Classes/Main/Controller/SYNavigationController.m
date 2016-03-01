@@ -17,7 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,6 +45,10 @@
 }
 
 - (void)updateGesture {
+    
+    NSLog(@"----> 当前： %lu", self.viewControllers.count);
+    
+    
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     if (self.viewControllers.count > 1) {
         delegate.mainController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;

@@ -96,13 +96,14 @@
     static NSString *reuse_id = @"main_reuseid";
     SYLeftDrawerCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse_id];
     if (!cell) {
-        cell = [[SYLeftDrawerCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuse_id];
+        cell = [[SYLeftDrawerCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuse_id];
         
         UIView *bgView = [[UIView alloc] initWithFrame:cell.frame];
         bgView.backgroundColor = SYColor(21, 26, 31, 1.0);
         cell.selectedBackgroundView = bgView;
         cell.backgroundColor = SYColor(26, 31, 36, 1.0);
         cell.textLabel.textColor = [UIColor whiteColor];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     cell.theme = self.dataSource[indexPath.row];
     return cell;
