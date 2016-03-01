@@ -102,7 +102,7 @@
                 [scrollView setContentOffset:CGPointMake(2*kScreenWidth, 0) animated:NO];
                 [self setImage:img];
             } else {
-                [MBProgressHUD showError:@"已经是最后一张了"];
+                [MBProgressHUD showError:@"已经是第一张了"];
             }
         }
     } else if (scrollView.contentOffset.x > kScreenWidth*1.5) {
@@ -113,7 +113,7 @@
                 [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
                 [self setImage:img];
             } else {
-                [MBProgressHUD showError:@"已经是第一张了"];
+                [MBProgressHUD showError:@"已经是最后张了"];
             }
         }
         
@@ -180,11 +180,6 @@
 
 - (void)image: (UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo{
     [MBProgressHUD showSuccess:@"已保存至相册"];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self remove];
-    });
-    
 }
 
 

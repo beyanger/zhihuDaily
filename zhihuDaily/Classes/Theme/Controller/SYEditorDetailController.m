@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 
+@property (nonatomic, copy) NSString *url;
 @end
 
 @implementation SYEditorDetailController
@@ -21,11 +22,22 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view bringSubviewToFront:self.indicatorView];
-    self.title = self.editor.name;
+    
+    NSString *url = nil;
+    
+    if ([self.editor isKindOfClass:[SYEditor class]]) {
+        SYEditor *editor = self.editor;
+        self.title = [self.editor name];
+        url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/editor/%d/profile-page/ios", editor.id];
+    } else {
+        SYRecommender *rec = self.editor;
+        self.title = [[self.editor name] stringByAppendingString:@"--知乎"];
+        url = [@"http://www.zhihu.com/people/" stringByAppendingString:rec.zhihu_url_token];
+    }
+
+    self.url = url;
+    
     self.webView.delegate = self;
-    
-    NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/editor/%d/profile-page/ios", self.editor.id];
-    
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
 }
 
@@ -40,9 +52,7 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     
     
-    NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/editor/%d/profile-page/ios", self.editor.id];
-    
-    if ([request.URL.absoluteString isEqualToString:url]) {
+    if ([request.URL.absoluteString hasPrefix:@"http://news-at.zhihu.com/api/4/editor/"] || [request.URL.absoluteString hasPrefix:@"http://www.zhihu.com/people/"]) {
         return YES;
     }
 
@@ -55,15 +65,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

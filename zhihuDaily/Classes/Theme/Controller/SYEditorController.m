@@ -12,7 +12,7 @@
 
 static NSString *editor_reuseid = @"editor_reuseid";
 
-@interface SYEditorController () <UITableViewDataSource, UITableViewDelegate>
+@interface SYEditorController ()
 
 @property (nonatomic, strong) UITableView *tableView;
 @end
@@ -32,15 +32,25 @@ static NSString *editor_reuseid = @"editor_reuseid";
 }
 
 - (SYEditorCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SYEditorCell *cell = [tableView dequeueReusableCellWithIdentifier:editor_reuseid];
+    SYEditorCell *cell;
+    if ([self.editors[indexPath.row] isKindOfClass:[SYEditor class]]) {
+        cell = [SYEditorCell editorCellWithTableView:tableView];
+    } else {
+        cell = [SYEditorCell recommenderCellWithTableView:tableView];
+    }
 
     cell.editor = self.editors[indexPath.row];
     return cell;
 }
 
+
+
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SYEditorDetailController *edvc = [[SYEditorDetailController alloc] init];
     edvc.editor = self.editors[indexPath.row];
+    
     [self.navigationController pushViewController:edvc animated:YES];
 }
 

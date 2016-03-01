@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "SYEditor.h"
 #import "SYBaseViewController.h"
-@interface SYEditorController : SYBaseViewController
+#import "SYEditorCell.h"
+#import "SYEditorDetailController.h"
 
-@property (nonatomic, strong) NSArray<SYEditor *> *editors;
+@interface SYEditorController : SYBaseViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) NSArray *editors;
 
 @end

@@ -22,8 +22,8 @@
 #import "SYVersion.h"
 #import "SYCacheTool.h"
 #import "SYStory.h"
-
-
+#import "SYRecommenderResult.h"
+#import "SYRecommenderItem.h"
 typedef void (^Completed)(id obj);
 
 typedef void  (^Failure)();

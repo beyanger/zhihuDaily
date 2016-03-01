@@ -141,6 +141,9 @@
 		2FC588031C7A0974003C9A7A /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC587F91C7A0974003C9A7A /* ViewController+MASAdditions.m */; };
 		2FC588071C7A0B50003C9A7A /* YSHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC588061C7A0B50003C9A7A /* YSHttpTool.m */; };
 		2FC7ED701C85271000AAD71D /* SYLoadingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7ED6F1C85271000AAD71D /* SYLoadingLayer.m */; };
+		2FC7ED731C85423F00AAD71D /* SYRecommendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7ED721C85423F00AAD71D /* SYRecommendController.m */; };
+		2FC7ED761C85453100AAD71D /* SYRecommenderResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7ED751C85453100AAD71D /* SYRecommenderResult.m */; };
+		2FC7ED791C85493900AAD71D /* SYRecommenderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7ED781C85493900AAD71D /* SYRecommenderItem.m */; };
 		2FCCAD0A1C83BDB000C19D35 /* UITableView+FDIndexPathHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCCAD031C83BDB000C19D35 /* UITableView+FDIndexPathHeightCache.m */; };
 		2FCCAD0B1C83BDB000C19D35 /* UITableView+FDKeyedHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCCAD051C83BDB000C19D35 /* UITableView+FDKeyedHeightCache.m */; };
 		2FCCAD0C1C83BDB000C19D35 /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCCAD071C83BDB000C19D35 /* UITableView+FDTemplateLayoutCell.m */; };
@@ -449,6 +452,12 @@
 		2FC588061C7A0B50003C9A7A /* YSHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSHttpTool.m; sourceTree = "<group>"; };
 		2FC7ED6E1C85271000AAD71D /* SYLoadingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYLoadingLayer.h; sourceTree = "<group>"; };
 		2FC7ED6F1C85271000AAD71D /* SYLoadingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYLoadingLayer.m; sourceTree = "<group>"; };
+		2FC7ED711C85423F00AAD71D /* SYRecommendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYRecommendController.h; sourceTree = "<group>"; };
+		2FC7ED721C85423F00AAD71D /* SYRecommendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYRecommendController.m; sourceTree = "<group>"; };
+		2FC7ED741C85453100AAD71D /* SYRecommenderResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYRecommenderResult.h; sourceTree = "<group>"; };
+		2FC7ED751C85453100AAD71D /* SYRecommenderResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYRecommenderResult.m; sourceTree = "<group>"; };
+		2FC7ED771C85493900AAD71D /* SYRecommenderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYRecommenderItem.h; sourceTree = "<group>"; };
+		2FC7ED781C85493900AAD71D /* SYRecommenderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYRecommenderItem.m; sourceTree = "<group>"; };
 		2FCCAD021C83BDB000C19D35 /* UITableView+FDIndexPathHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDIndexPathHeightCache.h"; sourceTree = "<group>"; };
 		2FCCAD031C83BDB000C19D35 /* UITableView+FDIndexPathHeightCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDIndexPathHeightCache.m"; sourceTree = "<group>"; };
 		2FCCAD041C83BDB000C19D35 /* UITableView+FDKeyedHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDKeyedHeightCache.h"; sourceTree = "<group>"; };
@@ -1152,6 +1161,8 @@
 				2F3A8CC41C8289A900D5C527 /* SYEditorDetailController.h */,
 				2F3A8CC51C8289A900D5C527 /* SYEditorDetailController.m */,
 				2F3A8CC61C8289A900D5C527 /* SYEditorDetailController.xib */,
+				2FC7ED711C85423F00AAD71D /* SYRecommendController.h */,
+				2FC7ED721C85423F00AAD71D /* SYRecommendController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1163,6 +1174,10 @@
 				2FB9230B1C7EEBC6000A0A2D /* SYThemeItem.m */,
 				2FB9230D1C7EEBE8000A0A2D /* SYEditor.h */,
 				2FB9230E1C7EEBE8000A0A2D /* SYEditor.m */,
+				2FC7ED741C85453100AAD71D /* SYRecommenderResult.h */,
+				2FC7ED751C85453100AAD71D /* SYRecommenderResult.m */,
+				2FC7ED771C85493900AAD71D /* SYRecommenderItem.h */,
+				2FC7ED781C85493900AAD71D /* SYRecommenderItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1489,12 +1504,14 @@
 				2FB9230C1C7EEBC6000A0A2D /* SYThemeItem.m in Sources */,
 				2F4F1A841C7FA09500AF3BDF /* FMDatabasePool.m in Sources */,
 				2F0E2CBD1C7BE7F7004FDA0F /* SYImageView.m in Sources */,
+				2FC7ED791C85493900AAD71D /* SYRecommenderItem.m in Sources */,
 				2FC587D51C7A096A003C9A7A /* SDWebImageDownloader.m in Sources */,
 				2F6CF27B1C7FB20700C4B346 /* UINavigationBar+Awesome.m in Sources */,
 				2FC587A41C7A0956003C9A7A /* AFURLRequestSerialization.m in Sources */,
 				2F37AB691C7B4EFF00D3CD65 /* SYDetailController.m in Sources */,
 				2FB923011C7E2BF8000A0A2D /* SYRefreshView.m in Sources */,
 				2FC587A51C7A0956003C9A7A /* AFURLResponseSerialization.m in Sources */,
+				2FC7ED761C85453100AAD71D /* SYRecommenderResult.m in Sources */,
 				2F37AB891C7B7F0B00D3CD65 /* SYStoryNavigationView.m in Sources */,
 				2F37AB7A1C7B675100D3CD65 /* MMDrawerVisualState.m in Sources */,
 				2F6AC61C1C81FD090090CD8A /* SYNetworkTool.m in Sources */,
@@ -1553,6 +1570,7 @@
 				2FC587DF1C7A096A003C9A7A /* UIView+WebCacheOperation.m in Sources */,
 				2FC7ED701C85271000AAD71D /* SYLoadingLayer.m in Sources */,
 				2F6AC5E71C8141DD0090CD8A /* SYContainerView.m in Sources */,
+				2FC7ED731C85423F00AAD71D /* SYRecommendController.m in Sources */,
 				2FC587FF1C7A0974003C9A7A /* MASViewConstraint.m in Sources */,
 				2FC587A21C7A0956003C9A7A /* AFSecurityPolicy.m in Sources */,
 				2F6AC6191C81FA650090CD8A /* SYShareButton.m in Sources */,

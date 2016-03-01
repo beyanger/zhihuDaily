@@ -22,6 +22,9 @@
 #import "Masonry.h"
 #import "SYTableHeader.h"
 #import "SYCommentParam.h"
+#import "SYRecommendController.h"
+#import "SYRecommenderResult.h"
+
 
 @interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate, UIScrollViewDelegate, SYImageViewDelegate>
 
@@ -39,6 +42,10 @@
 @property (nonatomic, strong) NSArray<NSString *> *allImages;
 
 @property (nonatomic, strong) NSArray<SYEditor *> *recommenders;
+
+
+@property (nonatomic, strong) SYRecommenderResult *recommender;
+
 
 @end
 
@@ -303,13 +310,17 @@
                 self.topView.story = ds;
             } else if (ds.recommenders.count) { // 有推荐者
                 // 为推荐者插入一段40高度的hodler
-                NSMutableString *htmlStr = [ds.htmlStr mutableCopy];
-                
-                NSRange range = [htmlStr rangeOfString:@"<body>"];
-                
-                [htmlStr insertString:@"<div style=\"height:40px\"></div>" atIndex:range.location+range.length];
-                ds.htmlStr = [htmlStr copy];
-                
+                NSString *headStr = [ds.htmlStr substringToIndex:200];
+                NSString *insert = @"<div style=\"height:40px\"></div>";
+                NSRange loc = [headStr rangeOfString:insert];
+                if (loc.location == NSNotFound) {
+                    // 如果没找到高度为40 的holder，那么插入之
+                    NSMutableString *htmlStr = [ds.htmlStr mutableCopy];
+                    NSRange range = [htmlStr rangeOfString:@"<body>"];
+                    [htmlStr insertString:insert atIndex:range.location+range.length];
+                    ds.htmlStr = [htmlStr copy];
+                }
+                // 设置顶部推荐者的头像
                 NSMutableArray *avatars = [@[] mutableCopy];
                 for (SYRecommender *recommender in ds.recommenders) {
                     [avatars addObject:recommender.avatar];
@@ -317,12 +328,16 @@
                 }
                 self.headerView.hidden = NO;
                 self.topView.hidden = YES;
+                // 设置顶部推荐者的下一级控制器的数据源，可以放在点击之后获取
+                // 这里预先获取，以免点击之后再获取，增强用户体验
+                [SYZhihuTool getStoryRecommendersWithId:story.id completed:^(id obj) {
+                    self.recommender = obj;
+                }];
+                
             } else { // 啥也没有
                 self.headerView.hidden = YES;
                 self.topView.hidden = YES;
             }
-            
-            
             [self.webView loadHTMLString:ds.htmlStr baseURL:nil];
             
         });
@@ -361,8 +376,17 @@
     if (!_headerView) {
         _headerView = [SYTableHeader headerViewWitTitle:@"推荐者" hidenRight:YES];
         _headerView.frame = CGRectMake(0, -40, kScreenWidth, 60+40);
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandler)];
+        [_headerView addGestureRecognizer:tap];
     }
     return _headerView;
+}
+
+- (void)tapHandler {
+    SYRecommendController *rc = [[SYRecommendController alloc] init];
+    NSArray *recommender = [self.recommender.editors arrayByAddingObjectsFromArray:self.recommender.items.lastObject.recommenders];
+    rc.editors = recommender;
+    [self.navigationController pushViewController:rc animated:YES];
 }
 
 - (UIWebView *)webView {

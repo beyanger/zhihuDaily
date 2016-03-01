@@ -20,6 +20,40 @@
 
 @implementation SYZhihuTool
 
+
++ (void)load {
+    [SYDetailStory mj_setupObjectClassInArray:^NSDictionary *{
+        return @{@"recommenders":@"SYRecommender"};
+    }];
+    
+    [SYLastestParamResult mj_setupObjectClassInArray:^NSDictionary *{
+        return @{@"top_stories":@"SYStory", @"stories":@"SYStory"};
+    }];
+    
+    [SYBeforeStoryResult mj_setupObjectClassInArray:^NSDictionary *{
+        return @{@"stories":@"SYStory"};
+    }];
+    
+    
+    [SYThemeItem mj_setupObjectClassInArray:^NSDictionary *{
+        return @{@"stories": @"SYStory", @"editors":@"SYEditor"};
+    }];
+    
+    [SYThemeItem mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
+        return @{@"desc":@"description"};
+    }];
+    
+    [SYRecommenderResult mj_setupObjectClassInArray:^NSDictionary *{
+        return @{@"editors": @"SYEditor", @"items":@"SYRecommenderItem"};
+    }];
+    [SYRecommenderItem mj_setupObjectClassInArray:^NSDictionary *{
+        return @{@"recommenders":@"SYRecommender"};
+    }];
+
+    
+}
+
+
 + (void)getLauchImageWithCompleted:(Completed)completed failure:(Failure)failure {
     NSString *launchImgUrl = @"http://news-at.zhihu.com/api/4/start-image/720*1184";
     
@@ -51,11 +85,7 @@
 + (void)getDetailWithId:(long long)storyid completed:(Completed)completed {
     NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/news/%lld", storyid];
 
-    NSLog(@"---> %@", url);
     
-    [SYDetailStory mj_setupObjectClassInArray:^NSDictionary *{
-        return @{@"recommenders":@"SYRecommender"};
-    }];
     
     SYDetailStory *story = [SYCacheTool queryStoryWithId:storyid];
     
@@ -66,6 +96,7 @@
     
     [YSHttpTool GETWithURL:url params:nil success:^(id responseObject) {
         SYDetailStory *ds = [SYDetailStory mj_objectWithKeyValues:responseObject];
+        
         ds.htmlStr = [NSString stringWithFormat:@"<html><head><link rel=\"stylesheet\" href=%@></head><body>%@</body></html>", ds.css[0], ds.body];
         
         !completed ? : completed(ds);
@@ -88,9 +119,7 @@
 
 
 + (void)getLastestStoryWithCompleted:(Completed)completed {
-    [SYLastestParamResult mj_setupObjectClassInArray:^NSDictionary *{
-        return @{@"top_stories":@"SYStory", @"stories":@"SYStory"};
-    }];
+
     
     // 返回结果相同
     NSString *storyUrl = @"http://news-at.zhihu.com/api/4/stories/latest";
@@ -161,10 +190,6 @@
 + (void)getBeforeStroyWithDateString:(NSString *)dateString completed:(Completed)completed {
     NSString *beforeUrl = [NSString stringWithFormat:@"http://news.at.zhihu.com/api/4/news/before/%@", dateString];
 
-    [SYBeforeStoryResult mj_setupObjectClassInArray:^NSDictionary *{
-        return @{@"stories":@"SYStory"};
-    }];
-    
     id jsonObject = [SYCacheTool queryStoryListWithDateString:dateString];
 
     
@@ -174,7 +199,6 @@
         return;
     }
     
-    NSLog(@" 从网络中获取更多数据");
     
     [YSHttpTool GETWithURL:beforeUrl params:nil success:^(id responseObject) {
         SYBeforeStoryResult *result = [SYBeforeStoryResult mj_objectWithKeyValues:responseObject];
@@ -188,14 +212,7 @@
     
     NSString *themeUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/theme/%d", themeId];
     
-    [SYThemeItem mj_setupObjectClassInArray:^NSDictionary *{
-        return @{@"stories": @"SYStory", @"editors":@"SYEditor"};
-    }];
-    
-    [SYThemeItem mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
-        return @{@"desc":@"description"};
-    }];
-    
+
     [YSHttpTool GETWithURL:themeUrl params:nil success:^(id responseObject) {
         SYThemeItem *item = [SYThemeItem mj_objectWithKeyValues:responseObject];
         !completed ? : completed(item);
@@ -212,7 +229,6 @@
         return;
     }
     
-    NSLog(@"从网络中获取更多主题： %d", themeid);
     
     NSString *beforeUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/theme/%d/before/%lld", themeid, storyId];
     
@@ -233,12 +249,17 @@
 }
 
 
+
+
 + (void)getStoryRecommendersWithId:(long long)storyid completed:(Completed)completed {
     NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/story/%lld/recommenders", storyid];
-    NSLog(@": %@", url);
+
+    
     [YSHttpTool GETWithURL:url params:nil success:^(id responseObject) {
-        NSArray<SYEditor *> *editors = [SYEditor mj_objectArrayWithKeyValuesArray:responseObject[@"editors"]];
-        !completed ? : completed(editors);
+        SYRecommenderResult *result = [SYRecommenderResult mj_objectWithKeyValues:responseObject];
+      
+        
+        !completed ? : completed(result);
     } failure:nil];
 }
 

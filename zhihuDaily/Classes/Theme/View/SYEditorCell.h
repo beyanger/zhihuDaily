@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "SYEditor.h"
+#import "SYRecommender.h"
 
 @interface SYEditorCell : UITableViewCell
 
-@property (nonatomic, strong) SYEditor *editor;
+@property (nonatomic, strong) id editor;
+
++ (instancetype)editorCellWithTableView:(UITableView *)tableView;
+
++ (instancetype)recommenderCellWithTableView:(UITableView *)tableView;
+
 
 @end

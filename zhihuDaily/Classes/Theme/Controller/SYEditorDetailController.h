@@ -8,7 +8,8 @@
 
 #import "SYBaseViewController.h"
 #import "SYEditor.h"
+#import "SYRecommender.h"
 @interface SYEditorDetailController : SYBaseViewController
-@property (nonatomic, strong) SYEditor *editor;
+@property (nonatomic, strong)  id editor;
 
 @end
