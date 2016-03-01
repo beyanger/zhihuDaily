@@ -30,7 +30,7 @@ static FMDatabaseQueue *_zhihu_queue;
             [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_story (storyid INTEGER PRIMARY KEY, story BLOB);"];
             SYAccount *account = [SYAccount sharedAccount];
             
-            NSString *collection = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_story_%@ (id INTEGER PRIMARY KEY AUTOINCREMENT, storyid TEXT UNIQUE);", account.name.md5sum];
+            NSString *collection = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_story_%@ (id INTEGER PRIMARY KEY AUTOINCREMENT, storyid INTEGER UNIQUE, story BLOB);", account.name.md5sum];
             [db executeUpdate:collection];
             
             NSLog(@"%@", collection);
@@ -46,17 +46,19 @@ static FMDatabaseQueue *_zhihu_queue;
      return _zhihu_queue;
 }
 
-+ (NSArray<NSNumber *> *)queryCollectedStroy {
++ (NSArray *)queryCollectedStroy {
     NSMutableArray *collectedArray = [@[] mutableCopy];
     SYAccount *account = [SYAccount sharedAccount];
     
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[self queue] inDatabase:^(FMDatabase *db) {
-            NSString *sql = [NSString stringWithFormat:@"SELECT storyid FROM ct_story_%@ ORDER BY id DESC;", account.name.md5sum];
+            NSString *sql = [NSString stringWithFormat:@"SELECT story FROM ct_story_%@ ORDER BY id DESC;", account.name.md5sum];
             FMResultSet *rs = [db executeQuery:sql];
             while (rs.next) {
-                NSNumber *storyid = [rs objectForColumnIndex:0];
-                [collectedArray addObject:storyid];
+                NSData *storyid = [rs dataForColumnIndex:0];
+             
+                SYStory *story = [NSKeyedUnarchiver unarchiveObjectWithData:storyid];
+                [collectedArray addObject:story];
             }
         }];
     });
@@ -64,16 +66,28 @@ static FMDatabaseQueue *_zhihu_queue;
     return collectedArray.count >0 ? collectedArray : nil;
 }
 
-+ (void)cacheCollectedStoryId:(long long)storyid {
++ (void)cacheCollectionWithStory:(SYStory *)story {
     SYAccount *account = [SYAccount sharedAccount];
     
-    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:story];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[self queue] inDatabase:^(FMDatabase *db) {
-            NSString *sql = [NSString stringWithFormat:@"REPLACE INTO ct_story_%@ (storyid) VALUES (?);", account.name.md5sum];
-            [db executeUpdate:sql, @(storyid)];
+            NSString *sql = [NSString stringWithFormat:@"REPLACE INTO ct_story_%@ (storyid, story) VALUES (?, ?);", account.name.md5sum];
+            [db executeUpdate:sql, @(story.id), data];
         }];
     });
 }
+
++ (void)cancelCollectedWithStory:(SYStory *)story {
+    SYAccount *account = [SYAccount sharedAccount];
+    
+    [[self queue] inDatabase:^(FMDatabase *db) {
+        NSString *sql = [NSString stringWithFormat:@"DELETE FROM ct_story_%@ WHERE storyid = ?;", account.name.md5sum];
+        [db executeUpdate:sql, @(story.id)];
+    }];
+}
+
 
 
 

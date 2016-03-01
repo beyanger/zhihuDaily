@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYStoryListController.h"
 
-#import "SYBaseViewController.h"
-
-@interface SYThemeController : SYBaseViewController
+@interface SYThemeController : SYStoryListController
 
 @property (nonatomic, assign) int themeid;
 

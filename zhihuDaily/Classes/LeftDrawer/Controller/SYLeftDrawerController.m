@@ -17,6 +17,9 @@
 #import "SYLoginViewController.h"
 #import "SYAccount.h"
 #import "UIButton+WebCache.h"
+#import "SYCollectionController.h"
+
+
 @interface SYLeftDrawerController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray<SYTheme *> *dataSource;
 
@@ -84,6 +87,14 @@
         navi.navigationBar.hidden = YES;
         [self.mainController setCenterViewController:navi withCloseAnimation:YES completion:nil];
         return;
+    } else {
+        NSLog(@"sdfasdfasf");
+        SYCollectionController *cc = [[SYCollectionController alloc] init];;
+        
+        SYNavigationController *navi = [[SYNavigationController alloc] initWithRootViewController:cc];
+        navi.navigationBar.hidden = YES;
+        [self.mainController setCenterViewController:navi withCloseAnimation:YES completion:nil];
+        
     }
 }
 

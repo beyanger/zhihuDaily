@@ -14,9 +14,9 @@
 
 @interface SYCacheTool : NSObject
 
-+ (void)cacheCollectedStoryId:(long long)storyid;
-+ (NSArray<NSNumber *> *)queryCollectedStroy;
-
++ (void)cacheCollectionWithStory:(SYStory *)story;
++ (NSArray<SYStory *> *)queryCollectedStroy;
++ (void)cancelCollectedWithStory:(SYStory *)story;
 
 + (SYBeforeStoryResult *)queryStoryListWithDateString:(NSString *)dateString;
 + (void)cacheStoryListWithObject:(SYBeforeStoryResult *)respObject;

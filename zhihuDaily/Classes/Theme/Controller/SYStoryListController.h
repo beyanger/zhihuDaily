@@ -7,7 +7,14 @@
 //
 
 #import "SYBaseViewController.h"
+#import "SYDetailController.h"
 
-@interface SYStoryListController : SYBaseViewController
+@interface SYStoryListController : SYBaseViewController <UITableViewDataSource, UITableViewDelegate, SYDetailControllerDelegate>
+
+
+@property (nonatomic, strong) NSArray<SYStory *> *stories;
+
+
+- (UITableView *)tableView;
 
 @end

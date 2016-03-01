@@ -263,10 +263,14 @@
     NSArray *collted =  [SYCacheTool queryCollectedStroy];
     !completed ? : completed(collted);
 }
-+ (void)collectedStoryWithId:(long long)storyid {
-    
-    [SYCacheTool cacheCollectedStoryId:storyid];
 
++ (void)collectedWithStroy:(SYStory *)story {
+    [SYCacheTool cacheCollectionWithStory:story];
+}
+
++ (void)cancelCollectedWithStroy:(SYStory *)story {
+    
+    [SYCacheTool cancelCollectedWithStory:story];
 }
 
 

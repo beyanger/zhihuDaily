@@ -93,8 +93,8 @@ typedef void  (^Failure)();
 
 // 获取当前用户的收藏
 + (void)getColltedStoriesWithCompleted:(Completed)completed;
-+ (void)collectedStoryWithId:(long long)storyid;
-
++ (void)collectedWithStroy:(SYStory *)story;
++ (void)cancelCollectedWithStroy:(SYStory *)story;
 
 
 @end

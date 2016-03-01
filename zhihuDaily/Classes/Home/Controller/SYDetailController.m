@@ -297,7 +297,7 @@
 #pragma mark shareView delegate
 - (void)shareView:(SYShareView *)shareView didSelected:(NSUInteger)index {
     if (![SYAccount sharedAccount].isLogin) {
-        [SYZhihuTool collectedStoryWithId:self.story.id];
+        [SYZhihuTool collectedWithStroy:self.story];
         [MBProgressHUD showSuccess:@"缓存成功"];
     } else {
         SYLoginViewController *lvc = [[SYLoginViewController alloc] init];
@@ -321,9 +321,10 @@
                 self.topView.story = ds;
             } else if (ds.recommenders.count) { // 有推荐者
                 // 为推荐者插入一段40高度的hodler
-                NSString *headStr = [ds.htmlStr substringToIndex:200];
+                // 这里返回到数据有问题
+                //NSString *headStr = [ds.htmlStr substringToIndex:200];
                 NSString *insert = @"<div style=\"height:40px\"></div>";
-                NSRange loc = [headStr rangeOfString:insert];
+                NSRange loc = [ds.htmlStr rangeOfString:insert];
                 if (loc.location == NSNotFound) {
                     // 如果没找到高度为40 的holder，那么插入之
                     NSMutableString *htmlStr = [ds.htmlStr mutableCopy];
