@@ -64,23 +64,17 @@ static NSString *comment_reuseid = @"comment_reuseid";
 - (void)longPressHandler:(UILongPressGestureRecognizer *)longGesture {
     if (longGesture.state == UIGestureRecognizerStateEnded) {
         CGPoint location = [longGesture locationInView:self.tableView];
-        NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:location];
-        self.cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        if (self.cell) {
-            self.pannel = [self addCommentViewWithLocation:location];
-        }
+        self.pannel = [self addCommentViewWithLocation:location];
     } else if (longGesture.state == UIGestureRecognizerStateBegan) {
         [self removeCommentPannel];
     }
     
 }
 - (void)tapPressHandler:(UITapGestureRecognizer *)tapGesture {
-    [self removeCommentPannel];
-    CGPoint location = [tapGesture locationInView:self.tableView];
-    NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:location];
-    self.cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    
-    if (self.cell) {
+    if (self.pannel) {
+        [self removeCommentPannel];
+    } else {
+        CGPoint location = [tapGesture locationInView:self.tableView];
         self.pannel = [self addCommentViewWithLocation:location];
     }
 }
@@ -124,6 +118,12 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
 
 - (SYCommentPannel *)addCommentViewWithLocation:(CGPoint)location {
+    
+    NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:location];
+    self.cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    if (!self.cell) return self.pannel;
+    
+    
     SYCommentPannel *cv = [SYCommentPannel commentPannelWithLiked:self.cell.comment.isLike];
     cv.delegate  = self;
    
