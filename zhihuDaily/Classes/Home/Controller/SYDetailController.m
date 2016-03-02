@@ -51,6 +51,7 @@
 
 @property (nonatomic, strong) SYRecommenderResult *recommender;
 
+@property (nonatomic, assign) BOOL isCollected;
 
 @end
 
@@ -98,7 +99,10 @@
             
             break;
         case 3: { // share {
-            SYShareView *shareView = [SYShareView shareView];
+            
+         
+            
+            SYShareView *shareView = [SYShareView shareViewWithTitle:self.isCollected?@"取消收藏":@"收藏"];
             shareView.delegate = self;
             [shareView show];
         }
@@ -303,8 +307,14 @@
 #pragma mark shareView delegate
 - (void)shareView:(SYShareView *)shareView didSelected:(NSUInteger)index {
     if (![SYAccount sharedAccount].isLogin) {
-        [SYZhihuTool collectedWithStroy:self.story];
-        [MBProgressHUD showSuccess:@"收藏成功"];
+        if (self.isCollected) {
+            [MBProgressHUD showSuccess:@"取消收藏"];
+            [SYZhihuTool cancelCollectedWithStroy:self.story];
+        } else {
+            [MBProgressHUD showSuccess:@"收藏成功"];
+            [SYZhihuTool collectedWithStroy:self.story];
+        }
+        self.isCollected = !self.isCollected;
     } else {
         SYLoginViewController *lvc = [[SYLoginViewController alloc] init];
         [self presentViewController:lvc animated:YES completion:nil];
@@ -316,6 +326,10 @@
 - (void)setStory:(SYStory *)story {
     if (!story) return;
     _story = story;
+    
+
+    // 查询收藏状态
+    self.isCollected = [SYZhihuTool queryCollectedStatusWithStory:story];
     
     [SYZhihuTool getDetailWithId:self.story.id completed:^(id obj) {
         dispatch_async(dispatch_get_main_queue(), ^{

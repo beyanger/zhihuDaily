@@ -17,6 +17,8 @@
 
 + (void)cacheCollectionWithStory:(SYStory *)story;
 + (NSArray<SYStory *> *)queryCollectedStroy;
++ (BOOL)queryCollectedStatusWithStory:(SYStory *)story;
+
 + (void)cancelCollectedWithStory:(SYStory *)story;
 
 + (void)cacheCollectionWithTheme:(SYTheme *)theme;

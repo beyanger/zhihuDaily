@@ -15,7 +15,8 @@
 typedef NS_ENUM(NSInteger, SYStoryPositionType) {
     SYStoryPositionTypeFirst = 1,
     SYStoryPositionTypeLast = 2,
-    SYStoryPositionTypeOther = 3,
+    SYStoryPositionTypeOther = 4,
+    
 };
 
 @protocol SYDetailControllerDelegate <NSObject>

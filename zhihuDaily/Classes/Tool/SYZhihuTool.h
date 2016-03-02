@@ -93,6 +93,7 @@ typedef void  (^Failure)();
 
 // 获取当前用户的收藏的故事, 收藏或者取消
 + (void)getColltedStoriesWithCompleted:(Completed)completed;
++ (BOOL)queryCollectedStatusWithStory:(SYStory *)story;
 + (void)collectedWithStroy:(SYStory *)story;
 + (void)cancelCollectedWithStroy:(SYStory *)story;
 

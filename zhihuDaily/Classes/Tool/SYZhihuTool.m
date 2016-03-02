@@ -298,6 +298,11 @@
     !completed ? : completed(collted);
 }
 
++ (BOOL)queryCollectedStatusWithStory:(SYStory *)story {
+    return [SYCacheTool queryCollectedStatusWithStory:story];
+}
+
+
 + (void)collectedWithStroy:(SYStory *)story {
     [SYCacheTool cacheCollectionWithStory:story];
 }

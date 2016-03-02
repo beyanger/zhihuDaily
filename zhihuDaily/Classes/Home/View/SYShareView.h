@@ -20,11 +20,10 @@
 
 @interface SYShareView : UIView
 
-+ (instancetype)shareView;
-
 - (void)show;
 
 @property (nonatomic, weak) id<SYShareViewDelegate> delegate;
 
-
++ (instancetype)shareView;
++ (instancetype)shareViewWithTitle:(NSString *)title;
 @end

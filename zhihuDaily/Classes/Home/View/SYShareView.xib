@@ -6,10 +6,10 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYShareView"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="YFZ-fZ-IFl" customClass="SYShareView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="336"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="326"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分享这篇内容" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJY-vn-NQ8">
@@ -402,8 +402,7 @@
                     <animations/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="AzC-tS-XDd"/>
-                        <constraint firstAttribute="height" constant="36" id="Gvn-4X-IyN"/>
+                        <constraint firstAttribute="height" constant="36" id="AzC-tS-XDd"/>
                     </constraints>
                     <state key="normal" title="取消">
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -434,9 +433,11 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="cancelTop" destination="dj2-s3-EeF" id="Hpv-5S-HRF"/>
                 <outlet property="pageControl" destination="e1V-f3-1sB" id="dy1-LX-XO7"/>
+                <outlet property="titleButton" destination="XNh-pU-2OK" id="gec-D0-tY5"/>
             </connections>
-            <point key="canvasLocation" x="1106" y="-282"/>
+            <point key="canvasLocation" x="1106" y="-287"/>
         </view>
     </objects>
     <resources>

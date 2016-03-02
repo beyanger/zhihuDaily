@@ -11,13 +11,17 @@
 #import "SYLoginViewController.h"
 #import "AppDelegate.h"
 #import "SYAccount.h"
-
+#import "SYStory.h"
 
 @interface SYShareView () <UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
-
 @property (nonatomic, weak) UIView *coverView;
+@property (weak, nonatomic) IBOutlet UIButton *titleButton;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelTop;
+
+@property (nonatomic, assign) CGFloat yoffset;
 
 @end
 
@@ -65,14 +69,28 @@
     
     [UIView animateWithDuration:0.3 animations:^{
         cover.backgroundColor = SYColor(48, 48, 48, 0.6);
-        self.transform = CGAffineTransformMakeTranslation(0, -320);
+        self.transform = CGAffineTransformMakeTranslation(0, self.yoffset);
     }];
 }
 
 
 + (instancetype)shareView {
-    return [[NSBundle mainBundle] loadNibNamed:@"SYShareView" owner:nil options:nil].firstObject;
-    
+    return [self shareViewWithTitle:nil];
 }
 
+
++ (instancetype)shareViewWithTitle:(NSString *)title {
+    SYShareView *shareView = [[NSBundle mainBundle] loadNibNamed:@"SYShareView" owner:nil options:nil].firstObject;
+    if (title.length > 0) {
+        [shareView.titleButton setTitle:title forState:UIControlStateNormal];
+        shareView.yoffset = -320;
+        shareView.cancelTop.constant = 12;
+    } else {
+        [shareView.titleButton setTitle:@"取消" forState:UIControlStateNormal];
+        shareView.cancelTop.constant = -36;
+        shareView.yoffset = -320+48;
+    }
+
+    return shareView;
+}
 @end

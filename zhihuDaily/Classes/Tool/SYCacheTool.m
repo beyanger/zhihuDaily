@@ -64,6 +64,20 @@ static FMDatabaseQueue *_zhihu_queue;
     return collectedArray.count >0 ? collectedArray : nil;
 }
 
++ (BOOL)queryCollectedStatusWithStory:(SYStory *)story {
+    __block BOOL status = NO;
+    SYAccount *account = [SYAccount sharedAccount];
+    [[self queue] inDatabase:^(FMDatabase *db) {
+        NSString *sql = [NSString stringWithFormat:@"SELECT story FROM ct_story_%@ WHERE storyid = ? ;", account.name.md5sum];
+        FMResultSet *rs = [db executeQuery:sql, @(story.id)];
+        while (rs.next) {
+            status = YES;
+        }
+    }];
+    return status;
+}
+
+
 + (void)cacheCollectionWithStory:(SYStory *)story {
     SYAccount *account = [SYAccount sharedAccount];
     

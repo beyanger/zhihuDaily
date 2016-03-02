@@ -28,14 +28,16 @@
 
     self.tableView.tableFooterView = [[UIView alloc] init];
     
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [SYZhihuTool getColltedStoriesWithCompleted:^(id obj) {
         self.collectionStroy = obj;
         [self.tableView reloadData];
     }];
 }
-
-
-
 
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
