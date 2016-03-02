@@ -29,8 +29,6 @@ static NSString *theme_reuseid = @"useid";
     
     [self.view addSubview:self.tableView];
     
-    
-    
 }
 
 
@@ -94,8 +92,6 @@ static NSString *theme_reuseid = @"useid";
     return SYStoryPositionTypeOther;
 }
 
-
-
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] init];
@@ -107,6 +103,13 @@ static NSString *theme_reuseid = @"useid";
         [_tableView registerNib:[UINib nibWithNibName:@"SYTableViewCell" bundle:nil] forCellReuseIdentifier:theme_reuseid];
     }
     return _tableView;
+}
+
+- (NSArray<SYStory *> *)stories {
+    if ([self isKindOfClass:[SYStoryListController class]]) {
+        NSLog(@"你需要自己实现");
+    }
+    return nil;
 }
 
 @end

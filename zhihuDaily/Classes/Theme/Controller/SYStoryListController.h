@@ -12,8 +12,7 @@
 @interface SYStoryListController : SYBaseViewController <UITableViewDataSource, UITableViewDelegate, SYDetailControllerDelegate>
 
 
-@property (nonatomic, strong) NSArray<SYStory *> *stories;
-
+- (NSArray<SYStory *> *)stories;
 
 - (UITableView *)tableView;
 

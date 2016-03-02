@@ -28,6 +28,8 @@
 #import "SYAccount.h"
 #import "SYZhihuTool.h"
 #import "MBProgressHUD+YS.h"
+#import "AppDelegate.h"
+
 
 @interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate, UIScrollViewDelegate, SYImageViewDelegate, SYShareViewDelegate>
 
@@ -78,6 +80,18 @@
         make.centerY.mas_equalTo(ws.view.mas_bottom);
     }];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    delegate.mainController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
+}
+- (void)dealloc {
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    delegate.mainController.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
+}
+
+
 
 #pragma mark bottom navigation delegate
 - (void)storyNavigationView:(SYStoryNavigationView *)navView didClicked:(NSInteger)index {
@@ -298,7 +312,7 @@
 - (void)shareView:(SYShareView *)shareView didSelected:(NSUInteger)index {
     if (![SYAccount sharedAccount].isLogin) {
         [SYZhihuTool collectedWithStroy:self.story];
-        [MBProgressHUD showSuccess:@"缓存成功"];
+        [MBProgressHUD showSuccess:@"收藏成功"];
     } else {
         SYLoginViewController *lvc = [[SYLoginViewController alloc] init];
         [self presentViewController:lvc animated:YES completion:nil];

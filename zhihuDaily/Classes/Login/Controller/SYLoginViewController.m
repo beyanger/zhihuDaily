@@ -8,6 +8,7 @@
 
 #import "SYLoginViewController.h"
 #import "MBProgressHUD+YS.h"
+#import "AppDelegate.h"
 
 @interface SYLoginViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *sinaButton;
@@ -33,6 +34,16 @@
     Black_StatusBar;
     
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    delegate.mainController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
+}
+- (void)dealloc {
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    delegate.mainController.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -43,7 +43,6 @@
     
     self.centerViewController = homeController;
     self.leftDrawerViewController = drawerController;
-
 }
 
 
