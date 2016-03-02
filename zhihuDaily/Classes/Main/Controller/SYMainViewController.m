@@ -27,9 +27,7 @@
     self.maximumLeftDrawerWidth = 200;
     self.shouldStretchDrawer = NO;
     self.showsShadow = NO;
-    self.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
-    self.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
-    
+  
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openDrawer) name:OpenDrawer object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeDrawer) name:CloseDrawer object:nil];

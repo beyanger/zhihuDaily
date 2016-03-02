@@ -8,12 +8,37 @@
 
 #import "SYNavigationController.h"
 #import "AppDelegate.h"
+#import "SYCollectionController.h"
 
-@interface SYNavigationController ()
+@interface SYNavigationController () <UINavigationControllerDelegate>
 
 @end
 
 @implementation SYNavigationController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.delegate = self;
+}
+
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+    if ((navigationController.childViewControllers.count == 1 && [viewController isKindOfClass:[SYCollectionController class]]) || navigationController.childViewControllers.count > 1) {
+        delegate.mainController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
+    } else {
+        delegate.mainController.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
+    }
+    
+    NSLog(@"---- current: %d", delegate.mainController.openDrawerGestureModeMask);
+}
+
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
