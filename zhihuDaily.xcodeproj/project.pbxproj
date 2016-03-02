@@ -101,6 +101,8 @@
 		2FB9230C1C7EEBC6000A0A2D /* SYThemeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB9230B1C7EEBC6000A0A2D /* SYThemeItem.m */; };
 		2FB9230F1C7EEBE8000A0A2D /* SYEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB9230E1C7EEBE8000A0A2D /* SYEditor.m */; };
 		2FB923151C7F369A000A0A2D /* SYVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB923141C7F369A000A0A2D /* SYVersion.m */; };
+		2FC00D6C1C86C17B00756EE4 /* SYLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC00D6A1C86C17B00756EE4 /* SYLoginController.m */; };
+		2FC00D6D1C86C17B00756EE4 /* SYLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FC00D6B1C86C17B00756EE4 /* SYLoginController.xib */; };
 		2FC5874B1C79FDEB003C9A7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874A1C79FDEB003C9A7A /* main.m */; };
 		2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */; };
 		2FC587561C79FDEB003C9A7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587551C79FDEB003C9A7A /* Assets.xcassets */; };
@@ -369,6 +371,9 @@
 		2FB9230E1C7EEBE8000A0A2D /* SYEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEditor.m; sourceTree = "<group>"; };
 		2FB923131C7F369A000A0A2D /* SYVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYVersion.h; sourceTree = "<group>"; };
 		2FB923141C7F369A000A0A2D /* SYVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYVersion.m; sourceTree = "<group>"; };
+		2FC00D691C86C17B00756EE4 /* SYLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYLoginController.h; sourceTree = "<group>"; };
+		2FC00D6A1C86C17B00756EE4 /* SYLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYLoginController.m; sourceTree = "<group>"; };
+		2FC00D6B1C86C17B00756EE4 /* SYLoginController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYLoginController.xib; sourceTree = "<group>"; };
 		2FC587461C79FDEB003C9A7A /* 知乎日报.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "知乎日报.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5874A1C79FDEB003C9A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -863,6 +868,9 @@
 				2F6CF2941C80329400C4B346 /* SYLoginViewController.h */,
 				2F6CF2951C80329400C4B346 /* SYLoginViewController.m */,
 				2F6CF2961C80329400C4B346 /* SYLoginViewController.xib */,
+				2FC00D691C86C17B00756EE4 /* SYLoginController.h */,
+				2FC00D6A1C86C17B00756EE4 /* SYLoginController.m */,
+				2FC00D6B1C86C17B00756EE4 /* SYLoginController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1390,6 +1398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F3A8CC31C82846400D5C527 /* SYEditorCell.xib in Resources */,
+				2FC00D6D1C86C17B00756EE4 /* SYLoginController.xib in Resources */,
 				2F1319DA1C7E18A200FA146F /* SYWebViewController.xib in Resources */,
 				2FB923061C7EE232000A0A2D /* SYTopImageView.xib in Resources */,
 				2F6AC5F31C8167A50090CD8A /* SYLaunchController.xib in Resources */,
@@ -1548,6 +1557,7 @@
 				2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */,
 				2FC587FE1C7A0974003C9A7A /* MASViewAttribute.m in Sources */,
 				2F6CF2A51C80612100C4B346 /* SYBaseViewController.m in Sources */,
+				2FC00D6C1C86C17B00756EE4 /* SYLoginController.m in Sources */,
 				2F2CCBA71C7B08F600C45E3D /* SYStory.m in Sources */,
 				2F6AC5FF1C8173910090CD8A /* SYSettingSwitch.m in Sources */,
 				2F2CCBC71C7B0C1400C45E3D /* NSObject+MJKeyValue.m in Sources */,
@@ -1757,7 +1767,10 @@
 				INFOPLIST_FILE = zhihuDaily/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-all_load";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-lReactiveCocoa",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.beyanger.zhihuDaily;
 				PRODUCT_NAME = "知乎日报";
 			};
@@ -1774,7 +1787,10 @@
 				INFOPLIST_FILE = zhihuDaily/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-all_load";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-lReactiveCocoa",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.beyanger.zhihuDaily;
 				PRODUCT_NAME = "知乎日报";
 			};

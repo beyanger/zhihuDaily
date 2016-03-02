@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYLoginController">
+            <connections>
+                <outlet property="loginButton" destination="Ew3-fl-Zsf" id="H8X-L7-mIi"/>
+                <outlet property="nameLabel" destination="duN-v2-vBu" id="G2P-05-OQU"/>
+                <outlet property="password" destination="fgR-mV-2eh" id="ux3-2f-KWR"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login_Background" translatesAutoresizingMaskIntoConstraints="NO" id="hKM-Qn-JIO">
+                    <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                    <animations/>
+                </imageView>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="这里输入用户名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="duN-v2-vBu">
+                    <rect key="frame" x="170" y="214.5" width="260" height="51"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="260" id="9UG-Ow-o7m"/>
+                        <constraint firstAttribute="height" constant="51" id="NOG-J5-1ok"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ew3-fl-Zsf">
+                    <rect key="frame" x="170" y="424.5" width="260" height="51"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                    <state key="normal" title="登录" backgroundImage="Login_Button_Sina">
+                        <color key="titleColor" red="0.50588235290000005" green="0.52549019610000003" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="login:" destination="-1" eventType="touchUpInside" id="SGf-pW-YFW"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="这里输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fgR-mV-2eh">
+                    <rect key="frame" x="170" y="293" width="260" height="51"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                </textField>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="fgR-mV-2eh" firstAttribute="width" secondItem="duN-v2-vBu" secondAttribute="width" id="2V0-UU-FYR"/>
+                <constraint firstItem="fgR-mV-2eh" firstAttribute="height" secondItem="duN-v2-vBu" secondAttribute="height" id="5q4-YB-TrK"/>
+                <constraint firstItem="hKM-Qn-JIO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9uU-GA-07E"/>
+                <constraint firstItem="duN-v2-vBu" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="HmT-CA-KKr"/>
+                <constraint firstAttribute="bottom" secondItem="hKM-Qn-JIO" secondAttribute="bottom" id="PCF-av-5o5"/>
+                <constraint firstItem="duN-v2-vBu" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-60" id="QTr-En-sMH"/>
+                <constraint firstItem="fgR-mV-2eh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WjT-af-X0N"/>
+                <constraint firstItem="fgR-mV-2eh" firstAttribute="top" secondItem="duN-v2-vBu" secondAttribute="bottom" constant="28" id="bhU-6i-d1V"/>
+                <constraint firstItem="Ew3-fl-Zsf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="deM-2v-xdE"/>
+                <constraint firstItem="Ew3-fl-Zsf" firstAttribute="top" secondItem="fgR-mV-2eh" secondAttribute="bottom" constant="80" id="el5-G7-akC"/>
+                <constraint firstAttribute="trailing" secondItem="hKM-Qn-JIO" secondAttribute="trailing" id="gdg-8O-SpN"/>
+                <constraint firstItem="hKM-Qn-JIO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="hNn-2I-72Y"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="Login_Background" width="320" height="506"/>
+        <image name="Login_Button_Sina" width="260" height="51"/>
+    </resources>
+</document>

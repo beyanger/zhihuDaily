@@ -55,12 +55,7 @@
     self.bottomContainer.layer.shadowOpacity = 0;
     self.bottomContainer.layer.shadowRadius = 5.;
     
-    SYAccount *account = [SYAccount sharedAccount];
-    
-    [self.avatarBtn sd_setImageWithURL:[NSURL URLWithString:account.avatar] forState:UIControlStateNormal];
-    [self.avatarBtn setTitle:account.name forState:UIControlStateNormal];
-    
-}
+ }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -73,6 +68,12 @@
     [collected addObjectsFromArray:notCollected];
     self.dataSource = collected;
     [self.tableView reloadData];
+    
+    // 更新头像状态
+    SYAccount *account = [SYAccount sharedAccount];
+    NSLog(@"--dfs> %@, %@", account.avatar,account.name);
+    [self.avatarBtn sd_setImageWithURL:[NSURL URLWithString:account.avatar] forState:UIControlStateNormal];
+    [self.avatarBtn setTitle:account.name forState:UIControlStateNormal];
 }
 
 
@@ -117,17 +118,8 @@
     return self.dataSource.count;
 }
 - (SYLeftDrawerCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *reuse_id = @"main_reuseid";
-    SYLeftDrawerCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse_id];
-    if (!cell) {
-        cell = [[SYLeftDrawerCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuse_id];
-        
-        UIView *bgView = [[UIView alloc] initWithFrame:cell.frame];
-        bgView.backgroundColor = SYColor(21, 26, 31, 1.0);
-        cell.selectedBackgroundView = bgView;
-        cell.backgroundColor = SYColor(26, 31, 36, 1.0);
-        cell.textLabel.textColor = [UIColor whiteColor];
-    }
+
+    SYLeftDrawerCell *cell = [SYLeftDrawerCell cellWithTableView:tableView];
     cell.theme = self.dataSource[indexPath.row];
     return cell;
 }

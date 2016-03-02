@@ -29,7 +29,7 @@
 #import "SYZhihuTool.h"
 #import "MBProgressHUD+YS.h"
 #import "AppDelegate.h"
-
+#import "SYLoginController.h"
 
 @interface SYDetailController () <UIWebViewDelegate, SYStoryNavigationViewDelegate, UIScrollViewDelegate, SYImageViewDelegate, SYShareViewDelegate>
 
@@ -57,6 +57,7 @@
 
 @implementation SYDetailController
 
+#pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -82,7 +83,13 @@
     }];
 }
 
-
+#pragma mark event action
+- (void)tapHandler {
+    SYRecommendController *rc = [[SYRecommendController alloc] init];
+    NSArray *recommender = [self.recommender.editors arrayByAddingObjectsFromArray:self.recommender.items.lastObject.recommenders];
+    rc.editors = recommender;
+    [self.navigationController pushViewController:rc animated:YES];
+}
 
 
 #pragma mark bottom navigation delegate
@@ -217,7 +224,7 @@
         transform = CGAffineTransformMakeTranslation(0, -kScreenHeight);
     }
     if (!story) return;
-
+    
     // 切换过程动画
     UIView *v = [self.view snapshotViewAfterScreenUpdates:NO];
     self.story = story;
@@ -242,7 +249,7 @@
         if (yoffset > 220) Black_StatusBar;
         else White_StatusBar;
     } else Black_StatusBar;
-
+    
     
     if (yoffset < 0) {
         if (self.topView == [self currentTopView]) {
@@ -279,6 +286,7 @@
     }
 }
 
+
 #pragma mark imageView delegate
 - (NSString *)prevImageOfImageView:(SYImageView *)imageView current:(NSString *)current {
     NSInteger location = [self locateImage:current];
@@ -306,7 +314,7 @@
 
 #pragma mark shareView delegate
 - (void)shareView:(SYShareView *)shareView didSelected:(NSUInteger)index {
-    if (![SYAccount sharedAccount].isLogin) {
+    if ([SYAccount sharedAccount].isLogin) {
         if (self.isCollected) {
             [MBProgressHUD showSuccess:@"取消收藏"];
             [SYZhihuTool cancelCollectedWithStroy:self.story];
@@ -316,18 +324,21 @@
         }
         self.isCollected = !self.isCollected;
     } else {
-        SYLoginViewController *lvc = [[SYLoginViewController alloc] init];
-        [self presentViewController:lvc animated:YES completion:nil];
+        SYLoginController *loginvc = [[SYLoginController alloc] init];
+        [self presentViewController:loginvc animated:YES completion:nil];
+        
     }
-
+    
 }
 
-#pragma setter & getter
+
+
+#pragma mark setter & getter
 - (void)setStory:(SYStory *)story {
     if (!story) return;
     _story = story;
     
-
+    
     // 查询收藏状态
     self.isCollected = [SYZhihuTool queryCollectedStatusWithStory:story];
     
@@ -384,14 +395,6 @@
     }];
 }
 
-- (UIView *)currentTopView {
-    if (!self.topView.hidden) {
-        return self.topView;
-    } else if (!self.headerView.hidden) {
-        return self.headerView;
-    }
-    return nil;
-}
 
 - (SYTopView *)topView {
     if (!_topView) {
@@ -403,6 +406,7 @@
     return _topView;
 }
 
+
 - (SYTableHeader *)headerView {
     if (!_headerView) {
         _headerView = [SYTableHeader headerViewWitTitle:@"推荐者" hidenRight:YES];
@@ -413,13 +417,6 @@
         _headerView.hidden = YES;
     }
     return _headerView;
-}
-
-- (void)tapHandler {
-    SYRecommendController *rc = [[SYRecommendController alloc] init];
-    NSArray *recommender = [self.recommender.editors arrayByAddingObjectsFromArray:self.recommender.items.lastObject.recommenders];
-    rc.editors = recommender;
-    [self.navigationController pushViewController:rc animated:YES];
 }
 
 - (UIWebView *)webView {
@@ -485,5 +482,13 @@
     return _storyNav;
 }
 
+- (UIView *)currentTopView {
+    if (!self.topView.hidden) {
+        return self.topView;
+    } else if (!self.headerView.hidden) {
+        return self.headerView;
+    }
+    return nil;
+}
 
 @end

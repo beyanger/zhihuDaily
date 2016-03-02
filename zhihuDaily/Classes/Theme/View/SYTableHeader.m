@@ -37,6 +37,7 @@
     for (NSUInteger i = 0; i < 5; i++) {
         if (i < avatars.count) {
             [self.editorsImage[i] sd_setImageWithURL:[NSURL URLWithString:avatars[i]]];
+            NSLog(@"%@", avatars[i]);
         } else {
             self.editorsImage[i].image = nil;
         }

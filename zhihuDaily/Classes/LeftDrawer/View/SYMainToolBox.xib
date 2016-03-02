@@ -26,6 +26,15 @@
                                     <inset key="imageEdgeInsets" minX="0.0" minY="-15" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="设置" image="Menu_Icon_Setting"/>
                                 </button>
+                                <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKW-2n-gkn">
+                                    <rect key="frame" x="0.0" y="0.0" width="89" height="60"/>
+                                    <animations/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                    <inset key="contentEdgeInsets" minX="15" minY="5" maxX="0.0" maxY="0.0"/>
+                                    <inset key="titleEdgeInsets" minX="-18" minY="20" maxX="0.0" maxY="0.0"/>
+                                    <inset key="imageEdgeInsets" minX="5" minY="-15" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="收藏" image="Menu_Icon_Collect"/>
+                                </button>
                                 <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4T-70-WDT">
                                     <rect key="frame" x="89" y="0.0" width="89" height="60"/>
                                     <animations/>
@@ -34,15 +43,6 @@
                                     <inset key="titleEdgeInsets" minX="-18" minY="20" maxX="0.0" maxY="0.0"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="-15" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="消息" image="Menu_Icon_Message"/>
-                                </button>
-                                <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKW-2n-gkn">
-                                    <rect key="frame" x="0.0" y="0.0" width="89" height="60"/>
-                                    <animations/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                    <inset key="contentEdgeInsets" minX="15" minY="5" maxX="0.0" maxY="0.0"/>
-                                    <inset key="titleEdgeInsets" minX="-18" minY="20" maxX="0.0" maxY="0.0"/>
-                                    <inset key="imageEdgeInsets" minX="0.0" minY="-15" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="收藏" image="Menu_Icon_Collect"/>
                                 </button>
                             </subviews>
                             <animations/>

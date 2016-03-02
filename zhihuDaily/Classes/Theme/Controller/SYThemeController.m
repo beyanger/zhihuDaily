@@ -39,6 +39,7 @@
     [self.sy_header addSubview:self.collectBtn];
     [self.view bringSubviewToFront:self.sy_header];
     self.sy_attachScrollView = self.tableView;
+    self.tableView.tableHeaderView = self.tableHeader;
 }
 
 

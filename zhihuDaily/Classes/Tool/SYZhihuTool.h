@@ -24,8 +24,12 @@
 #import "SYStory.h"
 #import "SYRecommenderResult.h"
 #import "SYRecommenderItem.h"
+#import "SYAccount.h"
+
+
 typedef void (^Completed)(id obj);
 
+typedef void (^Success)();
 typedef void  (^Failure)();
 
 @interface SYZhihuTool : NSObject
@@ -102,5 +106,6 @@ typedef void  (^Failure)();
 + (void)cancelCollectedWithTheme:(SYTheme *)theme;
 
 
++ (void)loginWithName:(NSString *)name password:(NSString *)password success:(Success)success failure:(Failure)failure;
 
 @end

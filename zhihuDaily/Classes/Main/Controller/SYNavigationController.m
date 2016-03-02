@@ -35,12 +35,6 @@
 }
 
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated {
     // 当一级页面需要返回时，打开抽屉
     if (self.childViewControllers.count == 1) {

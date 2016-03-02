@@ -46,6 +46,12 @@ static NSString *comment_reuseid = @"comment_reuseid";
     [self.tableView reloadData];
 }
 
+
+- (void)dealloc {
+    [self removeCommentPannel];
+}
+
+
 - (void)setupTableView {
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, kScreenWidth, kScreenHeight-100) style:UITableViewStylePlain];
     
@@ -61,6 +67,8 @@ static NSString *comment_reuseid = @"comment_reuseid";
     [self.tableView registerNib:[UINib nibWithNibName:@"SYCommentCell" bundle:nil] forCellReuseIdentifier:comment_reuseid];
 }
 
+
+#pragma mark event action
 - (void)longPressHandler:(UILongPressGestureRecognizer *)longGesture {
     if (longGesture.state == UIGestureRecognizerStateEnded) {
         CGPoint location = [longGesture locationInView:self.tableView];
@@ -77,11 +85,6 @@ static NSString *comment_reuseid = @"comment_reuseid";
         CGPoint location = [tapGesture locationInView:self.tableView];
         self.pannel = [self addCommentViewWithLocation:location];
     }
-}
-
-- (void)setParam:(SYCommentParam *)param {
-    _param = param;
-    [self setupDataSource];
 }
 
 
@@ -101,6 +104,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
     [self removeCommentPannel];
 }
 
+#pragma mark private
 - (void)removeCommentPannel {
     
     SYCommentPannel *pannel = self.pannel;
@@ -118,7 +122,6 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
 
 - (SYCommentPannel *)addCommentViewWithLocation:(CGPoint)location {
-    
     NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:location];
     self.cell = [self.tableView cellForRowAtIndexPath:indexPath];
     if (!self.cell) return self.pannel;
@@ -137,11 +140,6 @@ static NSString *comment_reuseid = @"comment_reuseid";
         cv.center = CGPointMake(location.x, location.y-20);
     }
     
-    
-    NSLog(@"%@", NSStringFromCGRect(cv.frame));
-    // 添加一个遮罩
-
-
     cv.alpha = 0;
     [self.tableView addSubview:cv];
     [UIView animateWithDuration:0.5 animations:^{
@@ -183,9 +181,6 @@ static NSString *comment_reuseid = @"comment_reuseid";
 }
 
 
-- (void)dealloc {
-    [self removeCommentPannel];
-}
 
 #pragma mark - Table view data source
 
@@ -227,13 +222,10 @@ static NSString *comment_reuseid = @"comment_reuseid";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     CGFloat height =  [tableView fd_heightForCellWithIdentifier:comment_reuseid configuration:^(SYCommentCell *cell) {
-
         if (!indexPath.section && self.allComments.firstObject.count) {
             cell.comment = self.allComments[indexPath.section][indexPath.row];
             return;
         }
-        
-        
         cell.comment = self.allComments.lastObject[indexPath.row];
     }];
     
@@ -244,6 +236,14 @@ static NSString *comment_reuseid = @"comment_reuseid";
     [self removeCommentPannel];
 }
 
+
+#pragma mark setter & getter
+
+
+- (void)setParam:(SYCommentParam *)param {
+    _param = param;
+    [self setupDataSource];
+}
 
 - (NSMutableArray<NSArray<SYComment *> *> *)allComments {
     if (!_allComments) {

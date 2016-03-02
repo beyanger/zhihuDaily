@@ -20,16 +20,16 @@ static char TAG_ACTIVITY_SHOW;
 - (void)sd_setImageWithURL:(NSURL *)url {
 
     
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    BOOL nopic = [ud boolForKey:@"移动网络下载图片"];
-    if (!nopic) {
-        self.image = [UIImage imageNamed:@"Management_Placeholder"];
-        return;
-    }
+//    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+//    BOOL nopic = [ud boolForKey:@"移动网络下载图片"];
+//    if (!nopic) {
+//        self.image = [UIImage imageNamed:@"Management_Placeholder"];
+//        return;
+//    }
+//
+//    [self sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"Management_Placeholder"]];
 
-    [self sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"Management_Placeholder"]];
-
-    //[self sd_setImageWithURL:url placeholderImage:nil options:0 progress:nil completed:nil];
+    [self sd_setImageWithURL:url placeholderImage:nil options:0 progress:nil completed:nil];
 }
 
 - (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder {

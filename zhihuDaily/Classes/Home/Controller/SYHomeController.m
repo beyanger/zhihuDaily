@@ -54,6 +54,7 @@ static NSString *reuseid = @"useid";
     return _storyGroup;
 }
 
+#pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     White_StatusBar;
@@ -67,13 +68,13 @@ static NSString *reuseid = @"useid";
     [self titleLabel];
 }
 
+
+#pragma mark private method
 - (void)setupTableView {
     [self.tableView registerNib:[UINib nibWithNibName:@"SYTableViewCell" bundle:nil] forCellReuseIdentifier:@"useid"];
     
     [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
-    
     [self reload];
-    
 }
 
 - (void)reload {
@@ -106,18 +107,11 @@ static NSString *reuseid = @"useid";
     }];
 }
 
-
-
+#pragma mark event action
 - (void)didClickedMenuButton:(UIButton *)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:ToggleDrawer object:nil];
 }
 
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
@@ -181,7 +175,16 @@ static NSString *reuseid = @"useid";
     }
 }
 
-// top story 轮播器的代理方法
+#pragma mark scrollView delegate
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (scrollView.contentOffset.y <= -80) {
+        [self reload];
+    }
+}
+
+
+
+#pragma mark  图片轮播器轮播器的代理方法
 - (void)pictureView:(SYPicturesView *)picturesView clickedIndex:(NSInteger)index {
 
     if (index < 0 || index >= self.topStory.count) return;
@@ -190,17 +193,7 @@ static NSString *reuseid = @"useid";
     [self gotoDetailControllerWithStory:story];
 }
 
-- (void)gotoDetailControllerWithStory:(SYStory *)story {
-    
-    SYDetailController *dc = [[SYDetailController alloc] init];
-    dc.delegate =self;
-    dc.story = story;
-    
-
-    [self.navigationController pushViewController:dc animated:YES];
-}
-
-
+#pragma mark detailController delegate
 struct SYPoint {
     NSInteger x;
     NSInteger y;
@@ -256,12 +249,18 @@ typedef struct SYPoint SYPoint;
     return SYStoryPositionTypeOther;
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if (scrollView.contentOffset.y <= -80) {
-        [self reload];
-    }
+
+- (void)gotoDetailControllerWithStory:(SYStory *)story {
+    
+    SYDetailController *dc = [[SYDetailController alloc] init];
+    dc.delegate =self;
+    dc.story = story;
+    
+    [self.navigationController pushViewController:dc animated:YES];
 }
 
+
+#pragma mark setter & getter
 - (UITableView *)tableView {
     if (!_tableView) {
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, kScreenWidth, kScreenHeight-20) style:UITableViewStylePlain];
@@ -335,7 +334,7 @@ typedef struct SYPoint SYPoint;
 }
 
 
-
+#pragma mark KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
 
     if ([keyPath isEqualToString:@"contentOffset"]) {

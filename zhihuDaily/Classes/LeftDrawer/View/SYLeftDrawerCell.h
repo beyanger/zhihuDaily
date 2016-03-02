@@ -11,4 +11,7 @@
 
 @interface SYLeftDrawerCell : UITableViewCell
 @property (nonatomic, strong) SYTheme *theme;
+
++ (instancetype)cellWithTableView:(UITableView *)tableView;
+
 @end

@@ -275,9 +275,6 @@
 
 
 
-+ (void)likeStoryWithId:(long long)storyid {
-    NSString *likeUrl = @"http://news-at.zhihu.com/api/4/vote/stories";
-}
 
 
 
@@ -320,6 +317,15 @@
 + (void)cancelCollectedWithTheme:(SYTheme *)theme {
     [SYCacheTool cancelCollectedWithTheme:theme];
 }
+
++ (void)loginWithName:(NSString *)name password:(NSString *)password success:(Success)success failure:(Failure)failure {
+    // 这里应该
+    BOOL result = [SYCacheTool loginWithName:name password:password];
+    
+    result ? (!success? :success()) : (!failure? :failure());
+}
+
+
 
 
 

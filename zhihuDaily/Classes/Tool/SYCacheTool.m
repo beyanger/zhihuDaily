@@ -24,10 +24,18 @@ static FMDatabaseQueue *_zhihu_queue;
         NSString *dbName = [NSString stringWithFormat:@"%@.cached.sqlite", @"zhihu"];
         NSString *pathName = [path stringByAppendingPathComponent:dbName];
         
+        NSLog(@"---> %@", path);
+        
         _zhihu_queue = [FMDatabaseQueue databaseQueueWithPath:pathName];
         [_zhihu_queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_storylist (date INTEGER PRIMARY KEY, storylist BLOB);"];
             [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_story (storyid INTEGER PRIMARY KEY, story BLOB);"];
+           
+            
+            NSString *userLogin = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_user (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE, password TEXT);"];
+            [db executeUpdate:userLogin];
+            
+
             SYAccount *account = [SYAccount sharedAccount];
             
             NSString *collection = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_story_%@ (id INTEGER PRIMARY KEY AUTOINCREMENT, storyid INTEGER UNIQUE, story BLOB);", account.name.md5sum];
@@ -35,7 +43,6 @@ static FMDatabaseQueue *_zhihu_queue;
             
             NSString *collectedTheme = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_theme_%@ (id INTEGER PRIMARY KEY AUTOINCREMENT, themeid INTEGER UNIQUE, theme BLOB);", account.name.md5sum];
             [db executeUpdate:collectedTheme];
-            
         }];
     });
     
@@ -130,6 +137,8 @@ static FMDatabaseQueue *_zhihu_queue;
     
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[self queue] inDatabase:^(FMDatabase *db) {
+            
+            NSLog(@"---> %@, %d", account.name, account.isLogin);
             NSString *sql = [NSString stringWithFormat:@"SELECT theme FROM ct_theme_%@ ORDER BY id DESC;", account.name.md5sum];
             FMResultSet *rs = [db executeQuery:sql];
             while (rs.next) {
@@ -143,13 +152,6 @@ static FMDatabaseQueue *_zhihu_queue;
     
     return collectedArray.count >0 ? collectedArray : nil;
 }
-
-
-
-
-
-
-
 
 
 + (SYBeforeStoryResult *)queryStoryListWithDateString:(NSString *)dateString {
@@ -284,6 +286,37 @@ static FMDatabaseQueue *_zhihu_queue;
         }];
     });
     return storyArray;
+}
+
+
++ (BOOL)loginWithName:(NSString *)name password:(NSString *)password {
+    __block BOOL success = NO;
+    NSString *sql = @"SELECT password FROM ct_user WHERE name = ?;";
+    [[self queue] inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:sql, name];
+        int count = 0;
+        while (rs.next) {
+            NSString *pwd = [rs objectForColumnIndex:0];
+            if ([pwd isEqualToString:password]) {
+                success = YES;
+            }
+            count++;
+        }
+        if (count == 0) {
+            success = YES;
+            NSString *insert = @"INSERT INTO ct_user (name, password) VALUES (?, ?);";
+            [db executeUpdate:insert, name, password];
+            
+            // 新用户，需要为新用户创建数据表
+            NSString *collection = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_story_%@ (id INTEGER PRIMARY KEY AUTOINCREMENT, storyid INTEGER UNIQUE, story BLOB);", name.md5sum];
+            [db executeUpdate:collection];
+            NSString *collectedTheme = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_theme_%@ (id INTEGER PRIMARY KEY AUTOINCREMENT, themeid INTEGER UNIQUE, theme BLOB);", name.md5sum];
+            [db executeUpdate:collectedTheme];
+        }
+    }];
+    
+    
+    return success;
 }
 
 

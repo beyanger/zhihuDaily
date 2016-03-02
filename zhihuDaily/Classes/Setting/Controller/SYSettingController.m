@@ -18,6 +18,8 @@
 #import "SYLoginViewController.h"
 #import "SYAccount.h"
 #import "UIImageView+WebCache.h"
+#import "SYLoginController.h"
+
 
 @interface SYSettingController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -104,7 +106,18 @@
     if (!_groups) {
         SYSettingGroup *group0 = [[SYSettingGroup alloc] init];
         
-        group0.items = @[[SYSettingArrow itemWithTitle:[SYAccount sharedAccount].name operation:nil destvc:[SYLoginViewController class]]];
+        
+        group0.items = @[[SYSettingArrow itemWithTitle:[SYAccount sharedAccount].name operation:nil destvc:[SYLoginController class]],
+                         [SYSettingText itemWithTitle:@"注销登录" operation:^{
+                             [[SYAccount sharedAccount] logout];
+                             [MBProgressHUD showSuccess:@"已经退出登录..."];
+                             
+                         } text:[SYAccount sharedAccount].name]
+                         
+                         ];
+        
+        
+        
         
         SYSettingGroup *group1 = [[SYSettingGroup alloc] init];
         group1.items = @[[SYSettingSwitch itemWithTitle:@"自动离线下载" operation:nil]];

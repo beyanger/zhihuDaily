@@ -24,13 +24,13 @@
 
 @implementation SYWebViewController
 
+#pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     White_StatusBar;
 
     [self.view addSubview:self.indicator];
-    
     
     [self updateButton];
    
@@ -41,10 +41,9 @@
 
 - (void)dealloc{
     Black_StatusBar;
-    NSLog(@"... dealloc");
 }
 
-
+#pragma mark event action
 - (IBAction)pop {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -62,16 +61,12 @@
     [shareView show];
 }
 
-- (UIActivityIndicatorView *)indicator {
-    if (!_indicator) {
-        _indicator  = [[UIActivityIndicatorView alloc] init];
-        _indicator.frame = CGRectMake(kScreenWidth-44, 20, 44, 44);
-    }
-    return _indicator;
+- (void)updateButton {
+    self.back.enabled = self.webView.canGoBack;
+    self.forward.enabled = self.webView.canGoForward;
 }
 
-
-
+#pragma webView delegate
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     [self.indicator startAnimating];
     [self updateButton];
@@ -82,20 +77,14 @@
     self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
 }
 
-
-- (void)updateButton {
-    self.back.enabled = self.webView.canGoBack;
-    self.forward.enabled = self.webView.canGoForward;
+#pragma mark getter & setter 
+- (UIActivityIndicatorView *)indicator {
+    if (!_indicator) {
+        _indicator  = [[UIActivityIndicatorView alloc] init];
+        _indicator.frame = CGRectMake(kScreenWidth-44, 20, 44, 44);
+    }
+    return _indicator;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
