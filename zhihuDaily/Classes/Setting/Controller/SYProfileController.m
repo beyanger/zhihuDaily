@@ -2,21 +2,32 @@
 //  SYProfileController.m
 //  zhihuDaily
 //
-//  Created by yang on 16/2/22.
+//  Created by yang on 16/3/2.
 //  Copyright © 2016年 yang. All rights reserved.
 //
 
 #import "SYProfileController.h"
+#import "UIImageView+WebCache.h"
+#import "SYAccount.h"
 
 @interface SYProfileController ()
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @end
 
 @implementation SYProfileController
 
+- (void)awakeFromNib {
+    self.avatarImageView.layer.cornerRadius = 40;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[SYAccount sharedAccount].avatar]];
+    self.nameLabel.text = [SYAccount sharedAccount].name;
+    
+    NSLog(@"sasdfsf");
 }
 
 - (void)didReceiveMemoryWarning {

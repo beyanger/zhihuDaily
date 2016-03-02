@@ -19,7 +19,7 @@
 #import "SYAccount.h"
 #import "UIImageView+WebCache.h"
 #import "SYLoginController.h"
-
+#import "SYProfileController.h"
 
 @interface SYSettingController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -88,6 +88,9 @@
     
     !item.operation?:item.operation();
     
+ 
+    
+    
     if ([item isKindOfClass:[SYSettingArrow class]]) {
         SYSettingArrow *arrow = (SYSettingArrow *)item;
         if (arrow.destvc) {
@@ -107,7 +110,7 @@
         SYSettingGroup *group0 = [[SYSettingGroup alloc] init];
         
         
-        group0.items = @[[SYSettingArrow itemWithTitle:[SYAccount sharedAccount].name operation:nil destvc:[SYLoginController class]],
+        group0.items = @[[SYSettingArrow itemWithTitle:[SYAccount sharedAccount].name operation:nil destvc:[SYAccount sharedAccount].isLogin?[SYProfileController class]:[SYLoginController class] ],
                          [SYSettingText itemWithTitle:@"注销登录" operation:^{
                              [[SYAccount sharedAccount] logout];
                              [MBProgressHUD showSuccess:@"已经退出登录..."];

@@ -26,7 +26,8 @@
     
     if (!cell) {
         cell = [[self alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuse_id];
-    
+        cell.imageView.layer.cornerRadius = 19;
+
         //cell.imageView.maskView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Menu_Avatar_Mask"]];
     }
     return cell;
@@ -39,6 +40,7 @@
     _item = item;
     self.textLabel.text = item.title;
     [self setupRightView];
+    
 }
 
 - (void)setupRightView {

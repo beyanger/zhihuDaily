@@ -35,7 +35,6 @@
 		2F2CCBC91C7B0C1400C45E3D /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBBF1C7B0C1400C45E3D /* NSString+MJExtension.m */; };
 		2F2CCBCC1C7B156500C45E3D /* SYMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBCB1C7B156500C45E3D /* SYMainViewController.m */; };
 		2F2CCBCF1C7B26F100C45E3D /* SYSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CCBCE1C7B26F100C45E3D /* SYSettingController.m */; };
-		2F37AB651C7B4A0F00D3CD65 /* SYProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB631C7B4A0F00D3CD65 /* SYProfileController.m */; };
 		2F37AB691C7B4EFF00D3CD65 /* SYDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB681C7B4EFF00D3CD65 /* SYDetailController.m */; };
 		2F37AB781C7B675100D3CD65 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB701C7B675100D3CD65 /* MMDrawerBarButtonItem.m */; };
 		2F37AB791C7B675100D3CD65 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F37AB731C7B675100D3CD65 /* MMDrawerController.m */; };
@@ -103,6 +102,8 @@
 		2FB923151C7F369A000A0A2D /* SYVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB923141C7F369A000A0A2D /* SYVersion.m */; };
 		2FC00D6C1C86C17B00756EE4 /* SYLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC00D6A1C86C17B00756EE4 /* SYLoginController.m */; };
 		2FC00D6D1C86C17B00756EE4 /* SYLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FC00D6B1C86C17B00756EE4 /* SYLoginController.xib */; };
+		2FC00D711C86F54300756EE4 /* SYProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC00D6F1C86F54300756EE4 /* SYProfileController.m */; };
+		2FC00D721C86F54300756EE4 /* SYProfileController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FC00D701C86F54300756EE4 /* SYProfileController.xib */; };
 		2FC5874B1C79FDEB003C9A7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874A1C79FDEB003C9A7A /* main.m */; };
 		2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */; };
 		2FC587561C79FDEB003C9A7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587551C79FDEB003C9A7A /* Assets.xcassets */; };
@@ -248,8 +249,6 @@
 		2F2CCBCB1C7B156500C45E3D /* SYMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYMainViewController.m; sourceTree = "<group>"; };
 		2F2CCBCD1C7B26F100C45E3D /* SYSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYSettingController.h; sourceTree = "<group>"; };
 		2F2CCBCE1C7B26F100C45E3D /* SYSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYSettingController.m; sourceTree = "<group>"; };
-		2F37AB621C7B4A0F00D3CD65 /* SYProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYProfileController.h; sourceTree = "<group>"; };
-		2F37AB631C7B4A0F00D3CD65 /* SYProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYProfileController.m; sourceTree = "<group>"; };
 		2F37AB671C7B4EFF00D3CD65 /* SYDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYDetailController.h; sourceTree = "<group>"; };
 		2F37AB681C7B4EFF00D3CD65 /* SYDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYDetailController.m; sourceTree = "<group>"; };
 		2F37AB6F1C7B675100D3CD65 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
@@ -374,6 +373,9 @@
 		2FC00D691C86C17B00756EE4 /* SYLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYLoginController.h; sourceTree = "<group>"; };
 		2FC00D6A1C86C17B00756EE4 /* SYLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYLoginController.m; sourceTree = "<group>"; };
 		2FC00D6B1C86C17B00756EE4 /* SYLoginController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYLoginController.xib; sourceTree = "<group>"; };
+		2FC00D6E1C86F54300756EE4 /* SYProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYProfileController.h; sourceTree = "<group>"; };
+		2FC00D6F1C86F54300756EE4 /* SYProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYProfileController.m; sourceTree = "<group>"; };
+		2FC00D701C86F54300756EE4 /* SYProfileController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYProfileController.xib; sourceTree = "<group>"; };
 		2FC587461C79FDEB003C9A7A /* 知乎日报.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "知乎日报.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5874A1C79FDEB003C9A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -588,8 +590,9 @@
 			children = (
 				2F2CCBCD1C7B26F100C45E3D /* SYSettingController.h */,
 				2F2CCBCE1C7B26F100C45E3D /* SYSettingController.m */,
-				2F37AB621C7B4A0F00D3CD65 /* SYProfileController.h */,
-				2F37AB631C7B4A0F00D3CD65 /* SYProfileController.m */,
+				2FC00D6E1C86F54300756EE4 /* SYProfileController.h */,
+				2FC00D6F1C86F54300756EE4 /* SYProfileController.m */,
+				2FC00D701C86F54300756EE4 /* SYProfileController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1406,6 +1409,7 @@
 				2F2CCB981C7B016500C45E3D /* SYTableViewCell.xib in Resources */,
 				2FC587561C79FDEB003C9A7A /* Assets.xcassets in Resources */,
 				2FCCAD121C83C70E00C19D35 /* SYCommentPannel.xib in Resources */,
+				2FC00D721C86F54300756EE4 /* SYProfileController.xib in Resources */,
 				2F0E2CC51C7BF071004FDA0F /* MBProgressHUD.bundle in Resources */,
 				2F37AB8B1C7B7F1600D3CD65 /* SYStoryNavigationView.xib in Resources */,
 				2F37AB831C7B6E0F00D3CD65 /* SYTopView.xib in Resources */,
@@ -1513,7 +1517,6 @@
 				2F2CCBC01C7B0C1400C45E3D /* MJExtensionConst.m in Sources */,
 				2FE707AF1C7DE3F4005CB13B /* SYLeftDrawerCell.m in Sources */,
 				2F2CCBC31C7B0C1400C45E3D /* MJPropertyKey.m in Sources */,
-				2F37AB651C7B4A0F00D3CD65 /* SYProfileController.m in Sources */,
 				2FC588021C7A0974003C9A7A /* View+MASAdditions.m in Sources */,
 				2FCCAD1A1C8401FA00C19D35 /* SYAccount.m in Sources */,
 				2F9996021C7C799D0072C8F0 /* SYDismisAnimation.m in Sources */,
@@ -1588,6 +1591,7 @@
 				2FC5879F1C7A0956003C9A7A /* AFHTTPRequestOperationManager.m in Sources */,
 				2FC587FC1C7A0974003C9A7A /* MASConstraintMaker.m in Sources */,
 				2FC587D81C7A096A003C9A7A /* SDWebImagePrefetcher.m in Sources */,
+				2FC00D711C86F54300756EE4 /* SYProfileController.m in Sources */,
 				2F6AC6021C8173AB0090CD8A /* SYSettingText.m in Sources */,
 				2FCCAD0C1C83BDB000C19D35 /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				2FC587D41C7A096A003C9A7A /* SDWebImageDecoder.m in Sources */,

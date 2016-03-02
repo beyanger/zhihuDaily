@@ -20,7 +20,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <animations/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="70g-cJ-vVV">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Login_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="70g-cJ-vVV">
                     <rect key="frame" x="237" y="457" width="125" height="45"/>
                     <animations/>
                 </imageView>
