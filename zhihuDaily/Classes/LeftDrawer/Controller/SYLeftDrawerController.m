@@ -62,6 +62,19 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //修改状态排序, 收藏的主题排在前面
+    NSMutableArray *collected = [@[] mutableCopy];
+    NSMutableArray *notCollected = [@[] mutableCopy];
+    [self.dataSource enumerateObjectsUsingBlock:^(SYTheme * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.isCollected ? [collected addObject:obj] : [notCollected addObject:obj];
+    }];
+    [collected addObjectsFromArray:notCollected];
+    self.dataSource = collected;
+    [self.tableView reloadData];
+}
+
 
 - (IBAction)login {
     SYLoginViewController *lvc = [[SYLoginViewController alloc] init];
@@ -72,6 +85,7 @@
     [SYZhihuTool getThemesWithCompleted:^(id obj) {
         SYTheme *home = [[SYTheme alloc] init];
         home.name = @"首页";
+        home.isCollected = YES;
         self.dataSource = [obj mutableCopy];
         [self.dataSource insertObject:home atIndex:0];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -88,7 +102,6 @@
         [self.mainController setCenterViewController:navi withCloseAnimation:YES completion:nil];
         return;
     } else {
-        NSLog(@"sdfasdfasf");
         SYCollectionController *cc = [[SYCollectionController alloc] init];;
         
         SYNavigationController *navi = [[SYNavigationController alloc] initWithRootViewController:cc];
@@ -114,7 +127,6 @@
         cell.selectedBackgroundView = bgView;
         cell.backgroundColor = SYColor(26, 31, 36, 1.0);
         cell.textLabel.textColor = [UIColor whiteColor];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     cell.theme = self.dataSource[indexPath.row];
     return cell;
@@ -125,7 +137,7 @@
     if (indexPath.row == 0) {
         [self.mainController setCenterViewController:self.naviHome withCloseAnimation:YES completion:nil];
     } else {
-        self.themeController.themeid = self.dataSource[indexPath.row].id;
+        self.themeController.theme = self.dataSource[indexPath.row];
         [self.mainController setCenterViewController:self.naviTheme withCloseAnimation:YES completion:nil];
     }
 }

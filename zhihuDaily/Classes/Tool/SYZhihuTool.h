@@ -91,10 +91,15 @@ typedef void  (^Failure)();
 + (void)getStoryRecommendersWithId:(long long)storyid completed:(Completed)completed;
 
 
-// 获取当前用户的收藏
+// 获取当前用户的收藏的故事, 收藏或者取消
 + (void)getColltedStoriesWithCompleted:(Completed)completed;
 + (void)collectedWithStroy:(SYStory *)story;
 + (void)cancelCollectedWithStroy:(SYStory *)story;
+
+// 收藏或者取消
++ (void)collectedWithTheme:(SYTheme *)theme;
++ (void)cancelCollectedWithTheme:(SYTheme *)theme;
+
 
 
 @end

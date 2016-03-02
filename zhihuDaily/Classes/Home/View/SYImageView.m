@@ -183,8 +183,5 @@
 }
 
 
-- (void)dealloc {
-    NSLog(@"sdfasfsdfas dealloc");
-}
 
 @end

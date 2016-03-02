@@ -26,17 +26,13 @@
     
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
 
+    // 在进入收藏页面(一级页面，若打开返回手势，会影响收藏页面上的操作)时， 或者进入到其他的二级页面，关闭返回手势
     if ((navigationController.childViewControllers.count == 1 && [viewController isKindOfClass:[SYCollectionController class]]) || navigationController.childViewControllers.count > 1) {
         delegate.mainController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
     } else {
         delegate.mainController.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
     }
-    
-    NSLog(@"---- current: %d", delegate.mainController.openDrawerGestureModeMask);
 }
-
-
-
 
 
 
@@ -46,9 +42,9 @@
 }
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated {
+    // 当一级页面需要返回时，打开抽屉
     if (self.childViewControllers.count == 1) {
        [[NSNotificationCenter defaultCenter] postNotificationName:ToggleDrawer object:nil];
-        return nil;
     }
     
     return [super popViewControllerAnimated:animated];

@@ -148,14 +148,48 @@
     } failure:nil];
 }
 
-
+// 获取主题列表
 + (void)getThemesWithCompleted:(Completed)completed {
     NSString *themeUrl = @"http://news-at.zhihu.com/api/4/themes";
     
+    
+    NSMutableArray<SYTheme *> *collectedThemes = [SYCacheTool queryCollectedTheme];
+    
     [YSHttpTool GETWithURL:themeUrl params:nil success:^(id responseObject) {
         NSArray<SYTheme *> *themeArray = [SYTheme mj_objectArrayWithKeyValuesArray:responseObject[@"others"]];
-        !completed ? : completed(themeArray);
+    
+        
+        NSMutableArray *newCollected = [@[] mutableCopy];
+        NSMutableArray *notCollected = [@[] mutableCopy];
+        
+
         for (SYTheme *theme in themeArray) {
+            BOOL flag = NO;
+            SYTheme *checkTheme = nil;
+            for (SYTheme *collected in collectedThemes) {
+                if (theme.id == collected.id) {
+                    flag = YES;
+                    checkTheme = collected;
+                    [newCollected addObject:theme];
+                    [SYCacheTool cacheCollectionWithTheme:theme]; // 将网络中最新获取到的主题缓存到数据库中
+                    break;
+                }
+            }
+            
+            if (flag) {
+                [collectedThemes removeObject:checkTheme];
+            } else {
+                [notCollected addObject:theme];
+            }
+        }
+        [newCollected addObjectsFromArray:collectedThemes];
+        [newCollected addObjectsFromArray:notCollected];
+        
+        !completed ? : completed(newCollected);
+        
+        for (SYTheme *theme in themeArray) {
+            //这里是创建主题表，以后有有该主题的新闻，则缓存到对应的表中， 并没有缓存该主题
+            //缓存的是该主题下的列表故事
             [SYCacheTool cacheTheme:theme.id];
         }
         
@@ -269,9 +303,19 @@
 }
 
 + (void)cancelCollectedWithStroy:(SYStory *)story {
-    
     [SYCacheTool cancelCollectedWithStory:story];
 }
+
+// 获取当前用户收藏的主题
+
+// 收藏或者取消
++ (void)collectedWithTheme:(SYTheme *)theme {
+    [SYCacheTool cacheCollectionWithTheme:theme];
+}
++ (void)cancelCollectedWithTheme:(SYTheme *)theme {
+    [SYCacheTool cancelCollectedWithTheme:theme];
+}
+
 
 
 @end

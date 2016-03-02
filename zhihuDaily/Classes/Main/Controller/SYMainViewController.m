@@ -41,6 +41,9 @@
     
     self.centerViewController = homeController;
     self.leftDrawerViewController = drawerController;
+    
+    self.closeDrawerGestureModeMask = MMCloseDrawerGestureModeAll;
+    
 }
 
 

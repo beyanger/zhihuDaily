@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "SYStoryListController.h"
+#import "SYTheme.h"
+
+
+@class SYThemeController;
+
 
 @interface SYThemeController : SYStoryListController
 
-@property (nonatomic, assign) int themeid;
+@property (nonatomic, strong) SYTheme *theme;
 
 @end

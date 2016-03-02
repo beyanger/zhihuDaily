@@ -82,13 +82,22 @@
 
 
 - (void)didClickedCollectBtn:(UIButton *)sender {
-    sender.selected ? [MBProgressHUD showError:@"已经取消关注"] : [MBProgressHUD showSuccess:@"成功关注"];
     sender.selected = !sender.selected;
+    self.theme.isCollected = sender.selected;
+    if (sender.selected) {
+        [MBProgressHUD showSuccess:@"已经成功关注"];
+        [SYZhihuTool collectedWithTheme:self.theme];
+    } else  {
+        [MBProgressHUD showError:@"已经取消关注"];
+        [SYZhihuTool cancelCollectedWithTheme:self.theme];
+    }
 }
 
 
-- (void)setThemeid:(int)themeid {
-    _themeid = themeid;
+- (void)setTheme:(SYTheme *)theme {
+    _theme = theme;
+    
+    self.collectBtn.selected = theme.isCollected;
     
     [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 
@@ -105,7 +114,7 @@
 }
 
 - (void)reload {
-    [SYZhihuTool getThemeWithId:self.themeid completed:^(id obj) {
+    [SYZhihuTool getThemeWithId:self.theme.id completed:^(id obj) {
         self.themeItem = obj;
         dispatch_async(dispatch_get_main_queue(), ^{
             self.title = self.themeItem.name;
@@ -127,7 +136,7 @@
 
 - (void)loadMoreData {
     long long storyid = self.stories.lastObject.id;
-    int themeid = self.themeid;
+    int themeid = self.theme.id;
     [SYZhihuTool getBeforeThemeStoryWithId:themeid storyId:storyid completed:^(id obj) {
         [self.themeItem.stories addObjectsFromArray:obj];
         [self.tableView reloadData];

@@ -33,8 +33,7 @@ static FMDatabaseQueue *_zhihu_queue;
             NSString *collection = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_story_%@ (id INTEGER PRIMARY KEY AUTOINCREMENT, storyid INTEGER UNIQUE, story BLOB);", account.name.md5sum];
             [db executeUpdate:collection];
             
-            NSLog(@"%@", collection);
-            NSString *collectedTheme = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_theme_%@ (id INTEGER PRIMARY KEY AUTOINCREMENT, themeid TEXT UNIQUE);", account.name.md5sum];
+            NSString *collectedTheme = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_theme_%@ (id INTEGER PRIMARY KEY AUTOINCREMENT, themeid INTEGER UNIQUE, theme BLOB);", account.name.md5sum];
             [db executeUpdate:collectedTheme];
             
         }];
@@ -49,7 +48,6 @@ static FMDatabaseQueue *_zhihu_queue;
 + (NSArray *)queryCollectedStroy {
     NSMutableArray *collectedArray = [@[] mutableCopy];
     SYAccount *account = [SYAccount sharedAccount];
-    
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[self queue] inDatabase:^(FMDatabase *db) {
             NSString *sql = [NSString stringWithFormat:@"SELECT story FROM ct_story_%@ ORDER BY id DESC;", account.name.md5sum];
@@ -87,6 +85,55 @@ static FMDatabaseQueue *_zhihu_queue;
         [db executeUpdate:sql, @(story.id)];
     }];
 }
+
+
++ (void)cacheCollectionWithTheme:(SYTheme *)theme {
+    SYAccount *account = [SYAccount sharedAccount];
+    
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:theme];
+    theme.isCollected = YES;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[self queue] inDatabase:^(FMDatabase *db) {
+            NSString *sql = [NSString stringWithFormat:@"REPLACE INTO ct_theme_%@ (themeid, theme) VALUES (?, ?);", account.name.md5sum];
+            [db executeUpdate:sql, @(theme.id), data];
+        }];
+    });
+}
+
++ (void)cancelCollectedWithTheme:(SYTheme *)theme {
+    SYAccount *account = [SYAccount sharedAccount];
+    
+    [[self queue] inDatabase:^(FMDatabase *db) {
+        NSString *sql = [NSString stringWithFormat:@"DELETE FROM ct_theme_%@ WHERE themeid = ?;", account.name.md5sum];
+        [db executeUpdate:sql, @(theme.id)];
+    }];
+}
+
++ (NSMutableArray *)queryCollectedTheme {
+    NSMutableArray *collectedArray = [@[] mutableCopy];
+    SYAccount *account = [SYAccount sharedAccount];
+    
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [[self queue] inDatabase:^(FMDatabase *db) {
+            NSString *sql = [NSString stringWithFormat:@"SELECT theme FROM ct_theme_%@ ORDER BY id DESC;", account.name.md5sum];
+            FMResultSet *rs = [db executeQuery:sql];
+            while (rs.next) {
+                NSData *data = [rs dataForColumnIndex:0];
+                
+                SYTheme *theme = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                [collectedArray addObject:theme];
+            }
+        }];
+    });
+    
+    return collectedArray.count >0 ? collectedArray : nil;
+}
+
+
+
+
+
 
 
 
@@ -254,8 +301,11 @@ static FMDatabaseQueue *_zhihu_queue;
     NSArray *tableArray = [self queryTables];
     [[self queue] inDatabase:^(FMDatabase *db) {
         for (NSString *table in tableArray) {
-            NSString *sql = [@"DELETE FROM " stringByAppendingString:table];
-            [db executeUpdate:sql];
+            // 这里只需要清除缓存的主页故事和主题故事， 不需要清除收藏数据
+            if (![table hasPrefix:@"ct_"]) {
+                NSString *sql = [@"DELETE FROM " stringByAppendingString:table];
+                [db executeUpdate:sql];
+            }
         }
     }];
 }

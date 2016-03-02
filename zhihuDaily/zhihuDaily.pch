@@ -23,7 +23,6 @@
 #define CloseDrawer         @"leftdrawer_close"
 #define ToggleDrawer        @"leftdrawer_toggle"
 
-
 #define White_StatusBar    do {[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;} while (0)
 
 #define Black_StatusBar     do {[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;} while (0)

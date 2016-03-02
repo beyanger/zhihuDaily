@@ -144,6 +144,7 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     SYStoryPositionType position = [self.delegate detailController:self story:self.story];
+    // 这里代码看起来硌得慌....得改.... // 应该是需要封装一下...
     if (position == SYStoryPositionTypeFirst) {
         self.header.text = @"已经是第一篇";
         self.downArrow.hidden = YES;
@@ -157,7 +158,7 @@
     } else {
         self.header.text = @"载入上一篇";
         self.downArrow.hidden = NO;
-        self.header.text = @"已经是最后一篇了";
+        self.footer.text = @"已经是最后一篇了";
         self.upArrow.hidden = YES;
     }
 }

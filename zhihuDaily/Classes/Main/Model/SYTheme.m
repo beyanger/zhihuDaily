@@ -7,8 +7,10 @@
 //
 
 #import "SYTheme.h"
+#import "MJExtension.h"
 
 @implementation SYTheme
 
 
+MJCodingImplementation
 @end

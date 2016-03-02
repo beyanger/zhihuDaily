@@ -79,12 +79,14 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self removeTimer];
 }
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
     CGFloat x = self.pageControl.currentPage*kScreenWidth;
     [self.scrollerView setContentOffset:CGPointMake(x, 0) animated:YES];
-    
     [self addTimer];
 }
+
 
 
 - (void)nextImage {

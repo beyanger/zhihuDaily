@@ -22,4 +22,10 @@
  */
 @property (nonatomic, assign) int id;
 
+/**
+ *  是否被收藏
+ */
+@property (nonatomic, assign) BOOL isCollected;
+
+
 @end
