@@ -18,16 +18,17 @@
 
 @implementation SYProfileController
 
-- (void)awakeFromNib {
-    self.avatarImageView.layer.cornerRadius = 40;
-}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = @"关于我";
+    
+    self.avatarImageView.layer.cornerRadius = 40;
+    self.avatarImageView.clipsToBounds = YES;
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[SYAccount sharedAccount].avatar]];
     self.nameLabel.text = [SYAccount sharedAccount].name;
-    
-    NSLog(@"sasdfsf");
 }
 
 - (void)didReceiveMemoryWarning {

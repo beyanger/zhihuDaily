@@ -13,7 +13,7 @@
 #import "AppDelegate.h"
 #import "MBProgressHUD+YS.h"
 #import "SYCacheTool.h"
-
+#import "SYNetworkTool.h"
 
 
 @interface SYLaunchController ()
@@ -25,19 +25,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *url = [ud stringForKey:@"launchScreen"];
     
+    // 如果之前有缓存的图片，直接加载先~
     if (url) [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:url]];
-    
     
     SYMainViewController *mainvc = [[SYMainViewController alloc] init];
     [mainvc view];
     [SYZhihuTool getLauchImageWithCompleted:^(id obj) {
         [ud setObject:obj forKey:@"launchScreen"];
         [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:obj]];
-        
         
         AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         delegate.mainController = mainvc;

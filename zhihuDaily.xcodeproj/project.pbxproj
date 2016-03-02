@@ -104,6 +104,8 @@
 		2FC00D6D1C86C17B00756EE4 /* SYLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FC00D6B1C86C17B00756EE4 /* SYLoginController.xib */; };
 		2FC00D711C86F54300756EE4 /* SYProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC00D6F1C86F54300756EE4 /* SYProfileController.m */; };
 		2FC00D721C86F54300756EE4 /* SYProfileController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FC00D701C86F54300756EE4 /* SYProfileController.xib */; };
+		2FC00D741C86FBDF00756EE4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC00D731C86FBDF00756EE4 /* SystemConfiguration.framework */; };
+		2FC00D771C86FC3F00756EE4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC00D761C86FC3F00756EE4 /* Reachability.m */; };
 		2FC5874B1C79FDEB003C9A7A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874A1C79FDEB003C9A7A /* main.m */; };
 		2FC5874E1C79FDEB003C9A7A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */; };
 		2FC587561C79FDEB003C9A7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FC587551C79FDEB003C9A7A /* Assets.xcassets */; };
@@ -376,6 +378,9 @@
 		2FC00D6E1C86F54300756EE4 /* SYProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYProfileController.h; sourceTree = "<group>"; };
 		2FC00D6F1C86F54300756EE4 /* SYProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYProfileController.m; sourceTree = "<group>"; };
 		2FC00D701C86F54300756EE4 /* SYProfileController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYProfileController.xib; sourceTree = "<group>"; };
+		2FC00D731C86FBDF00756EE4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2FC00D751C86FC3F00756EE4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		2FC00D761C86FC3F00756EE4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		2FC587461C79FDEB003C9A7A /* 知乎日报.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "知乎日报.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5874A1C79FDEB003C9A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -527,6 +532,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FC00D741C86FBDF00756EE4 /* SystemConfiguration.framework in Frameworks */,
 				2FC7ED8C1C857D0000AAD71D /* Accelerate.framework in Frameworks */,
 				2F4F1A891C7FA12100AF3BDF /* libsqlite3.tbd in Frameworks */,
 				0C31255FFB97F1A1D9111E05 /* libPods.a in Frameworks */,
@@ -1136,6 +1142,8 @@
 		2FC588041C7A0B45003C9A7A /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				2FC00D751C86FC3F00756EE4 /* Reachability.h */,
+				2FC00D761C86FC3F00756EE4 /* Reachability.m */,
 				2FE707991C7DC2A3005CB13B /* SYZhihuTool.h */,
 				2FE7079A1C7DC2A3005CB13B /* SYZhihuTool.m */,
 				2FC588051C7A0B50003C9A7A /* YSHttpTool.h */,
@@ -1284,6 +1292,7 @@
 		F74BAFFBA1045F4A4EB4F7C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2FC00D731C86FBDF00756EE4 /* SystemConfiguration.framework */,
 				2FC7ED8B1C857D0000AAD71D /* Accelerate.framework */,
 				0C50C0EAD7EDF10139A7E065 /* libPods.a */,
 			);
@@ -1597,6 +1606,7 @@
 				2FC587D41C7A096A003C9A7A /* SDWebImageDecoder.m in Sources */,
 				2FC7ED8A1C857C7B00AAD71D /* UIView+SY.m in Sources */,
 				2FC588031C7A0974003C9A7A /* ViewController+MASAdditions.m in Sources */,
+				2FC00D771C86FC3F00756EE4 /* Reachability.m in Sources */,
 				2F2CCB971C7B016500C45E3D /* SYTableViewCell.m in Sources */,
 				2FE707821C7D86C4005CB13B /* SYHomeHeaderView.m in Sources */,
 				2F6CF29B1C80451500C4B346 /* SYTableHeader.m in Sources */,

@@ -45,15 +45,14 @@
 }
 
 - (void)setupSubviews {
+    
+    self.avatarBtn.imageView.layer.cornerRadius = 18;
+    self.avatarBtn.imageView.clipsToBounds = YES;
+    
     self.tableView.bounces = NO;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    self.bottomContainer.layer.shadowColor = SYColor(26, 31, 36, 1.0).CGColor;
-    self.bottomContainer.layer.shadowOffset = CGSizeMake(0, -30);
-    self.bottomContainer.layer.shadowOpacity = 0;
-    self.bottomContainer.layer.shadowRadius = 5.;
     
  }
 

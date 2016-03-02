@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
-
+#import <SystemConfiguration/SystemConfiguration.h>
+#import "Reachability.h"
 typedef NS_ENUM(NSUInteger, SYNetworkType) {
     SYNetworkTypeNone = 0,
     SYNetworkType2G = 1,
