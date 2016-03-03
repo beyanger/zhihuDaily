@@ -7,10 +7,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYLeftDrawerController">
             <connections>
-                <outlet property="avatarBtn" destination="kbX-T9-v3G" id="IX8-BY-c4C"/>
+                <outlet property="avatarImage" destination="VUp-IA-PDV" id="cqk-8a-yuI"/>
                 <outlet property="bottomContainer" destination="Z2y-rx-axp" id="rpP-fk-iVY"/>
                 <outlet property="dayNightButton" destination="4OM-8E-Ada" id="6yc-Za-Cn0"/>
+                <outlet property="nameLabel" destination="GNj-1y-Qzy" id="MKL-vu-Mk2"/>
                 <outlet property="offlineButton" destination="ouR-em-HCb" id="Chj-km-9wc"/>
+                <outlet property="profileView" destination="AWQ-U3-cI2" id="ZRX-PM-QIs"/>
                 <outlet property="tableView" destination="2ct-Rg-CXs" id="q2D-CB-VpE"/>
                 <outlet property="view" destination="wIS-YN-ehO" id="VV2-tV-tSd"/>
             </connections>
@@ -27,7 +29,7 @@
                             <rect key="frame" x="0.0" y="60" width="200" height="60"/>
                             <subviews>
                                 <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCi-4n-Uff">
-                                    <rect key="frame" x="133" y="0.0" width="67" height="60"/>
+                                    <rect key="frame" x="133" y="0.0" width="66.5" height="60"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                     <inset key="contentEdgeInsets" minX="15" minY="5" maxX="0.0" maxY="0.0"/>
@@ -51,7 +53,7 @@
                                     </connections>
                                 </button>
                                 <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBN-6P-rXm">
-                                    <rect key="frame" x="0.0" y="0.0" width="67" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="66.5" height="60"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                     <inset key="contentEdgeInsets" minX="15" minY="5" maxX="0.0" maxY="0.0"/>
@@ -81,30 +83,46 @@
                                 <constraint firstAttribute="bottom" secondItem="dmM-KK-dCi" secondAttribute="bottom" id="y5y-Ty-OGo"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbX-T9-v3G">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AWQ-U3-cI2">
                             <rect key="frame" x="0.0" y="0.0" width="200" height="60"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VUp-IA-PDV">
+                                    <rect key="frame" x="18" y="11" width="38" height="38"/>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="38" id="rep-GI-KQo"/>
+                                        <constraint firstAttribute="height" constant="38" id="rjN-yK-bVH"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GNj-1y-Qzy">
+                                    <rect key="frame" x="72" y="21" width="116" height="18"/>
+                                    <animations/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <animations/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <inset key="titleEdgeInsets" minX="35" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="请登录" image="Menu_Avatar">
-                                <color key="titleColor" red="0.88627450980392153" green="0.8901960784313725" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="login" destination="-1" eventType="touchUpInside" id="SbT-fk-hnr"/>
-                            </connections>
-                        </button>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="VUp-IA-PDV" firstAttribute="centerY" secondItem="AWQ-U3-cI2" secondAttribute="centerY" id="6UZ-C6-i1x"/>
+                                <constraint firstAttribute="trailing" secondItem="GNj-1y-Qzy" secondAttribute="trailing" constant="12" id="Irk-FH-e51"/>
+                                <constraint firstItem="GNj-1y-Qzy" firstAttribute="centerY" secondItem="AWQ-U3-cI2" secondAttribute="centerY" id="cbp-Ts-smD"/>
+                                <constraint firstItem="GNj-1y-Qzy" firstAttribute="leading" secondItem="VUp-IA-PDV" secondAttribute="trailing" constant="16" id="fzy-hZ-f7h"/>
+                                <constraint firstItem="VUp-IA-PDV" firstAttribute="leading" secondItem="AWQ-U3-cI2" secondAttribute="leading" constant="18" id="kFt-Gi-e4d"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" red="0.10196078431372549" green="0.12156862745098039" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="AWQ-U3-cI2" secondAttribute="trailing" id="2yp-2F-7wZ"/>
                         <constraint firstAttribute="height" constant="120" id="7Wq-U2-cpa"/>
+                        <constraint firstItem="AWQ-U3-cI2" firstAttribute="leading" secondItem="0Zn-t0-lhY" secondAttribute="leading" id="ISY-w8-UCX"/>
                         <constraint firstItem="GBX-SP-FKl" firstAttribute="leading" secondItem="0Zn-t0-lhY" secondAttribute="leading" id="NiM-lM-yRo"/>
-                        <constraint firstItem="kbX-T9-v3G" firstAttribute="leading" secondItem="0Zn-t0-lhY" secondAttribute="leading" id="U2w-dt-4N6"/>
-                        <constraint firstItem="kbX-T9-v3G" firstAttribute="top" secondItem="0Zn-t0-lhY" secondAttribute="top" id="UbC-xp-z3T"/>
-                        <constraint firstAttribute="trailing" secondItem="kbX-T9-v3G" secondAttribute="trailing" id="WCK-4O-cSJ"/>
+                        <constraint firstItem="GBX-SP-FKl" firstAttribute="top" secondItem="AWQ-U3-cI2" secondAttribute="bottom" id="YuK-LD-drW"/>
                         <constraint firstAttribute="bottom" secondItem="GBX-SP-FKl" secondAttribute="bottom" id="bdR-dL-oRs"/>
-                        <constraint firstItem="GBX-SP-FKl" firstAttribute="top" secondItem="kbX-T9-v3G" secondAttribute="bottom" id="e8F-bk-iNR"/>
+                        <constraint firstItem="AWQ-U3-cI2" firstAttribute="top" secondItem="0Zn-t0-lhY" secondAttribute="top" id="gQ0-iU-wex"/>
                         <constraint firstAttribute="trailing" secondItem="GBX-SP-FKl" secondAttribute="trailing" id="qiB-5o-d4F"/>
                     </constraints>
                 </view>
@@ -187,7 +205,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Menu_Avatar" width="35" height="35"/>
         <image name="Menu_Dark" width="22" height="22"/>
         <image name="Menu_Download" width="22" height="22"/>
         <image name="Menu_Icon_Collect" width="20" height="20"/>

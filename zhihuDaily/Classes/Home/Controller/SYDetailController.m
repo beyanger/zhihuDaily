@@ -138,7 +138,9 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 
     NSString *absoString = request.URL.absoluteString;
-    NSLog(@"asfsdf---> %@", absoString);
+    
+    NSLog(@"----> %@", absoString);
+    
     if ([absoString hasPrefix:@"http://daily.zhihu.com/story"]) {
         return YES;
     } else if ([absoString hasPrefix:@"http://mp.weixin.qq.com/s"]) {
@@ -148,7 +150,7 @@
         SYImageView *imageView = [SYImageView showImageWithURLString:url];
         imageView.delegate = self;
         return NO;
-    } else if ([absoString hasPrefix:@"http://"]) {
+    } else if ([absoString hasPrefix:@"http://"] || [absoString hasPrefix:@"https://"]) {
         SYWebViewController *nav = [[SYWebViewController alloc] init];
         nav.request = request;
         [self.navigationController pushViewController:nav animated:YES];
@@ -182,8 +184,7 @@
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     //调整字号
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    BOOL font = [ud boolForKey:@"大号字"];
+    BOOL font = [kUserDefaults boolForKey:@"大号字"];
     if (font) {
         NSString *str = @"document.body.style.webkitTextSizeAdjust='120%';";
         [webView stringByEvaluatingJavaScriptFromString:str];

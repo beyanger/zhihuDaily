@@ -48,8 +48,6 @@
     [SYRecommenderItem mj_setupObjectClassInArray:^NSDictionary *{
         return @{@"recommenders":@"SYRecommender"};
     }];
-
-    
 }
 
 
@@ -274,11 +272,6 @@
 }
 
 
-
-
-
-
-
 + (void)getStoryRecommendersWithId:(long long)storyid completed:(Completed)completed {
     NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/story/%lld/recommenders", storyid];
     [YSHttpTool GETWithURL:url params:nil success:^(id responseObject) {
@@ -315,20 +308,13 @@
     [SYCacheTool cacheCollectionWithTheme:theme];
 }
 + (void)cancelCollectedWithTheme:(SYTheme *)theme {
-    [SYCacheTool cancelCollectedWithTheme:theme];
+   return [SYCacheTool cancelCollectedWithTheme:theme];
 }
 
 + (void)loginWithName:(NSString *)name password:(NSString *)password success:(Success)success failure:(Failure)failure {
     // 这里应该
     BOOL result = [SYCacheTool loginWithName:name password:password];
-    
     result ? (!success? :success()) : (!failure? :failure());
-    
-    success?success():success();;
 }
-
-
-
-
 
 @end

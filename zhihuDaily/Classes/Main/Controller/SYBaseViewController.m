@@ -87,7 +87,12 @@
 }
 
 - (void)sy_back {
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    if (self.navigationController) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 
@@ -120,6 +125,7 @@
     self.sy_titleLabel.text = title;
     [super setTitle:title];
 }
+
 
 
 @end

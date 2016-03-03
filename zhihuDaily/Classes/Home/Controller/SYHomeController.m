@@ -109,7 +109,7 @@ static NSString *reuseid = @"useid";
 
 #pragma mark event action
 - (void)didClickedMenuButton:(UIButton *)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:ToggleDrawer object:nil];
+    [kNotificationCenter postNotificationName:ToggleDrawer object:nil];
 }
 
 

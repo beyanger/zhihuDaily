@@ -31,13 +31,11 @@ static FMDatabaseQueue *_zhihu_queue;
             [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_storylist (date INTEGER PRIMARY KEY, storylist BLOB);"];
             [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_story (storyid INTEGER PRIMARY KEY, story BLOB);"];
            
-            
             NSString *userLogin = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_user (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE, password TEXT);"];
             [db executeUpdate:userLogin];
             
 
             SYAccount *account = [SYAccount sharedAccount];
-            
             NSString *collection = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_story_%@ (id INTEGER PRIMARY KEY AUTOINCREMENT, storyid INTEGER UNIQUE, story BLOB);", account.name.md5sum];
             [db executeUpdate:collection];
             
@@ -354,8 +352,5 @@ static FMDatabaseQueue *_zhihu_queue;
         }
     }];
 }
-
-
-
 
 @end

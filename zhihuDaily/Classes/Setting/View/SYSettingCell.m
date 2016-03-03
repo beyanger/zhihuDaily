@@ -26,14 +26,12 @@
     
     if (!cell) {
         cell = [[self alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuse_id];
-        cell.imageView.layer.cornerRadius = 19;
-
-        //cell.imageView.maskView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Menu_Avatar_Mask"]];
+        CAShapeLayer *layer = [CAShapeLayer layer];
+        layer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(4, 4, 32, 32)].CGPath;
+        cell.imageView.layer.mask = layer;
     }
     return cell;
 }
-
-
 
 
 - (void)setItem:(SYSettingItem *)item {
@@ -67,9 +65,8 @@
 - (UISwitch *)switchView {
     if (!_switchView) {
         _switchView = [[UISwitch alloc] init];
-        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
         _switchView.onTintColor = kGroundColor;
-        _switchView.on = [ud boolForKey:self.item.title];
+        _switchView.on = [kUserDefaults boolForKey:self.item.title];
         [_switchView addTarget:self action:@selector(clickedSwitch:) forControlEvents:UIControlEventValueChanged];
     }
     return _switchView;

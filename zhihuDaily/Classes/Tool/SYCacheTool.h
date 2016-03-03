@@ -39,7 +39,7 @@
 + (void)cacheThemeSotryListWithId:(int)themeid respObject:(NSArray<SYStory *> *)respObject;
 + (NSArray<SYStory *> *)queryBeforeStoryListWithId:(int)themeid storyId:(long long)storyId;
 
-// denglu shuju ku ...
+
 + (BOOL)loginWithName:(NSString *)name password:(NSString *)password;
 
 

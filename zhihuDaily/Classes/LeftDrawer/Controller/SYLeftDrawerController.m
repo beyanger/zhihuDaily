@@ -18,12 +18,15 @@
 #import "SYAccount.h"
 #import "UIButton+WebCache.h"
 #import "SYCollectionController.h"
-
+#import "UIImageView+WebCache.h"
+#import "SYProfileController.h"
 
 @interface SYLeftDrawerController () <UITableViewDelegate, UITableViewDataSource, SYLeftDrawerCellDelegate, SYThemeControllerDelegate>
 @property (nonatomic, strong) NSMutableArray<SYTheme *> *dataSource;
 
-@property (weak, nonatomic) IBOutlet UIButton *avatarBtn;
+@property (weak, nonatomic) IBOutlet UIView *profileView;
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImage;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *offlineButton;
 @property (weak, nonatomic) IBOutlet UIButton *dayNightButton;
@@ -42,12 +45,14 @@
     [super viewDidLoad];
     [self setupSubviews];
     [self setupDataSource];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(login)];
+    [self.profileView addGestureRecognizer:tap];
 }
 
 - (void)setupSubviews {
     
-    self.avatarBtn.imageView.layer.cornerRadius = 18;
-    self.avatarBtn.imageView.clipsToBounds = YES;
+    self.avatarImage.layer.cornerRadius = 18;
+
     
     self.tableView.bounces = NO;
     self.tableView.delegate = self;
@@ -68,8 +73,9 @@
     
     // 更新头像状态
     SYAccount *account = [SYAccount sharedAccount];
-    [self.avatarBtn sd_setImageWithURL:[NSURL URLWithString:account.avatar] forState:UIControlStateNormal];
-    [self.avatarBtn setTitle:account.name forState:UIControlStateNormal];
+    [self.avatarImage sd_setImageWithURL:[NSURL URLWithString:account.avatar]];
+    
+    self.nameLabel.text = account.name;
 }
 
 
@@ -77,8 +83,14 @@
 
 
 - (IBAction)login {
-    SYLoginViewController *lvc = [[SYLoginViewController alloc] init];
-    [self presentViewController:lvc animated:YES completion:nil];
+    SYAccount *account = [SYAccount sharedAccount];
+    if (account.isLogin) {
+        SYProfileController *pc = [[SYProfileController alloc] init];
+        [self presentViewController:pc animated:YES completion:nil];
+    } else {
+        SYLoginViewController *lvc = [[SYLoginViewController alloc] init];
+        [self presentViewController:lvc animated:YES completion:nil];
+    }
 }
 
 - (void)setupDataSource {

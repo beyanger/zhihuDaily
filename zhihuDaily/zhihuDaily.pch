@@ -32,6 +32,14 @@
 
 #define kWhiteColor         [UIColor whiteColor]
 
+#define kUserDefaults       [NSUserDefaults standardUserDefaults]
+#define kNotificationCenter         [NSNotificationCenter defaultCenter]
+
+
+
+
+
+
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 

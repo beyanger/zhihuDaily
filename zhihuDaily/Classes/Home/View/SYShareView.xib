@@ -374,7 +374,7 @@
                         <constraint firstItem="pAB-J2-fKA" firstAttribute="top" secondItem="8k5-qh-oWJ" secondAttribute="top" id="jDC-Nz-5pw"/>
                     </constraints>
                 </view>
-                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="e1V-f3-1sB">
+                <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="e1V-f3-1sB">
                     <rect key="frame" x="148" y="192" width="23" height="20"/>
                     <animations/>
                     <constraints>

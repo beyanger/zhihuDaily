@@ -26,8 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSString *url = [ud stringForKey:@"launchScreen"];
+    
+    NSString *url = [kUserDefaults stringForKey:@"launchScreen"];
     
     // 如果之前有缓存的图片，直接加载先~
     if (url) [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:url]];
@@ -35,7 +35,7 @@
     SYMainViewController *mainvc = [[SYMainViewController alloc] init];
     [mainvc view];
     [SYZhihuTool getLauchImageWithCompleted:^(id obj) {
-        [ud setObject:obj forKey:@"launchScreen"];
+        [kUserDefaults setObject:obj forKey:@"launchScreen"];
         [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:obj]];
         
         AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;

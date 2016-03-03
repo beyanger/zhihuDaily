@@ -88,8 +88,6 @@
     
     !item.operation?:item.operation();
     
- 
-    
     
     if ([item isKindOfClass:[SYSettingArrow class]]) {
         SYSettingArrow *arrow = (SYSettingArrow *)item;
@@ -118,9 +116,6 @@
                          } text:[SYAccount sharedAccount].name]
                          
                          ];
-        
-        
-        
         
         SYSettingGroup *group1 = [[SYSettingGroup alloc] init];
         group1.items = @[[SYSettingSwitch itemWithTitle:@"自动离线下载" operation:nil]];

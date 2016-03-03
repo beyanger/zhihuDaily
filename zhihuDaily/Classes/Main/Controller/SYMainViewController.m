@@ -29,9 +29,9 @@
     self.showsShadow = NO;
   
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openDrawer) name:OpenDrawer object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeDrawer) name:CloseDrawer object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleDrawer) name:ToggleDrawer object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(openDrawer) name:OpenDrawer object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(closeDrawer) name:CloseDrawer object:nil];
+    [kNotificationCenter addObserver:self selector:@selector(toggleDrawer) name:ToggleDrawer object:nil];
 
     SYLeftDrawerController *drawerController = [[SYLeftDrawerController alloc] init];
     
@@ -66,7 +66,7 @@
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [kNotificationCenter removeObserver:self];
 }
 
 

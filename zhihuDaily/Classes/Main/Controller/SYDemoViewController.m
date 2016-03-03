@@ -16,7 +16,7 @@
 
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [[NSNotificationCenter defaultCenter] postNotificationName:ToggleDrawer object:nil];
+    [kNotificationCenter postNotificationName:ToggleDrawer object:nil];
 }
 
 - (void)viewDidLoad {
