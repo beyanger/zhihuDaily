@@ -52,7 +52,7 @@
 
 - (SYTableHeader *)tableHeader {
     if (!_tableHeader) {
-        _tableHeader = [SYTableHeader headerViewWitTitle:@"编辑" hidenRight:NO];
+        _tableHeader = [SYTableHeader headerViewWitTitle:@"编辑" rightViewType:SYRightViewTypeNone];
         _tableHeader.bounds = CGRectMake(0, 0, kScreenWidth, 48);
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickedHeader)];
         [_tableHeader addGestureRecognizer:tap];

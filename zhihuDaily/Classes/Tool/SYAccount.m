@@ -48,12 +48,8 @@ static SYAccount *_account;
             _account->_avatar = @"http://pic1.zhimg.com/e70b91873695eb59e7d9a145f87a1688_m.jpg";
             _account->_name = name;
             result = YES;
-            
-            NSLog(@"-----> block");
         } failure:nil];
     });
-    NSLog(@"return ...");
-    
     return result;
 }
 

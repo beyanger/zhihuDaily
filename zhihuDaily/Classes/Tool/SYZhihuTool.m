@@ -323,6 +323,8 @@
     BOOL result = [SYCacheTool loginWithName:name password:password];
     
     result ? (!success? :success()) : (!failure? :failure());
+    
+    success?success():success();;
 }
 
 

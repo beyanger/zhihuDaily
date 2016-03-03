@@ -20,7 +20,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
 @interface SYCommentsController () <UITableViewDataSource, UITableViewDelegate, SYCommentPannelDelegate>
 
-@property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, strong) NSMutableArray<NSArray<SYComment *> *> *allComments;
 
@@ -40,7 +40,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
     self.automaticallyAdjustsScrollViewInsets = NO;
 
-    [self setupTableView];
+    [self.view addSubview:self.tableView];
     
     [self setupBackBtn];
     [self.tableView reloadData];
@@ -51,21 +51,6 @@ static NSString *comment_reuseid = @"comment_reuseid";
     [self removeCommentPannel];
 }
 
-
-- (void)setupTableView {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, kScreenWidth, kScreenHeight-100) style:UITableViewStylePlain];
-    
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressHandler:)];
-    [tableView addGestureRecognizer:longPress];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPressHandler:)];
-    [tableView addGestureRecognizer:tap];
-    
-    [self.view addSubview:tableView];
-    self.tableView = tableView;
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    [self.tableView registerNib:[UINib nibWithNibName:@"SYCommentCell" bundle:nil] forCellReuseIdentifier:comment_reuseid];
-}
 
 
 #pragma mark event action
@@ -106,9 +91,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
 #pragma mark private
 - (void)removeCommentPannel {
-    
     SYCommentPannel *pannel = self.pannel;
-    
     self.pannel = nil;
     self.cell = nil;
     if (pannel) {
@@ -163,23 +146,6 @@ static NSString *comment_reuseid = @"comment_reuseid";
 - (void)backGo {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-- (void)setupDataSource {
-    [SYZhihuTool getLongCommentsWithId:self.param.id completed:^(id obj) {
-        self.allComments[0] = obj;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    }];
-
-    [SYZhihuTool getShortCommentsWithId:self.param.id completed:^(id obj) {
-        self.allComments[1] = obj;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    }];
-}
-
 
 
 #pragma mark - Table view data source
@@ -242,7 +208,19 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
 - (void)setParam:(SYCommentParam *)param {
     _param = param;
-    [self setupDataSource];
+    [SYZhihuTool getLongCommentsWithId:self.param.id completed:^(id obj) {
+        self.allComments[0] = obj;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
+    
+    [SYZhihuTool getShortCommentsWithId:self.param.id completed:^(id obj) {
+        self.allComments[1] = obj;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
 }
 
 - (NSMutableArray<NSArray<SYComment *> *> *)allComments {
@@ -250,6 +228,26 @@ static NSString *comment_reuseid = @"comment_reuseid";
         _allComments = [@[@[], @[]] mutableCopy];
     }
     return _allComments;
+}
+
+
+- (UITableView *)tableView {
+    if (!_tableView) {
+      
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, kScreenWidth, kScreenHeight-100) style:UITableViewStylePlain];
+        
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressHandler:)];
+        [_tableView addGestureRecognizer:longPress];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPressHandler:)];
+        [_tableView addGestureRecognizer:tap];
+        
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        [self.tableView registerNib:[UINib nibWithNibName:@"SYCommentCell" bundle:nil] forCellReuseIdentifier:comment_reuseid];
+        
+        _tableView.estimatedRowHeight = 80;
+    }
+    return _tableView;
 }
 
 

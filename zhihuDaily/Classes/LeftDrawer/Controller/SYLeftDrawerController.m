@@ -53,27 +53,27 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = SYColor(26, 31, 36, 1.0);
+    
     
  }
 
+
+
+
+
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //修改状态排序, 收藏的主题排在前面
-    NSMutableArray *collected = [@[] mutableCopy];
-    NSMutableArray *notCollected = [@[] mutableCopy];
-    [self.dataSource enumerateObjectsUsingBlock:^(SYTheme * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.isCollected ? [collected addObject:obj] : [notCollected addObject:obj];
-    }];
-    [collected addObjectsFromArray:notCollected];
-    self.dataSource = collected;
-    [self.tableView reloadData];
     
     // 更新头像状态
     SYAccount *account = [SYAccount sharedAccount];
-    NSLog(@"--dfs> %@, %@", account.avatar,account.name);
     [self.avatarBtn sd_setImageWithURL:[NSURL URLWithString:account.avatar] forState:UIControlStateNormal];
     [self.avatarBtn setTitle:account.name forState:UIControlStateNormal];
 }
+
+
+
 
 
 - (IBAction)login {
@@ -88,11 +88,37 @@
         home.isCollected = YES;
         self.dataSource = [obj mutableCopy];
         [self.dataSource insertObject:home atIndex:0];
+  
+        for (SYTheme *theme in self.dataSource) {
+            [theme addObserver:self forKeyPath:@"isCollected" options:NSKeyValueObservingOptionNew context:(__bridge void * _Nullable)(theme)];
+        }
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
     }];
 }
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    SYTheme *theme = (__bridge SYTheme *)(context);
+    if (theme.isCollected) {
+        [self.tableView  moveRowAtIndexPath:[NSIndexPath indexPathForRow:[self locateTheme:theme] inSection:0] toIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    } else {
+        [self.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:[self locateTheme:theme] inSection:0] toIndexPath:[NSIndexPath indexPathForRow:self.dataSource.count inSection:0]];
+    }
+    
+}
+
+- (NSInteger)locateTheme:(SYTheme *)theme {
+    for (NSUInteger i = 0; i < self.dataSource.count; i++) {
+        if (self.dataSource[i].id == theme.id) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
 
 - (IBAction)didClickedMenuButton:(UIButton *)sender {
     if ([sender.currentTitle isEqualToString:@"设置"]) {
@@ -123,8 +149,19 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    SYTheme *theme = self.dataSource[sourceIndexPath.section];
+    [self.dataSource removeObject:theme];
+    [self.dataSource insertObject:theme atIndex:1];
     
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         [self.mainController setCenterViewController:self.naviHome withCloseAnimation:YES completion:nil];
     } else {
@@ -132,6 +169,13 @@
         [self.mainController setCenterViewController:self.naviTheme withCloseAnimation:YES completion:nil];
     }
 }
+
+
+
+
+
+
+
 
 - (SYNavigationController *)naviHome {
     if (!_naviHome) {

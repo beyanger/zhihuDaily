@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray<UIImageView *> *editorsImage;
 @property (weak, nonatomic) IBOutlet UIImageView *rightView;
 @property (weak, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet UIImageView *moreImage;
 
 @end
 
@@ -37,21 +38,33 @@
     for (NSUInteger i = 0; i < 5; i++) {
         if (i < avatars.count) {
             [self.editorsImage[i] sd_setImageWithURL:[NSURL URLWithString:avatars[i]]];
-            NSLog(@"%@", avatars[i]);
         } else {
             self.editorsImage[i].image = nil;
         }
-  
     }
-
 }
 
-+ (instancetype)headerViewWitTitle:(NSString *)title hidenRight:(BOOL)hiden {
+
++ (instancetype)headerViewWitTitle:(NSString *)title rightViewType:(SYRightViewType)type {
     SYTableHeader *header = [[NSBundle mainBundle] loadNibNamed:@"SYTableHeader" owner:nil options:nil].firstObject;
     header.title.text = title;
-    header.rightView.hidden = hiden;
+    if (type == SYRightViewTypeArrow) {
+        header.rightView.hidden = NO;
+        header.moreImage.hidden = YES;
+    } else if (type == SYRightViewTypeMore) {
+        header.rightView.hidden = YES;
+        header.moreImage.hidden = NO;
+    } else {
+        header.rightView.hidden = YES;
+        header.moreImage.hidden = YES;
+    }
     return header;
 }
+
+- (void)setHidenMoreIndicator:(BOOL)hidenMoreIndicator {
+    self.moreImage.hidden = hidenMoreIndicator;
+}
+
 
 
 /*

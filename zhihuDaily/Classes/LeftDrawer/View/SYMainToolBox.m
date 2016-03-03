@@ -48,8 +48,37 @@
     self.tableView.delegate = delegate;
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"menuActionClose" object:nil];
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+//    
+//    CALayer *layer = [CALayer layer];
+//    layer.backgroundColor = [UIColor greenColor].CGColor;
+//    layer.bounds = CGRectMake(0, 0, 20, 20);
+//    layer.position = point;
+//    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+//    maskLayer.path = [UIBezierPath bezierPathWithOvalInRect:layer.bounds].CGPath;
+//    layer.mask = maskLayer;
+//    
+//    [self.layer addSublayer:layer];
+//    
+//    CABasicAnimation *ba = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
+//    ba.fromValue = (__bridge id)SYColor(255, 255, 255, 0.9).CGColor;
+//    ba.toValue = (__bridge id)SYColor(255, 0, 0, 0.1).CGColor;
+//    ba.duration = 2.0;
+//    [layer addAnimation:ba forKey:@"sdfasdf"];
+//    [ba setValue:layer forKey:@"key"];
+//    ba.delegate = self;
+
+    return [super hitTest:point withEvent:event];
 }
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    CALayer *layer = [anim valueForKey:@"key"];
+    NSLog(@"sdfasdfsdf --> %@", layer);
+    
+    [layer removeFromSuperlayer];
+}
+
+
 
 @end

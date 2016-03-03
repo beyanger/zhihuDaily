@@ -57,10 +57,12 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [SYZhihuTool cancelCollectedWithStroy:self.stories[indexPath.row]];
         [self.collectionStroy removeObject:self.stories[indexPath.row]];
-        [self.tableView reloadData];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         // 更新到数据库中
+    
     }
 }
+
 
 
 - (NSArray<SYStory *> *)stories {

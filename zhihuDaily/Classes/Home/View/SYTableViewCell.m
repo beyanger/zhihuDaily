@@ -23,16 +23,19 @@
     _story = story;
     self.title.text = story.title;
     
+    
+    self.multiImage.hidden = !story.multipic;
+    
     if (story.images.count > 0) {
         [self.image sd_setImageWithURL:[NSURL URLWithString:story.images.firstObject]];
         self.image.hidden = NO;
         self.titleLeft.constant = 18;
     } else {
         self.image.hidden = YES;
+        self.multiImage.hidden = YES;
         self.titleLeft.constant = 18-60;
     }
-
-    self.multiImage.hidden = !story.multipic;
+    
 }
 
 

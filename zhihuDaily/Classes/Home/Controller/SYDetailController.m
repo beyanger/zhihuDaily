@@ -86,8 +86,14 @@
 #pragma mark event action
 - (void)tapHandler {
     SYRecommendController *rc = [[SYRecommendController alloc] init];
-    NSArray *recommender = [self.recommender.editors arrayByAddingObjectsFromArray:self.recommender.items.lastObject.recommenders];
-    rc.editors = recommender;
+    
+    if (self.recommender.editors.count > 0) {
+        rc.editors = [self.recommender.editors arrayByAddingObjectsFromArray:self.recommender.items.lastObject.recommenders];
+    } else {
+        rc.editors = self.recommender.items.lastObject.recommenders;
+    }
+
+    
     [self.navigationController pushViewController:rc animated:YES];
 }
 
@@ -106,9 +112,6 @@
             
             break;
         case 3: { // share {
-            
-         
-            
             SYShareView *shareView = [SYShareView shareViewWithTitle:self.isCollected?@"取消收藏":@"收藏"];
             shareView.delegate = self;
             [shareView show];
@@ -135,18 +138,20 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 
     NSString *absoString = request.URL.absoluteString;
-    if ([absoString hasPrefix:@"http"]) {
-
+    NSLog(@"asfsdf---> %@", absoString);
+    if ([absoString hasPrefix:@"http://daily.zhihu.com/story"]) {
+        return YES;
+    } else if ([absoString hasPrefix:@"http://mp.weixin.qq.com/s"]) {
+        return YES;
+    } else if([absoString hasPrefix:@"detailimage:"]) {
+        NSString *url = [absoString stringByReplacingOccurrencesOfString:@"detailimage:" withString:@""];
+        SYImageView *imageView = [SYImageView showImageWithURLString:url];
+        imageView.delegate = self;
+        return NO;
+    } else if ([absoString hasPrefix:@"http://"]) {
         SYWebViewController *nav = [[SYWebViewController alloc] init];
         nav.request = request;
         [self.navigationController pushViewController:nav animated:YES];
-        return NO;
-        
-    } else if ([absoString hasPrefix:@"detailimage:"]) {
-        NSString *url = [absoString stringByReplacingOccurrencesOfString:@"detailimage:"
-                                       withString:@""];
-        SYImageView *imageView = [SYImageView showImageWithURLString:url];
-        imageView.delegate = self;
         return NO;
     }
     return YES;
@@ -184,6 +189,7 @@
         [webView stringByEvaluatingJavaScriptFromString:str];
     }
     
+        
     
     //js方法遍历图片添加点击事件 返回图片个数
     static  NSString * const jsGetImages = @"function setImages(){"\
@@ -342,50 +348,6 @@
     // 查询收藏状态
     self.isCollected = [SYZhihuTool queryCollectedStatusWithStory:story];
     
-    [SYZhihuTool getDetailWithId:self.story.id completed:^(id obj) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            SYDetailStory *ds = (SYDetailStory *)obj;
-            
-            if (ds.image) { // 有图
-                self.headerView.hidden = YES;
-                self.topView.hidden = NO;
-                self.topView.story = ds;
-            } else if (ds.recommenders.count) { // 有推荐者
-                // 为推荐者插入一段40高度的hodler
-                // 这里返回到数据有问题
-                //NSString *headStr = [ds.htmlStr substringToIndex:200];
-                NSString *insert = @"<div style=\"height:40px\"></div>";
-                NSRange loc = [ds.htmlStr rangeOfString:insert];
-                if (loc.location == NSNotFound) {
-                    // 如果没找到高度为40 的holder，那么插入之
-                    NSMutableString *htmlStr = [ds.htmlStr mutableCopy];
-                    NSRange range = [htmlStr rangeOfString:@"<body>"];
-                    [htmlStr insertString:insert atIndex:range.location+range.length];
-                    ds.htmlStr = [htmlStr copy];
-                }
-                // 设置顶部推荐者的头像
-                NSMutableArray *avatars = [@[] mutableCopy];
-                for (SYRecommender *recommender in ds.recommenders) {
-                    [avatars addObject:recommender.avatar];
-                    self.headerView.avatars = avatars;
-                }
-                self.headerView.hidden = NO;
-                self.topView.hidden = YES;
-                // 设置顶部推荐者的下一级控制器的数据源，可以放在点击之后获取
-                // 这里预先获取，以免点击之后再获取，增强用户体验
-                [SYZhihuTool getStoryRecommendersWithId:story.id completed:^(id obj) {
-                    self.recommender = obj;
-                }];
-                
-            } else { // 啥也没有
-                self.headerView.hidden = YES;
-                self.topView.hidden = YES;
-            }
-            [self.webView loadHTMLString:ds.htmlStr baseURL:nil];
-            
-        });
-    }];
-    
     // 设置 extraStory
     [SYZhihuTool getExtraWithId:self.story.id completed:^(id obj) {
         SYExtraStory *es = (SYExtraStory *)obj;
@@ -393,6 +355,67 @@
             self.storyNav.extraStory = es;
         });
     }];
+    
+    
+    [SYZhihuTool getDetailWithId:self.story.id completed:^(id obj) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            SYDetailStory *ds = (SYDetailStory *)obj;
+
+            if (ds.image) { // 有图
+                self.headerView.hidden = YES;
+                self.topView.hidden = NO;
+                self.topView.story = ds;
+            } else if (ds.recommenders.count) { // 有推荐者
+                
+                // 设置顶部推荐者的头像
+                NSMutableArray *avatars = [@[] mutableCopy];
+                for (SYRecommender *recommender in ds.recommenders) {
+                    [avatars addObject:recommender.avatar];
+                    self.headerView.avatars = avatars;
+                }
+                self.headerView.hidenMoreIndicator =  self.headerView.avatars.count <= 5;
+                    
+                    
+                    
+                self.headerView.hidden = NO;
+                self.topView.hidden = YES;
+                // 设置顶部推荐者的下一级控制器的数据源，可以放在点击之后获取
+                // 这里预先获取，以免点击之后再获取，增强用户体验
+                [SYZhihuTool getStoryRecommendersWithId:story.id completed:^(id obj) {
+                    self.recommender = obj;
+                }];
+
+                // 为推荐者插入一段40高度的hodler
+                // 这里返回到数据有问题
+                // 长度小于200 说明返回的值为空，需要加载story的网页版
+                if (ds.htmlStr.length < 200) {
+                    NSString *desturl = [NSString stringWithFormat:@"http://daily.zhihu.com/story/%lld", story.id];
+                    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:desturl]]];
+                    // 这里需要让
+                    return;
+                } else {
+                    NSString *insert = @"<div style=\"height:40px\"></div>";
+                    NSRange loc = [ds.htmlStr rangeOfString:insert];
+                    if (loc.location == NSNotFound) {
+                        // 如果没找到高度为40 的holder，那么插入之
+                        NSMutableString *htmlStr = [ds.htmlStr mutableCopy];
+                        NSRange range = [htmlStr rangeOfString:@"<body>"]; // 插入到body之后
+                        [htmlStr insertString:insert atIndex:range.location+range.length];
+                        ds.htmlStr = [htmlStr copy];
+                    }
+                }
+                
+            } else { // 啥也没有
+                self.headerView.hidden = YES;
+                self.topView.hidden = YES;
+            }
+
+            [self.webView loadHTMLString:ds.htmlStr baseURL:nil];
+            
+        });
+    }];
+    
+
 }
 
 
@@ -409,7 +432,7 @@
 
 - (SYTableHeader *)headerView {
     if (!_headerView) {
-        _headerView = [SYTableHeader headerViewWitTitle:@"推荐者" hidenRight:YES];
+        _headerView = [SYTableHeader headerViewWitTitle:@"推荐者" rightViewType:SYRightViewTypeMore];
         _headerView.frame = CGRectMake(0, -40, kScreenWidth, 60+40);
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandler)];
         [_headerView addGestureRecognizer:tap];
