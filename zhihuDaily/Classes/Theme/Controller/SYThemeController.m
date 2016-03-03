@@ -52,7 +52,7 @@
 
 - (SYTableHeader *)tableHeader {
     if (!_tableHeader) {
-        _tableHeader = [SYTableHeader headerViewWitTitle:@"编辑" rightViewType:SYRightViewTypeNone];
+        _tableHeader = [SYTableHeader headerViewWitTitle:@"编辑" rightViewType:SYRightViewTypeArrow];
         _tableHeader.bounds = CGRectMake(0, 0, kScreenWidth, 48);
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickedHeader)];
         [_tableHeader addGestureRecognizer:tap];
@@ -85,12 +85,11 @@
 - (void)didClickedCollectBtn:(UIButton *)sender {
     sender.selected = !sender.selected;
     self.theme.isCollected = sender.selected;
-    if (sender.selected) {
-        [MBProgressHUD showSuccess:@"已经成功关注"];
-        [SYZhihuTool collectedWithTheme:self.theme];
-    } else  {
-        [MBProgressHUD showError:@"已经取消关注"];
-        [SYZhihuTool cancelCollectedWithTheme:self.theme];
+    sender.selected ? [MBProgressHUD showSuccess:@"已经成功关注"] :[MBProgressHUD showError:@"已经取消关注"];
+        
+    
+    if ([self.delegate respondsToSelector:@selector(themeController:theme:actionType:)]) {
+        [self.delegate themeController:self theme:self.theme actionType:sender.selected];
     }
 }
 

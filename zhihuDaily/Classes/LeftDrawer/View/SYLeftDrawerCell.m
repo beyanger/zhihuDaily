@@ -53,6 +53,9 @@
     [SYZhihuTool collectedWithTheme:self.theme];
     sender.enabled = NO;
     
+    if ([self.delegate respondsToSelector:@selector(didClickedLeftDrawerCell:)]) {
+        [self.delegate didClickedLeftDrawerCell:self];
+    }
     //TODO 这里需要通知leftDrawer做一个添加收藏的刷新动画效果....
 }
 

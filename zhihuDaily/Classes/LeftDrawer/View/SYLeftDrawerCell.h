@@ -9,9 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "SYTheme.h"
 
+@class SYLeftDrawerCell;
+
+@protocol SYLeftDrawerCellDelegate <NSObject>
+
+@optional
+- (void)didClickedLeftDrawerCell:(SYLeftDrawerCell *)cell;
+
+@end
+
 @interface SYLeftDrawerCell : UITableViewCell
 @property (nonatomic, strong) SYTheme *theme;
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
+
+@property (nonatomic, weak) id<SYLeftDrawerCellDelegate> delegate;
 
 @end

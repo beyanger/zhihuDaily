@@ -137,8 +137,6 @@ static FMDatabaseQueue *_zhihu_queue;
     
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[self queue] inDatabase:^(FMDatabase *db) {
-            
-            NSLog(@"---> %@, %d", account.name, account.isLogin);
             NSString *sql = [NSString stringWithFormat:@"SELECT theme FROM ct_theme_%@ ORDER BY id DESC;", account.name.md5sum];
             FMResultSet *rs = [db executeQuery:sql];
             while (rs.next) {

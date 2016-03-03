@@ -13,9 +13,22 @@
 
 @class SYThemeController;
 
+typedef NS_ENUM(BOOL, SYThemeActionType) {
+    SYThemeActionTypeCancel = NO,
+    SYThemeActionTypeCollect = YES,
+};
+
+@protocol SYThemeControllerDelegate <NSObject>
+
+@optional
+- (void)themeController:(SYThemeController *)themeController theme:(SYTheme*)theme actionType:(SYThemeActionType)type;
+
+@end
 
 @interface SYThemeController : SYStoryListController
 
 @property (nonatomic, strong) SYTheme *theme;
+
+@property (nonatomic, weak) id<SYThemeControllerDelegate> delegate;
 
 @end

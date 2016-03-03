@@ -20,7 +20,7 @@
 #import "SYCollectionController.h"
 
 
-@interface SYLeftDrawerController () <UITableViewDelegate, UITableViewDataSource>
+@interface SYLeftDrawerController () <UITableViewDelegate, UITableViewDataSource, SYLeftDrawerCellDelegate, SYThemeControllerDelegate>
 @property (nonatomic, strong) NSMutableArray<SYTheme *> *dataSource;
 
 @property (weak, nonatomic) IBOutlet UIButton *avatarBtn;
@@ -89,24 +89,10 @@
         self.dataSource = [obj mutableCopy];
         [self.dataSource insertObject:home atIndex:0];
   
-        for (SYTheme *theme in self.dataSource) {
-            [theme addObserver:self forKeyPath:@"isCollected" options:NSKeyValueObservingOptionNew context:(__bridge void * _Nullable)(theme)];
-        }
-        
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
     }];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-    SYTheme *theme = (__bridge SYTheme *)(context);
-    if (theme.isCollected) {
-        [self.tableView  moveRowAtIndexPath:[NSIndexPath indexPathForRow:[self locateTheme:theme] inSection:0] toIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    } else {
-        [self.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:[self locateTheme:theme] inSection:0] toIndexPath:[NSIndexPath indexPathForRow:self.dataSource.count inSection:0]];
-    }
-    
 }
 
 - (NSInteger)locateTheme:(SYTheme *)theme {
@@ -133,7 +119,6 @@
         SYNavigationController *navi = [[SYNavigationController alloc] initWithRootViewController:cc];
         navi.navigationBar.hidden = YES;
         [self.mainController setCenterViewController:navi withCloseAnimation:YES completion:nil];
-        
     }
 }
 
@@ -146,6 +131,7 @@
 
     SYLeftDrawerCell *cell = [SYLeftDrawerCell cellWithTableView:tableView];
     cell.theme = self.dataSource[indexPath.row];
+    cell.delegate = self;
     return cell;
 }
 
@@ -155,11 +141,18 @@
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    SYTheme *theme = self.dataSource[sourceIndexPath.section];
-    [self.dataSource removeObject:theme];
-    [self.dataSource insertObject:theme atIndex:1];
-    
+
+    SYTheme *theme = self.dataSource[sourceIndexPath.row];
+    [self.dataSource removeObjectAtIndex:sourceIndexPath.row];
+    if (destinationIndexPath.row == 1) {
+        [self.dataSource insertObject:theme atIndex:1];
+    } else {
+        [self.dataSource addObject:theme];
+    }
 }
+
+
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
@@ -170,9 +163,46 @@
     }
 }
 
+#pragma mark cell delegate
+- (void)didClickedLeftDrawerCell:(SYLeftDrawerCell *)cell {
+    SYTheme *theme = cell.theme;
+    NSInteger locate =  [self locateTheme:theme];
+    if (locate < 0) return;
+    
+    NSIndexPath *sip = [NSIndexPath indexPathForRow:locate inSection:0];
+    NSIndexPath *dip = [NSIndexPath indexPathForRow:1 inSection:0];
+    [self.tableView moveRowAtIndexPath:sip toIndexPath:dip];
+    [self tableView:self.tableView moveRowAtIndexPath:sip toIndexPath:dip];
+    
+}
 
 
+#pragma mark theme controller delegate
 
+- (void)themeController:(SYThemeController *)themeController theme:(SYTheme*)theme actionType:(SYThemeActionType)type {
+    NSInteger locate =  [self locateTheme:theme];
+    if (locate < 0) return;
+    
+    
+    NSIndexPath *sip = nil;
+    NSIndexPath *dip = nil;
+    
+    if (type == SYThemeActionTypeCollect) {
+        NSLog(@"----收藏---> %@", theme.name);
+        [SYZhihuTool collectedWithTheme:theme];
+        sip = [NSIndexPath indexPathForRow:locate inSection:0];
+        dip = [NSIndexPath indexPathForRow:1 inSection:0];
+  
+    } else {
+        [SYZhihuTool cancelCollectedWithTheme:theme];
+        sip = [NSIndexPath indexPathForRow:locate inSection:0];
+        dip = [NSIndexPath indexPathForRow:self.dataSource.count-1 inSection:0];
+    }
+    
+    [self.tableView moveRowAtIndexPath:sip toIndexPath:dip];
+    [self tableView:self.tableView moveRowAtIndexPath:sip toIndexPath:dip];
+    
+}
 
 
 
@@ -198,6 +228,7 @@
     if (!_themeController) {
         _themeController = [[SYThemeController alloc] init];
         _themeController.view.backgroundColor = [UIColor whiteColor];
+        _themeController.delegate = self;
     }
     return _themeController;
 }
