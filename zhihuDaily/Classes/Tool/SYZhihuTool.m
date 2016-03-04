@@ -130,21 +130,57 @@
     NSString *longCommentUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/story/%lld/long-comments", storyid];
     
     [YSHttpTool GETWithURL:longCommentUrl params:nil success:^(id responseObject) {
-        NSArray *comment = [SYComment mj_objectArrayWithKeyValuesArray:responseObject[@"comments"]];
+        NSArray<SYComment *> *comment = [SYComment mj_objectArrayWithKeyValuesArray:responseObject[@"comments"]];
+        
+        [comment enumerateObjectsUsingBlock:^(SYComment * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (obj.reply_to) {
+                NSLog(@"%@", obj.reply_to.author);
+            }
+            
+        }];
+        NSLog(@"--->长评论： %lu", comment.count);
+
         !completed ? : completed(comment);
     } failure:nil];
     
     
 }
++ (void)getBeforeLongCommentsWithId:(long long)storyid commentid:(long)commentid completed:(Completed)completed {
+    NSString *longBeforeUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/story/%lld/long-comments/before/%ld", storyid, commentid];
+    [YSHttpTool GETWithURL:longBeforeUrl params:nil success:^(id responseObject) {
+        NSArray *comments = [SYComment mj_objectArrayWithKeyValuesArray:responseObject[@"comments"]];
+        NSLog(@"--->之前的 长评论： %lu", comments.count);
 
+        !completed ? completed : completed(comments);
+        
+    } failure:nil];
+}
 
 + (void)getShortCommentsWithId:(long long)storyid completed:(Completed)completed {
     NSString *shortCommentUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/story/%lld/short-comments", storyid];
     [YSHttpTool GETWithURL:shortCommentUrl params:nil success:^(id responseObject) {
         NSArray *comment = [SYComment mj_objectArrayWithKeyValuesArray:responseObject[@"comments"]];
+        
+        
+        NSLog(@"--->条短评论： %lu", comment.count);
+        
+
         !completed ? : completed(comment);
     } failure:nil];
 }
+
+
++ (void)getBeforeShortCommentsWithId:(long long)storyid commentid:(long)commentid completed:(Completed)completed {
+    NSString *longBeforeUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/story/%lld/short-comments/before/%ld", storyid, commentid];
+    [YSHttpTool GETWithURL:longBeforeUrl params:nil success:^(id responseObject) {
+        NSArray *comments = [SYComment mj_objectArrayWithKeyValuesArray:responseObject[@"comments"]];
+        NSLog(@"--->之前的 短评论： %lu", comments.count);
+        
+        !completed ? completed : completed(comments);
+        
+    } failure:nil];
+}
+
 
 // 获取主题列表
 + (void)getThemesWithCompleted:(Completed)completed {

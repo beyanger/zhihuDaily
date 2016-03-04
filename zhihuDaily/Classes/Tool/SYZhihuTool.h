@@ -64,21 +64,24 @@ typedef void  (^Failure)();
  *  获取story的长评论
  */
 + (void)getLongCommentsWithId:(long long)storyid completed:(Completed)completed;
+
++ (void)getBeforeLongCommentsWithId:(long long)storyid commentid:(long)commentid completed:(Completed)completed;
+
 /**
  *  获取story的短评论
  */
 + (void)getShortCommentsWithId:(long long)storyid completed:(Completed)completed;
++ (void)getBeforeShortCommentsWithId:(long long)storyid commentid:(long)commentid completed:(Completed)completed;
+
+
 /**
  *  获取所有的 theme //主题列表相对稳定，所以可以缓存
  */
 + (void)getThemesWithCompleted:(Completed)completed;
 
-// 收藏或者取消
+// 收藏或者取消专栏
 + (void)collectedWithTheme:(SYTheme *)theme;
 + (void)cancelCollectedWithTheme:(SYTheme *)theme;
-
-
-
 
 /**
  *  根据 NSDate类型时间获取当日之前的story
@@ -94,19 +97,28 @@ typedef void  (^Failure)();
  */
 + (void)getThemeWithId:(int)themeId completed:(Completed)completed;
 
-
+/**
+ *  获取某个专栏story之前的story
+ *
+ */
 + (void)getBeforeThemeStoryWithId:(int)themeid storyId:(long long)storyId completed:(Completed)completed;
-
+/**
+ *  获取story的推荐者
+ */
 + (void)getStoryRecommendersWithId:(long long)storyid completed:(Completed)completed;
 
 
-// 获取当前用户的收藏的故事, 收藏或者取消
+// 获取当前用户的收藏的故事, 收藏/取消/查询收藏状态
 + (void)getColltedStoriesWithCompleted:(Completed)completed;
-+ (BOOL)queryCollectedStatusWithStory:(SYStory *)story;
 + (void)collectedWithStroy:(SYStory *)story;
 + (void)cancelCollectedWithStroy:(SYStory *)story;
++ (BOOL)queryCollectedStatusWithStory:(SYStory *)story;
 
 
+
+/**
+ *  用户登录
+ */
 + (void)loginWithName:(NSString *)name password:(NSString *)password success:(Success)success failure:(Failure)failure;
 
 @end

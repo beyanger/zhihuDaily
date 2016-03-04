@@ -71,10 +71,9 @@
     [super viewWillAppear:animated];
     
     // 更新头像状态
-    SYAccount *account = [SYAccount sharedAccount];
-    [self.avatarImage sd_setImageWithURL:[NSURL URLWithString:account.avatar]];
+    [self.avatarImage sd_setImageWithURL:[NSURL URLWithString:kAccount.avatar]];
     
-    self.nameLabel.text = account.name;
+    self.nameLabel.text = kAccount.name;
 }
 
 - (void)dealloc {
@@ -179,6 +178,7 @@
     } else {
         [self.dataSource addObject:theme];
     }
+
 }
 
 
@@ -213,7 +213,7 @@
 - (void)themeController:(SYThemeController *)themeController theme:(SYTheme*)theme actionType:(SYThemeActionType)type {
     NSInteger locate =  [self locateTheme:theme];
     if (locate < 0) return;
-    
+    theme.isCollected = type;
     
     NSIndexPath *sip = nil;
     NSIndexPath *dip = nil;
@@ -221,6 +221,7 @@
     if (type == SYThemeActionTypeCollect) {
         NSLog(@"----收藏---> %@", theme.name);
         [SYZhihuTool collectedWithTheme:theme];
+        
         sip = [NSIndexPath indexPathForRow:locate inSection:0];
         dip = [NSIndexPath indexPathForRow:1 inSection:0];
   

@@ -18,11 +18,11 @@
 
 static NSString *comment_reuseid = @"comment_reuseid";
 
-@interface SYCommentsController () <UITableViewDataSource, UITableViewDelegate, SYCommentPannelDelegate>
+@interface SYCommentsController () <UITableViewDataSource, UITableViewDelegate, SYCommentPannelDelegate, SYCommentCellDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
-@property (nonatomic, strong) NSMutableArray<NSArray<SYComment *> *> *allComments;
+@property (nonatomic, strong) NSMutableArray<NSMutableArray<SYComment *> *> *allComments;
 
 @property (nonatomic, weak) SYCommentPannel *pannel;
 
@@ -88,6 +88,16 @@ static NSString *comment_reuseid = @"comment_reuseid";
     }
     [self removeCommentPannel];
 }
+
+
+- (void)commentCelll:(SYCommentCell *)cell actionType:(int)type {
+    [self.tableView reloadData];
+}
+
+
+
+
+
 
 #pragma mark private
 - (void)removeCommentPannel {
@@ -174,7 +184,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
     SYCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:comment_reuseid forIndexPath:indexPath];
   
-    
+    cell.delegate = self;
     if (!indexPath.section && self.allComments.firstObject.count) {
         cell.comment = self.allComments[indexPath.section][indexPath.row];
         return cell;
@@ -182,25 +192,42 @@ static NSString *comment_reuseid = @"comment_reuseid";
     
     
     cell.comment = self.allComments.lastObject[indexPath.row];
+    
+    NSLog(@"cell for indexp %d", cell.comment.isOpen);
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//
+//    CGFloat height =  [tableView fd_heightForCellWithIdentifier:comment_reuseid configuration:^(SYCommentCell *cell) {
+//        if (!indexPath.section && self.allComments.firstObject.count) {
+//            cell.comment = self.allComments[indexPath.section][indexPath.row];
+//            return;
+//        }
+//        cell.comment = self.allComments.lastObject[indexPath.row];
+//    }];
+//    
+//    return height;
+//}
 
-    CGFloat height =  [tableView fd_heightForCellWithIdentifier:comment_reuseid configuration:^(SYCommentCell *cell) {
-        if (!indexPath.section && self.allComments.firstObject.count) {
-            cell.comment = self.allComments[indexPath.section][indexPath.row];
-            return;
-        }
-        cell.comment = self.allComments.lastObject[indexPath.row];
-    }];
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+
     
-    return height;
+    if (indexPath.row == self.allComments.lastObject.count-5) {
+        [self loadMoreShortComments];
+    }
 }
+
+
+
+
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self removeCommentPannel];
 }
+
+
 
 
 #pragma mark setter & getter
@@ -223,7 +250,31 @@ static NSString *comment_reuseid = @"comment_reuseid";
     }];
 }
 
-- (NSMutableArray<NSArray<SYComment *> *> *)allComments {
+- (void)loadMoreShortComments {
+    
+    if (self.allComments.lastObject.count == self.param.short_comments) {
+        NSLog(@"没有更多短评论了....");
+        return;
+    }
+    
+    [SYZhihuTool getBeforeShortCommentsWithId:self.param.id commentid:self.allComments.lastObject.lastObject.id completed:^(id obj) {
+        [self.allComments.lastObject addObjectsFromArray:obj];
+        [self.tableView reloadData];
+    }];
+}
+- (void)loadMoreLongComments {
+    if (self.allComments.firstObject.count == self.param.long_comments) {
+        NSLog(@"没有更多长评论了");
+        return;
+    }
+    [SYZhihuTool getBeforeLongCommentsWithId:self.param.id commentid:self.allComments.firstObject.lastObject.id completed:^(id obj) {
+        [self.allComments.firstObject addObjectsFromArray:obj];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
+}
+
+
+- (NSMutableArray<NSMutableArray<SYComment *> *> *)allComments {
     if (!_allComments) {
         _allComments = [@[@[], @[]] mutableCopy];
     }
@@ -240,7 +291,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
         [_tableView addGestureRecognizer:longPress];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPressHandler:)];
         [_tableView addGestureRecognizer:tap];
-        
+        _tableView.estimatedRowHeight = 100;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [self.tableView registerNib:[UINib nibWithNibName:@"SYCommentCell" bundle:nil] forCellReuseIdentifier:comment_reuseid];

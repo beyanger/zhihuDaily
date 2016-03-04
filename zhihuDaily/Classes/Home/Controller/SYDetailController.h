@@ -26,8 +26,6 @@ typedef NS_ENUM(NSInteger, SYStoryPositionType) {
 - (SYStory *)prevStoryForDetailController:(SYDetailController *)detailController story:(SYStory *)story;
 - (SYStoryPositionType)detailController:(SYDetailController *)detailController story:(SYStory *)story;
 
-
-
 @end
 
 

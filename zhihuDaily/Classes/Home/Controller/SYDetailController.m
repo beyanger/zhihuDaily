@@ -321,7 +321,7 @@
 
 #pragma mark shareView delegate
 - (void)shareView:(SYShareView *)shareView didSelected:(NSUInteger)index {
-    if ([SYAccount sharedAccount].isLogin) {
+    if (kAccount.isLogin) {
         if (self.isCollected) {
             [MBProgressHUD showSuccess:@"取消收藏"];
             [SYZhihuTool cancelCollectedWithStroy:self.story];

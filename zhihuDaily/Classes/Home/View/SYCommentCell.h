@@ -9,8 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "SYComment.h"
 
+
+@class SYCommentCell;
+
+@protocol SYCommentCellDelegate <NSObject>
+
+@optional
+- (void)commentCelll:(SYCommentCell *)cell   actionType:(int)type;
+
+@end
+
 @interface SYCommentCell : UITableViewCell
 
 @property (nonatomic, strong) SYComment *comment;
+
+
+@property (nonatomic, weak) id<SYCommentCellDelegate> delegate;
 
 @end

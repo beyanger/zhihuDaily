@@ -28,14 +28,14 @@
     
     self.avatarImageView.layer.cornerRadius = 40;
     self.avatarImageView.clipsToBounds = YES;
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[SYAccount sharedAccount].avatar]];
-    self.nameLabel.text = [SYAccount sharedAccount].name;
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:kAccount.avatar]];
+    self.nameLabel.text = kAccount.name;
 }
 - (IBAction)logout:(UIButton *)sender {
     SYAccount *account = [SYAccount sharedAccount];
     [account logout];
     sender.enabled = NO;
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[SYAccount sharedAccount].avatar]];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:kAccount.avatar]];
     self.nameLabel.text = [SYAccount sharedAccount].name;
     [MBProgressHUD showSuccess:@"已经退出"];
 }

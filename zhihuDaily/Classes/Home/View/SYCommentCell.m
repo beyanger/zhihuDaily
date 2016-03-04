@@ -22,12 +22,30 @@
 @property (weak, nonatomic) IBOutlet UIImageView *likeImage;
 @property (nonatomic, weak) SYCommentPannel *commentPannel;
 @property (nonatomic, assign) BOOL isAnimatting;
+@property (weak, nonatomic) IBOutlet UIButton *expandBtn;
+
+@property (weak, nonatomic) IBOutlet UILabel *replyLabel;
 
 
 @end
 
 
 @implementation SYCommentCell
+- (IBAction)didClickedExpendBtn:(UIButton *)sender {
+    
+    
+    
+    NSLog(@"- comment: --> %@", self.comment);
+    self.comment.isOpen = !self.comment.isOpen;
+
+    
+    sender.selected = self.comment.isOpen;
+    
+    
+    if ([self.delegate respondsToSelector:@selector(commentCelll:actionType:)]) {
+        [self.delegate commentCelll:self actionType:sender.selected];
+    }}
+
 
 
 - (void)awakeFromNib {
@@ -45,10 +63,36 @@
     self.nameLabel.text = comment.author;
     self.commentLabel.text = comment.content;
     
+    if (comment.reply_to) {
+        
+        NSDictionary *nameAttr = @{
+            NSFontAttributeName:[UIFont systemFontOfSize:16],
+            NSForegroundColorAttributeName:[UIColor blackColor]};
+        NSString *name  = [@"//" stringByAppendingString:comment.reply_to.author];
+        NSMutableAttributedString *author = [[NSMutableAttributedString alloc] initWithString:name attributes: nameAttr];
+        
+        NSDictionary *contentAttr = @{
+                    NSFontAttributeName:[UIFont systemFontOfSize:15],
+                    NSForegroundColorAttributeName:SYColor(89, 89, 89, 1)
+                    };
+        NSAttributedString *content = [[NSAttributedString alloc] initWithString:[@": " stringByAppendingString:comment.reply_to.content] attributes:contentAttr];
+        
+        [author appendAttributedString:content];
+        self.replyLabel.attributedText = author;
+        self.expandBtn.hidden = NO;
+    } else {
+        self.replyLabel.text = nil;
+        self.expandBtn.hidden = YES;
+    }
     
     self.likeLabel.text = [NSString stringWithFormat:@"%ld", comment.likes];
     
     
+    if (comment.reply_to) {
+        self.expandBtn.hidden = NO;
+    } else {
+        self.expandBtn.hidden = YES;
+    }
     
     
     if (comment.isLike) {
@@ -59,8 +103,10 @@
         self.likeLabel.textColor = SYColor(128, 128, 128, 1.0);
     }
     
+   
     
-    
+    self.replyLabel.numberOfLines = self.comment.isOpen ? 0 : 2;
+    self.expandBtn.selected = comment.isOpen;
     
     
     
@@ -74,11 +120,6 @@
     });
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:comment.time];
     self.timeLabel.text = [NSString stringWithFormat:@"%@", [_formatter stringFromDate:date]];
-  
-    
-    
-    
-
 }
 
 

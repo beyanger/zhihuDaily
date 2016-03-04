@@ -64,12 +64,10 @@
     self.textLabel.text = theme.name;
 
     if ([theme.name isEqualToString:@"首页"]) {
-        self.accessoryView.hidden = YES;
+        self.addButton.enabled = NO;
     } else {
-        self.accessoryView.hidden = NO;
         self.addButton.enabled = !theme.isCollected;
     }
 }
-
 
 @end

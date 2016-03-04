@@ -37,7 +37,7 @@
 #define kUserDefaults       [NSUserDefaults standardUserDefaults]
 #define kNotificationCenter         [NSNotificationCenter defaultCenter]
 
-
+#define kAccount            [SYAccount sharedAccount]
 
 
 

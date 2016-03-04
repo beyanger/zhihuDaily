@@ -35,12 +35,6 @@
     commentView.clipsToBounds = YES;
     [commentView.likeBtn setTitle:liked?@"取消点赞":@"点赞" forState:UIControlStateNormal];
     commentView.width = liked ? 225 : 203;
-    
-    
-    
-    
-    
-    
     return commentView;
 }
 
