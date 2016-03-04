@@ -150,6 +150,8 @@
 + (void)getThemesWithCompleted:(Completed)completed {
     NSString *themeUrl = @"http://news-at.zhihu.com/api/4/themes";
     
+    NSLog(@"share name : %@", [SYAccount sharedAccount].name);
+    
     NSArray *themeStatus = [SYCacheTool queryThemeWithUser:[SYAccount sharedAccount].name];
     if (themeStatus.count > 0) {
         !completed ? : completed(themeStatus); // 这里是带有收藏信息的
@@ -257,21 +259,21 @@
 // 获取当前用户的收藏
 + (void)getColltedStoriesWithCompleted:(Completed)completed {
     // 这里应该从网络中获取，但是当前仅仅是本地收藏
-    NSArray *collted =  [SYCacheTool queryCollectedStroy];
+    NSArray *collted =  [SYCacheTool queryCollectedStroyWithUser:[SYAccount sharedAccount].name];
     !completed ? : completed(collted);
 }
 
 + (BOOL)queryCollectedStatusWithStory:(SYStory *)story {
-    return [SYCacheTool queryCollectedStatusWithStory:story];
+    return [SYCacheTool queryCollectedStatusWithUser:[SYAccount sharedAccount].name Story:story];
 }
 
 
 + (void)collectedWithStroy:(SYStory *)story {
-    [SYCacheTool cacheCollectionWithStory:story];
+    [SYCacheTool cacheCollectionWithUser:[SYAccount sharedAccount].name story:story];
 }
 
 + (void)cancelCollectedWithStroy:(SYStory *)story {
-    [SYCacheTool cancelCollectedWithStory:story];
+    [SYCacheTool cancelCollectedWithUser:[SYAccount sharedAccount].name story:story];
 }
 
 // 获取当前用户收藏的主题

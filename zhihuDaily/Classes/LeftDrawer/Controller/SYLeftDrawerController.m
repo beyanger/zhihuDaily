@@ -20,8 +20,9 @@
 #import "SYCollectionController.h"
 #import "UIImageView+WebCache.h"
 #import "SYProfileController.h"
+#import "SYLoginController.h"
 
-@interface SYLeftDrawerController () <UITableViewDataSource, SYLeftDrawerCellDelegate, SYThemeControllerDelegate>
+@interface SYLeftDrawerController () <UITableViewDataSource, UITableViewDelegate, SYLeftDrawerCellDelegate, SYThemeControllerDelegate>
 @property (nonatomic, strong) NSMutableArray<SYTheme *> *dataSource;
 
 @property (weak, nonatomic) IBOutlet UIView *profileView;
@@ -45,22 +46,20 @@
     [super viewDidLoad];
     [self setupSubviews];
     [self setupDataSource];
+    
+    [kNotificationCenter addObserver:self selector:@selector(setupDataSource) name:NotiLogin object:nil];
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(login)];
     [self.profileView addGestureRecognizer:tap];
 }
 
 - (void)setupSubviews {
-    
     self.avatarImage.layer.cornerRadius = 18;
-
-    
     self.tableView.bounces = NO;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = SYColor(26, 31, 36, 1.0);
-    
-    
  }
 
 
@@ -78,6 +77,9 @@
     self.nameLabel.text = account.name;
 }
 
+- (void)dealloc {
+    [kNotificationCenter removeObserver:self];
+}
 
 
 
@@ -88,12 +90,17 @@
         SYProfileController *pc = [[SYProfileController alloc] init];
         [self presentViewController:pc animated:YES completion:nil];
     } else {
-        SYLoginViewController *lvc = [[SYLoginViewController alloc] init];
+        SYLoginController *lvc = [[SYLoginController alloc] init];
+        
         [self presentViewController:lvc animated:YES completion:nil];
     }
 }
 
 - (void)setupDataSource {
+    
+    
+    NSLog(@"收到通知");
+    
     [SYZhihuTool getThemesWithCompleted:^(NSArray<SYTheme *> *obj) {
         // 将收藏的列表放在前面显示
         NSMutableArray *collected = [@[] mutableCopy];
@@ -104,6 +111,7 @@
         
         [collected addObjectsFromArray:notCollected];
         self.dataSource = collected;
+        
         SYTheme *home = [[SYTheme alloc] init];
         home.name = @"首页";
         home.isCollected = YES;
@@ -114,6 +122,8 @@
         });
     }];
 }
+
+
 
 - (NSInteger)locateTheme:(SYTheme *)theme {
     for (NSUInteger i = 0; i < self.dataSource.count; i++) {

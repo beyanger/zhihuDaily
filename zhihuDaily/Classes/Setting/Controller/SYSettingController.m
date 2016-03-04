@@ -102,20 +102,17 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    _groups[0].items = @[[SYSettingArrow itemWithTitle:[SYAccount sharedAccount].name operation:nil destvc:[SYAccount sharedAccount].isLogin?[SYProfileController class]:[SYLoginController class] ]];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
 
 - (NSArray<SYSettingGroup *> *)groups {
     if (!_groups) {
         SYSettingGroup *group0 = [[SYSettingGroup alloc] init];
         
-        
-        group0.items = @[[SYSettingArrow itemWithTitle:[SYAccount sharedAccount].name operation:nil destvc:[SYAccount sharedAccount].isLogin?[SYProfileController class]:[SYLoginController class] ],
-                         [SYSettingText itemWithTitle:@"注销登录" operation:^{
-                             [[SYAccount sharedAccount] logout];
-                             [MBProgressHUD showSuccess:@"已经退出登录..."];
-                             
-                         } text:[SYAccount sharedAccount].name]
-                         
-                         ];
+        group0.items = @[[SYSettingArrow itemWithTitle:[SYAccount sharedAccount].name operation:nil destvc:[SYAccount sharedAccount].isLogin?[SYProfileController class]:[SYLoginController class] ]];
         
         SYSettingGroup *group1 = [[SYSettingGroup alloc] init];
         group1.items = @[[SYSettingSwitch itemWithTitle:@"自动离线下载" operation:nil]];

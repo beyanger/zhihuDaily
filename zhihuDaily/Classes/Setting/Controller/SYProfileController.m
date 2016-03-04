@@ -9,6 +9,7 @@
 #import "SYProfileController.h"
 #import "UIImageView+WebCache.h"
 #import "SYAccount.h"
+#import "MBProgressHUD+YS.h"
 
 @interface SYProfileController ()
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
@@ -29,6 +30,14 @@
     self.avatarImageView.clipsToBounds = YES;
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[SYAccount sharedAccount].avatar]];
     self.nameLabel.text = [SYAccount sharedAccount].name;
+}
+- (IBAction)logout:(UIButton *)sender {
+    SYAccount *account = [SYAccount sharedAccount];
+    [account logout];
+    sender.enabled = NO;
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[SYAccount sharedAccount].avatar]];
+    self.nameLabel.text = [SYAccount sharedAccount].name;
+    [MBProgressHUD showSuccess:@"已经退出"];
 }
 
 - (void)didReceiveMemoryWarning {

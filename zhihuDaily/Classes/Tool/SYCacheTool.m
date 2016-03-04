@@ -59,47 +59,70 @@ static FMDatabaseQueue *_zhihu_queue;
 }
 
 + (FMDatabaseQueue *)queue {
+    static int count = 0;
+    NSLog(@"----> %d", count++);
+    
      return _zhihu_queue;
 }
 
-+ (NSArray *)queryCollectedStroy {
-    SYAccount *account = [SYAccount sharedAccount];
-    if (!account.isLogin) return nil;
-    
-    
-    NSMutableArray *collectedArray = [@[] mutableCopy];
+
++ (void)cacheCollectionWithUser:(NSString *)name story:(SYStory *)story {
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[self queue] inDatabase:^(FMDatabase *db) {
-            NSString *sql = [NSString stringWithFormat:@"SELECT story FROM ct_story_%@ ORDER BY id DESC;", account.name.md5sum];
-            FMResultSet *rs = [db executeQuery:sql];
+            NSString *sql = @"REPLACE INTO ct_story (user, storyid, story) VALUES (?, ?, ?);";
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:story];
+            
+            [db executeUpdate:sql, name, @(story.id), data];
+        }];
+    });
+}
++ (NSArray<SYStory *> *)queryCollectedStroyWithUser:(NSString *)name {
+    NSMutableArray *storyArray = [@[] mutableCopy];
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [[self queue] inDatabase:^(FMDatabase *db) {
+            NSString *sql = @"SELECT story FROM ct_story WHERE user = ? ORDER BY id DESC;";
+            FMResultSet *rs =  [db executeQuery:sql, name];
             while (rs.next) {
-                NSData *storyid = [rs dataForColumnIndex:0];
-             
-                SYStory *story = [NSKeyedUnarchiver unarchiveObjectWithData:storyid];
-                [collectedArray addObject:story];
+                NSData *data = [rs dataForColumnIndex:0];
+                SYStory *story = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                [storyArray addObject:story];
             }
         }];
     });
-    
-    return collectedArray.count >0 ? collectedArray : nil;
+
+    return storyArray.count > 0 ? storyArray : nil;
 }
 
-+ (BOOL)queryCollectedStatusWithStory:(SYStory *)story {
-    SYAccount *account = [SYAccount sharedAccount];
-    if (!account.isLogin) return NO;
-    __block BOOL status = NO;
-    [[self queue] inDatabase:^(FMDatabase *db) {
-        NSString *sql = [NSString stringWithFormat:@"SELECT story FROM ct_story_%@ WHERE storyid = ? ;", account.name.md5sum];
-        FMResultSet *rs = [db executeQuery:sql, @(story.id)];
-        while (rs.next) {
-            status = YES;
-        }
-    }];
-    return status;
++ (BOOL)queryCollectedStatusWithUser:(NSString *)name Story:(SYStory *)story {
+    __block BOOL result = NO;
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [[self queue] inDatabase:^(FMDatabase *db) {
+            NSString *sql = @"SELECT story FROM ct_story WHERE user = ? AND storyid = ?;";
+            FMResultSet *rs =  [db executeQuery:sql, name, @(story.id)];
+            result = rs.next;
+         }];
+    });
+    return result;
+}
+
++ (void)cancelCollectedWithUser:(NSString *)name story:(SYStory *)story {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [[self queue] inDatabase:^(FMDatabase *db) {
+            NSString *sql = @"DELETE FROM ct_story WHERE user = ? AND storyid = ?;";
+            [db executeUpdate:sql, name, @(story.id)];
+        }];
+    });
 }
 
 
-+ (void)updateCollectedStatusWithUser:(NSString *)user themeid:(int)themeid type:(BOOL)type {
+
+
+
+
+
+
+
++ (void)updateCollectedThemeWithUser:(NSString *)user themeid:(int)themeid type:(BOOL)type {
     NSLog(@"update id: %d, %d", themeid, type);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[self queue] inDatabase:^(FMDatabase *db) {
@@ -124,11 +147,11 @@ static FMDatabaseQueue *_zhihu_queue;
 }
 
 + (void)cacheCollectionThemeWithUser:(NSString *)user theme:(SYTheme *)theme {
-    [self updateCollectedStatusWithUser:user themeid:theme.id type:YES];
+    [self updateCollectedThemeWithUser:user themeid:theme.id type:YES];
 }
 
 + (void)cancelCollectedThemeWithUser:(NSString *)user theme:(SYTheme *)theme {
-    [self updateCollectedStatusWithUser:user themeid:theme.id type:NO];
+    [self updateCollectedThemeWithUser:user themeid:theme.id type:NO];
 }
 
 + (NSArray *)queryThemeWithUser:(NSString *)user {

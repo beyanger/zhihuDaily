@@ -44,6 +44,7 @@ static SYAccount *_account;
             _account->_avatar = @"http://pic1.zhimg.com/e70b91873695eb59e7d9a145f87a1688_m.jpg";
             [kUserDefaults setObject:_account->_avatar forKey:@"avatar"];
             _account->_name = name;
+            [kNotificationCenter postNotificationName:NotiLogin object:nil];
             result = YES;
         } failure:nil];
     });
@@ -52,7 +53,9 @@ static SYAccount *_account;
 
 - (void)logout {
     _isLogin = NO;
+    [kNotificationCenter postNotificationName:NotiLogin object:nil];
     [kUserDefaults setBool:NO forKey:@"isLogin"];
+    [kUserDefaults synchronize];
 }
 
 

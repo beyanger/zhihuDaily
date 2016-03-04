@@ -17,41 +17,51 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login_Background" translatesAutoresizingMaskIntoConstraints="NO" id="wsC-Bh-pMk">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <animations/>
-                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D7d-yg-8YO">
-                    <rect key="frame" x="260" y="260" width="80" height="80"/>
+                    <rect key="frame" x="260" y="120" width="80" height="80"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="W7C-SM-cHB"/>
                         <constraint firstAttribute="height" constant="80" id="uJq-SK-n5O"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJ1-j2-Fer">
-                    <rect key="frame" x="263" y="384" width="74.5" height="44"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJ1-j2-Fer">
+                    <rect key="frame" x="263" y="244" width="73.5" height="44"/>
                     <animations/>
                     <fontDescription key="fontDescription" name="IowanOldStyle-BoldItalic" family="Iowan Old Style" pointSize="32"/>
-                    <color key="textColor" red="0.99292868589743588" green="0.99292868589743588" blue="0.99292868589743588" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbe-yv-IsR">
+                    <rect key="frame" x="200" y="420" width="200" height="40"/>
+                    <animations/>
+                    <state key="normal" title="退出登录" backgroundImage="login_border">
+                        <color key="titleColor" red="0.28609622454398337" green="0.1729066491620089" blue="0.76279362416107388" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="logout:" destination="-1" eventType="touchUpInside" id="CRY-U6-Dw0"/>
+                    </connections>
+                </button>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="wsC-Bh-pMk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4Hc-1n-lsK"/>
                 <constraint firstItem="tJ1-j2-Fer" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="8Tx-Dg-9ye"/>
+                <constraint firstItem="Mbe-yv-IsR" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="AiI-A9-KFY"/>
                 <constraint firstItem="D7d-yg-8YO" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="BoD-yN-8rj"/>
-                <constraint firstItem="wsC-Bh-pMk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="JnX-Rk-YeY"/>
                 <constraint firstItem="tJ1-j2-Fer" firstAttribute="top" secondItem="D7d-yg-8YO" secondAttribute="bottom" constant="44" id="Ref-Zu-Ub0"/>
-                <constraint firstAttribute="trailing" secondItem="wsC-Bh-pMk" secondAttribute="trailing" id="e0F-yP-CHW"/>
-                <constraint firstAttribute="bottom" secondItem="wsC-Bh-pMk" secondAttribute="bottom" id="tQ3-PU-DKi"/>
-                <constraint firstItem="D7d-yg-8YO" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="zq3-4n-d4Q"/>
+                <constraint firstItem="D7d-yg-8YO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="120" id="aJw-rw-MQi"/>
+                <constraint firstAttribute="bottom" secondItem="Mbe-yv-IsR" secondAttribute="bottom" constant="140" id="vWM-4z-AZ5"/>
+                <constraint firstItem="D7d-yg-8YO" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-40" id="zq3-4n-d4Q"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="zq3-4n-d4Q"/>
+                </mask>
+            </variation>
         </view>
     </objects>
     <resources>
-        <image name="Login_Background" width="320" height="506"/>
+        <image name="login_border" width="200" height="40"/>
     </resources>
 </document>

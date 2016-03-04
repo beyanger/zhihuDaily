@@ -15,11 +15,13 @@
 
 @interface SYCacheTool : NSObject
 
-+ (void)cacheCollectionWithStory:(SYStory *)story;
-+ (NSArray<SYStory *> *)queryCollectedStroy;
-+ (BOOL)queryCollectedStatusWithStory:(SYStory *)story;
 
-+ (void)cancelCollectedWithStory:(SYStory *)story;
++ (void)cancelCollectedWithUser:(NSString *)name story:(SYStory *)story;
++ (BOOL)queryCollectedStatusWithUser:(NSString *)name Story:(SYStory *)story;
++ (NSArray<SYStory *> *)queryCollectedStroyWithUser:(NSString *)name;
+
++ (void)cacheCollectionWithUser:(NSString *)name story:(SYStory *)story;
+
 
 
 // 返回包含主题是否被收藏信息
