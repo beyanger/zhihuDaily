@@ -14,10 +14,14 @@
 
 @implementation SYDemoViewController
 
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [kNotificationCenter postNotificationName:ToggleDrawer object:nil];
++ (void)load {
+    NSLog(@"---- demo load");
 }
+
++ (void)initialize {
+    NSLog(@"initial ize ");
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

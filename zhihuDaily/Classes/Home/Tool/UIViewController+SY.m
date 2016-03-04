@@ -47,7 +47,7 @@
 
 
 
-+ (void)load {
++ (void)fork {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         Class class = [self class];

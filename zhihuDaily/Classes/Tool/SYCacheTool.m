@@ -28,19 +28,31 @@ static FMDatabaseQueue *_zhihu_queue;
         
         _zhihu_queue = [FMDatabaseQueue databaseQueueWithPath:pathName];
         [_zhihu_queue inDatabase:^(FMDatabase *db) {
-            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_storylist (date INTEGER PRIMARY KEY, storylist BLOB);"];
-            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_story (storyid INTEGER PRIMARY KEY, story BLOB);"];
-           
-            NSString *userLogin = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_user (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE, password TEXT);"];
-            [db executeUpdate:userLogin];
+            // 缓存主页列表，以日期作为 primary key，每日列表为表项
+            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_homelist (id INTEGER PRIMARY KEY AUTOINCREMENT, date INTEGER UNIQUE, storylist BLOB);"];
+            // 缓存具体的story， storyid作为primary key， story内容为表项
+            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_detailstory (id INTEGER PRIMARY KEY AUTOINCREMENT,  storyid INTEGER UNIQUE, story BLOB);"];
             
+            
+            // 缓存主题下的故事，storyid为primary key，同时记录该story的themeid
+            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_themelist (id INTEGER PRIMARY KEY AUTOINCREMENT, storyid INTEGER UNIQUE, themeid INTEGER, story BLOB)"];
 
-            SYAccount *account = [SYAccount sharedAccount];
-            NSString *collection = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_story_%@ (id INTEGER PRIMARY KEY AUTOINCREMENT, storyid INTEGER UNIQUE, story BLOB);", account.name.md5sum];
-            [db executeUpdate:collection];
+            // 已登录过用户表，登录过程为，当用户为新用户时，第一次登录输入的密码作为用户密码，并登录成功，当用户再次登录时，必须输入与第一次登录时的密码相同，否则登录不成功
+            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS ct_user (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE, password TEXT);"];
             
-            NSString *collectedTheme = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_theme_%@ (id INTEGER PRIMARY KEY AUTOINCREMENT, themeid INTEGER UNIQUE, theme BLOB);", account.name.md5sum];
-            [db executeUpdate:collectedTheme];
+            
+            
+            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS theme (themeid INTEGER PRIMARY KEY, theme BLOB);"];
+            //创建联合 unique约束
+            // 创建一个公共表，添加 storyid和name的联合唯一约束...
+            NSString *ct_story = @"CREATE TABLE IF NOT EXISTS ct_story (id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, storyid INTEGER, story BLOB, CONSTRAINT collected_story UNIQUE(user, storyid));";
+
+            //记录用户收藏主题情况
+            NSString *ct_theme = @"CREATE TABLE IF NOT EXISTS ct_theme (id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, themeid INTEGER, is_collected BOOL, CONSTRAINT collected_theme UNIQUE(user, themeid));";
+            
+            [db executeUpdate:ct_story];
+            [db executeUpdate:ct_theme];
+            
         }];
     });
     
@@ -51,8 +63,11 @@ static FMDatabaseQueue *_zhihu_queue;
 }
 
 + (NSArray *)queryCollectedStroy {
-    NSMutableArray *collectedArray = [@[] mutableCopy];
     SYAccount *account = [SYAccount sharedAccount];
+    if (!account.isLogin) return nil;
+    
+    
+    NSMutableArray *collectedArray = [@[] mutableCopy];
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[self queue] inDatabase:^(FMDatabase *db) {
             NSString *sql = [NSString stringWithFormat:@"SELECT story FROM ct_story_%@ ORDER BY id DESC;", account.name.md5sum];
@@ -70,8 +85,9 @@ static FMDatabaseQueue *_zhihu_queue;
 }
 
 + (BOOL)queryCollectedStatusWithStory:(SYStory *)story {
-    __block BOOL status = NO;
     SYAccount *account = [SYAccount sharedAccount];
+    if (!account.isLogin) return NO;
+    __block BOOL status = NO;
     [[self queue] inDatabase:^(FMDatabase *db) {
         NSString *sql = [NSString stringWithFormat:@"SELECT story FROM ct_story_%@ WHERE storyid = ? ;", account.name.md5sum];
         FMResultSet *rs = [db executeQuery:sql, @(story.id)];
@@ -83,71 +99,70 @@ static FMDatabaseQueue *_zhihu_queue;
 }
 
 
-+ (void)cacheCollectionWithStory:(SYStory *)story {
-    SYAccount *account = [SYAccount sharedAccount];
-    
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:story];
-    
++ (void)updateCollectedStatusWithUser:(NSString *)user themeid:(int)themeid type:(BOOL)type {
+    NSLog(@"update id: %d, %d", themeid, type);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[self queue] inDatabase:^(FMDatabase *db) {
-            NSString *sql = [NSString stringWithFormat:@"REPLACE INTO ct_story_%@ (storyid, story) VALUES (?, ?);", account.name.md5sum];
-            [db executeUpdate:sql, @(story.id), data];
+            //NSString *sql = [NSString stringWithFormat:@"UPDATE ct_theme SET is_collected = ? WHERE user = ? AND themeid = ?;"];
+            NSString *sql = @"REPLACE INTO ct_theme (user, themeid, is_collected) VALUES (?, ?, ?)";
+            [db executeUpdate:sql, user, @(themeid), @(type)];
         }];
     });
 }
 
-+ (void)cancelCollectedWithStory:(SYStory *)story {
-    SYAccount *account = [SYAccount sharedAccount];
-    
-    [[self queue] inDatabase:^(FMDatabase *db) {
-        NSString *sql = [NSString stringWithFormat:@"DELETE FROM ct_story_%@ WHERE storyid = ?;", account.name.md5sum];
-        [db executeUpdate:sql, @(story.id)];
-    }];
-}
 
 
-+ (void)cacheCollectionWithTheme:(SYTheme *)theme {
-    SYAccount *account = [SYAccount sharedAccount];
-    
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:theme];
-    theme.isCollected = YES;
-    
++ (void)cacheThemeWithTheme:(SYTheme *)theme {
+    NSLog(@"---> %@", theme.name);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[self queue] inDatabase:^(FMDatabase *db) {
-            NSString *sql = [NSString stringWithFormat:@"REPLACE INTO ct_theme_%@ (themeid, theme) VALUES (?, ?);", account.name.md5sum];
+            NSString *sql = @"REPLACE INTO theme (themeid, theme) VALUES (?, ?);";
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:theme];
             [db executeUpdate:sql, @(theme.id), data];
         }];
     });
 }
 
-+ (void)cancelCollectedWithTheme:(SYTheme *)theme {
-    SYAccount *account = [SYAccount sharedAccount];
-    
-    [[self queue] inDatabase:^(FMDatabase *db) {
-        NSString *sql = [NSString stringWithFormat:@"DELETE FROM ct_theme_%@ WHERE themeid = ?;", account.name.md5sum];
-        [db executeUpdate:sql, @(theme.id)];
-    }];
++ (void)cacheCollectionThemeWithUser:(NSString *)user theme:(SYTheme *)theme {
+    [self updateCollectedStatusWithUser:user themeid:theme.id type:YES];
 }
 
-+ (NSMutableArray *)queryCollectedTheme {
-    NSMutableArray *collectedArray = [@[] mutableCopy];
-    SYAccount *account = [SYAccount sharedAccount];
++ (void)cancelCollectedThemeWithUser:(NSString *)user theme:(SYTheme *)theme {
+    [self updateCollectedStatusWithUser:user themeid:theme.id type:NO];
+}
+
++ (NSArray *)queryThemeWithUser:(NSString *)user {
+    NSMutableArray *themeArray = [@[] mutableCopy];
     
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[self queue] inDatabase:^(FMDatabase *db) {
-            NSString *sql = [NSString stringWithFormat:@"SELECT theme FROM ct_theme_%@ ORDER BY id DESC;", account.name.md5sum];
-            FMResultSet *rs = [db executeQuery:sql];
-            while (rs.next) {
-                NSData *data = [rs dataForColumnIndex:0];
+            NSString *allTheme = @"SELECT themeid, theme FROM theme;";
+            FMResultSet *trs = [db executeQuery:allTheme];
+            NSMutableDictionary *dict = [@{} mutableCopy];
+            while (trs.next) {
+                int themeid = [trs intForColumnIndex:0];
+                SYTheme *theme = [NSKeyedUnarchiver unarchiveObjectWithData:[trs dataForColumnIndex:1]];
+                dict[@(themeid)] = theme;
                 
-                SYTheme *theme = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-                [collectedArray addObject:theme];
             }
+            
+//            NSString *sql = [NSString stringWithFormat:@"SELECT ct_theme.themeid, is_collected FROM theme INNER JOIN ct_theme WHERE  user = ? AND is_collected = 1 AND theme.themeid = ct_theme.themeid;"];
+            
+            NSString *sql = @"SELECT themeid FROM ct_theme WHERE user = ? AND is_collected = 1;";
+            FMResultSet *rs = [db executeQuery:sql, user];
+            while (rs.next) {
+                int themeid = [rs intForColumnIndex:0];
+                SYTheme *theme = dict[@(themeid)];
+                theme.isCollected = YES;
+            }
+            [themeArray addObjectsFromArray:dict.allValues];
         }];
     });
-    
-    return collectedArray.count >0 ? collectedArray : nil;
+    return themeArray.count>0 ? themeArray : nil;
 }
+
+
+
 
 
 + (SYBeforeStoryResult *)queryStoryListWithDateString:(NSString *)dateString {
@@ -166,7 +181,7 @@ static FMDatabaseQueue *_zhihu_queue;
 
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[self queue] inDatabase:^(FMDatabase *db) {
-            FMResultSet *rs = [db executeQuery:@"SELECT storylist FROM t_storylist WHERE date = ?", dateString];
+            FMResultSet *rs = [db executeQuery:@"SELECT storylist FROM t_homelist WHERE date = ?", dateString];
             // 这里结果应该只有一个
             while (rs.next) {
                 data = [rs dataForColumnIndex:0];
@@ -189,7 +204,7 @@ static FMDatabaseQueue *_zhihu_queue;
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:respObject];
         NSString *dateString = respObject.date;
         [[self queue] inDatabase:^(FMDatabase *db) {
-            [db executeUpdate:@"INSERT OR IGNORE INTO t_storylist (date, storylist) VALUES (?, ?);", dateString, data];
+            [db executeUpdate:@"INSERT OR IGNORE INTO t_homelist (date, storylist) VALUES (?, ?);", dateString, data];
         }];
     });
 }
@@ -201,7 +216,7 @@ static FMDatabaseQueue *_zhihu_queue;
     
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[self queue] inDatabase:^(FMDatabase *db) {
-            FMResultSet *rs = [db executeQuery:@"SELECT story FROM t_story WHERE storyid = ?", @(storyid)];
+            FMResultSet *rs = [db executeQuery:@"SELECT story FROM t_detailstory WHERE storyid = ?", @(storyid)];
             // 这里结果只有一个
             while (rs.next) {
                 data = [rs dataForColumnIndex:0];
@@ -222,7 +237,7 @@ static FMDatabaseQueue *_zhihu_queue;
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:story];
         
         [[self queue] inDatabase:^(FMDatabase *db) {
-            [db executeUpdate:@"INSERT OR IGNORE INTO t_story (storyid, story) VALUES (?, ?);", @(story.id), data];
+            [db executeUpdate:@"INSERT OR IGNORE INTO t_detailstory (storyid, story) VALUES (?, ?);", @(story.id), data];
         }];
     });
 }
@@ -243,27 +258,16 @@ static FMDatabaseQueue *_zhihu_queue;
 }
 
 
-+ (void)cacheTheme:(int)themeid {
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *sql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS theme_%d (storyid INTEGER PRIMARY KEY, story BLOB)", themeid];
-        [[self queue] inDatabase:^(FMDatabase *db) {
-            [db executeUpdate:sql];
-        }];
-    });
-    
-}
-
-+ (void)cacheThemeSotryListWithId:(int)themeid respObject:(NSArray<SYStory *>*)respObject {
++ (void)cacheThemeStoryListWithId:(int)themeid respObject:(NSArray<SYStory *>*)respObject {
     // 进行缓存数据
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *sql = [NSString stringWithFormat:@"INSERT OR IGNORE INTO theme_%d (storyid, story) VALUES (?, ?);", themeid];
+        NSString *sql = [NSString stringWithFormat:@"INSERT OR IGNORE INTO t_themelist (storyid, themeid, story) VALUES (?, ?, ?);"];
         [[self queue] inDatabase:^(FMDatabase *db) {
-            for (SYStory *story in respObject) {
-                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:story];
-                [db executeUpdate:sql, @(story.id), data];
-            }
+            [respObject enumerateObjectsUsingBlock:^(SYStory * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:obj];
+                [db executeUpdate:sql, @(obj.id), @(themeid), data];
+            }];
         }];
+        
     });
     
 }
@@ -271,9 +275,9 @@ static FMDatabaseQueue *_zhihu_queue;
 + (NSArray<SYStory *> *)queryBeforeStoryListWithId:(int)themeid storyId:(long long)storyId {
     NSMutableArray *storyArray = [@[] mutableCopy];
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSString *sql = [NSString stringWithFormat:@"SELECT story FROM theme_%d WHERE storyid < ? ORDER BY storyid DESC LIMIT 20;", themeid];
+        NSString *sql = @"SELECT story FROM t_themelist WHERE themeid=? AND storyid < ? ORDER BY storyid DESC LIMIT 20;";
         [[self queue] inDatabase:^(FMDatabase *db) {
-            FMResultSet *rs = [db executeQuery:sql, @(storyId)];
+            FMResultSet *rs = [db executeQuery:sql, @(themeid), @(storyId)];
             while (rs.next) {
                 NSData *data = [rs dataForColumnIndex:0];
                 SYStory *story = [NSKeyedUnarchiver unarchiveObjectWithData:data];

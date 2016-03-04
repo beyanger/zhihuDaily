@@ -11,7 +11,7 @@
 
 #import "SYZhihuTool.h"
 #import "fmdb.h"
-
+#import "NSString+MD5.h"
 
 
 
@@ -150,47 +150,19 @@
 + (void)getThemesWithCompleted:(Completed)completed {
     NSString *themeUrl = @"http://news-at.zhihu.com/api/4/themes";
     
-    
-    NSMutableArray<SYTheme *> *collectedThemes = [SYCacheTool queryCollectedTheme];
+    NSArray *themeStatus = [SYCacheTool queryThemeWithUser:[SYAccount sharedAccount].name];
+    if (themeStatus.count > 0) {
+        !completed ? : completed(themeStatus); // 这里是带有收藏信息的
+        return;
+    }
     
     [YSHttpTool GETWithURL:themeUrl params:nil success:^(id responseObject) {
         NSArray<SYTheme *> *themeArray = [SYTheme mj_objectArrayWithKeyValuesArray:responseObject[@"others"]];
-    
         
-        NSMutableArray *newCollected = [@[] mutableCopy];
-        NSMutableArray *notCollected = [@[] mutableCopy];
-        
-
-        for (SYTheme *theme in themeArray) {
-            BOOL flag = NO;
-            SYTheme *checkTheme = nil;
-            for (SYTheme *collected in collectedThemes) {
-                if (theme.id == collected.id) {
-                    flag = YES;
-                    checkTheme = collected;
-                    [newCollected addObject:theme];
-                    [SYCacheTool cacheCollectionWithTheme:theme]; // 将网络中最新获取到的主题缓存到数据库中
-                    break;
-                }
-            }
-            
-            if (flag) {
-                [collectedThemes removeObject:checkTheme];
-            } else {
-                [notCollected addObject:theme];
-            }
-        }
-        [newCollected addObjectsFromArray:collectedThemes];
-        [newCollected addObjectsFromArray:notCollected];
-        
-        !completed ? : completed(newCollected);
-        
-        for (SYTheme *theme in themeArray) {
-            //这里是创建主题表，以后有有该主题的新闻，则缓存到对应的表中， 并没有缓存该主题
-            //缓存的是该主题下的列表故事
-            [SYCacheTool cacheTheme:theme.id];
-        }
-        
+        !completed ? : completed(themeArray);
+        [themeArray enumerateObjectsUsingBlock:^(SYTheme *obj, NSUInteger idx, BOOL *stop) {
+            [SYCacheTool cacheThemeWithTheme:obj];
+        }];
     } failure:nil];
 }
 
@@ -254,10 +226,11 @@
     NSArray *objArray = [SYCacheTool queryBeforeStoryListWithId:themeid storyId:storyId];
     
     if (objArray.count > 0) {
+        
+        NSLog(@"---> 从缓存中获取到 %lu 条 theme: %d", objArray.count, themeid);
         !completed ? :completed(objArray);
         return;
     }
-    
     
     NSString *beforeUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/theme/%d/before/%lld", themeid, storyId];
     
@@ -266,7 +239,7 @@
     
         !completed ? :completed(storyArray);
         
-        [SYCacheTool cacheThemeSotryListWithId:themeid respObject:storyArray];
+        [SYCacheTool cacheThemeStoryListWithId:themeid respObject:storyArray];
         
     } failure:nil];
 }
@@ -305,10 +278,10 @@
 
 // 收藏或者取消
 + (void)collectedWithTheme:(SYTheme *)theme {
-    [SYCacheTool cacheCollectionWithTheme:theme];
+    [SYCacheTool cacheCollectionThemeWithUser:[SYAccount sharedAccount].name theme:theme];
 }
 + (void)cancelCollectedWithTheme:(SYTheme *)theme {
-   return [SYCacheTool cancelCollectedWithTheme:theme];
+    [SYCacheTool cancelCollectedThemeWithUser:[SYAccount sharedAccount].name theme:theme];
 }
 
 + (void)loginWithName:(NSString *)name password:(NSString *)password success:(Success)success failure:(Failure)failure {

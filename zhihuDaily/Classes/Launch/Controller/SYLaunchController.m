@@ -12,7 +12,6 @@
 #import "SYMainViewController.h"
 #import "AppDelegate.h"
 #import "MBProgressHUD+YS.h"
-#import "SYCacheTool.h"
 #import "SYNetworkTool.h"
 
 

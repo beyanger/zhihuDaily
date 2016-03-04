@@ -69,9 +69,16 @@ typedef void  (^Failure)();
  */
 + (void)getShortCommentsWithId:(long long)storyid completed:(Completed)completed;
 /**
- *  获取所有的 theme
+ *  获取所有的 theme //主题列表相对稳定，所以可以缓存
  */
 + (void)getThemesWithCompleted:(Completed)completed;
+
+// 收藏或者取消
++ (void)collectedWithTheme:(SYTheme *)theme;
++ (void)cancelCollectedWithTheme:(SYTheme *)theme;
+
+
+
 
 /**
  *  根据 NSDate类型时间获取当日之前的story
@@ -98,10 +105,6 @@ typedef void  (^Failure)();
 + (BOOL)queryCollectedStatusWithStory:(SYStory *)story;
 + (void)collectedWithStroy:(SYStory *)story;
 + (void)cancelCollectedWithStroy:(SYStory *)story;
-
-// 收藏或者取消
-+ (void)collectedWithTheme:(SYTheme *)theme;
-+ (void)cancelCollectedWithTheme:(SYTheme *)theme;
 
 
 + (void)loginWithName:(NSString *)name password:(NSString *)password success:(Success)success failure:(Failure)failure;

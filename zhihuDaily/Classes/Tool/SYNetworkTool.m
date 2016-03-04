@@ -18,7 +18,6 @@
     Reachability *conn = [Reachability reachabilityForInternetConnection];
     
     if ([wifi currentReachabilityStatus] != NotReachable) { // 有wifi
-        
         return SYNetworkTypeWiFi;
     } else if ([conn currentReachabilityStatus] != NotReachable) { // 没有使用wifi, 使用手机自带网络进行上网
         return SYNetworkType3G;

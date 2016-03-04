@@ -7,7 +7,6 @@
 //
 
 #import "SYMainViewController.h"
-#import "SYMainToolBox.h"
 #import "SYTheme.h"
 #import "SYHomeController.h"
 #import "SYZhihuTool.h"

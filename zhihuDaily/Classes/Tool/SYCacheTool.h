@@ -21,9 +21,15 @@
 
 + (void)cancelCollectedWithStory:(SYStory *)story;
 
-+ (void)cacheCollectionWithTheme:(SYTheme *)theme;
-+ (void)cancelCollectedWithTheme:(SYTheme *)theme;
-+ (NSMutableArray *)queryCollectedTheme;
+
+// 返回包含主题是否被收藏信息
++ (void)cacheThemeWithTheme:(SYTheme *)theme;
++ (NSArray *)queryThemeWithUser:(NSString *)user;
+
+
++ (void)cacheCollectionThemeWithUser:(NSString *)user theme:(SYTheme *)theme;
++ (void)cancelCollectedThemeWithUser:(NSString *)user theme:(SYTheme *)theme;
+
 
 
 + (SYBeforeStoryResult *)queryStoryListWithDateString:(NSString *)dateString;
@@ -34,10 +40,11 @@
 
 
 //这里是创建主题表，以后有有该主题的新闻，则缓存到对应的表中
-+ (void)cacheTheme:(int)themeid;
 
-+ (void)cacheThemeSotryListWithId:(int)themeid respObject:(NSArray<SYStory *> *)respObject;
++ (void)cacheThemeStoryListWithId:(int)themeid respObject:(NSArray<SYStory *> *)respObject;
 + (NSArray<SYStory *> *)queryBeforeStoryListWithId:(int)themeid storyId:(long long)storyId;
+
+
 
 
 + (BOOL)loginWithName:(NSString *)name password:(NSString *)password;

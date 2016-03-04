@@ -18,7 +18,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="wIS-YN-ehO" customClass="SYMainToolBox">
+        <view contentMode="scaleToFill" id="wIS-YN-ehO">
             <rect key="frame" x="0.0" y="0.0" width="200" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>

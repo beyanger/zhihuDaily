@@ -171,8 +171,6 @@
 		2FE707911C7DBF4E005CB13B /* SYThemeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE7078C1C7DBF4E005CB13B /* SYThemeController.m */; };
 		2FE7079B1C7DC2A3005CB13B /* SYZhihuTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE7079A1C7DC2A3005CB13B /* SYZhihuTool.m */; };
 		2FE707A21C7DD358005CB13B /* SYLeftDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE707A11C7DD358005CB13B /* SYLeftDrawerController.m */; };
-		2FE707A61C7DD6B6005CB13B /* SYMainToolBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE707A41C7DD6B6005CB13B /* SYMainToolBox.m */; };
-		2FE707A71C7DD6B6005CB13B /* SYMainToolBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FE707A51C7DD6B6005CB13B /* SYMainToolBox.xib */; };
 		2FE707AC1C7DDC69005CB13B /* SYLeftDrawerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FE707AB1C7DDC69005CB13B /* SYLeftDrawerController.xib */; };
 		2FE707AF1C7DE3F4005CB13B /* SYLeftDrawerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE707AE1C7DE3F4005CB13B /* SYLeftDrawerCell.m */; };
 		2FE707B21C7DECDD005CB13B /* SYDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE707B11C7DECDD005CB13B /* SYDemoViewController.m */; };
@@ -516,9 +514,6 @@
 		2FE7079A1C7DC2A3005CB13B /* SYZhihuTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYZhihuTool.m; sourceTree = "<group>"; };
 		2FE707A01C7DD358005CB13B /* SYLeftDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYLeftDrawerController.h; sourceTree = "<group>"; };
 		2FE707A11C7DD358005CB13B /* SYLeftDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYLeftDrawerController.m; sourceTree = "<group>"; };
-		2FE707A31C7DD6B6005CB13B /* SYMainToolBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYMainToolBox.h; sourceTree = "<group>"; };
-		2FE707A41C7DD6B6005CB13B /* SYMainToolBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYMainToolBox.m; sourceTree = "<group>"; };
-		2FE707A51C7DD6B6005CB13B /* SYMainToolBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYMainToolBox.xib; sourceTree = "<group>"; };
 		2FE707AB1C7DDC69005CB13B /* SYLeftDrawerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYLeftDrawerController.xib; sourceTree = "<group>"; };
 		2FE707AD1C7DE3F4005CB13B /* SYLeftDrawerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYLeftDrawerCell.h; sourceTree = "<group>"; };
 		2FE707AE1C7DE3F4005CB13B /* SYLeftDrawerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYLeftDrawerCell.m; sourceTree = "<group>"; };
@@ -966,9 +961,9 @@
 		2FC5877C1C79FE74003C9A7A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2F6CF27E1C7FB22500C4B346 /* Categories */,
 				2F6AC5E81C8166F60090CD8A /* Launch */,
 				2F6CF28D1C80326E00C4B346 /* Login */,
-				2F6CF27E1C7FB22500C4B346 /* Categories */,
 				2FE7079C1C7DD339005CB13B /* LeftDrawer */,
 				2FE707891C7DBF4E005CB13B /* Theme */,
 				2F2CCB851C7AF19F00C45E3D /* Home */,
@@ -1271,9 +1266,6 @@
 			children = (
 				2FE707AD1C7DE3F4005CB13B /* SYLeftDrawerCell.h */,
 				2FE707AE1C7DE3F4005CB13B /* SYLeftDrawerCell.m */,
-				2FE707A31C7DD6B6005CB13B /* SYMainToolBox.h */,
-				2FE707A41C7DD6B6005CB13B /* SYMainToolBox.m */,
-				2FE707A51C7DD6B6005CB13B /* SYMainToolBox.xib */,
 				2F6AC5E51C8141DD0090CD8A /* SYContainerView.h */,
 				2F6AC5E61C8141DD0090CD8A /* SYContainerView.m */,
 			);
@@ -1426,7 +1418,6 @@
 				2FCCAD171C83E7AB00C19D35 /* SYCommentView.xib in Resources */,
 				2F9995E91C7C47760072C8F0 /* SYCommentCell.xib in Resources */,
 				2FE707AC1C7DDC69005CB13B /* SYLeftDrawerController.xib in Resources */,
-				2FE707A71C7DD6B6005CB13B /* SYMainToolBox.xib in Resources */,
 				2F3A8CC81C8289A900D5C527 /* SYEditorDetailController.xib in Resources */,
 				2F6AC6141C81F40C0090CD8A /* SYShareView.xib in Resources */,
 				2F4F1A871C7FA09500AF3BDF /* Info.plist in Resources */,
@@ -1530,7 +1521,6 @@
 				2FCCAD1A1C8401FA00C19D35 /* SYAccount.m in Sources */,
 				2F9996021C7C799D0072C8F0 /* SYDismisAnimation.m in Sources */,
 				2F2CCBC81C7B0C1400C45E3D /* NSObject+MJProperty.m in Sources */,
-				2FE707A61C7DD6B6005CB13B /* SYMainToolBox.m in Sources */,
 				2FC587FA1C7A0974003C9A7A /* MASCompositeConstraint.m in Sources */,
 				2F37AB781C7B675100D3CD65 /* MMDrawerBarButtonItem.m in Sources */,
 				2FCCAD0D1C83BDB000C19D35 /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,

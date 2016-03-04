@@ -21,7 +21,7 @@
 #import "UIImageView+WebCache.h"
 #import "SYProfileController.h"
 
-@interface SYLeftDrawerController () <UITableViewDelegate, UITableViewDataSource, SYLeftDrawerCellDelegate, SYThemeControllerDelegate>
+@interface SYLeftDrawerController () <UITableViewDataSource, SYLeftDrawerCellDelegate, SYThemeControllerDelegate>
 @property (nonatomic, strong) NSMutableArray<SYTheme *> *dataSource;
 
 @property (weak, nonatomic) IBOutlet UIView *profileView;
@@ -94,13 +94,21 @@
 }
 
 - (void)setupDataSource {
-    [SYZhihuTool getThemesWithCompleted:^(id obj) {
+    [SYZhihuTool getThemesWithCompleted:^(NSArray<SYTheme *> *obj) {
+        // 将收藏的列表放在前面显示
+        NSMutableArray *collected = [@[] mutableCopy];
+        NSMutableArray *notCollected = [@[] mutableCopy];
+        [obj enumerateObjectsUsingBlock:^(SYTheme * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            obj.isCollected ? [collected addObject:obj] : [notCollected addObject:obj];
+        }];
+        
+        [collected addObjectsFromArray:notCollected];
+        self.dataSource = collected;
         SYTheme *home = [[SYTheme alloc] init];
         home.name = @"首页";
         home.isCollected = YES;
-        self.dataSource = [obj mutableCopy];
+        
         [self.dataSource insertObject:home atIndex:0];
-  
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
@@ -180,6 +188,7 @@
     SYTheme *theme = cell.theme;
     NSInteger locate =  [self locateTheme:theme];
     if (locate < 0) return;
+    cell.theme.isCollected = YES;
     
     NSIndexPath *sip = [NSIndexPath indexPathForRow:locate inSection:0];
     NSIndexPath *dip = [NSIndexPath indexPathForRow:1 inSection:0];
