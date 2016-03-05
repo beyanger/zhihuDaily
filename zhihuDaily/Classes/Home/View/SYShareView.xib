@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -23,355 +22,24 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8k5-qh-oWJ">
                     <rect key="frame" x="0.0" y="30" width="320" height="160"/>
                     <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAB-J2-fKA">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oea-Tu-Ihp">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3k9-kW-JcH">
-                                    <rect key="frame" x="0.0" y="0.0" width="640" height="160"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iM4-NF-AUE" userLabel="1">
-                                            <rect key="frame" x="10" y="0.0" width="75" height="80"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="75" id="mh4-8C-Meg"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="y0l-ud-AnJ"/>
-                                                <constraint firstAttribute="height" constant="80" id="zAd-oc-PWi"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <inset key="titleEdgeInsets" minX="-60" minY="60" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" title="微信" image="Share_WeChat">
-                                                <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q83-mY-PUf" userLabel="1">
-                                            <rect key="frame" x="85" y="0.0" width="75" height="80"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="80" id="8c3-49-SFa"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="e6Q-Tg-V9R"/>
-                                                <constraint firstAttribute="width" constant="75" id="rYX-S9-bZ0"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <inset key="titleEdgeInsets" minX="-60" minY="60" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" title="朋友圈" image="Share_WeChat_Moments">
-                                                <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCc-1x-Rkn" userLabel="1">
-                                            <rect key="frame" x="160" y="0.0" width="75" height="80"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="hS4-TK-4R9"/>
-                                                <constraint firstAttribute="width" constant="75" id="qwy-KQ-96p"/>
-                                                <constraint firstAttribute="height" constant="80" id="t64-TI-QnH"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <inset key="titleEdgeInsets" minX="-60" minY="60" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" title="有道云笔记" image="Share_YoudaoNote">
-                                                <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jqk-Vo-qJE" userLabel="1">
-                                            <rect key="frame" x="235" y="0.0" width="75" height="80"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="80" id="4yW-Gt-lzj"/>
-                                                <constraint firstAttribute="width" constant="75" id="87k-Pa-BET"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="yr5-Ld-09s"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <inset key="titleEdgeInsets" minX="-60" minY="60" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" title="QQ" image="Share_QQ">
-                                                <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyk-mG-ZO9" userLabel="1">
-                                            <rect key="frame" x="160" y="80" width="75" height="80"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="75" id="17j-D7-1eS"/>
-                                                <constraint firstAttribute="height" constant="80" id="RFJ-2G-Zll"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="pIN-AP-f0T"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <inset key="titleEdgeInsets" minX="-60" minY="60" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" title="新浪" image="Share_Sina">
-                                                <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ek-ok-DOh" userLabel="1">
-                                            <rect key="frame" x="10" y="80" width="75" height="80"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="80" id="C67-iI-E9M"/>
-                                                <constraint firstAttribute="width" constant="75" id="OtG-Jd-QXd"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="ikc-1w-WCW"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <inset key="titleEdgeInsets" minX="-60" minY="60" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" title="复制链接" image="Share_Copylink">
-                                                <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJJ-Il-I9S" userLabel="1">
-                                            <rect key="frame" x="85" y="80" width="75" height="80"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="75" id="8ap-tX-K6w"/>
-                                                <constraint firstAttribute="height" constant="80" id="9z8-f2-V7V"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="rbM-RS-KNw"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <inset key="titleEdgeInsets" minX="-60" minY="60" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" title="印象笔记" image="Share_Evernote">
-                                                <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aX9-Um-yD0" userLabel="1">
-                                            <rect key="frame" x="235" y="80" width="75" height="80"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="75" id="E1V-RD-Azj"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="QJR-tJ-Q5Y"/>
-                                                <constraint firstAttribute="height" constant="80" id="sBC-gO-2f1"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <inset key="titleEdgeInsets" minX="-60" minY="60" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" title="腾讯" image="Share_Tencent">
-                                                <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YIf-vR-Y8d" userLabel="1">
-                                            <rect key="frame" x="330" y="0.0" width="75" height="80"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="80" id="NEw-vl-W70"/>
-                                                <constraint firstAttribute="width" constant="75" id="eJL-qG-A4l"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="r9b-Vu-zkw"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <inset key="titleEdgeInsets" minX="-60" minY="60" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" title="信息" image="Share_Message">
-                                                <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpb-Px-cdh" userLabel="1">
-                                            <rect key="frame" x="405" y="0.0" width="75" height="80"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="75" id="IoY-QB-4JG"/>
-                                                <constraint firstAttribute="height" constant="80" id="ZpI-Yk-CAZ"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="jQl-da-bt5"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <inset key="titleEdgeInsets" minX="-60" minY="60" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" title="Instapaper" image="Share_Instapaper">
-                                                <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aaZ-Z7-j6b" userLabel="1">
-                                            <rect key="frame" x="480" y="0.0" width="75" height="80"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="80" id="k53-9h-KfH"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="wsJ-CH-V52"/>
-                                                <constraint firstAttribute="width" constant="75" id="yr6-ac-CdT"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <inset key="titleEdgeInsets" minX="-60" minY="60" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" title="人人" image="Share_Renren">
-                                                <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ynb-HV-TDO" userLabel="1">
-                                            <rect key="frame" x="555" y="0.0" width="75" height="80"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="H5S-Hv-Wte"/>
-                                                <constraint firstAttribute="width" constant="75" id="esV-Fh-q1u"/>
-                                                <constraint firstAttribute="height" constant="80" id="fqu-Fv-X35"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <inset key="titleEdgeInsets" minX="-60" minY="60" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" title="Facebook" image="Share_Facebook">
-                                                <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r70-wE-JIn" userLabel="1">
-                                            <rect key="frame" x="480" y="80" width="75" height="80"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="80" id="JKK-4O-H9J"/>
-                                                <constraint firstAttribute="width" constant="75" id="aEo-Dr-yAn"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="aQJ-9Y-hSR"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <inset key="titleEdgeInsets" minX="-60" minY="60" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" title="Twitter" image="Share_Twitter">
-                                                <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yK8-Mr-ih7" userLabel="1">
-                                            <rect key="frame" x="330" y="80" width="75" height="80"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="80" id="76x-sD-NUg"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="IVz-8A-nAc"/>
-                                                <constraint firstAttribute="width" constant="75" id="nyg-OA-fWZ"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <inset key="titleEdgeInsets" minX="-60" minY="60" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" title="JS" image="Share_JS">
-                                                <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUC-vB-ROE" userLabel="1">
-                                            <rect key="frame" x="405" y="80" width="75" height="80"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="80" id="XgC-7z-rKd"/>
-                                                <constraint firstAttribute="width" constant="75" id="b9Y-nB-qLO"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="zg0-cj-r3v"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <inset key="titleEdgeInsets" minX="-60" minY="60" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" title="Pocket" image="Share_Pocket">
-                                                <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7J-fr-fTD" userLabel="1">
-                                            <rect key="frame" x="555" y="80" width="75" height="80"/>
-                                            <animations/>
-                                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="80" id="Us3-pq-Hhc"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="WhZ-5b-nqE"/>
-                                                <constraint firstAttribute="width" constant="75" id="dwm-aO-ueI"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <inset key="titleEdgeInsets" minX="-60" minY="60" maxX="0.0" maxY="0.0"/>
-                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="20"/>
-                                            <state key="normal" title="Readability" image="Share_Readability">
-                                                <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                        </button>
-                                    </subviews>
-                                    <animations/>
-                                    <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstItem="ynb-HV-TDO" firstAttribute="width" secondItem="aaZ-Z7-j6b" secondAttribute="width" id="0I5-W0-ddv"/>
-                                        <constraint firstItem="Y7J-fr-fTD" firstAttribute="leading" secondItem="r70-wE-JIn" secondAttribute="trailing" id="0aP-9o-jOh"/>
-                                        <constraint firstItem="aX9-Um-yD0" firstAttribute="leading" secondItem="dyk-mG-ZO9" secondAttribute="trailing" id="18e-r9-y9L"/>
-                                        <constraint firstItem="q83-mY-PUf" firstAttribute="width" secondItem="iM4-NF-AUE" secondAttribute="width" id="4Uf-s6-p8R"/>
-                                        <constraint firstItem="YIf-vR-Y8d" firstAttribute="top" secondItem="3k9-kW-JcH" secondAttribute="top" id="4eO-L3-Qk4"/>
-                                        <constraint firstItem="QUC-vB-ROE" firstAttribute="top" secondItem="yK8-Mr-ih7" secondAttribute="top" id="5GY-7D-aqZ"/>
-                                        <constraint firstItem="JCc-1x-Rkn" firstAttribute="leading" secondItem="q83-mY-PUf" secondAttribute="trailing" id="5Ne-g6-jtJ"/>
-                                        <constraint firstItem="eJJ-Il-I9S" firstAttribute="width" secondItem="1ek-ok-DOh" secondAttribute="width" id="5UZ-O0-vGc"/>
-                                        <constraint firstItem="ynb-HV-TDO" firstAttribute="height" secondItem="aaZ-Z7-j6b" secondAttribute="height" id="5cq-yF-pjd"/>
-                                        <constraint firstItem="ynb-HV-TDO" firstAttribute="leading" secondItem="aaZ-Z7-j6b" secondAttribute="trailing" id="7n9-js-oI3"/>
-                                        <constraint firstItem="r70-wE-JIn" firstAttribute="width" secondItem="QUC-vB-ROE" secondAttribute="width" id="8Fu-Hb-7cv"/>
-                                        <constraint firstItem="JCc-1x-Rkn" firstAttribute="height" secondItem="q83-mY-PUf" secondAttribute="height" id="8ZK-Tc-0bG"/>
-                                        <constraint firstItem="yK8-Mr-ih7" firstAttribute="top" secondItem="YIf-vR-Y8d" secondAttribute="bottom" id="C6H-4F-Yd7"/>
-                                        <constraint firstItem="QUC-vB-ROE" firstAttribute="height" secondItem="yK8-Mr-ih7" secondAttribute="height" id="E1a-Up-VB0"/>
-                                        <constraint firstItem="eJJ-Il-I9S" firstAttribute="top" secondItem="1ek-ok-DOh" secondAttribute="top" id="E25-Tz-Dkf"/>
-                                        <constraint firstItem="ynb-HV-TDO" firstAttribute="top" secondItem="aaZ-Z7-j6b" secondAttribute="top" id="F8u-Wa-K30"/>
-                                        <constraint firstItem="dyk-mG-ZO9" firstAttribute="leading" secondItem="eJJ-Il-I9S" secondAttribute="trailing" id="Gmp-7f-1j3"/>
-                                        <constraint firstItem="QUC-vB-ROE" firstAttribute="width" secondItem="yK8-Mr-ih7" secondAttribute="width" id="H92-X6-HVx"/>
-                                        <constraint firstItem="wpb-Px-cdh" firstAttribute="width" secondItem="YIf-vR-Y8d" secondAttribute="width" id="HKl-fY-tf4"/>
-                                        <constraint firstItem="Y7J-fr-fTD" firstAttribute="top" secondItem="r70-wE-JIn" secondAttribute="top" id="MYt-iL-IGv"/>
-                                        <constraint firstItem="r70-wE-JIn" firstAttribute="leading" secondItem="QUC-vB-ROE" secondAttribute="trailing" id="OZx-t0-arq"/>
-                                        <constraint firstItem="aaZ-Z7-j6b" firstAttribute="height" secondItem="wpb-Px-cdh" secondAttribute="height" id="PZM-Xo-B5G"/>
-                                        <constraint firstItem="yK8-Mr-ih7" firstAttribute="top" secondItem="YIf-vR-Y8d" secondAttribute="bottom" id="QbY-cO-FCd"/>
-                                        <constraint firstItem="dyk-mG-ZO9" firstAttribute="width" secondItem="eJJ-Il-I9S" secondAttribute="width" id="R86-fI-lA9"/>
-                                        <constraint firstItem="iM4-NF-AUE" firstAttribute="leading" secondItem="3k9-kW-JcH" secondAttribute="leading" constant="10" id="ShQ-1F-arf"/>
-                                        <constraint firstItem="aX9-Um-yD0" firstAttribute="width" secondItem="dyk-mG-ZO9" secondAttribute="width" id="TsO-lG-aZI"/>
-                                        <constraint firstItem="eJJ-Il-I9S" firstAttribute="height" secondItem="1ek-ok-DOh" secondAttribute="height" id="Uyy-qR-iIv"/>
-                                        <constraint firstItem="1ek-ok-DOh" firstAttribute="leading" secondItem="3k9-kW-JcH" secondAttribute="leading" constant="10" id="XK4-zu-ZG6"/>
-                                        <constraint firstItem="q83-mY-PUf" firstAttribute="height" secondItem="iM4-NF-AUE" secondAttribute="height" id="aB8-oJ-VBz"/>
-                                        <constraint firstItem="wpb-Px-cdh" firstAttribute="height" secondItem="YIf-vR-Y8d" secondAttribute="height" id="abz-Ij-Vtn"/>
-                                        <constraint firstItem="wpb-Px-cdh" firstAttribute="leading" secondItem="YIf-vR-Y8d" secondAttribute="trailing" id="acf-rI-E0l"/>
-                                        <constraint firstItem="Y7J-fr-fTD" firstAttribute="width" secondItem="r70-wE-JIn" secondAttribute="width" id="arO-c8-Ex1"/>
-                                        <constraint firstItem="QUC-vB-ROE" firstAttribute="leading" secondItem="yK8-Mr-ih7" secondAttribute="trailing" id="b79-2L-9zk"/>
-                                        <constraint firstItem="q83-mY-PUf" firstAttribute="leading" secondItem="iM4-NF-AUE" secondAttribute="trailing" id="bTM-b5-OLN"/>
-                                        <constraint firstItem="q83-mY-PUf" firstAttribute="top" secondItem="iM4-NF-AUE" secondAttribute="top" id="djU-vd-DYw"/>
-                                        <constraint firstItem="wpb-Px-cdh" firstAttribute="top" secondItem="YIf-vR-Y8d" secondAttribute="top" id="egm-g8-yaA"/>
-                                        <constraint firstAttribute="height" constant="160" id="ehA-bB-Nq6"/>
-                                        <constraint firstItem="JCc-1x-Rkn" firstAttribute="width" secondItem="q83-mY-PUf" secondAttribute="width" id="f7i-zg-W2K"/>
-                                        <constraint firstItem="1ek-ok-DOh" firstAttribute="top" secondItem="iM4-NF-AUE" secondAttribute="bottom" id="gS4-Sb-Dw9"/>
-                                        <constraint firstItem="aX9-Um-yD0" firstAttribute="height" secondItem="dyk-mG-ZO9" secondAttribute="height" id="hMn-d3-EVV"/>
-                                        <constraint firstItem="r70-wE-JIn" firstAttribute="top" secondItem="QUC-vB-ROE" secondAttribute="top" id="hOu-vV-ane"/>
-                                        <constraint firstItem="eJJ-Il-I9S" firstAttribute="leading" secondItem="1ek-ok-DOh" secondAttribute="trailing" id="hlu-tb-6f6"/>
-                                        <constraint firstItem="YIf-vR-Y8d" firstAttribute="leading" secondItem="Jqk-Vo-qJE" secondAttribute="trailing" constant="20" id="hoR-3E-tXW"/>
-                                        <constraint firstItem="Jqk-Vo-qJE" firstAttribute="width" secondItem="JCc-1x-Rkn" secondAttribute="width" id="kby-es-zxM"/>
-                                        <constraint firstItem="yK8-Mr-ih7" firstAttribute="leading" secondItem="aX9-Um-yD0" secondAttribute="trailing" constant="20" id="klP-8C-BnQ"/>
-                                        <constraint firstItem="JCc-1x-Rkn" firstAttribute="top" secondItem="q83-mY-PUf" secondAttribute="top" id="lYo-QW-z45"/>
-                                        <constraint firstItem="dyk-mG-ZO9" firstAttribute="top" secondItem="eJJ-Il-I9S" secondAttribute="top" id="me9-1Z-Mee"/>
-                                        <constraint firstItem="aaZ-Z7-j6b" firstAttribute="leading" secondItem="wpb-Px-cdh" secondAttribute="trailing" id="myb-XP-GSO"/>
-                                        <constraint firstItem="r70-wE-JIn" firstAttribute="height" secondItem="QUC-vB-ROE" secondAttribute="height" id="nj3-JD-HLD"/>
-                                        <constraint firstItem="Y7J-fr-fTD" firstAttribute="height" secondItem="r70-wE-JIn" secondAttribute="height" id="oki-40-KEl"/>
-                                        <constraint firstItem="aX9-Um-yD0" firstAttribute="top" secondItem="dyk-mG-ZO9" secondAttribute="top" id="ppj-Ly-fGv"/>
-                                        <constraint firstItem="Jqk-Vo-qJE" firstAttribute="leading" secondItem="JCc-1x-Rkn" secondAttribute="trailing" id="rUp-9c-jlh"/>
-                                        <constraint firstItem="Jqk-Vo-qJE" firstAttribute="height" secondItem="JCc-1x-Rkn" secondAttribute="height" id="s8T-QL-wiJ"/>
-                                        <constraint firstItem="dyk-mG-ZO9" firstAttribute="height" secondItem="eJJ-Il-I9S" secondAttribute="height" id="t0I-EV-KXH"/>
-                                        <constraint firstItem="aaZ-Z7-j6b" firstAttribute="width" secondItem="wpb-Px-cdh" secondAttribute="width" id="t2u-iR-lXq"/>
-                                        <constraint firstItem="aaZ-Z7-j6b" firstAttribute="top" secondItem="wpb-Px-cdh" secondAttribute="top" id="uAA-My-2Ia"/>
-                                        <constraint firstItem="Jqk-Vo-qJE" firstAttribute="top" secondItem="JCc-1x-Rkn" secondAttribute="top" id="xZs-rs-SZC"/>
-                                        <constraint firstItem="iM4-NF-AUE" firstAttribute="width" secondItem="3k9-kW-JcH" secondAttribute="width" multiplier="0.125" constant="-5" id="yDc-z7-5id"/>
-                                        <constraint firstItem="iM4-NF-AUE" firstAttribute="top" secondItem="3k9-kW-JcH" secondAttribute="top" id="ylo-FU-10M"/>
-                                    </constraints>
-                                </view>
-                            </subviews>
                             <animations/>
-                            <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="3k9-kW-JcH" secondAttribute="bottom" id="RrD-Rw-8Ad"/>
-                                <constraint firstItem="3k9-kW-JcH" firstAttribute="leading" secondItem="pAB-J2-fKA" secondAttribute="leading" id="bM8-ZP-MgU"/>
-                                <constraint firstAttribute="trailing" secondItem="3k9-kW-JcH" secondAttribute="trailing" id="h96-Sx-vdr"/>
-                                <constraint firstItem="3k9-kW-JcH" firstAttribute="top" secondItem="pAB-J2-fKA" secondAttribute="top" id="xHf-gN-XTg"/>
+                                <constraint firstAttribute="height" constant="160" id="U3J-n2-wf7"/>
                             </constraints>
                             <connections>
-                                <outlet property="delegate" destination="YFZ-fZ-IFl" id="8fe-wk-cR3"/>
+                                <outlet property="delegate" destination="YFZ-fZ-IFl" id="eRD-x5-sY6"/>
                             </connections>
                         </scrollView>
                     </subviews>
                     <animations/>
                     <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="pAB-J2-fKA" secondAttribute="trailing" id="4If-Xx-q5X"/>
-                        <constraint firstAttribute="height" constant="160" id="BVp-0j-17I"/>
-                        <constraint firstItem="pAB-J2-fKA" firstAttribute="leading" secondItem="8k5-qh-oWJ" secondAttribute="leading" id="EsB-Ja-lXS"/>
-                        <constraint firstAttribute="bottom" secondItem="pAB-J2-fKA" secondAttribute="bottom" id="awh-FJ-ipR"/>
-                        <constraint firstItem="pAB-J2-fKA" firstAttribute="top" secondItem="8k5-qh-oWJ" secondAttribute="top" id="jDC-Nz-5pw"/>
+                        <constraint firstAttribute="bottom" secondItem="oea-Tu-Ihp" secondAttribute="bottom" id="34x-sb-MXg"/>
+                        <constraint firstItem="oea-Tu-Ihp" firstAttribute="leading" secondItem="8k5-qh-oWJ" secondAttribute="leading" id="LF6-h4-0vp"/>
+                        <constraint firstAttribute="trailing" secondItem="oea-Tu-Ihp" secondAttribute="trailing" id="WGk-2V-iMc"/>
+                        <constraint firstItem="oea-Tu-Ihp" firstAttribute="top" secondItem="8k5-qh-oWJ" secondAttribute="top" id="lgR-SH-exU"/>
                     </constraints>
                 </view>
                 <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="e1V-f3-1sB">
@@ -416,7 +84,6 @@
             <color key="backgroundColor" red="0.86265093088150024" green="0.86279940605163574" blue="0.86264163255691528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="e1V-f3-1sB" firstAttribute="top" secondItem="8k5-qh-oWJ" secondAttribute="bottom" constant="2" id="6eK-ct-pM6"/>
-                <constraint firstItem="3k9-kW-JcH" firstAttribute="width" secondItem="YFZ-fZ-IFl" secondAttribute="width" multiplier="2" id="BKx-Lr-ntP"/>
                 <constraint firstItem="8k5-qh-oWJ" firstAttribute="top" secondItem="fJY-vn-NQ8" secondAttribute="bottom" constant="8" id="Lzy-iq-zTI"/>
                 <constraint firstItem="e1V-f3-1sB" firstAttribute="centerX" secondItem="YFZ-fZ-IFl" secondAttribute="centerX" id="Mao-vm-3xZ"/>
                 <constraint firstItem="fJY-vn-NQ8" firstAttribute="centerX" secondItem="YFZ-fZ-IFl" secondAttribute="centerX" id="O6Y-dr-8GL"/>
@@ -434,51 +101,11 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="cancelTop" destination="dj2-s3-EeF" id="Hpv-5S-HRF"/>
+                <outlet property="containerView" destination="oea-Tu-Ihp" id="WMd-ng-Afn"/>
                 <outlet property="pageControl" destination="e1V-f3-1sB" id="dy1-LX-XO7"/>
                 <outlet property="titleButton" destination="XNh-pU-2OK" id="gec-D0-tY5"/>
             </connections>
             <point key="canvasLocation" x="909" y="-259"/>
         </view>
-        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" id="krS-11-QbO">
-            <rect key="frame" x="0.0" y="0.0" width="424" height="200"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <animations/>
-            <nil key="simulatedStatusBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="G0q-3h-CPF">
-                <size key="itemSize" width="50" height="50"/>
-                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-            </collectionViewFlowLayout>
-            <point key="canvasLocation" x="998" y="-1000"/>
-        </collectionView>
-        <view contentMode="scaleToFill" id="JgN-mP-edC">
-            <rect key="frame" x="0.0" y="0.0" width="382" height="214"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <animations/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <nil key="simulatedStatusBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="829" y="-1283"/>
-        </view>
     </objects>
-    <resources>
-        <image name="Share_Copylink" width="60" height="60"/>
-        <image name="Share_Evernote" width="60" height="60"/>
-        <image name="Share_Facebook" width="60" height="60"/>
-        <image name="Share_Instapaper" width="60" height="60"/>
-        <image name="Share_JS" width="60" height="60"/>
-        <image name="Share_Message" width="60" height="60"/>
-        <image name="Share_Pocket" width="60" height="60"/>
-        <image name="Share_QQ" width="60" height="60"/>
-        <image name="Share_Readability" width="60" height="60"/>
-        <image name="Share_Renren" width="60" height="60"/>
-        <image name="Share_Sina" width="60" height="60"/>
-        <image name="Share_Tencent" width="60" height="60"/>
-        <image name="Share_Twitter" width="60" height="60"/>
-        <image name="Share_WeChat" width="60" height="60"/>
-        <image name="Share_WeChat_Moments" width="60" height="60"/>
-        <image name="Share_YoudaoNote" width="60" height="60"/>
-    </resources>
 </document>

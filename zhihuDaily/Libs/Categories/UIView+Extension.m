@@ -10,6 +10,13 @@
 
 @implementation UIView (Extension)
 
+- (NSString *)frameString {
+    return NSStringFromCGRect(self.frame);
+}
+- (NSString *)centerString {
+    return NSStringFromCGPoint(self.center);
+}
+
 - (void)setX:(CGFloat)x
 {
     CGRect frame = self.frame;

@@ -17,4 +17,6 @@
 @property (nonatomic, assign) CGFloat height;
 @property (nonatomic, assign) CGSize size;
 @property (nonatomic, assign) CGPoint origin;
+@property (nonatomic, readonly) NSString  *frameString;
+@property (nonatomic, readonly) NSString *centerString;
 @end
