@@ -18,17 +18,11 @@
 
 @implementation SYCollectionController
 
-
-
+#pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.title = @"我的收藏";
-
-
     self.tableView.tableFooterView = [[UIView alloc] init];
-    
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -40,6 +34,8 @@
 }
 
 
+
+#pragma mark tableView delegate
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }

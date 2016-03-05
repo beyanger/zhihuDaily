@@ -47,12 +47,6 @@
 static NSString *reuseid = @"useid";
 @implementation SYHomeController
 
-- (NSMutableArray<SYBeforeStoryResult *> *)storyGroup {
-    if (!_storyGroup) {
-        _storyGroup = [@[] mutableCopy];
-    }
-    return _storyGroup;
-}
 
 #pragma mark life cycle
 - (void)viewDidLoad {
@@ -60,7 +54,7 @@ static NSString *reuseid = @"useid";
     White_StatusBar;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = kWhiteColor;
-    
+
     [self setupTableView];
     [self.view addSubview:self.picturesView];
     [self.view addSubview:self.headerView];
@@ -68,6 +62,9 @@ static NSString *reuseid = @"useid";
     [self titleLabel];
 }
 
+- (void)dealloc {
+    [self.tableView removeObserver:self forKeyPath:@"contentOffset"];
+}
 
 #pragma mark private method
 - (void)setupTableView {
@@ -94,8 +91,6 @@ static NSString *reuseid = @"useid";
     }];
 }
 
-
-
 - (void)loadMoreBefore {
     SYBeforeStoryResult *result = self.storyGroup.lastObject;
     [SYZhihuTool getBeforeStroyWithDateString:result.date completed:^(id obj) {
@@ -113,7 +108,7 @@ static NSString *reuseid = @"useid";
 }
 
 
-#pragma mark - Table view data source
+#pragma mark - Table view  delegate & data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.storyGroup.count;
@@ -155,8 +150,6 @@ static NSString *reuseid = @"useid";
     return section ? 36 : CGFLOAT_MIN;
 }
 
-
-
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     if (section == 0) {
         self.headerView.height = 55;
@@ -184,7 +177,7 @@ static NSString *reuseid = @"useid";
 
 
 
-#pragma mark  图片轮播器轮播器的代理方法
+#pragma mark  图片轮播器 delegate
 - (void)pictureView:(SYPicturesView *)picturesView clickedIndex:(NSInteger)index {
 
     if (index < 0 || index >= self.topStory.count) return;
@@ -225,8 +218,7 @@ typedef struct SYPoint SYPoint;
         return self.storyGroup[location.y].stories[location.x-1];
     }
 }
-
-
+// 查找story在数组中的位置
 - (SYPoint)locationStory:(SYStory *)story {
     for (NSUInteger y = 0; y < self.storyGroup.count; y++) {
         NSArray<SYStory *> *stories = self.storyGroup[y].stories;
@@ -255,12 +247,20 @@ typedef struct SYPoint SYPoint;
     SYDetailController *dc = [[SYDetailController alloc] init];
     dc.delegate =self;
     dc.story = story;
-    
     [self.navigationController pushViewController:dc animated:YES];
 }
 
 
 #pragma mark setter & getter
+
+- (NSMutableArray<SYBeforeStoryResult *> *)storyGroup {
+    if (!_storyGroup) {
+        _storyGroup = [@[] mutableCopy];
+    }
+    return _storyGroup;
+}
+
+
 - (UITableView *)tableView {
     if (!_tableView) {
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, kScreenWidth, kScreenHeight-20) style:UITableViewStylePlain];

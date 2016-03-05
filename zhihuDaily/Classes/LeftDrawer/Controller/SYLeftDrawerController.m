@@ -42,6 +42,8 @@
 
 @implementation SYLeftDrawerController
 
+
+#pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupSubviews];
@@ -62,27 +64,19 @@
     self.tableView.backgroundColor = SYColor(26, 31, 36, 1.0);
  }
 
-
-
-
-
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     // 更新头像状态
     [self.avatarImage sd_setImageWithURL:[NSURL URLWithString:kAccount.avatar]];
-    
     self.nameLabel.text = kAccount.name;
+    White_StatusBar;
 }
 
 - (void)dealloc {
     [kNotificationCenter removeObserver:self];
 }
 
-
-
-
+#pragma mark event handler
 - (IBAction)login {
     SYAccount *account = [SYAccount sharedAccount];
     if (account.isLogin) {
@@ -96,10 +90,6 @@
 }
 
 - (void)setupDataSource {
-    
-    
-    NSLog(@"收到通知");
-    
     [SYZhihuTool getThemesWithCompleted:^(NSArray<SYTheme *> *obj) {
         // 将收藏的列表放在前面显示
         NSMutableArray *collected = [@[] mutableCopy];
@@ -152,7 +142,7 @@
 }
 
 
-#pragma mark toolBox中tableView的代理方法
+#pragma mark tableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataSource.count;
 }
@@ -163,7 +153,6 @@
     cell.delegate = self;
     return cell;
 }
-
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
@@ -236,9 +225,7 @@
     
 }
 
-
-
-
+#pragma mark setter & getter
 - (SYNavigationController *)naviHome {
     if (!_naviHome) {
         SYHomeController *home = [[SYHomeController alloc] init];

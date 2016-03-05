@@ -43,7 +43,7 @@
     Black_StatusBar;
 }
 
-#pragma mark event action
+#pragma mark event handler
 - (IBAction)pop {
     [self.navigationController popViewControllerAnimated:YES];
 }

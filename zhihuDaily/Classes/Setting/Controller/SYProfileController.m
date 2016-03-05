@@ -18,9 +18,7 @@
 @end
 
 @implementation SYProfileController
-
-
-
+#pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -31,6 +29,8 @@
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:kAccount.avatar]];
     self.nameLabel.text = kAccount.name;
 }
+
+#pragma mark event handler
 - (IBAction)logout:(UIButton *)sender {
     SYAccount *account = [SYAccount sharedAccount];
     [account logout];

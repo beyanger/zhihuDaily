@@ -17,6 +17,17 @@
 @end
 
 @implementation SYLoginViewController
+
+
+#pragma mark life cycle
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    Black_StatusBar;
+    
+    // Do any additional setup after loading the view from its nib.
+}
+
+#pragma mark event handler
 - (IBAction)back:(id)sender {
     White_StatusBar;
     if (self.navigationController) {
@@ -28,16 +39,6 @@
 - (IBAction)login:(UIButton *)sender {
     [MBProgressHUD showSuccess:sender.currentTitle];
 }
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    Black_StatusBar;
-    
-    // Do any additional setup after loading the view from its nib.
-}
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -21,6 +21,7 @@
 
 @implementation SYLoginController
 
+#pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -32,15 +33,12 @@
     
 }
 
+
+#pragma mark event handler
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 - (IBAction)login:(id)sender {
     
     BOOL result = [SYAccount loginWithName:self.nameLabel.text password:self.password.text];

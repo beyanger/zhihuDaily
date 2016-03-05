@@ -25,12 +25,14 @@
 
 @implementation SYBaseViewController
 
+#pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kWhiteColor;
     [self.view addSubview:self.sy_header];
 }
 
+#pragma mark setter & getter
 - (UIView *)sy_header {
     if (!_sy_header) {
         _sy_header = [[UIView alloc] init];

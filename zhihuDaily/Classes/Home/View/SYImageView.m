@@ -33,6 +33,7 @@
 
 @implementation SYImageView
 
+#pragma mark life cycle
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -55,14 +56,10 @@
     containerView.delegate = self;
     [self addSubview:containerView];
     
-    
-    
     UIScrollView *imageContainer = [[UIScrollView alloc] init];
     imageContainer.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, kScreenHeight);
     self.imageContainer = imageContainer;
     [containerView addSubview:imageContainer];
-    
-    
     
     UIImageView *imageView = [[UIImageView alloc] init];
     [imageContainer addSubview:imageView];
@@ -85,78 +82,9 @@
     
 }
 
+#pragma mark private
 - (void)handleTap:(UITapGestureRecognizer *)gesture {
     [self remove];
-}
-
-
-
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    
-    if (scrollView.contentOffset.x<kScreenWidth*0.5) {
-        // prev
-        if ([self.delegate respondsToSelector:@selector(prevImageOfImageView:current:)]) {
-            NSString *img = [self.delegate prevImageOfImageView:self current:self.current];
-            if (img.length) {
-                [scrollView setContentOffset:CGPointMake(2*kScreenWidth, 0) animated:NO];
-                [self setImage:img];
-            } else {
-                [MBProgressHUD showError:@"已经是第一张了"];
-            }
-        }
-    } else if (scrollView.contentOffset.x > kScreenWidth*1.5) {
-        // next
-        if ([self.delegate respondsToSelector:@selector(nextImageOfImageView:current:)]) {
-            NSString *img = [self.delegate nextImageOfImageView:self current:self.current];
-            if (img.length) {
-                [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
-                [self setImage:img];
-            } else {
-                [MBProgressHUD showError:@"已经是最后张了"];
-            }
-        }
-        
-    }
-    
-    
-    [scrollView setContentOffset:CGPointMake(kScreenWidth, 0) animated:YES];
-}
-
-
-
-+ (instancetype)showImageWithURLString:(NSString *)url {
-    SYImageView *view = [[self alloc] init];
-    
-    view.imageView.transform = CGAffineTransformMakeScale(0.5, 0.5);
-    view.alpha = 0.0;
-    [view setImage:url];
-    
-    [[UIApplication sharedApplication].keyWindow addSubview:view];
-    [UIView animateWithDuration:0.25 animations:^{
-        view.imageView.transform = CGAffineTransformIdentity;
-        view.alpha = 1.0;
-    }];
-    
-    return view;
-}
-
-- (void)setImage:(NSString *)imgUrl{
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-
-    self.current = imgUrl;
-    
-    self.imageView.image = nil;
-    
-    
-    [manager downloadImageWithURL:[NSURL URLWithString:imgUrl] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-        
-        
-    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-        self.imageView.image = image;
-        //self.containerView.contentSize = image.size;
-        
-    }];
 }
 
 
@@ -183,5 +111,70 @@
 }
 
 
+#pragma mark scrollView delegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    if (scrollView.contentOffset.x<kScreenWidth*0.5) {
+        // prev
+        if ([self.delegate respondsToSelector:@selector(prevImageOfImageView:current:)]) {
+            NSString *img = [self.delegate prevImageOfImageView:self current:self.current];
+            if (img.length) {
+                [scrollView setContentOffset:CGPointMake(2*kScreenWidth, 0) animated:NO];
+                [self setImage:img];
+            } else {
+                [MBProgressHUD showError:@"已经是第一张了"];
+            }
+        }
+    } else if (scrollView.contentOffset.x > kScreenWidth*1.5) {
+        // next
+        if ([self.delegate respondsToSelector:@selector(nextImageOfImageView:current:)]) {
+            NSString *img = [self.delegate nextImageOfImageView:self current:self.current];
+            if (img.length) {
+                [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+                [self setImage:img];
+            } else {
+                [MBProgressHUD showError:@"已经是最后张了"];
+            }
+        }
+        
+    }
+    [scrollView setContentOffset:CGPointMake(kScreenWidth, 0) animated:YES];
+}
+
+
+
+
+#pragma mark setter & getter
+- (void)setImage:(NSString *)imgUrl{
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+
+    self.current = imgUrl;
+    self.imageView.image = nil;
+    [manager downloadImageWithURL:[NSURL URLWithString:imgUrl] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        
+        
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+        self.imageView.image = image;
+        //self.containerView.contentSize = image.size;
+        
+    }];
+}
+
+
++ (instancetype)showImageWithURLString:(NSString *)url {
+    SYImageView *view = [[self alloc] init];
+    
+    view.imageView.transform = CGAffineTransformMakeScale(0.5, 0.5);
+    view.alpha = 0.0;
+    [view setImage:url];
+    
+    [[UIApplication sharedApplication].keyWindow addSubview:view];
+    [UIView animateWithDuration:0.25 animations:^{
+        view.imageView.transform = CGAffineTransformIdentity;
+        view.alpha = 1.0;
+    }];
+    
+    return view;
+}
 
 @end

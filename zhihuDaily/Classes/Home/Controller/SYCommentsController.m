@@ -20,29 +20,25 @@ static NSString *comment_reuseid = @"comment_reuseid";
 
 @interface SYCommentsController () <UITableViewDataSource, UITableViewDelegate, SYCommentPannelDelegate, SYCommentCellDelegate>
 
-@property (nonatomic, strong) UITableView *tableView;
-
 @property (nonatomic, strong) NSMutableArray<NSMutableArray<SYComment *> *> *allComments;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) SYCommentView *commentView;
 
 @property (nonatomic, weak) SYCommentPannel *pannel;
-
 @property (nonatomic, weak) SYCommentCell *cell;
-
-
 @end
 
 @implementation SYCommentsController
 
+#pragma mark life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"评论";
 
     self.automaticallyAdjustsScrollViewInsets = NO;
-
     [self.view addSubview:self.tableView];
-    
-    [self setupBackBtn];
+    [self.view addSubview:self.commentView];
     [self.tableView reloadData];
 }
 
@@ -72,34 +68,6 @@ static NSString *comment_reuseid = @"comment_reuseid";
     }
 }
 
-
-
-#pragma mark commentView delegate
-- (void)commentView:(SYCommentPannel *)commentView didClicked:(NSUInteger)index {
-    
-    SYComment *comment = self.cell.comment;
-    if (index == 0) {
-        BOOL isLike = !comment.isLike;
-        comment.likes += isLike?+1:-1;
-        comment.isLike = isLike;
-    } else if (index == 2) {
-        [UIPasteboard generalPasteboard].string = comment.content;
-        [MBProgressHUD showSuccess:@"复制成功"];
-    }
-    [self removeCommentPannel];
-}
-
-
-- (void)commentCelll:(SYCommentCell *)cell actionType:(int)type {
-    [self.tableView reloadData];
-}
-
-
-
-
-
-
-#pragma mark private
 - (void)removeCommentPannel {
     SYCommentPannel *pannel = self.pannel;
     self.pannel = nil;
@@ -118,7 +86,6 @@ static NSString *comment_reuseid = @"comment_reuseid";
     NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:location];
     self.cell = [self.tableView cellForRowAtIndexPath:indexPath];
     if (!self.cell) return self.pannel;
-    
     
     SYCommentPannel *cv = [SYCommentPannel commentPannelWithLiked:self.cell.comment.isLike];
     cv.delegate  = self;
@@ -142,23 +109,8 @@ static NSString *comment_reuseid = @"comment_reuseid";
 }
 
 
-- (void)setupBackBtn {
-    SYCommentView *commentView = [SYCommentView commentView];
-    commentView.frame = CGRectMake(0, kScreenHeight-40, kScreenWidth, 40);
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backGo)];
-    [commentView addGestureRecognizer:tap];
-    
-    [self.view addSubview:commentView];
-}
 
-
-- (void)backGo {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-
-#pragma mark - Table view data source
+#pragma mark - Table view  delegate & data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return  (self.allComments.firstObject.count!=0) + (self.allComments.lastObject.count!=0);
@@ -189,14 +141,11 @@ static NSString *comment_reuseid = @"comment_reuseid";
         cell.comment = self.allComments[indexPath.section][indexPath.row];
         return cell;
     }
-    
-    
     cell.comment = self.allComments.lastObject[indexPath.row];
-    
-    NSLog(@"cell for indexp %d", cell.comment.isOpen);
     return cell;
 }
 
+// 使用高度缓存的话，则cell的点击展开失效，所以使用系统自带的高度估算功能来高度自适应
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 //
 //    CGFloat height =  [tableView fd_heightForCellWithIdentifier:comment_reuseid configuration:^(SYCommentCell *cell) {
@@ -211,45 +160,38 @@ static NSString *comment_reuseid = @"comment_reuseid";
 //}
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-
-    
     if (indexPath.row == self.allComments.lastObject.count-5) {
         [self loadMoreShortComments];
     }
 }
-
-
-
-
-
-
+#pragma mark scrollView delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self removeCommentPannel];
 }
 
-
-
-
-#pragma mark setter & getter
-
-
-- (void)setParam:(SYCommentParam *)param {
-    _param = param;
-    [SYZhihuTool getLongCommentsWithId:self.param.id completed:^(id obj) {
-        self.allComments[0] = obj;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    }];
+#pragma mark commentView delegate
+- (void)commentView:(SYCommentPannel *)commentView didClicked:(NSUInteger)index {
     
-    [SYZhihuTool getShortCommentsWithId:self.param.id completed:^(id obj) {
-        self.allComments[1] = obj;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    }];
+    SYComment *comment = self.cell.comment;
+    if (index == 0) {
+        BOOL isLike = !comment.isLike;
+        comment.likes += isLike?+1:-1;
+        comment.isLike = isLike;
+    } else if (index == 2) {
+        [UIPasteboard generalPasteboard].string = comment.content;
+        [MBProgressHUD showSuccess:@"复制成功"];
+    }
+    [self removeCommentPannel];
 }
 
+// cell里点击展开按钮的代理方法
+- (void)commentCelll:(SYCommentCell *)cell actionType:(int)type {
+    [self.tableView reloadData];
+}
+
+
+
+#pragma mark private method
 - (void)loadMoreShortComments {
     
     if (self.allComments.lastObject.count == self.param.short_comments) {
@@ -272,6 +214,27 @@ static NSString *comment_reuseid = @"comment_reuseid";
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
 }
+
+
+
+#pragma mark setter & getter
+- (void)setParam:(SYCommentParam *)param {
+    _param = param;
+    [SYZhihuTool getLongCommentsWithId:self.param.id completed:^(id obj) {
+        self.allComments[0] = obj;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
+    
+    [SYZhihuTool getShortCommentsWithId:self.param.id completed:^(id obj) {
+        self.allComments[1] = obj;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
+}
+
 
 
 - (NSMutableArray<NSMutableArray<SYComment *> *> *)allComments {
@@ -301,6 +264,20 @@ static NSString *comment_reuseid = @"comment_reuseid";
     return _tableView;
 }
 
+- (SYCommentView *)commentView {
+    if (!_commentView) {
+        _commentView = [SYCommentView commentView];
+        _commentView.frame = CGRectMake(0, kScreenHeight-40, kScreenWidth, 40);
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backGo)];
+        [_commentView addGestureRecognizer:tap];
+    }
+    return _commentView;
+}
+
+- (void)backGo {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 

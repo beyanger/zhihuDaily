@@ -20,39 +20,45 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <animations/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Thomas Yang" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQz-1j-KGf">
-                    <rect key="frame" x="232" y="512" width="137" height="27.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="beyanger@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQz-1j-KGf">
+                    <rect key="frame" x="207.5" y="512.5" width="185" height="27.5"/>
                     <animations/>
                     <fontDescription key="fontDescription" name="IowanOldStyle-BoldItalic" family="Iowan Old Style" pointSize="20"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="blog.beyanger.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJO-rI-ok8">
-                    <rect key="frame" x="239" y="546" width="121.5" height="23.5"/>
-                    <animations/>
-                    <fontDescription key="fontDescription" name="IowanOldStyle-Italic" family="Iowan Old Style" pointSize="17"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="0Q2-rx-EYv">
-                    <rect key="frame" x="237.5" y="455" width="125" height="45"/>
+                    <rect key="frame" x="237" y="455" width="125" height="45"/>
                     <animations/>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目前待业中~求带~18612595660" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SyU-yO-5mR">
+                    <rect key="frame" x="153" y="550" width="293.5" height="24"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="bGB-fw-D4I" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8fg-SU-ALC"/>
                 <constraint firstAttribute="trailing" secondItem="bGB-fw-D4I" secondAttribute="trailing" id="JL5-YS-PAC"/>
+                <constraint firstAttribute="bottom" secondItem="SyU-yO-5mR" secondAttribute="bottom" constant="26" id="Mgp-wo-6er"/>
                 <constraint firstAttribute="bottom" secondItem="bGB-fw-D4I" secondAttribute="bottom" id="PSS-6b-f0k"/>
                 <constraint firstItem="bGB-fw-D4I" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Suy-Bo-1hu"/>
-                <constraint firstItem="AJO-rI-ok8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="iry-Gt-1tR"/>
+                <constraint firstItem="SyU-yO-5mR" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Teo-Vx-6ED"/>
+                <constraint firstItem="0Q2-rx-EYv" firstAttribute="top" secondItem="SyU-yO-5mR" secondAttribute="bottom" constant="28" id="aqR-r6-jYd"/>
                 <constraint firstItem="pQz-1j-KGf" firstAttribute="top" secondItem="0Q2-rx-EYv" secondAttribute="bottom" constant="12" id="jcs-Fr-giY"/>
                 <constraint firstAttribute="bottom" secondItem="pQz-1j-KGf" secondAttribute="bottom" constant="60" id="k8G-0i-CKM"/>
                 <constraint firstItem="pQz-1j-KGf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="kHN-nD-9c6"/>
-                <constraint firstAttribute="bottom" secondItem="AJO-rI-ok8" secondAttribute="bottom" constant="30" id="w3r-Fh-Jql"/>
                 <constraint firstItem="0Q2-rx-EYv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wSF-qP-EcV"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="aqR-r6-jYd"/>
+                </mask>
+            </variation>
         </view>
     </objects>
     <resources>

@@ -32,6 +32,9 @@
 
 @implementation SYThemeController
 
+
+#pragma mark life cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -43,44 +46,12 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == self.stories.count-18) {
-        [self loadMoreData];
-    }
-}
-
-
-- (SYTableHeader *)tableHeader {
-    if (!_tableHeader) {
-        _tableHeader = [SYTableHeader headerViewWitTitle:@"编辑" rightViewType:SYRightViewTypeArrow];
-        _tableHeader.bounds = CGRectMake(0, 0, kScreenWidth, 48);
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickedHeader)];
-        [_tableHeader addGestureRecognizer:tap];
-    }
-    return _tableHeader;
-}
-
+#pragma mark event hander
 - (void)clickedHeader {
     SYEditorController *evc = [[SYEditorController alloc] init];
     evc.editors = self.themeItem.editors;
     [self.navigationController pushViewController:evc animated:YES];
 }
-
-- (UIButton *)collectBtn {
-    if (!_collectBtn) {
-        _collectBtn = [[UIButton alloc] init];
-        
-        _collectBtn.size = CGSizeMake(44, 44);
-        _collectBtn.center = CGPointMake(kScreenWidth-20, 40);
-        [_collectBtn addTarget:self action:@selector(didClickedCollectBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [_collectBtn setImage:[UIImage imageNamed:@"Field_Follow"] forState:UIControlStateNormal];
-        [_collectBtn setImage:[UIImage imageNamed:@"Field_Unfollow"] forState:UIControlStateSelected];
-        
-    }
-    return _collectBtn;
-}
-
 
 - (void)didClickedCollectBtn:(UIButton *)sender {
     sender.selected = !sender.selected;
@@ -94,25 +65,9 @@
 }
 
 
-- (void)setTheme:(SYTheme *)theme {
-    _theme = theme;
-    
-    self.collectBtn.selected = theme.isCollected;
-    
-    [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 
-    UIView *view = [[UIView alloc] initWithFrame:kScreenBounds];
-    view.backgroundColor = SYColor(255, 255, 255, 0);
-    [self.view addSubview:view];
-    [UIView animateWithDuration:0.25 animations:^{
-        view.backgroundColor = SYColor(255, 255, 255, 0.8);
-    } completion:^(BOOL finished) {
-        [view removeFromSuperview];
-    }];
-    
-    [self reload];
-}
 
+#pragma mark private method
 - (void)reload {
     [SYZhihuTool getThemeWithId:self.theme.id completed:^(id obj) {
         self.themeItem = obj;
@@ -143,7 +98,14 @@
     }];
 }
 
+#pragma mark tableView delegate
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == self.stories.count-18) {
+        [self loadMoreData];
+    }
+}
 
+#pragma mark scrollView delegate
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (scrollView.contentOffset.y <= -80) {
@@ -158,6 +120,52 @@
     } else if (yoffset < -90) {
         self.tableView.contentOffset = CGPointMake(0, -90);
     }
+}
+
+
+#pragma mark setter & getter
+- (void)setTheme:(SYTheme *)theme {
+    _theme = theme;
+    
+    self.collectBtn.selected = theme.isCollected;
+    
+    [self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
+    
+    UIView *view = [[UIView alloc] initWithFrame:kScreenBounds];
+    view.backgroundColor = SYColor(255, 255, 255, 0);
+    [self.view addSubview:view];
+    [UIView animateWithDuration:0.25 animations:^{
+        view.backgroundColor = SYColor(255, 255, 255, 0.8);
+    } completion:^(BOOL finished) {
+        [view removeFromSuperview];
+    }];
+    
+    [self reload];
+}
+
+- (SYTableHeader *)tableHeader {
+    if (!_tableHeader) {
+        _tableHeader = [SYTableHeader headerViewWitTitle:@"编辑" rightViewType:SYRightViewTypeArrow];
+        _tableHeader.bounds = CGRectMake(0, 0, kScreenWidth, 48);
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickedHeader)];
+        [_tableHeader addGestureRecognizer:tap];
+    }
+    return _tableHeader;
+}
+
+- (UIButton *)collectBtn {
+    if (!_collectBtn) {
+        _collectBtn = [[UIButton alloc] init];
+        
+        _collectBtn.size = CGSizeMake(44, 44);
+        _collectBtn.center = CGPointMake(kScreenWidth-20, 40);
+        [_collectBtn addTarget:self action:@selector(didClickedCollectBtn:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [_collectBtn setImage:[UIImage imageNamed:@"Field_Follow"] forState:UIControlStateNormal];
+        [_collectBtn setImage:[UIImage imageNamed:@"Field_Unfollow"] forState:UIControlStateSelected];
+        
+    }
+    return _collectBtn;
 }
 
 - (NSArray<SYStory *> *)stories {

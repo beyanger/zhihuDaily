@@ -43,12 +43,8 @@
 @property (nonatomic, weak) UIImageView *downArrow;
 
 @property (nonatomic, strong) SYStoryNavigationView *storyNav;
-
 @property (nonatomic, strong) NSArray<NSString *> *allImages;
-
 @property (nonatomic, strong) NSArray<SYEditor *> *recommenders;
-
-
 @property (nonatomic, strong) SYRecommenderResult *recommender;
 
 @property (nonatomic, assign) BOOL isCollected;
@@ -506,6 +502,8 @@
     return _storyNav;
 }
 
+
+// 根据当前的情况返回界面上顶部的view类型
 - (UIView *)currentTopView {
     if (!self.topView.hidden) {
         return self.topView;

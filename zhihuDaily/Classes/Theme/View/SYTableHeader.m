@@ -21,6 +21,8 @@
 
 @implementation SYTableHeader
 
+
+#pragma mark life cycle
 - (void)awakeFromNib {
     for (UIImageView *imageView in self.editorsImage) {
         CAShapeLayer *maskLayer = [CAShapeLayer layer];
@@ -31,8 +33,7 @@
     
 }
 
-
-
+#pragma mark setter & getter
 - (void)setAvatars:(NSArray<NSString *> *)avatars {
     _avatars = avatars;
     for (NSUInteger i = 0; i < 5; i++) {

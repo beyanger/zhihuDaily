@@ -29,7 +29,6 @@
 }
 
 
-
 + (instancetype)topView {
     return [[[NSBundle mainBundle] loadNibNamed:@"SYTopView" owner:self options:nil] firstObject];
 }

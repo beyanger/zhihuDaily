@@ -19,6 +19,7 @@ static NSString *editor_reuseid = @"editor_reuseid";
 
 @implementation SYEditorController
 
+#pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kWhiteColor;
@@ -26,7 +27,7 @@ static NSString *editor_reuseid = @"editor_reuseid";
     self.title = @"主编";    
 }
 
-#pragma mark tableView delegate and dataSource
+#pragma mark tableView delegate and data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.editors.count;
 }
@@ -43,10 +44,6 @@ static NSString *editor_reuseid = @"editor_reuseid";
     return cell;
 }
 
-
-
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SYEditorDetailController *edvc = [[SYEditorDetailController alloc] init];
     edvc.editor = self.editors[indexPath.row];
@@ -55,7 +52,7 @@ static NSString *editor_reuseid = @"editor_reuseid";
 }
 
 
-
+#pragma mark setter & getter
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight-64) style:UITableViewStylePlain];

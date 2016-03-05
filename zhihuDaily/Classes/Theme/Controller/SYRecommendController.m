@@ -18,13 +18,9 @@
     [super viewDidLoad];
     
     self.title = @"推荐者";
-    
-    
 }
 
-
-
-
+#pragma mark tableView delegate
 - (SYEditorCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SYEditorCell *cell = [SYEditorCell recommenderCellWithTableView:tableView];
     cell.editor = self.editors[indexPath.row];

@@ -18,6 +18,8 @@
 
 @implementation SYEditorDetailController
 
+
+#pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;

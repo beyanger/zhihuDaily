@@ -22,10 +22,9 @@
 
 @implementation SYLaunchController
 
+#pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
     NSString *url = [kUserDefaults stringForKey:@"launchScreen"];
     
     // 如果之前有缓存的图片，直接加载先~
@@ -39,9 +38,9 @@
         
         AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         delegate.mainController = mainvc;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 
-            [UIView animateWithDuration:.68 animations:^{
+            [UIView animateWithDuration:1.89 animations:^{
                 self.backgroundImageView.alpha = 0.0;
                 self.backgroundImageView.transform = CGAffineTransformMakeScale(1.2, 1.2);
             } completion:^(BOOL finished) {

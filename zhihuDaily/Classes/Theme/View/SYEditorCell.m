@@ -20,13 +20,14 @@
 @implementation SYEditorCell
 
 
+#pragma mark life cycle
 - (void)awakeFromNib {
     self.avatarImageView.layer.cornerRadius = 24;
     self.avatarImageView.clipsToBounds = YES;
     self.editorImageView.hidden = YES;
 }
 
-
+#pragma mark setter & getter
 - (void)setEditor:(id)obj {
     _editor = obj;
     

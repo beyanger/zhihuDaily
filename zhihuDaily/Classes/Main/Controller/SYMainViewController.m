@@ -20,7 +20,7 @@
 
 @implementation SYMainViewController
 
-
+#pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.maximumLeftDrawerWidth = 200;
@@ -46,7 +46,11 @@
 }
 
 
+- (void)dealloc {
+    [kNotificationCenter removeObserver:self];
+}
 
+#pragma mark event handler
 - (void)openDrawer {
     [self openDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
@@ -63,13 +67,5 @@
         [self closeDrawer];
     }
 }
-
-- (void)dealloc {
-    [kNotificationCenter removeObserver:self];
-}
-
-
-
-
 
 @end

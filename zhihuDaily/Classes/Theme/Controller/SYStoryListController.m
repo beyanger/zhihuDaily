@@ -25,27 +25,14 @@ static NSString *theme_reuseid = @"useid";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
     [self.view addSubview:self.tableView];
     
 }
 
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    SYDetailController *dvc = [[SYDetailController alloc] init];
-    dvc.delegate = self;
-    dvc.story = self.stories[indexPath.row];
-    [self.navigationController pushViewController:dvc animated:YES];
-}
-
-
-#pragma mark - Table view data source
+#pragma mark - Table view delegete & data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.stories.count;
 }
-
 
 - (SYTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SYTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:theme_reuseid forIndexPath:indexPath];
@@ -55,18 +42,16 @@ static NSString *theme_reuseid = @"useid";
     return cell;
 }
 
-
-
-- (NSInteger)loacateStory:(SYStory *)story {
-    for (NSInteger i = 0; i < self.stories.count; i++) {
-        if (self.stories[i].id == story.id) {
-            return i;
-        }
-    }
-    return -1;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SYDetailController *dvc = [[SYDetailController alloc] init];
+    dvc.delegate = self;
+    dvc.story = self.stories[indexPath.row];
+    [self.navigationController pushViewController:dvc animated:YES];
 }
 
 
+
+#pragma mark deltail controller delegate
 - (SYStory *)nextStoryForDetailController:(SYDetailController *)detailController story:(SYStory *)story {
     NSInteger location = [self loacateStory:story];
     if (location == self.stories.count-1) {
@@ -82,7 +67,14 @@ static NSString *theme_reuseid = @"useid";
     return self.stories[location-1];
 }
 
-
+- (NSInteger)loacateStory:(SYStory *)story {
+    for (NSInteger i = 0; i < self.stories.count; i++) {
+        if (self.stories[i].id == story.id) {
+            return i;
+        }
+    }
+    return -1;
+}
 - (SYStoryPositionType)detailController:(SYDetailController *)detailController story:(SYStory *)story {
     if (self.stories.firstObject.id == story.id) {
         return SYStoryPositionTypeFirst;
@@ -92,6 +84,8 @@ static NSString *theme_reuseid = @"useid";
     return SYStoryPositionTypeOther;
 }
 
+
+#pragma mark setter & getter
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] init];

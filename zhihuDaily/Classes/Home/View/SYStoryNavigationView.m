@@ -19,26 +19,27 @@
 
 @implementation SYStoryNavigationView
 
+#pragma mark life cycle
 - (void)awakeFromNib {
     [self.popularityButton addObserver:self forKeyPath:@"selected" options:NSKeyValueObservingOptionNew context:nil];
 }
-
 
 - (void)dealloc {
     [self.popularityButton removeObserver:self forKeyPath:@"selected"];
 }
 
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"selected"]) {
-            self.popularityLabel.textColor = self.popularityButton.selected ? SYColor(22, 164, 220, 1.) : [UIColor lightGrayColor];
-        if (self.popularityButton.selected) {
-            [self changeValue:self.popularityButton];
-        } else {
-            self.popularityLabel.text = [NSString stringWithFormat:@"%d", self.popularityLabel.text.intValue-1];
-        }
+#pragma mark event handler
+
+- (IBAction)didClicked:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(storyNavigationView:didClicked:)]) {
+        [self.delegate storyNavigationView:self didClicked:sender.tag];
+    }
+    if (sender.tag == self.popularityButton.tag) {
+        self.popularityButton.selected = !self.popularityButton.selected;
     }
 }
+
 
 - (void)changeValue:(UIButton *)button {
     UILabel *view = [[UILabel alloc] init];
@@ -72,25 +73,25 @@
 }
 
 
-
+#pragma mark setter & getter
 - (void)setExtraStory:(SYExtraStory *)extraStory {
     _extraStory = extraStory;
     self.popularityLabel.text = [NSString stringWithFormat:@"%ld", extraStory.popularity];
     self.commentsLabel.text = [NSString stringWithFormat:@"%ld", extraStory.comments];
 }
 
-
-
-
-
-- (IBAction)didClicked:(UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(storyNavigationView:didClicked:)]) {
-        [self.delegate storyNavigationView:self didClicked:sender.tag];
-    }
-    if (sender.tag == self.popularityButton.tag) {
-        self.popularityButton.selected = !self.popularityButton.selected;
+#pragma mark KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"selected"]) {
+        self.popularityLabel.textColor = self.popularityButton.selected ? SYColor(22, 164, 220, 1.) : [UIColor lightGrayColor];
+        if (self.popularityButton.selected) {
+            [self changeValue:self.popularityButton];
+        } else {
+            self.popularityLabel.text = [NSString stringWithFormat:@"%d", self.popularityLabel.text.intValue-1];
+        }
     }
 }
+
 
 
 + (instancetype)storyNaviView {

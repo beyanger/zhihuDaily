@@ -35,14 +35,14 @@ static FMDatabaseQueue *_zhihu_queue;
             
             
             // 缓存主题下的故事，storyid为primary key，同时记录该story的themeid
-            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_themelist (id INTEGER PRIMARY KEY AUTOINCREMENT, storyid INTEGER UNIQUE, themeid INTEGER, story BLOB)"];
+            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_themelist (id INTEGER PRIMARY KEY AUTOINCREMENT, storyid INTEGER UNIQUE, themeid INTEGER, story BLOB);"];
 
             // 已登录过用户表，登录过程为，当用户为新用户时，第一次登录输入的密码作为用户密码，并登录成功，当用户再次登录时，必须输入与第一次登录时的密码相同，否则登录不成功
             [db executeUpdate:@"CREATE TABLE IF NOT EXISTS ct_user (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE, password TEXT);"];
             
             
             
-            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS theme (themeid INTEGER PRIMARY KEY, theme BLOB);"];
+            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_theme (themeid INTEGER PRIMARY KEY, theme BLOB);"];
             //创建联合 unique约束
             // 创建一个公共表，添加 storyid和name的联合唯一约束...
             NSString *ct_story = @"CREATE TABLE IF NOT EXISTS ct_story (id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, storyid INTEGER, story BLOB, CONSTRAINT collected_story UNIQUE(user, storyid));";
@@ -59,9 +59,6 @@ static FMDatabaseQueue *_zhihu_queue;
 }
 
 + (FMDatabaseQueue *)queue {
-    static int count = 0;
-    NSLog(@"----> %d", count++);
-    
      return _zhihu_queue;
 }
 
@@ -139,7 +136,7 @@ static FMDatabaseQueue *_zhihu_queue;
     NSLog(@"---> %@", theme.name);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[self queue] inDatabase:^(FMDatabase *db) {
-            NSString *sql = @"REPLACE INTO theme (themeid, theme) VALUES (?, ?);";
+            NSString *sql = @"REPLACE INTO t_theme (themeid, theme) VALUES (?, ?);";
             NSData *data = [NSKeyedArchiver archivedDataWithRootObject:theme];
             [db executeUpdate:sql, @(theme.id), data];
         }];
@@ -159,7 +156,7 @@ static FMDatabaseQueue *_zhihu_queue;
     
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[self queue] inDatabase:^(FMDatabase *db) {
-            NSString *allTheme = @"SELECT themeid, theme FROM theme;";
+            NSString *allTheme = @"SELECT themeid, theme FROM t_theme;";
             FMResultSet *trs = [db executeQuery:allTheme];
             NSMutableDictionary *dict = [@{} mutableCopy];
             while (trs.next) {

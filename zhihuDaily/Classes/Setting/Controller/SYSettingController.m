@@ -30,7 +30,7 @@
 @end
 
 @implementation SYSettingController
-
+#pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -38,17 +38,15 @@
     self.title = @"设置";
 }
 
-- (UITableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight-64) style:UITableViewStyleGrouped];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-    }
-    return _tableView;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    _groups[0].items = @[[SYSettingArrow itemWithTitle:[SYAccount sharedAccount].name operation:nil destvc:[SYAccount sharedAccount].isLogin?[SYProfileController class]:[SYLoginController class] ]];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 
-#pragma mark tableView dataSource
+
+#pragma mark tableView  delegate & data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.groups.count;
@@ -78,9 +76,6 @@
 
 }
 
-
-
-#pragma mark tableView delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     SYSettingCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -102,10 +97,16 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    _groups[0].items = @[[SYSettingArrow itemWithTitle:[SYAccount sharedAccount].name operation:nil destvc:[SYAccount sharedAccount].isLogin?[SYProfileController class]:[SYLoginController class] ]];
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+
+#pragma mark setter & getter
+
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight-64) style:UITableViewStyleGrouped];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+    }
+    return _tableView;
 }
 
 - (NSArray<SYSettingGroup *> *)groups {
