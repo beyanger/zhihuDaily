@@ -437,7 +437,30 @@
                 <outlet property="pageControl" destination="e1V-f3-1sB" id="dy1-LX-XO7"/>
                 <outlet property="titleButton" destination="XNh-pU-2OK" id="gec-D0-tY5"/>
             </connections>
-            <point key="canvasLocation" x="1106" y="-287"/>
+            <point key="canvasLocation" x="909" y="-259"/>
+        </view>
+        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" id="krS-11-QbO">
+            <rect key="frame" x="0.0" y="0.0" width="424" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <animations/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="G0q-3h-CPF">
+                <size key="itemSize" width="50" height="50"/>
+                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+            </collectionViewFlowLayout>
+            <point key="canvasLocation" x="998" y="-1000"/>
+        </collectionView>
+        <view contentMode="scaleToFill" id="JgN-mP-edC">
+            <rect key="frame" x="0.0" y="0.0" width="382" height="214"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="829" y="-1283"/>
         </view>
     </objects>
     <resources>

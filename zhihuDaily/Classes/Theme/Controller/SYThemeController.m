@@ -75,9 +75,11 @@
             self.title = self.themeItem.name;
             [self.sy_backgoundImageView sd_setImageWithURL:[NSURL URLWithString:self.themeItem.image]];
             NSMutableArray *avatarArray = [@[] mutableCopy];
-            [self.themeItem.editors enumerateObjectsUsingBlock:^(SYEditor *obj, NSUInteger idx, BOOL *stop) {
+            
+            for (SYEditor *obj in self.themeItem.editors) {
                 [avatarArray addObject:obj.avatar];
-            }];
+            }
+            
             self.tableHeader.avatars = avatarArray;
             [self.tableView reloadData];
             

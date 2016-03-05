@@ -7,7 +7,7 @@
 //
 
 #import "SYEditorDetailController.h"
-
+#import "SYZhihuTool.h"
 
 @interface SYEditorDetailController () <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -30,11 +30,11 @@
     if ([self.editor isKindOfClass:[SYEditor class]]) {
         SYEditor *editor = self.editor;
         self.title = [self.editor name];
-        url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/editor/%d/profile-page/ios", editor.id];
+        url = [SYZhihuTool getEditorHomePageWithEditor:editor];
     } else {
         SYRecommender *rec = self.editor;
         self.title = [[self.editor name] stringByAppendingString:@"--知乎"];
-        url = [@"http://www.zhihu.com/people/" stringByAppendingString:rec.zhihu_url_token];
+        url = [SYZhihuTool getRecommenderHomePageWithRecommender:rec];
     }
 
     self.url = url;

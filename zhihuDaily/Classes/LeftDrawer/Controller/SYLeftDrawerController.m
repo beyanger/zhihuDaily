@@ -94,9 +94,9 @@
         // 将收藏的列表放在前面显示
         NSMutableArray *collected = [@[] mutableCopy];
         NSMutableArray *notCollected = [@[] mutableCopy];
-        [obj enumerateObjectsUsingBlock:^(SYTheme * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            obj.isCollected ? [collected addObject:obj] : [notCollected addObject:obj];
-        }];
+        for (SYTheme *theme in obj) {
+            theme.isCollected ? [collected addObject:theme] : [notCollected addObject:theme];
+        }
         
         [collected addObjectsFromArray:notCollected];
         self.dataSource = collected;

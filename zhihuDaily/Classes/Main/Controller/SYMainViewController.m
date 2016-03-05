@@ -61,11 +61,7 @@
 }
 
 - (void)toggleDrawer {
-    if (self.openSide == MMDrawerSideNone) {
-        [self openDrawer];
-    } else {
-        [self closeDrawer];
-    }
+    self.openSide == MMDrawerSideNone ? [self openDrawer]:[self closeDrawer];
 }
 
 @end

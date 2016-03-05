@@ -41,7 +41,6 @@ static FMDatabaseQueue *_zhihu_queue;
             [db executeUpdate:@"CREATE TABLE IF NOT EXISTS ct_user (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE, password TEXT);"];
             
             
-            
             [db executeUpdate:@"CREATE TABLE IF NOT EXISTS t_theme (themeid INTEGER PRIMARY KEY, theme BLOB);"];
             //创建联合 unique约束
             // 创建一个公共表，添加 storyid和name的联合唯一约束...
@@ -283,11 +282,11 @@ static FMDatabaseQueue *_zhihu_queue;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *sql = [NSString stringWithFormat:@"INSERT OR IGNORE INTO t_themelist (storyid, themeid, story) VALUES (?, ?, ?);"];
         [[self queue] inDatabase:^(FMDatabase *db) {
-            [respObject enumerateObjectsUsingBlock:^(SYStory * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:obj];
-                [db executeUpdate:sql, @(obj.id), @(themeid), data];
-            }];
+            for (SYStory *story in respObject) {
+                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:story];
+                [db executeUpdate:sql, @(story.id), @(themeid), data];
+            }
         }];
-        
     });
     
 }
@@ -314,28 +313,21 @@ static FMDatabaseQueue *_zhihu_queue;
     NSString *sql = @"SELECT password FROM ct_user WHERE name = ?;";
     [[self queue] inDatabase:^(FMDatabase *db) {
         FMResultSet *rs = [db executeQuery:sql, name];
-        int count = 0;
-        while (rs.next) {
+        BOOL existFlag = NO;
+        if (rs.next) {
+            existFlag = YES;
             NSString *pwd = [rs objectForColumnIndex:0];
             if ([pwd isEqualToString:password]) {
                 success = YES;
             }
-            count++;
         }
-        if (count == 0) {
+        // 新用户登录
+        if (!existFlag) {
             success = YES;
             NSString *insert = @"INSERT INTO ct_user (name, password) VALUES (?, ?);";
             [db executeUpdate:insert, name, password];
-            
-            // 新用户，需要为新用户创建数据表
-            NSString *collection = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_story_%@ (id INTEGER PRIMARY KEY AUTOINCREMENT, storyid INTEGER UNIQUE, story BLOB);", name.md5sum];
-            [db executeUpdate:collection];
-            NSString *collectedTheme = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS ct_theme_%@ (id INTEGER PRIMARY KEY AUTOINCREMENT, themeid INTEGER UNIQUE, theme BLOB);", name.md5sum];
-            [db executeUpdate:collectedTheme];
         }
     }];
-    
-    
     return success;
 }
 

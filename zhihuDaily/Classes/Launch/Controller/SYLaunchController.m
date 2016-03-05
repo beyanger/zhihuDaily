@@ -32,7 +32,7 @@
     
     SYMainViewController *mainvc = [[SYMainViewController alloc] init];
     [mainvc view];
-    [SYZhihuTool getLauchImageWithCompleted:^(id obj) {
+    [SYZhihuTool getLaunchImageWithCompleted:^(id obj) {
         [kUserDefaults setObject:obj forKey:@"launchScreen"];
         [self.backgroundImageView sd_setImageWithURL:[NSURL URLWithString:obj]];
         

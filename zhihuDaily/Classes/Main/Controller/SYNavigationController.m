@@ -15,13 +15,13 @@
 @end
 
 @implementation SYNavigationController
-
+#pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.delegate = self;
 }
 
-
+#pragma mark navigation delegate
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     // 在进入收藏页面(一级页面，若打开返回手势，会影响收藏页面上的操作)时， 或者进入到其他的二级页面，关闭返回手势
@@ -33,6 +33,7 @@
 }
 
 
+#pragma mark pop mothed
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated {
     // 当一级页面需要返回时，打开抽屉
     if (self.childViewControllers.count == 1) {

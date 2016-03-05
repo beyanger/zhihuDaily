@@ -14,15 +14,6 @@
 
 @implementation SYDemoViewController
 
-+ (void)load {
-    NSLog(@"---- demo load");
-}
-
-+ (void)initialize {
-    NSLog(@"initial ize ");
-}
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

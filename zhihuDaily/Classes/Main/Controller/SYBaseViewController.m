@@ -32,7 +32,25 @@
     [self.view addSubview:self.sy_header];
 }
 
+
+
+#pragma mark event handler
+- (void)sy_back {
+    
+    if (self.navigationController) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+
 #pragma mark setter & getter
+- (void)setTitle:(NSString *)title {
+    self.sy_titleLabel.text = title;
+    [super setTitle:title];
+}
+
 - (UIView *)sy_header {
     if (!_sy_header) {
         _sy_header = [[UIView alloc] init];
@@ -59,6 +77,7 @@
     }
     return _sy_header;
 }
+
 
 - (UIImageView *)sy_headerBackgroundView {
     if (!_sy_headerBackgroundView) {
@@ -88,19 +107,9 @@
     return _sy_backButton;
 }
 
-- (void)sy_back {
-    
-    if (self.navigationController) {
-        [self.navigationController popViewControllerAnimated:YES];
-    } else {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-}
-
-
 - (void)setSy_attachScrollView:(UIScrollView *)sy_attachScrollView {
     if (!sy_attachScrollView) return;
-    if (_sy_attachScrollView) return;
+    if (_sy_attachScrollView) return; // once only
 
     _sy_attachScrollView = sy_attachScrollView;
     SYRefreshView *refresh = [SYRefreshView refreshViewWithScrollView:sy_attachScrollView];
@@ -122,12 +131,5 @@
 - (SYRefreshView *)sy_refreshView {
     return self.refreshView;
 }
-
-- (void)setTitle:(NSString *)title {
-    self.sy_titleLabel.text = title;
-    [super setTitle:title];
-}
-
-
 
 @end

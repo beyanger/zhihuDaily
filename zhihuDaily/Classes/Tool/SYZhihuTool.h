@@ -37,7 +37,7 @@ typedef void  (^Failure)();
 /**
  *  获取LaunchImage
  */
-+ (void)getLauchImageWithCompleted:(Completed)completed failure:(Failure)failure;
++ (void)getLaunchImageWithCompleted:(Completed)completed failure:(Failure)failure;
 
 
 + (void)queryAppWithVersion:(NSString *)version  Completed:(Completed)completed;
@@ -114,6 +114,9 @@ typedef void  (^Failure)();
 + (void)cancelCollectedWithStroy:(SYStory *)story;
 + (BOOL)queryCollectedStatusWithStory:(SYStory *)story;
 
+
++ (NSString *)getEditorHomePageWithEditor:(SYEditor *)editor;
++ (NSString *)getRecommenderHomePageWithRecommender:(SYRecommender *)recommender;
 
 
 /**

@@ -51,7 +51,7 @@
 }
 
 
-+ (void)getLauchImageWithCompleted:(Completed)completed failure:(Failure)failure {
++ (void)getLaunchImageWithCompleted:(Completed)completed failure:(Failure)failure {
     NSString *launchImgUrl = @"http://news-at.zhihu.com/api/4/start-image/720*1184";
     
     [YSHttpTool GETWithURL:launchImgUrl params:nil success:^(id responseObject) {
@@ -131,15 +131,6 @@
     
     [YSHttpTool GETWithURL:longCommentUrl params:nil success:^(id responseObject) {
         NSArray<SYComment *> *comment = [SYComment mj_objectArrayWithKeyValuesArray:responseObject[@"comments"]];
-        
-        [comment enumerateObjectsUsingBlock:^(SYComment * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (obj.reply_to) {
-                NSLog(@"%@", obj.reply_to.author);
-            }
-            
-        }];
-        NSLog(@"--->长评论： %lu", comment.count);
-
         !completed ? : completed(comment);
     } failure:nil];
     
@@ -149,7 +140,6 @@
     NSString *longBeforeUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/story/%lld/long-comments/before/%ld", storyid, commentid];
     [YSHttpTool GETWithURL:longBeforeUrl params:nil success:^(id responseObject) {
         NSArray *comments = [SYComment mj_objectArrayWithKeyValuesArray:responseObject[@"comments"]];
-        NSLog(@"--->之前的 长评论： %lu", comments.count);
 
         !completed ? completed : completed(comments);
         
@@ -198,14 +188,15 @@
         NSArray<SYTheme *> *themeArray = [SYTheme mj_objectArrayWithKeyValuesArray:responseObject[@"others"]];
         
         !completed ? : completed(themeArray);
-        [themeArray enumerateObjectsUsingBlock:^(SYTheme *obj, NSUInteger idx, BOOL *stop) {
+        for (SYTheme *obj in themeArray) {
             [SYCacheTool cacheThemeWithTheme:obj];
-        }];
+        }
+        
     } failure:nil];
 }
 
 
-+ (void)getLauchImageWithCompleted:(Completed)completed {
++ (void)getLaunchImageWithCompleted:(Completed)completed {
     NSString *launchImgUrl = @"http://news-at.zhihu.com/api/4/start-image/720*1184";
     
     [YSHttpTool GETWithURL:launchImgUrl params:nil success:^(id responseObject) {
@@ -321,6 +312,18 @@
 + (void)cancelCollectedWithTheme:(SYTheme *)theme {
     [SYCacheTool cancelCollectedThemeWithUser:[SYAccount sharedAccount].name theme:theme];
 }
+
+
+
++ (NSString *)getEditorHomePageWithEditor:(SYEditor *)editor {
+    return  [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/editor/%d/profile-page/ios", editor.id];
+}
+
++ (NSString *)getRecommenderHomePageWithRecommender:(SYRecommender *)recommender {
+    return [@"http://www.zhihu.com/people/" stringByAppendingString:recommender.zhihu_url_token];
+}
+
+
 
 + (void)loginWithName:(NSString *)name password:(NSString *)password success:(Success)success failure:(Failure)failure {
     // 这里应该
