@@ -34,6 +34,7 @@
     self.nameLabel.text = [obj valueForKey:@"name"];
     self.bioLabel.text = [obj valueForKey:@"bio"];
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[obj valueForKey:@"avatar"]]];
+    
     self.editorImageView.hidden = [obj isKindOfClass:[SYRecommender class]];
     
 }
@@ -43,6 +44,7 @@ static NSString *editor_reuseid = @"editor_reuseid";
     
     SYEditorCell *cell = [tableView dequeueReusableCellWithIdentifier:editor_reuseid];
     //[cell.editorImageView removeFromSuperview];
+    // 编辑者列表控制器调用的方法，应该隐藏 编辑的主页
     cell.editorImageView.alpha = 0.0;
     return cell;
 }

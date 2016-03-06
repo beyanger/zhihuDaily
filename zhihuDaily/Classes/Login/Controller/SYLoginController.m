@@ -49,7 +49,6 @@
         
         SYAccount *account = [SYAccount sharedAccount];
         
-        NSLog(@"--> %@ %@, %d", account.name, account.avatar, account.isLogin);
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         [MBProgressHUD showSuccess:@"请输入正确的用户名和密码"];

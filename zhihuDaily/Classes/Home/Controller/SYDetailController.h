@@ -13,9 +13,9 @@
 
 
 typedef NS_ENUM(NSInteger, SYStoryPositionType) {
-    SYStoryPositionTypeFirst = 1,
-    SYStoryPositionTypeLast = 2,
-    SYStoryPositionTypeOther = 4,
+    SYStoryPositionTypeFirst = 1 << 0,
+    SYStoryPositionTypeLast = 1 << 1,
+    SYStoryPositionTypeOther = 1 << 2,
     SYStoryPositionTypeFirstAndLast =
                                     SYStoryPositionTypeFirst|SYStoryPositionTypeLast,
 };

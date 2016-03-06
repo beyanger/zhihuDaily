@@ -30,7 +30,7 @@
 typedef void (^Completed)(id obj);
 
 typedef void (^Success)();
-typedef void  (^Failure)();
+typedef void (^Failure)();
 
 @interface SYZhihuTool : NSObject
 
@@ -40,7 +40,7 @@ typedef void  (^Failure)();
 + (void)getLaunchImageWithCompleted:(Completed)completed failure:(Failure)failure;
 
 
-+ (void)queryAppWithVersion:(NSString *)version  Completed:(Completed)completed;
++ (void)queryAppWithVersion:(NSString *)version  completed:(Completed)completed;
 
 
 

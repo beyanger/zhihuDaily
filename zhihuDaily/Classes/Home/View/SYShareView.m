@@ -58,6 +58,7 @@
     button.imageEdgeInsets = UIEdgeInsetsMake(0, 6, 20, 0);
     button.titleEdgeInsets = UIEdgeInsetsMake(60, -60, 0, 0);
     button.titleLabel.font = [UIFont systemFontOfSize:14];
+    [button setTitleColor:SYColor(60, 60, 60, 1.) forState:UIControlStateNormal];
     return button;
 }
 

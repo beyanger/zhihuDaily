@@ -54,7 +54,7 @@
 
 + (NSUInteger)imageSize;
 
-+ (NSUInteger)dataSize;
++ (unsigned long long)dataSize;
 
 + (void)clearCache;
 

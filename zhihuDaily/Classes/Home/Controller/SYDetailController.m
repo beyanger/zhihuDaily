@@ -43,8 +43,12 @@
 @property (nonatomic, weak) UIImageView *downArrow;
 
 @property (nonatomic, strong) SYStoryNavigationView *storyNav;
+
 @property (nonatomic, strong) NSArray<NSString *> *allImages;
+
 @property (nonatomic, strong) NSArray<SYEditor *> *recommenders;
+
+
 @property (nonatomic, strong) SYRecommenderResult *recommender;
 
 @property (nonatomic, assign) BOOL isCollected;
@@ -135,14 +139,12 @@
 
     NSString *absoString = request.URL.absoluteString;
     
-    NSLog(@"----> %@", absoString);
-    
     if ([absoString hasPrefix:@"http://daily.zhihu.com/story"]) {
         return YES;
     } else if ([absoString hasPrefix:@"http://mp.weixin.qq.com/s"]) {
         return YES;
     } else if([absoString hasPrefix:@"detailimage:"]) {
-        NSString *url = [absoString stringByReplacingOccurrencesOfString:@"detailimage:" withString:@""];
+        NSString *url = [absoString substringFromIndex:@"detailimage:".length];
         SYImageView *imageView = [SYImageView showImageWithURLString:url];
         imageView.delegate = self;
         return NO;
@@ -158,26 +160,15 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     SYStoryPositionType position = [self.delegate detailController:self story:self.story];
-    // 这里代码看起来硌得慌....得改.... // 应该是需要封装一下...
-    if (position == SYStoryPositionTypeFirst) {
-        self.header.text = @"已经是第一篇";
-        self.downArrow.hidden = YES;
-        self.footer.text = @"载入下一篇";
-        self.upArrow.hidden = NO;
-    } else if (position == SYStoryPositionTypeOther) {
-        self.header.text = @"载入上一篇";
-        self.downArrow.hidden = NO;
-        self.footer.text = @"载入下一篇";
-        self.upArrow.hidden = NO;
-    } else {
-        self.header.text = @"载入上一篇";
-        self.downArrow.hidden = NO;
-        self.footer.text = @"已经是最后一篇了";
-        self.upArrow.hidden = YES;
-    }
+
+    BOOL isFirst = !!(position & SYStoryPositionTypeFirst);
+    self.header.text = isFirst ? @"已经是第一篇" : @"载入上一篇";
+    self.downArrow.hidden = isFirst;
+    BOOL isLast = !!(position & SYStoryPositionTypeLast);
+    self.footer.text = isLast ? @"已经是最后一篇了" : @"载入下一篇";
+    self.upArrow.hidden = isLast;
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     //调整字号
     BOOL font = [kUserDefaults boolForKey:@"大号字"];
@@ -185,8 +176,6 @@
         NSString *str = @"document.body.style.webkitTextSizeAdjust='120%';";
         [webView stringByEvaluatingJavaScriptFromString:str];
     }
-    
-        
     
     //js方法遍历图片添加点击事件 返回图片个数
     static  NSString * const jsGetImages = @"function setImages(){"\
@@ -356,14 +345,13 @@
     
     [SYZhihuTool getDetailWithId:self.story.id completed:^(id obj) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            SYDetailStory *ds = (SYDetailStory *)obj;
+            SYDetailStory *ds = obj;
 
             if (ds.image) { // 有图
                 self.headerView.hidden = YES;
                 self.topView.hidden = NO;
                 self.topView.story = ds;
-            } else if (ds.recommenders.count) { // 有推荐者
-                
+            } else if (ds.recommenders.count > 0) { // 有推荐者
                 // 设置顶部推荐者的头像
                 NSMutableArray *avatars = [@[] mutableCopy];
                 for (SYRecommender *recommender in ds.recommenders) {
@@ -371,9 +359,7 @@
                     self.headerView.avatars = avatars;
                 }
                 self.headerView.hidenMoreIndicator =  self.headerView.avatars.count <= 5;
-                    
-                    
-                    
+                
                 self.headerView.hidden = NO;
                 self.topView.hidden = YES;
                 // 设置顶部推荐者的下一级控制器的数据源，可以放在点击之后获取
@@ -502,15 +488,15 @@
     return _storyNav;
 }
 
-
-// 根据当前的情况返回界面上顶部的view类型
 - (UIView *)currentTopView {
-    if (!self.topView.hidden) {
-        return self.topView;
-    } else if (!self.headerView.hidden) {
-        return self.headerView;
-    }
-    return nil;
+//    if (!self.topView.hidden) {
+//        return self.topView;
+//    } else if (!self.headerView.hidden) {
+//        return self.headerView;
+//    }
+//    return nil;
+    
+    return !self.topView.hidden ? self.topView : (!self.headerView.hidden ? self.headerView : nil);
 }
 
 @end

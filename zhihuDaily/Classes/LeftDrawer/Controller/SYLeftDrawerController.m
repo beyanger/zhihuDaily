@@ -208,18 +208,18 @@
     NSIndexPath *dip = nil;
     
     if (type == SYThemeActionTypeCollect) {
-        NSLog(@"----收藏---> %@", theme.name);
         [SYZhihuTool collectedWithTheme:theme];
         
         sip = [NSIndexPath indexPathForRow:locate inSection:0];
         dip = [NSIndexPath indexPathForRow:1 inSection:0];
-  
     } else {
         [SYZhihuTool cancelCollectedWithTheme:theme];
         sip = [NSIndexPath indexPathForRow:locate inSection:0];
         dip = [NSIndexPath indexPathForRow:self.dataSource.count-1 inSection:0];
     }
-    
+    // 重新设置theme，刷新cell的显示
+    SYLeftDrawerCell *cell = [self.tableView cellForRowAtIndexPath:sip];
+    cell.theme = theme;
     [self.tableView moveRowAtIndexPath:sip toIndexPath:dip];
     [self tableView:self.tableView moveRowAtIndexPath:sip toIndexPath:dip];
     

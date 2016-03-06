@@ -23,7 +23,7 @@
                     <animations/>
                 </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="这里输入用户名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="duN-v2-vBu">
-                    <rect key="frame" x="170" y="214.5" width="260" height="51"/>
+                    <rect key="frame" x="170" y="194.5" width="260" height="51"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="260" id="9UG-Ow-o7m"/>
@@ -33,7 +33,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ew3-fl-Zsf">
-                    <rect key="frame" x="170" y="424.5" width="260" height="51"/>
+                    <rect key="frame" x="170" y="404.5" width="260" height="51"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="26"/>
                     <state key="normal" title="登录" backgroundImage="Login_Button_Sina">
@@ -43,16 +43,16 @@
                         <action selector="login:" destination="-1" eventType="touchUpInside" id="SGf-pW-YFW"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="A2f-LX-Ra3">
+                    <rect key="frame" x="237.5" y="125.5" width="125" height="45"/>
+                    <animations/>
+                </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="这里输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fgR-mV-2eh">
-                    <rect key="frame" x="170" y="293" width="260" height="51"/>
+                    <rect key="frame" x="170" y="274" width="260" height="51"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="A2f-LX-Ra3">
-                    <rect key="frame" x="237.5" y="145.5" width="125" height="45"/>
-                    <animations/>
-                </imageView>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -63,7 +63,7 @@
                 <constraint firstItem="hKM-Qn-JIO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9uU-GA-07E"/>
                 <constraint firstItem="duN-v2-vBu" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="HmT-CA-KKr"/>
                 <constraint firstAttribute="bottom" secondItem="hKM-Qn-JIO" secondAttribute="bottom" id="PCF-av-5o5"/>
-                <constraint firstItem="duN-v2-vBu" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-60" id="QTr-En-sMH"/>
+                <constraint firstItem="duN-v2-vBu" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-80" id="QTr-En-sMH"/>
                 <constraint firstItem="A2f-LX-Ra3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WES-XY-IXu"/>
                 <constraint firstItem="fgR-mV-2eh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WjT-af-X0N"/>
                 <constraint firstItem="fgR-mV-2eh" firstAttribute="top" secondItem="duN-v2-vBu" secondAttribute="bottom" constant="28" id="bhU-6i-d1V"/>

@@ -83,6 +83,7 @@ static FMDatabaseQueue *_zhihu_queue;
                 SYStory *story = [NSKeyedUnarchiver unarchiveObjectWithData:data];
                 [storyArray addObject:story];
             }
+            [rs close];
         }];
     });
 
@@ -96,6 +97,7 @@ static FMDatabaseQueue *_zhihu_queue;
             NSString *sql = @"SELECT story FROM ct_story WHERE user = ? AND storyid = ?;";
             FMResultSet *rs =  [db executeQuery:sql, name, @(story.id)];
             result = rs.next;
+            [rs close];
          }];
     });
     return result;
@@ -164,7 +166,7 @@ static FMDatabaseQueue *_zhihu_queue;
                 dict[@(themeid)] = theme;
                 
             }
-            
+            [trs close];
 //            NSString *sql = [NSString stringWithFormat:@"SELECT ct_theme.themeid, is_collected FROM theme INNER JOIN ct_theme WHERE  user = ? AND is_collected = 1 AND theme.themeid = ct_theme.themeid;"];
             
             NSString *sql = @"SELECT themeid FROM ct_theme WHERE user = ? AND is_collected = 1;";
@@ -174,6 +176,7 @@ static FMDatabaseQueue *_zhihu_queue;
                 SYTheme *theme = dict[@(themeid)];
                 theme.isCollected = YES;
             }
+            [rs close];
             [themeArray addObjectsFromArray:dict.allValues];
         }];
     });
@@ -202,9 +205,8 @@ static FMDatabaseQueue *_zhihu_queue;
         [[self queue] inDatabase:^(FMDatabase *db) {
             FMResultSet *rs = [db executeQuery:@"SELECT storylist FROM t_homelist WHERE date = ?", dateString];
             // 这里结果应该只有一个
-            while (rs.next) {
-                data = [rs dataForColumnIndex:0];
-            }
+            if (rs.next) data = [rs dataForColumnIndex:0];
+            [rs close];
         }];
     });
     
@@ -237,9 +239,8 @@ static FMDatabaseQueue *_zhihu_queue;
         [[self queue] inDatabase:^(FMDatabase *db) {
             FMResultSet *rs = [db executeQuery:@"SELECT story FROM t_detailstory WHERE storyid = ?", @(storyid)];
             // 这里结果只有一个
-            while (rs.next) {
-                data = [rs dataForColumnIndex:0];
-            }
+            if (rs.next) data = [rs dataForColumnIndex:0];
+            [rs close];
         }];
     });
     if (data.length > 0) {
@@ -270,7 +271,7 @@ static FMDatabaseQueue *_zhihu_queue;
         while (rs.next) {
             [tables addObject:[rs stringForColumnIndex:0]];
         }
-        
+        [rs close];
     }];
     
     return tables;
@@ -302,6 +303,7 @@ static FMDatabaseQueue *_zhihu_queue;
                 SYStory *story = [NSKeyedUnarchiver unarchiveObjectWithData:data];
                 [storyArray addObject:story];
             }
+            [rs close];
         }];
     });
     return storyArray;
@@ -321,6 +323,7 @@ static FMDatabaseQueue *_zhihu_queue;
                 success = YES;
             }
         }
+        [rs close];
         // 新用户登录
         if (!existFlag) {
             success = YES;
@@ -341,7 +344,7 @@ static FMDatabaseQueue *_zhihu_queue;
     return [[SDImageCache sharedImageCache] getSize];
 }
 
-+ (NSUInteger)dataSize {
++ (unsigned long long)dataSize {
     NSString *path = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
     NSString *dbName = [NSString stringWithFormat:@"%@.cached.sqlite", @"zhihu"];
     

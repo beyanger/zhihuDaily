@@ -76,6 +76,8 @@ static NSString *theme_reuseid = @"useid";
     return -1;
 }
 - (SYStoryPositionType)detailController:(SYDetailController *)detailController story:(SYStory *)story {
+    if (self.stories.count == 1 && self.stories.firstObject.id == story.id)
+        return SYStoryPositionTypeFirstAndLast;
     if (self.stories.firstObject.id == story.id) {
         return SYStoryPositionTypeFirst;
     } else if ( self.stories.lastObject.id == story.id) {

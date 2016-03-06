@@ -64,7 +64,7 @@
 
 
 
-+ (void)queryAppWithVersion:(NSString *)version  Completed:(Completed)completed {
++ (void)queryAppWithVersion:(NSString *)version  completed:(Completed)completed {
     
     // http://news-at.zhihu.com/api/4/version/android/2.3.0
     // http://news-at.zhihu.com/api/4/version/ios/2.3.0
@@ -76,19 +76,16 @@
     } failure:nil];
 }
 
-
-
-
 + (void)getDetailWithId:(long long)storyid completed:(Completed)completed {
-    NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/news/%lld", storyid];
-
+ 
     SYDetailStory *story = [SYCacheTool queryStoryWithId:storyid];
-    
     if (story) {
         !completed ? : completed(story);
         return;
     }
     
+    NSString *url = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/news/%lld", storyid];
+
     [YSHttpTool GETWithURL:url params:nil success:^(id responseObject) {
         SYDetailStory *ds = [SYDetailStory mj_objectWithKeyValues:responseObject];
         
@@ -114,13 +111,12 @@
 
 
 + (void)getLastestStoryWithCompleted:(Completed)completed {
-
-    
     // 返回结果相同
-    NSString *storyUrl = @"http://news-at.zhihu.com/api/4/stories/latest";
+    //NSString *storyUrl = @"http://news-at.zhihu.com/api/4/stories/latest";
     NSString *url = @"http://news-at.zhihu.com/api/4/news/latest";
 
     [YSHttpTool GETWithURL:url params:nil success:^(id responseObject) {
+        // 当日的story 列表不需要缓存
         SYLastestParamResult *result = [SYLastestParamResult mj_objectWithKeyValues:responseObject];
         !completed ? : completed(result);
     } failure:nil];
@@ -150,10 +146,6 @@
     NSString *shortCommentUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/story/%lld/short-comments", storyid];
     [YSHttpTool GETWithURL:shortCommentUrl params:nil success:^(id responseObject) {
         NSArray *comment = [SYComment mj_objectArrayWithKeyValuesArray:responseObject[@"comments"]];
-        
-        
-        NSLog(@"--->条短评论： %lu", comment.count);
-        
 
         !completed ? : completed(comment);
     } failure:nil];
@@ -164,7 +156,6 @@
     NSString *longBeforeUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/story/%lld/short-comments/before/%ld", storyid, commentid];
     [YSHttpTool GETWithURL:longBeforeUrl params:nil success:^(id responseObject) {
         NSArray *comments = [SYComment mj_objectArrayWithKeyValuesArray:responseObject[@"comments"]];
-        NSLog(@"--->之前的 短评论： %lu", comments.count);
         
         !completed ? completed : completed(comments);
         
@@ -180,7 +171,7 @@
     
     NSArray *themeStatus = [SYCacheTool queryThemeWithUser:[SYAccount sharedAccount].name];
     if (themeStatus.count > 0) {
-        !completed ? : completed(themeStatus); // 这里是带有收藏信息的
+        !completed ? : completed(themeStatus); // 这里是带有收藏信息的,但未排序
         return;
     }
     
@@ -206,9 +197,6 @@
 
 }
 
-
-
-
 + (void)getBeforeStroyWithDate:(NSDate *)date completed:(Completed)completed {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyyMMdd"];
@@ -220,11 +208,9 @@
 + (void)getBeforeStroyWithDateString:(NSString *)dateString completed:(Completed)completed {
     NSString *beforeUrl = [NSString stringWithFormat:@"http://news.at.zhihu.com/api/4/news/before/%@", dateString];
 
-    id jsonObject = [SYCacheTool queryStoryListWithDateString:dateString];
+    SYBeforeStoryResult *result = [SYCacheTool queryStoryListWithDateString:dateString];
 
-    
-    if (jsonObject) {
-        SYBeforeStoryResult *result = [SYBeforeStoryResult mj_objectWithKeyValues:jsonObject];
+    if (result) {
         !completed ? : completed(result);
         return;
     }
@@ -241,8 +227,6 @@
 + (void)getThemeWithId:(int)themeId completed:(Completed)completed {
     
     NSString *themeUrl = [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/theme/%d", themeId];
-    
-
     [YSHttpTool GETWithURL:themeUrl params:nil success:^(id responseObject) {
         SYThemeItem *item = [SYThemeItem mj_objectWithKeyValues:responseObject];
         !completed ? : completed(item);
@@ -255,8 +239,6 @@
     NSArray *objArray = [SYCacheTool queryBeforeStoryListWithId:themeid storyId:storyId];
     
     if (objArray.count > 0) {
-        
-        NSLog(@"---> 从缓存中获取到 %lu 条 theme: %d", objArray.count, themeid);
         !completed ? :completed(objArray);
         return;
     }
@@ -322,8 +304,6 @@
 + (NSString *)getRecommenderHomePageWithRecommender:(SYRecommender *)recommender {
     return [@"http://www.zhihu.com/people/" stringByAppendingString:recommender.zhihu_url_token];
 }
-
-
 
 + (void)loginWithName:(NSString *)name password:(NSString *)password success:(Success)success failure:(Failure)failure {
     // 这里应该
