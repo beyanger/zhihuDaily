@@ -58,6 +58,9 @@ static SYAccount *_account;
     [kUserDefaults synchronize];
 }
 
+- (BOOL)isLogin {
+    return _isLogin;
+}
 
 - (NSString *)avatar {
     return self.isLogin ? _avatar : @"http://i13.tietuku.com/e8a20966f7153539.png";

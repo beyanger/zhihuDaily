@@ -112,14 +112,6 @@ static FMDatabaseQueue *_zhihu_queue;
     });
 }
 
-
-
-
-
-
-
-
-
 + (void)updateCollectedThemeWithUser:(NSString *)user themeid:(int)themeid type:(BOOL)type {
     NSLog(@"update id: %d, %d", themeid, type);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -182,11 +174,13 @@ static FMDatabaseQueue *_zhihu_queue;
     });
     return themeArray.count>0 ? themeArray : nil;
 }
-
-
-
-
-
+/**
+ *  <#Description#>
+ *
+ *  @param dateString <#dateString description#>
+ *
+ *  @return <#return value description#>
+ */
 + (SYBeforeStoryResult *)queryStoryListWithDateString:(NSString *)dateString {
     static NSDateFormatter *formatter;
     static dispatch_once_t onceToken;

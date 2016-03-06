@@ -10,6 +10,7 @@
 #import "SYEditor.h"
 #import "SYRecommender.h"
 @interface SYEditorDetailController : SYBaseViewController
+
 @property (nonatomic, strong)  id editor;
 
 @end

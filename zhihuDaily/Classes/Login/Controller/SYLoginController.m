@@ -45,11 +45,11 @@
     
     if (result) {
         [MBProgressHUD showSuccess:@"登录成功"];
-        [self.navigationController popViewControllerAnimated:YES];
-        
-        SYAccount *account = [SYAccount sharedAccount];
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
+        if (self.navigationController) {
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
     } else {
         [MBProgressHUD showSuccess:@"请输入正确的用户名和密码"];
     }

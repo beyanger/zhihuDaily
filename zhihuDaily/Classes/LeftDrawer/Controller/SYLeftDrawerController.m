@@ -171,8 +171,6 @@
 }
 
 
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         [self.mainController setCenterViewController:self.naviHome withCloseAnimation:YES completion:nil];

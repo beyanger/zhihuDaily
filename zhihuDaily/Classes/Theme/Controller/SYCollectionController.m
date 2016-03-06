@@ -60,7 +60,7 @@
 }
 
 
-
+#pragma mark setter & getter
 - (NSArray<SYStory *> *)stories {
     return self.collectionStroy;
 }

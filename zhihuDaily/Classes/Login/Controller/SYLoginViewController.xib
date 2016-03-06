@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYLoginViewController">
@@ -22,14 +22,12 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ee5-Dt-sbJ">
                             <rect key="frame" x="277" y="9" width="46" height="27"/>
-                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="23"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjc-LA-2fB">
                             <rect key="frame" x="6" y="0.0" width="44" height="44"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="VeS-k8-v1t"/>
                             </constraints>
@@ -39,7 +37,6 @@
                             </connections>
                         </button>
                     </subviews>
-                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="ee5-Dt-sbJ" firstAttribute="centerY" secondItem="jkG-9C-y78" secondAttribute="centerY" id="7Sx-og-SG5"/>
@@ -52,11 +49,9 @@
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login_Background" translatesAutoresizingMaskIntoConstraints="NO" id="2eX-YG-3Z3">
                     <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                    <animations/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="iTh-QJ-7XT">
                     <rect key="frame" x="237" y="104" width="125" height="45"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="125" id="aMf-Xn-XSa"/>
                         <constraint firstAttribute="height" constant="45" id="mTc-wL-Ywq"/>
@@ -64,7 +59,6 @@
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgK-JC-vWy">
                     <rect key="frame" x="170" y="489" width="260" height="51"/>
-                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                     <state key="normal" title="腾讯微博" backgroundImage="Login_Button_Tencent">
                         <color key="titleColor" red="0.1019607843" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -75,7 +69,6 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7p-ak-kia">
                     <rect key="frame" x="170" y="414" width="260" height="51"/>
-                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                     <state key="normal" title="新浪微博" backgroundImage="Login_Button_Sina">
                         <color key="titleColor" red="0.1019607843" green="0.1215686275" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -85,7 +78,6 @@
                     </connections>
                 </button>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="2eX-YG-3Z3" secondAttribute="bottom" id="37L-F4-dPZ"/>

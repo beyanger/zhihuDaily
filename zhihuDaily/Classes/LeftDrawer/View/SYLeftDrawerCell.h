@@ -19,10 +19,12 @@
 @end
 
 @interface SYLeftDrawerCell : UITableViewCell
+
 @property (nonatomic, strong) SYTheme *theme;
 
-+ (instancetype)cellWithTableView:(UITableView *)tableView;
-
 @property (nonatomic, weak) id<SYLeftDrawerCellDelegate> delegate;
+
+
++ (instancetype)cellWithTableView:(UITableView *)tableView;
 
 @end
