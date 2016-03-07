@@ -118,7 +118,6 @@ typedef void (^Failure)();
 + (NSString *)getEditorHomePageWithEditor:(SYEditor *)editor;
 + (NSString *)getRecommenderHomePageWithRecommender:(SYRecommender *)recommender;
 
-
 /**
  *  用户登录
  */

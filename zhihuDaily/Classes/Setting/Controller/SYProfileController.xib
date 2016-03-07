@@ -32,6 +32,10 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbe-yv-IsR">
                     <rect key="frame" x="200" y="420" width="200" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="Y2e-Pu-GuM"/>
+                        <constraint firstAttribute="height" constant="40" id="sTA-M9-wES"/>
+                    </constraints>
                     <state key="normal" title="退出登录" backgroundImage="login_border">
                         <color key="titleColor" red="0.28609622454398337" green="0.1729066491620089" blue="0.76279362416107388" alpha="1" colorSpace="calibratedRGB"/>
                     </state>

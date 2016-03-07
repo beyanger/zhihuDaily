@@ -16,8 +16,6 @@
 
 @property (nonatomic, weak) UIScrollView *sy_attachScrollView;
 
-
-
 - (UIImageView *)sy_backgoundImageView;
 
 - (SYRefreshView *)sy_refreshView;
