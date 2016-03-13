@@ -21,11 +21,9 @@ typedef NS_ENUM(NSInteger, SYStoryPositionType) {
 };
 
 @protocol SYDetailControllerDelegate <NSObject>
-@required
 - (SYStory *)nextStoryForDetailController:(SYDetailController *)detailController story:(SYStory *)story;
 - (SYStory *)prevStoryForDetailController:(SYDetailController *)detailController story:(SYStory *)story;
 - (SYStoryPositionType)detailController:(SYDetailController *)detailController story:(SYStory *)story;
-
 @end
 
 

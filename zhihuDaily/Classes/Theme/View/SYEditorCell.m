@@ -40,8 +40,8 @@
 }
 
 static NSString *editor_reuseid = @"editor_reuseid";
+
 + (instancetype)editorCellWithTableView:(UITableView *)tableView {
-    
     SYEditorCell *cell = [tableView dequeueReusableCellWithIdentifier:editor_reuseid];
     //[cell.editorImageView removeFromSuperview];
     // 编辑者列表控制器调用的方法，应该隐藏 编辑的主页
@@ -51,7 +51,6 @@ static NSString *editor_reuseid = @"editor_reuseid";
 
 + (instancetype)recommenderCellWithTableView:(UITableView *)tableView {
     SYEditorCell *cell = [tableView dequeueReusableCellWithIdentifier:editor_reuseid];
-    
     return cell;
 }
 

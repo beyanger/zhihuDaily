@@ -145,7 +145,7 @@ static NSString *comment_reuseid = @"comment_reuseid";
     return cell;
 }
 
-// 使用高度缓存的话，则cell的点击展开失效，所以使用系统自带的高度估算功能来高度自适应
+//// 使用高度缓存的话，则cell的点击展开失效，所以使用系统自带的高度估算功能来高度自适应
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 //
 //    CGFloat height =  [tableView fd_heightForCellWithIdentifier:comment_reuseid configuration:^(SYCommentCell *cell) {

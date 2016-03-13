@@ -169,9 +169,7 @@
 
 // 获取主题列表
 + (void)getThemesWithCompleted:(Completed)completed {
-    NSString *themeUrl = @"http://news-at.zhihu.com/api/4/themes";
-    
-    NSLog(@"share name : %@", [SYAccount sharedAccount].name);
+   
     
     NSArray *themeStatus = [SYCacheTool queryThemeWithUser:[SYAccount sharedAccount].name];
     if (themeStatus.count > 0) {
@@ -179,6 +177,7 @@
         return;
     }
     
+    NSString *themeUrl = @"http://news-at.zhihu.com/api/4/themes";
     [YSHttpTool GETWithURL:themeUrl params:nil success:^(id responseObject) {
         NSArray<SYTheme *> *themeArray = [SYTheme mj_objectArrayWithKeyValuesArray:responseObject[@"others"]];
         
@@ -210,7 +209,7 @@
 
 
 + (void)getBeforeStroyWithDateString:(NSString *)dateString completed:(Completed)completed {
-    NSString *beforeUrl = [NSString stringWithFormat:@"http://news.at.zhihu.com/api/4/news/before/%@", dateString];
+
 
     SYBeforeStoryResult *result = [SYCacheTool queryStoryListWithDateString:dateString];
 
@@ -219,6 +218,7 @@
         return;
     }
     
+    NSString *beforeUrl = [NSString stringWithFormat:@"http://news.at.zhihu.com/api/4/news/before/%@", dateString];
     
     [YSHttpTool GETWithURL:beforeUrl params:nil success:^(id responseObject) {
         SYBeforeStoryResult *result = [SYBeforeStoryResult mj_objectWithKeyValues:responseObject];
@@ -298,8 +298,6 @@
 + (void)cancelCollectedWithTheme:(SYTheme *)theme {
     [SYCacheTool cancelCollectedThemeWithUser:[SYAccount sharedAccount].name theme:theme];
 }
-
-
 
 + (NSString *)getEditorHomePageWithEditor:(SYEditor *)editor {
     return  [NSString stringWithFormat:@"http://news-at.zhihu.com/api/4/editor/%d/profile-page/ios", editor.id];
