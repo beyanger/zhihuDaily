@@ -78,6 +78,10 @@
 
 + (void)getDetailWithId:(long long)storyid completed:(Completed)completed {
  
+    
+    
+    
+    
     SYDetailStory *story = [SYCacheTool queryStoryWithId:storyid];
     if (story) {
         !completed ? : completed(story);

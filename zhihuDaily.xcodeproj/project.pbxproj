@@ -382,7 +382,7 @@
 		2FC00D731C86FBDF00756EE4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2FC00D751C86FC3F00756EE4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		2FC00D761C86FC3F00756EE4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		2FC587461C79FDEB003C9A7A /* 知乎日报.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "知乎日报.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FC587461C79FDEB003C9A7A /* zhihuDaily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zhihuDaily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC5874A1C79FDEB003C9A7A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FC5874C1C79FDEB003C9A7A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2FC5874D1C79FDEB003C9A7A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -913,7 +913,7 @@
 		2FC587471C79FDEB003C9A7A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FC587461C79FDEB003C9A7A /* 知乎日报.app */,
+				2FC587461C79FDEB003C9A7A /* zhihuDaily.app */,
 				2FC5875F1C79FDEB003C9A7A /* zhihuDailyTests.xctest */,
 				2FC5876A1C79FDEB003C9A7A /* zhihuDailyUITests.xctest */,
 			);
@@ -1316,7 +1316,7 @@
 			);
 			name = zhihuDaily;
 			productName = zhihuDaily;
-			productReference = 2FC587461C79FDEB003C9A7A /* 知乎日报.app */;
+			productReference = 2FC587461C79FDEB003C9A7A /* zhihuDaily.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2FC5875E1C79FDEB003C9A7A /* zhihuDailyTests */ = {
@@ -1782,7 +1782,7 @@
 					"-lReactiveCocoa",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.beyanger.zhihuDaily;
-				PRODUCT_NAME = "知乎日报";
+				PRODUCT_NAME = zhihuDaily;
 			};
 			name = Debug;
 		};
@@ -1802,7 +1802,7 @@
 					"-lReactiveCocoa",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.beyanger.zhihuDaily;
-				PRODUCT_NAME = "知乎日报";
+				PRODUCT_NAME = zhihuDaily;
 			};
 			name = Release;
 		};

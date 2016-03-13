@@ -7,6 +7,9 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "SYAccount.h"
+#import "SYZhihuTool.h"
+
 
 @interface zhihuDailyTests : XCTestCase
 
@@ -20,14 +23,36 @@
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    NSLog(@"----> tear down");
+    
     [super tearDown];
 }
 
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
 }
+
+- (void)testLogin {
+    
+    NSString *user = [NSString stringWithFormat:@"%@", @(arc4random())];
+    
+    BOOL result = [SYAccount loginWithName:user password:@"1456"];
+    
+    XCTAssert(result, @"新用户登录成功");
+    
+    result = [SYAccount loginWithName:user password:@"16"];
+    XCTAssert(!result, @"第二次登录，密码不对，登录失败");
+}
+
+- (void)testRequestData {
+
+    
+    
+}
+
 
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
